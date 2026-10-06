@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<script src="./np-icons.js"></script>
+<script src="./np-sprite.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+--brand-primary:#2962FF;--brand-deep:#1A237E;--brand-accent:#E4F2FD;--brand-primary-dk:#6E9BFF;
+--surface-canvas:#F6F7FB;--surface-card:#fff;--surface-raised:#F6F7FB;
+--text-primary:#1F2330;--text-secondary:#455A64;--text-muted:#90A4AE;
+--border-default:#E4E7EC;--border-soft:#F1F3F7;
+--status-success:#0B6B3A;--status-success-bg:#E8F5EC;--status-success-bd:#BEDFC9;
+--status-warning:#7A4A00;--status-warning-bg:#FFF6E8;--status-warning-bd:#F3D9AE;
+--status-error:#9B2222;--status-error-bg:#FDF3F3;--status-error-bd:#E9C9C9;
+--status-info:#01579B;--status-info-bg:#E8F4FD;--status-info-bd:#BEDCF2;
+--status-neutral:#37474F;--status-neutral-bg:#ECEFF1;--status-neutral-bd:#CFD8DC;
+}
+.tB{--brand-primary:#00796B;--brand-deep:#00453C;--brand-accent:#E0F2F0;--brand-primary-dk:#4DB6AC}
+.dk{
+--dk-base-1:#14161A;--dk-base-2:#1C2028;--dk-base-3:#242934;--dk-base-4:#2C3340;--dk-brand:var(--brand-deep);
+--surface-canvas:color-mix(in srgb,var(--dk-brand) 35%,var(--dk-base-1));--surface-card:color-mix(in srgb,var(--dk-brand) 35%,var(--dk-base-2));--surface-raised:color-mix(in srgb,var(--dk-brand) 35%,var(--dk-base-3));--surface-elevated:color-mix(in srgb,var(--dk-brand) 35%,var(--dk-base-4));
+--border-default:rgba(144,164,174,.22);--border-soft:rgba(144,164,174,.13);
+--text-primary:#F5F7FC;--text-secondary:#C5CEE0;--text-muted:#95A3BA;
+--brand-primary:var(--brand-primary-dk);--brand-accent:color-mix(in srgb,var(--brand-primary-dk) 20%,var(--surface-card));
+--status-success:#7FD6A2;--status-success-bg:color-mix(in srgb,#7FD6A2 15%,var(--surface-card));--status-success-bd:color-mix(in srgb,#7FD6A2 34%,var(--surface-card));
+--status-warning:#F0C478;--status-warning-bg:color-mix(in srgb,#F0C478 15%,var(--surface-card));--status-warning-bd:color-mix(in srgb,#F0C478 34%,var(--surface-card));
+--status-error:#FF9A9A;--status-error-bg:color-mix(in srgb,#FF9A9A 15%,var(--surface-card));--status-error-bd:color-mix(in srgb,#FF9A9A 34%,var(--surface-card));
+--status-info:#7FC4EC;--status-info-bg:color-mix(in srgb,#7FC4EC 15%,var(--surface-card));--status-info-bd:color-mix(in srgb,#7FC4EC 34%,var(--surface-card));
+--status-neutral:#B0BEC5;--status-neutral-bg:var(--surface-raised);--status-neutral-bd:rgba(144,164,174,.26);
+}
+.stroke{fill:none;stroke:currentColor;stroke-width:4.6;stroke-linecap:round;stroke-linejoin:round}
+.strokeS{fill:none;stroke:currentColor;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:currentColor}
+.i{display:inline-flex;flex:none;width:22px;height:22px;color:inherit}
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic','Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+.f{position:relative;box-sizing:border-box;width:390px;height:844px;flex:none;overflow:hidden;border-radius:24px;background:var(--surface-canvas);border:1px solid var(--border-default);box-shadow:0 16px 40px rgba(31,35,48,.12);color:var(--text-primary);display:flex;flex-direction:column}
+.f::before{content:"";position:absolute;z-index:0;inset-block-start:0;inset-inline:0;height:150px;background-color:var(--brand-deep);background-image:radial-gradient(120% 80% at 76% 4%,rgba(255,255,255,.18),transparent 62%)}
+.f::after{content:"";position:absolute;z-index:1;inset-block-start:96px;inset-inline-start:-42%;width:184%;height:460px;background:var(--surface-canvas);border-radius:52% 52% 0 0/62% 62% 0 0}
+.sbl{position:relative;z-index:3;flex:none;display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 20px;font-family:Inter,system-ui,sans-serif;font-size:13px;color:#fff}
+.hdr{position:relative;z-index:3;flex:none;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px}
+.hdr b{font:800 17px/24px 'Noto Sans Arabic',sans-serif;color:#fff}
+.hdr .sub{font:500 11.5px/16px 'Noto Sans Arabic',sans-serif;color:rgba(255,255,255,.78)}
+.ib{display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin-inline-start:-10px;border:0;background:transparent;color:#fff;cursor:pointer}
+.bd{position:relative;z-index:3;flex:1;min-height:0;display:flex;flex-direction:column;gap:11px;padding:16px 20px;overflow:hidden}
+.card{flex:none;background:var(--surface-card);border:1px solid var(--border-default);border-radius:16px;box-shadow:0 10px 28px rgba(31,35,48,.07)}
+.dk .card{box-shadow:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;flex:none;box-sizing:border-box;border:0;border-radius:12px;background:var(--brand-primary);color:#fff;font:700 16px/24px 'Noto Sans Arabic',sans-serif;cursor:pointer}
+.dk .btn{color:var(--surface-canvas)}
+.btn[disabled]{background:var(--surface-raised);color:var(--text-muted);border:1px solid var(--border-default);cursor:not-allowed}
+.btn2{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;flex:none;box-sizing:border-box;border:1px solid var(--brand-primary);border-radius:12px;background:var(--surface-card);color:var(--brand-deep);font:700 15px/24px 'Noto Sans Arabic',sans-serif;cursor:pointer}
+.dk .btn2{color:var(--brand-primary)}
+.btn3{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;flex:none;box-sizing:border-box;border:1px solid var(--status-neutral-bd);border-radius:12px;background:var(--surface-card);color:var(--text-secondary);font:700 15px/24px 'Noto Sans Arabic',sans-serif;cursor:pointer}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+.nav{position:relative;z-index:3;flex:none;height:78px;display:flex;align-items:center;background:var(--surface-card);border-top:1px solid var(--border-default)}
+.tab{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:100%;font:600 11px/16px 'Noto Sans Arabic',sans-serif}
+.wrap{display:flex;flex-direction:column;gap:9px}
+.nm{display:flex;align-items:baseline;gap:8px;font:500 11px/1.3 Inter,system-ui,sans-serif;color:#455A64}
+.tag{font:500 10px/1 Inter,system-ui,sans-serif;padding:3px 7px;background:#E4F2FD;color:#1A237E;border-radius:5px}
+.chip{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;border-radius:8px;font:600 11px/1 'Noto Sans Arabic',sans-serif;white-space:nowrap}
+.plate{display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;border-radius:11px;background:var(--surface-raised);color:var(--brand-primary)}
+.t3{font:700 15px/22px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)}
+.cap{font:400 11.5px/18px 'Noto Sans Arabic',sans-serif;color:var(--text-secondary)}
+.lb{font:600 13px/20px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)}
+.kpi{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:9px 11px;box-sizing:border-box;border-radius:12px;background:var(--surface-raised);border:1px solid var(--border-soft)}
+.kpi b{font:700 16px/22px Inter,system-ui,sans-serif;direction:ltr;color:var(--brand-deep)}
+.dk .kpi b{color:var(--brand-primary)}
+.kpi span{font:400 10.5px/15px 'Noto Sans Arabic',sans-serif;color:var(--text-secondary)}
+.row{flex:none;display:flex;align-items:center;gap:10px;min-height:48px;box-sizing:border-box;padding:9px 12px;border:1px solid var(--border-default);border-radius:12px;background:var(--surface-card)}
+.fbar{flex:none;display:flex;gap:7px;overflow:hidden}
+.fb{display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 12px;box-sizing:border-box;border-radius:10px;border:1px solid var(--border-default);background:var(--surface-card);font:600 11.5px/1 'Noto Sans Arabic',sans-serif;color:var(--text-secondary);white-space:nowrap}
+.fb.on{background:var(--brand-primary);border-color:var(--brand-primary);color:#fff}
+.dk .fb.on{color:var(--surface-canvas)}
+.bar{position:relative;flex:1;min-width:0;height:10px;border-radius:99px;background:var(--surface-raised);border:1px solid var(--border-soft);overflow:hidden}
+.fill-b{position:absolute;inset-block:0;inset-inline-start:0;border-radius:99px}
+.tank{position:relative;width:70px;height:150px;flex:none;box-sizing:border-box;border:2px solid var(--border-default);border-radius:14px;background:var(--surface-raised);overflow:hidden}
+.tank i{position:absolute;inset-block-end:0;inset-inline:0;display:block}
+.fld{flex:none;display:flex;align-items:center;gap:10px;height:58px;box-sizing:border-box;padding:0 14px;border:1.5px solid var(--border-default);border-radius:12px;background:var(--surface-card)}
+.sheet{position:absolute;z-index:6;inset-block-end:0;inset-inline:0;box-sizing:border-box;display:flex;flex-direction:column;gap:11px;padding:18px 20px 22px;background:var(--surface-card);border-radius:22px 22px 0 0;box-shadow:0 -18px 44px rgba(15,23,42,.24)}
+.scrim{position:absolute;z-index:5;inset:0;background:rgba(14,22,32,.44)}
+.grab{align-self:center;width:44px;height:4px;border-radius:2px;background:var(--border-default)}
+h1,h2,h3{margin:0}
+.sec{display:flex;flex-direction:column;gap:14px}
+.sh{font:800 19px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.panel{display:flex;flex-direction:column;gap:11px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+
+/* ══════════════════════════════════════════════════════════════════════
+   MANAGER VISUAL PARITY WITH WORKER APP — ported from the approved Worker
+   premium layer (05 · Worker App). Expressed through the semantic tokens
+   of this page, so Brand Dark keeps resolving its own values.
+   ══════════════════════════════════════════════════════════════════════ */
+.f::before{
+  height:184px;background-color:var(--brand-deep);
+  background-image:
+    radial-gradient(120% 90% at 82% -10%,rgba(255,255,255,.26),transparent 60%),
+    radial-gradient(90% 70% at 8% 0%,rgba(41,98,255,.55),transparent 62%),
+    linear-gradient(196deg,#2B5CFF 0%,#1B3ECB 46%,var(--brand-deep) 100%);
+}
+.dk::before{
+  background-image:
+    radial-gradient(120% 90% at 82% -10%,rgba(255,255,255,.12),transparent 60%),
+    linear-gradient(196deg,color-mix(in srgb,var(--brand-primary) 38%,var(--dk-brand)) 0%,var(--dk-brand) 100%);
+}
+.f::after{inset-block-start:118px;height:480px;border-radius:44% 44% 0 0/30% 30% 0 0}
+.sbl{height:46px;font-weight:600;letter-spacing:.2px}
+.hdr{height:62px;padding:0 18px}
+.hdr b{font-size:18px;line-height:30px;letter-spacing:-.2px}
+.hdr .sub{line-height:20px}
+.card{border-radius:20px;box-shadow:0 12px 30px rgba(16,34,80,.09),0 2px 6px rgba(16,34,80,.04)}
+.row{border-radius:16px;min-height:56px;padding:11px 13px;box-shadow:0 6px 16px rgba(16,34,80,.05)}
+.dk .card,.dk .row{box-shadow:none}
+.kpi{gap:3px;padding:12px 11px;border-radius:16px;align-items:center;text-align:center;background:color-mix(in srgb,var(--brand-accent,#E4F2FD) 42%,var(--surface,#fff));border-color:color-mix(in srgb,var(--brand-primary,#2962FF) 12%,transparent)}
+.kpi b{font-size:19px;line-height:26px;font-weight:800}
+.kpi span{font-size:11px;font-weight:600;color:var(--text-2)}
+.btn{border-radius:16px;font-size:16.5px;font-weight:800;letter-spacing:-.1px;background:linear-gradient(180deg,#3E6BFF 0%,var(--action-primary,#2962FF) 55%,#1E4FE6 100%);box-shadow:0 12px 24px rgba(41,98,255,.26)}
+.dk .btn{background:var(--action-primary,#2962FF);box-shadow:none}
+.btn[disabled]{background:var(--surface-2,#F2F4F7);box-shadow:none}
+.btn2,.btn3,.btnOK,.btnD{border-radius:16px;font-weight:700}
+.plate{width:44px;height:44px;border-radius:14px;background:color-mix(in srgb,var(--brand-accent,#E4F2FD) 70%,var(--surface,#fff));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--brand-primary,#2962FF) 10%,transparent)}
+.chip{height:28px;padding:0 10px;border-radius:9px;font-weight:700}
+.fld{border-radius:16px;box-shadow:0 4px 12px rgba(16,34,80,.04)}
+.fb{height:36px;border-radius:12px;font-weight:700}
+.nav{height:82px;padding-block-end:6px;border-top:0;box-shadow:0 -10px 28px rgba(16,34,80,.08);background:var(--surface,#fff)}
+.tab{position:relative;gap:5px;font-weight:700;font-size:11px}
+.sheet{border-radius:26px 26px 0 0}
+</style>
+</helmet>
+<div dir="rtl" style="padding:22px 26px;margin:0 0 18px;border-radius:14px;background:#FDF3F3;border:1px solid #E9C9C9;font-family:'Noto Sans Arabic',system-ui,sans-serif">
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#9B2222;color:#fff;font:700 11px/1 Inter,system-ui,sans-serif;direction:ltr">ARCHIVED</span>
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 Inter,system-ui,sans-serif;color:#37474F;direction:ltr">NP-DESIGN-CLOSURE-01 · P1</span>
+</div>
+<div style="font:500 12.5px/21px 'Noto Sans Arabic',sans-serif;color:#1F2330">
+<b>Replaced By:</b> <a href="../06 · Manager App.dc.html" style="color:#9B2222">06 · Manager App</a> — المصدر القانوني الوحيد لتطبيق المدير<br>
+<b>Reason:</b> Logic and frames safely consolidated into the canonical Manager source (namespaces <span style="font-family:Inter,system-ui,sans-serif;direction:ltr">c.*</span> · source-scoped CSS <span style="font-family:Inter,system-ui,sans-serif;direction:ltr">.src-c</span>)<br>
+<b>Original Frames:</b> 22 &nbsp;·&nbsp; <b>Screen Loss:</b> 0 &nbsp;·&nbsp; <b>Deleted:</b> 0<br>
+<b>Date:</b> 2026-09-20<br>
+<b>Pre-merge SHA-256:</b> <span style="font-family:Inter,system-ui,sans-serif;direction:ltr;font-size:11px;word-break:break-all">760e2cdba0afb953a2b70fc6c6d0819f1d9d537fef66223a53864be3de78b925</span><br>
+<b>Canonical target SHA-256 (pre-merge):</b> <span style="font-family:Inter,system-ui,sans-serif;direction:ltr;font-size:11px;word-break:break-all">0440ef309e13f3d9631182ec2462e92fbea5efd1d7cbfad1eeae3e7e074da2a5</span>
+</div></div>
+<div dir="rtl" style="padding:40px;display:flex;flex-direction:column;gap:32px;color:#455A64">
+<!-- functional icon geometry removed · NP-ICON-SYSTEM-01 v2: all ids resolve to the canonical registry (np-icons.js) through the generated adapter (np-sprite.js) -->
+
+  <header style="display:flex;flex-direction:column;gap:10px;max-width:1160px">
+    <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:7px;background:#1A237E;color:#fff;font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:600">NP-WO-CD-08 · PHASE 3 · INVENTORY · TANKS · SUPPLY OPERATIONS</span>
+    <h1 style="font:800 31px/1.25 'Noto Sans Arabic',sans-serif;color:#1A237E">تطبيق المدير — المخزون والخزانات وعمليات التوريد</h1>
+    <p style="font:400 14.5px/26px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:980px;text-wrap:pretty">مرحلة تشغيلية على نفس الأساس والشل والصلاحيات — بلا إعادة تصميم للمرحلتين الأولى والثانية وبلا تبويب خامس. كل الألوان من <span class="mono">Semantic Tokens</span> (<span class="mono">--brand-* · --surface-* · --text-* · --status-*</span>)، ونوع الوقود وحدود المخزون من <span class="mono">configuration</span> لا من داخل المكوّن. الخادم هو المرجع للأرصدة: الحساب على الجهاز يظهر بوسم <b style="color:#1F2330">تقديري</b> حتى التأكيد ثم <b style="color:#1F2330">مؤكد</b>.</p>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;padding-top:3px">
+      <sc-for list="{{pills}}" as="p" hint-placeholder-count="8">
+        <span class="mono" style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border:1px solid #DDE4EE;border-radius:8px;background:#fff;font-size:11.5px;font-weight:600;line-height:1;color:#1A237E">{{p}}</span>
+      </sc-for>
+    </div>
+  </header>
+
+  <section class="sec">
+    <h2 class="sh">01 — نظرة المخزون والخزانات</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M31</span>screen_inventory_overview</span>
+        <article class="f" data-screen-label="M31 Inventory overview">
+          <div class="sbl"><span>10:45</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>المخزون والخزانات</b><span class="sub">{{tenant.stationName}}</span></span></div>
+          <div class="bd">
+            <span style="display:flex;gap:8px">
+              <span class="kpi"><b>4</b><span>إجمالي الخزانات</span></span>
+              <span class="kpi"><b>2</b><span>تنبيهات</span></span>
+              <span class="kpi"><b>10:45</b><span>آخر تحديث</span></span>
+            </span>
+            <sc-for list="{{fuelStock}}" as="s" hint-placeholder-count="2">
+              <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:9px">
+                <span style="display:flex;align-items:center;gap:9px">
+                  <span class="plate" style="width:32px;height:32px;border-radius:9px;background:{{s.bg}};color:{{s.ink}}"><svg class="i" style="width:16px;height:16px" viewBox="0 0 20 20"><use href="#s-fuel"></use></svg></span>
+                  <b class="t3" style="flex:1;min-width:0">{{s.fuel}}</b>
+                  <span class="chip" style="background:{{s.bg}};border:1px solid {{s.bd}};color:{{s.ink}}"><svg class="i" style="width:12px;height:12px" viewBox="0 0 20 20"><use href="{{s.icon}}"></use></svg>{{s.state}}</span>
+                </span>
+                <span style="display:flex;align-items:flex-end;gap:8px">
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span class="cap">الرصيد الحالي — لتر</span><b class="mono" style="font-size:18px;font-weight:600;color:var(--brand-deep)">{{s.balance}}</b></span>
+                  <span style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:1px"><span class="cap">السعة</span><b class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-primary)">{{s.capacity}}</b></span>
+                </span>
+                <span style="display:flex;align-items:center;gap:9px">
+                  <span class="bar"><span class="fill-b" style="width:{{s.pct}};background:{{s.ink}}"></span></span>
+                  <b class="mono" style="flex:none;font-size:12px;font-weight:600;color:{{s.ink}}">{{s.pctLabel}}</b>
+                </span>
+              </div>
+            </sc-for>
+            <sc-for list="{{invEntries}}" as="e" hint-placeholder-count="3">
+              <span class="row" style="cursor:pointer">
+                <span class="plate" style="width:34px;height:34px;border-radius:10px"><svg class="i" style="width:17px;height:17px" viewBox="0 0 20 20"><use href="{{e.icon}}"></use></svg></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">{{e.title}}</b><span class="cap">{{e.desc}}</span></span>
+                <svg class="i" style="width:14px;height:14px;color:var(--text-muted)" viewBox="0 0 20 20"><use href="#s-chevron"></use></svg>
+              </span>
+            </sc-for>
+          </div>
+          <div class="nav">
+            <sc-for list="{{navStation}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}">
+                <span style="position:relative;display:flex"><svg class="i" style="width:22px;height:22px" viewBox="0 0 20 20"><use href="{{t.icon}}"></use></svg><sc-if value="{{t.badge}}" hint-placeholder-val="{{ false }}"><span class="mono" style="position:absolute;inset-block-start:-4px;inset-inline-end:-6px;min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:8px;background:#C62828;color:#fff;font-size:9.5px;display:flex;align-items:center;justify-content:center">{{t.count}}</span></sc-if></span>
+                {{t.label}}
+                <sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:var(--brand-primary)"></span></sc-if>
+              </span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M32</span>screen_tanks · filters</span>
+        <article class="f" data-screen-label="M32 Tanks">
+          <div class="sbl"><span>10:47</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>الخزانات</b><span class="sub">4 خزانات · {{tenant.stationName}}</span></span><button class="ib" style="margin:0"><svg class="i" style="width:19px;height:19px" viewBox="0 0 20 20"><use href="#s-search"></use></svg></button></div>
+          <div class="bd" style="gap:10px">
+            <span class="fbar">
+              <sc-for list="{{tankFilters}}" as="f" hint-placeholder-count="4">
+                <span class="fb {{f.cls}}">{{f.label}}<span class="mono" style="font-size:10.5px">{{f.count}}</span></span>
+              </sc-for>
+            </span>
+            <sc-for list="{{tanks}}" as="t" hint-placeholder-count="4">
+              <span class="card" style="display:flex;flex-direction:column;gap:8px;padding:12px;cursor:pointer">
+                <span style="display:flex;align-items:center;gap:9px">
+                  <span class="plate" style="width:30px;height:30px;border-radius:9px;background:{{t.bg}};color:{{t.ink}}"><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-tank"></use></svg></span>
+                  <b style="flex:1;min-width:0;font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">{{t.name}} · {{t.fuel}}</b>
+                  <span class="chip" style="background:{{t.bg}};border:1px solid {{t.bd}};color:{{t.ink}}"><svg class="i" style="width:12px;height:12px" viewBox="0 0 20 20"><use href="{{t.icon}}"></use></svg>{{t.state}}</span>
+                </span>
+                <span style="display:flex;align-items:baseline;gap:7px">
+                  <b class="mono" style="font-size:15px;font-weight:600;color:var(--brand-deep)">{{t.balance}}</b>
+                  <span class="cap">لتر من <span class="mono">{{t.capacity}}</span></span>
+                  <span style="flex:1"></span>
+                  <b class="mono" style="font-size:12px;font-weight:600;color:{{t.ink}}">{{t.pctLabel}}</b>
+                </span>
+                <span class="bar"><span class="fill-b" style="width:{{t.pct}};background:{{t.ink}}"></span></span>
+                <span class="cap">آخر قراءة <span class="mono">{{t.lastReading}}</span></span>
+              </span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M33</span>screen_tank_details · NPTankLevel</span>
+        <article class="f" data-screen-label="M33 Tank details">
+          <div class="sbl"><span>10:49</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>تفاصيل الخزان</b><span class="sub">الخزان 01 · بنزين</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:13px;display:flex;gap:12px">
+              <span class="tank"><i style="height:53.2%;background:var(--status-success)"></i></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:7px">
+                <span class="chip" style="align-self:flex-start;background:var(--status-success-bg);border:1px solid var(--status-success-bd);color:var(--status-success)"><svg class="i" style="width:12px;height:12px" viewBox="0 0 20 20"><use href="#s-check"></use></svg>طبيعي</span>
+                <sc-for list="{{tankMeta}}" as="m" hint-placeholder-count="5">
+                  <span style="display:flex;align-items:center;justify-content:space-between;gap:9px"><span class="cap">{{m.k}}</span><b class="{{m.cls}}" style="font-size:12px;font-weight:600;color:var(--text-primary)">{{m.v}}</b></span>
+                </sc-for>
+              </span>
+            </div>
+            <sc-for list="{{tankSections}}" as="s" hint-placeholder-count="5">
+              <span class="row" style="cursor:pointer">
+                <svg class="i" style="width:16px;height:16px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="{{s.icon}}"></use></svg>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:600 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">{{s.title}}</b><span class="cap">{{s.desc}}</span></span>
+                <span class="chip" style="background:{{s.bg}};border:1px solid {{s.bd}};color:{{s.ink}}">{{s.meta}}</span>
+              </span>
+            </sc-for>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <span class="cap mono" style="text-align:center">canRecordInventoryReading = true · canConfigureTank = false</span>
+              <button class="btn"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg>تسجيل قراءة المخزون</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M43</span>no_tanks · configuration is web-first</span>
+        <article class="f" data-screen-label="M43 No tanks">
+          <div class="sbl"><span>10:51</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>المخزون والخزانات</b><span class="sub">{{tenant.stationName}}</span></span></div>
+          <div class="bd" style="align-items:center;text-align:center;gap:12px">
+            <span style="margin-top:34px;display:flex;align-items:center;justify-content:center;width:82px;height:82px;border-radius:99px;background:var(--surface-raised);color:var(--text-secondary)"><svg class="i" style="width:36px;height:36px" viewBox="0 0 20 20"><use href="#s-tank"></use></svg></span>
+            <b style="font:800 20px/29px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">لا توجد خزانات مضافة</b>
+            <span class="cap" style="max-width:290px">يجب إعداد خزانات المحطة قبل إدارة المخزون. الإعداد يتم من النظام الإداري المعتمد.</span>
+            <span style="width:100%;display:flex;align-items:center;gap:9px;padding:11px 12px;box-sizing:border-box;border-radius:12px;background:var(--surface-raised);border:1px solid var(--border-default);text-align:start">
+              <svg class="i" style="width:16px;height:16px;color:var(--text-secondary)" viewBox="0 0 20 20"><use href="#s-lock"></use></svg>
+              <span class="cap" style="flex:1;min-width:0"><span class="mono">canConfigureTank = false</span> — لا يظهر «إضافة خزان».</span>
+            </span>
+            <span style="width:100%;margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn2">مراجعة إعدادات المحطة</button>
+              <button class="btn3">العودة للمحطة</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sh">02 — قراءة المخزون والفروقات</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M34</span>screen_inventory_reading</span>
+        <article class="f" data-screen-label="M34 Inventory reading">
+          <div class="sbl"><span>10:52</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>تسجيل قراءة المخزون</b><span class="sub">الخزان 01 · بنزين</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="lb">الخزان</span>
+            <span class="fld"><svg class="i" style="width:18px;height:18px;color:var(--brand-primary)" viewBox="0 0 20 20"><use href="#s-tank"></use></svg><span style="flex:1;min-width:0;font:600 13.5px/20px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">الخزان 01 — بنزين</span><svg class="i" style="width:16px;height:16px;color:var(--text-muted)" viewBox="0 0 20 20"><use href="#s-down"></use></svg></span>
+            <span style="display:flex;gap:8px">
+              <span class="kpi"><b>5,320.000</b><span>القراءة السابقة</span></span>
+              <span class="kpi"><b>06:10</b><span>وقتها</span></span>
+            </span>
+            <span class="lb">القراءة الحالية — لتر</span>
+            <span class="fld" style="border-color:var(--brand-primary)"><span class="mono" style="flex:1;min-width:0;font-size:19px;font-weight:600;color:var(--text-primary)">5,180.500</span><span class="cap">لتر</span></span>
+            <span class="cap">مطلوب · أرقام فقط · لا قيم سالبة · لا يتجاوز السعة <span class="mono">10,000</span>.</span>
+            <span style="display:flex;gap:9px">
+              <span class="row" style="flex:1;min-width:0;justify-content:center;gap:7px"><svg class="i" style="width:16px;height:16px;color:var(--text-secondary)" viewBox="0 0 20 20"><use href="#s-camera"></use></svg><span class="cap">صورة (اختياري)</span></span>
+              <span class="row" style="flex:1;min-width:0;justify-content:center;gap:7px"><svg class="i" style="width:16px;height:16px;color:var(--text-secondary)" viewBox="0 0 20 20"><use href="#s-attach"></use></svg><span class="cap">ملاحظة (اختياري)</span></span>
+            </span>
+            <span style="margin-top:auto"><button class="btn">مراجعة القراءة</button></span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M34·b</span>reading_validation · capacity blocked</span>
+        <article class="f" data-screen-label="M34b Reading validation">
+          <div class="sbl"><span>10:53</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>تسجيل قراءة المخزون</b><span class="sub">الخزان 01 · بنزين</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="lb">القراءة الحالية — لتر</span>
+            <span class="fld" style="border-color:var(--status-error);background:var(--status-error-bg)"><span class="mono" style="flex:1;min-width:0;font-size:19px;font-weight:600;color:var(--status-error)">12,400.000</span><svg class="i" style="width:18px;height:18px;color:var(--status-error)" viewBox="0 0 20 20"><use href="#s-alert"></use></svg></span>
+            <span style="display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border-radius:12px;background:var(--status-error-bg);border:1px solid var(--status-error-bd)">
+              <svg class="i" style="width:16px;height:16px;color:var(--status-error)" viewBox="0 0 20 20"><use href="#s-close"></use></svg>
+              <span style="flex:1;min-width:0;font:600 11.5px/18px 'Noto Sans Arabic',sans-serif;color:var(--status-error)">القيمة تتجاوز سعة الخزان (<span class="mono">10,000</span> لتر) — لا يمكن المتابعة.</span>
+            </span>
+            <span style="display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border-radius:12px;background:var(--status-warning-bg);border:1px solid var(--status-warning-bd)">
+              <svg class="i" style="width:16px;height:16px;color:var(--status-warning)" viewBox="0 0 20 20"><use href="#s-alert"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 12px/18px 'Noto Sans Arabic',sans-serif;color:var(--status-warning)">فرق غير معتاد — القراءة تحتاج مراجعة</b><span class="cap" style="color:var(--status-warning)">تحذير فقط عند قيمة داخل السعة. لا افتراض فقد أو تلاعب — القرار من قاعدة الخادم.</span></span>
+            </span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn" disabled>مراجعة القراءة</button>
+              <button class="btn3">تصحيح القيمة</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M35</span>screen_reading_review</span>
+        <article class="f" data-screen-label="M35 Reading review">
+          <div class="sbl"><span>10:54</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة قراءة المخزون</b><span class="sub">الخزان 01 · بنزين</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{readingReview}}" as="r" hint-placeholder-count="4">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;{{r.extra}}"><span class="cap">{{r.k}}</span><b class="mono" style="font-size:{{r.size}};font-weight:600;color:{{r.ink}}">{{r.v}}</b></span>
+              </sc-for>
+              <span style="display:flex;gap:7px;flex-wrap:wrap">
+                <span class="chip" style="background:var(--surface-raised);border:1px solid var(--border-default);color:var(--text-secondary)">محسوبة تلقائياً</span>
+                <span class="chip" style="background:var(--status-info-bg);border:1px solid var(--status-info-bd);color:var(--status-info)">تقديري حتى تأكيد الخادم</span>
+              </span>
+            </div>
+            <span class="row"><svg class="i" style="width:16px;height:16px;color:var(--text-secondary)" viewBox="0 0 20 20"><use href="#s-clock"></use></svg><span class="cap" style="flex:1;min-width:0">وقت التسجيل</span><b class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-primary)">18/09/2026 · 10:54</b></span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn">حفظ القراءة</button>
+              <button class="btn3">تعديل</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M36</span>screen_variance_details</span>
+        <article class="f" data-screen-label="M36 Variance details">
+          <div class="sbl"><span>10:56</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>تفاصيل الفرق</b><span class="sub">الخزان 01 · بنزين</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:9px">
+              <span style="display:flex;align-items:center;gap:9px"><span class="plate" style="width:30px;height:30px;border-radius:9px;background:var(--status-warning-bg);color:var(--status-warning)"><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-scale"></use></svg></span><b class="t3" style="flex:1;min-width:0">فرق الفترة</b><span class="chip" style="background:var(--status-warning-bg);border:1px solid var(--status-warning-bd);color:var(--status-warning)">يحتاج مراجعة</span></span>
+              <sc-for list="{{variance}}" as="r" hint-placeholder-count="4">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;{{r.extra}}"><span class="cap">{{r.k}}</span><b class="mono" style="font-size:{{r.size}};font-weight:600;color:{{r.ink}}">{{r.v}}</b></span>
+              </sc-for>
+            </div>
+            <span style="display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border-radius:12px;background:var(--surface-raised);border:1px solid var(--border-default)">
+              <svg class="i" style="width:16px;height:16px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="#s-info"></use></svg>
+              <span class="cap" style="flex:1;min-width:0">القيم من الخادم: <span class="mono">expectedBalance · actualBalance · variance</span>. الحدود من <span class="mono">tenant/station config</span> — لا نسبة مثبّتة في المكوّن ولا معادلة محاسبية في الواجهة.</span>
+            </span>
+            <span class="row"><svg class="i" style="width:16px;height:16px;color:var(--text-secondary)" viewBox="0 0 20 20"><use href="#s-clock"></use></svg><span class="cap" style="flex:1;min-width:0">الفترة</span><b class="mono" style="font-size:12px;font-weight:600;color:var(--text-primary)">18/09 06:00 — 18:00</b></span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <span class="cap mono" style="text-align:center">canReviewVariance = true</span>
+              <button class="btn2">إقرار المراجعة</button>
+              <button class="btn3">عرض قراءات الفترة</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sh">03 — عمليات التوريد واستلامه</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M37</span>screen_supply_operations</span>
+        <article class="f" data-screen-label="M37 Supply operations">
+          <div class="sbl"><span>11:02</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>التوريدات</b><span class="sub">{{tenant.stationName}}</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="fbar">
+              <sc-for list="{{supplyFilters}}" as="f" hint-placeholder-count="4">
+                <span class="fb {{f.cls}}">{{f.label}}<span class="mono" style="font-size:10.5px">{{f.count}}</span></span>
+              </sc-for>
+            </span>
+            <sc-for list="{{supplies}}" as="s" hint-placeholder-count="3">
+              <span class="card" style="display:flex;flex-direction:column;gap:8px;padding:12px;cursor:pointer">
+                <span style="display:flex;align-items:center;gap:9px">
+                  <span class="plate" style="width:30px;height:30px;border-radius:9px;background:{{s.bg}};color:{{s.ink}}"><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-truck"></use></svg></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">{{s.fuel}} → {{s.tank}}</b><span class="cap mono">{{s.ref}}</span></span>
+                  <span class="chip" style="background:{{s.bg}};border:1px solid {{s.bd}};color:{{s.ink}}">{{s.state}}</span>
+                </span>
+                <span style="display:flex;align-items:center;gap:8px;padding-top:7px;border-top:1px solid var(--border-soft)">
+                  <span class="cap" style="flex:1;min-width:0">{{s.time}}</span>
+                  <b class="mono" style="font-size:13px;font-weight:600;color:var(--brand-deep)">{{s.qty}}</b>
+                  <span class="cap">لتر</span>
+                </span>
+              </span>
+            </sc-for>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <span class="cap mono" style="text-align:center">canReceiveSupply = true</span>
+              <button class="btn"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-down"></use></svg>استلام توريد</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M38</span>screen_receive_supply · safety calc</span>
+        <article class="f" data-screen-label="M38 Receive supply">
+          <div class="sbl"><span>11:04</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>استلام توريد</b><span class="sub">{{tenant.stationName}}</span></span></div>
+          <div class="bd" style="gap:9px">
+            <span style="display:flex;gap:9px">
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px"><span class="lb">نوع الوقود</span><span class="fld" style="height:52px"><span style="flex:1;min-width:0;font:600 13px/20px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">بنزين</span><svg class="i" style="width:15px;height:15px;color:var(--text-muted)" viewBox="0 0 20 20"><use href="#s-down"></use></svg></span></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px"><span class="lb">الخزان</span><span class="fld" style="height:52px"><span style="flex:1;min-width:0;font:600 13px/20px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">الخزان 02</span><svg class="i" style="width:15px;height:15px;color:var(--text-muted)" viewBox="0 0 20 20"><use href="#s-down"></use></svg></span></span>
+            </span>
+            <span class="lb">الكمية — لتر</span>
+            <span class="fld" style="border-color:var(--brand-primary)"><span class="mono" style="flex:1;min-width:0;font-size:19px;font-weight:600;color:var(--text-primary)">1,320.000</span><span class="cap">لتر</span></span>
+            <div class="card" style="padding:12px;display:flex;flex-direction:column;gap:8px">
+              <span style="display:flex;align-items:center;gap:8px"><b class="lb" style="flex:1;min-width:0">أثر التوريد على الخزان</b><span class="chip" style="background:var(--status-info-bg);border:1px solid var(--status-info-bd);color:var(--status-info)">تقديري</span></span>
+              <sc-for list="{{supplyCalc}}" as="r" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;{{r.extra}}"><span class="cap">{{r.k}}</span><b class="mono" style="font-size:{{r.size}};font-weight:600;color:{{r.ink}}">{{r.v}}</b></span>
+              </sc-for>
+              <span style="display:flex;align-items:center;gap:9px"><span class="bar"><span class="fill-b" style="width:66.5%;background:var(--status-success)"></span></span><b class="mono" style="flex:none;font-size:11.5px;font-weight:600;color:var(--status-success)">66.5%</b></span>
+            </div>
+            <span style="display:flex;gap:8px">
+              <span class="row" style="flex:1;min-width:0;justify-content:center;gap:6px;min-height:44px"><svg class="i" style="width:15px;height:15px;color:var(--text-secondary)" viewBox="0 0 20 20"><use href="#s-attach"></use></svg><span class="cap">مرفق</span></span>
+              <span class="row" style="flex:1;min-width:0;justify-content:center;gap:6px;min-height:44px"><svg class="i" style="width:15px;height:15px;color:var(--text-secondary)" viewBox="0 0 20 20"><use href="#s-truck"></use></svg><span class="cap">مرجع / مركبة</span></span>
+            </span>
+            <span class="cap">الحقول الاختيارية تظهر فقط إن وُجدت في عقد الخادم — غير مطلوبة الآن.</span>
+            <span style="margin-top:auto"><button class="btn">مراجعة التوريد</button></span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M46</span>supply_capacity_error · blocked</span>
+        <article class="f" data-screen-label="M46 Capacity error">
+          <div class="sbl"><span>11:05</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>استلام توريد</b><span class="sub">الخزان 02 · بنزين</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="lb">الكمية — لتر</span>
+            <span class="fld" style="border-color:var(--status-error);background:var(--status-error-bg)"><span class="mono" style="flex:1;min-width:0;font-size:19px;font-weight:600;color:var(--status-error)">7,500.000</span><svg class="i" style="width:18px;height:18px;color:var(--status-error)" viewBox="0 0 20 20"><use href="#s-alert"></use></svg></span>
+            <div class="card" style="padding:12px;display:flex;flex-direction:column;gap:8px">
+              <sc-for list="{{capacityCalc}}" as="r" hint-placeholder-count="4">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;{{r.extra}}"><span class="cap">{{r.k}}</span><b class="mono" style="font-size:{{r.size}};font-weight:600;color:{{r.ink}}">{{r.v}}</b></span>
+              </sc-for>
+            </div>
+            <span style="display:flex;align-items:flex-start;gap:9px;padding:12px;border-radius:12px;background:var(--status-error-bg);border:1px solid var(--status-error-bd)">
+              <svg class="i" style="width:17px;height:17px;color:var(--status-error)" viewBox="0 0 20 20"><use href="#s-close"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--status-error)">الكمية تتجاوز السعة المتاحة للخزان</b><span class="cap" style="color:var(--status-error)">المتاح <span class="mono">6,000.000</span> لتر فقط. صحّح الكمية أو اختر خزاناً آخر.</span></span>
+            </span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn" disabled>مراجعة التوريد</button>
+              <button class="btn3">تغيير الخزان</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M39</span>screen_supply_review · confirm sheet</span>
+        <article class="f" data-screen-label="M39 Supply review">
+          <div class="sbl"><span>11:06</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة التوريد</b><span class="sub">بنزين · الخزان 02</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{supplyReview}}" as="r" hint-placeholder-count="4">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;{{r.extra}}"><span class="cap">{{r.k}}</span><b class="mono" style="font-size:{{r.size}};font-weight:600;color:{{r.ink}}">{{r.v}}</b></span>
+              </sc-for>
+              <span class="chip" style="align-self:flex-start;background:var(--status-info-bg);border:1px solid var(--status-info-bd);color:var(--status-info)">الرصيد بعد التوريد — محسوب تلقائياً · تقديري</span>
+            </div>
+          </div>
+          <div class="scrim"></div>
+          <div class="sheet">
+            <span class="grab"></span>
+            <span style="display:flex;align-items:center;gap:10px"><span style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;border-radius:11px;background:var(--brand-accent);color:var(--brand-deep)"><svg class="i" style="width:19px;height:19px" viewBox="0 0 20 20"><use href="#s-truck"></use></svg></span><b style="font:800 18px/26px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">تأكيد استلام التوريد؟</b></span>
+            <span class="cap">يُرسل الطلب للخادم للتحقق والاعتماد. لا يُحدَّث رصيد الخزان كمؤكد قبل رد الخادم.</span>
+            <span style="display:flex;gap:8px"><span class="kpi"><b>1,320.000</b><span>الكمية</span></span><span class="kpi"><b>الخزان 02</b><span>الوجهة</span></span></span>
+            <button class="btn">تأكيد الاستلام</button>
+            <button class="btn3">تعديل</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M40</span>screen_supply_success · server confirmed</span>
+        <article class="f" data-screen-label="M40 Supply success">
+          <div class="sbl"><span>11:07</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>استلام توريد</b></div>
+          <div class="bd" style="align-items:center;text-align:center;gap:12px">
+            <span style="margin-top:32px;display:flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:99px;background:var(--status-success-bg);color:var(--status-success)"><svg class="i" style="width:38px;height:38px" viewBox="0 0 20 20"><use href="#s-check"></use></svg></span>
+            <b style="font:800 20px/29px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">تم تسجيل التوريد بنجاح</b>
+            <span class="chip" style="background:var(--status-success-bg);border:1px solid var(--status-success-bd);color:var(--status-success)"><svg class="i" style="width:12px;height:12px" viewBox="0 0 20 20"><use href="#s-check"></use></svg>مؤكد من الخادم</span>
+            <span style="width:100%;display:flex;gap:8px"><span class="kpi"><b>1,320.000</b><span>الكمية — لتر</span></span><span class="kpi"><b>الخزان 02</b><span>الخزان</span></span></span>
+            <span style="width:100%;display:flex;align-items:center;gap:9px;padding:12px 13px;box-sizing:border-box;border-radius:12px;background:var(--surface-card);border:1px solid var(--border-default);text-align:start">
+              <svg class="i" style="width:17px;height:17px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="#s-tank"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column"><span class="cap">الرصيد المحدّث من الخادم</span><b class="mono" style="font-size:17px;font-weight:600;color:var(--brand-deep)">6,650.000</b></span>
+              <span class="cap mono">recordVersion 12</span>
+            </span>
+            <span style="width:100%;margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn">عرض الخزان</button>
+              <button class="btn3">العودة للمخزون</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sh">04 — التنبيهات والحالات الحاكمة</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M41</span>low_inventory · alert routing</span>
+        <article class="f" data-screen-label="M41 Low inventory">
+          <div class="sbl"><span>11:12</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>تنبيهات المخزون</b><span class="sub">مخزون منخفض</span></span></div>
+          <div class="bd" style="gap:10px">
+            <sc-for list="{{invAlerts}}" as="a" hint-placeholder-count="4">
+              <span class="row" style="align-items:flex-start;padding:11px 12px;border-color:{{a.bd}};cursor:pointer">
+                <span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;flex:none;border-radius:10px;background:{{a.bg}};color:{{a.ink}}"><svg class="i" style="width:16px;height:16px" viewBox="0 0 20 20"><use href="{{a.icon}}"></use></svg></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">{{a.title}}</b><span class="cap">{{a.desc}}</span><span class="cap mono" style="color:var(--text-muted)">{{a.route}}</span></span>
+                <svg class="i" style="width:14px;height:14px;color:var(--text-muted)" viewBox="0 0 20 20"><use href="#s-chevron"></use></svg>
+              </span>
+            </sc-for>
+            <span style="margin-top:auto;display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--surface-raised);border:1px solid var(--border-default)">
+              <svg class="i" style="width:16px;height:16px;color:var(--text-secondary)" viewBox="0 0 20 20"><use href="#s-info"></use></svg>
+              <span class="cap" style="flex:1;min-width:0">الحدود من <span class="mono">lowThreshold · criticalThreshold</span> في إعداد المستأجر/المحطة.</span>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M42</span>critical_inventory · tank state</span>
+        <article class="f" data-screen-label="M42 Critical inventory">
+          <div class="sbl"><span>11:14</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>تفاصيل الخزان</b><span class="sub">الخزان 04 · جاز</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span style="display:flex;align-items:flex-start;gap:9px;padding:12px;border-radius:12px;background:var(--status-error-bg);border:1px solid var(--status-error-bd)">
+              <svg class="i" style="width:17px;height:17px;color:var(--status-error)" viewBox="0 0 20 20"><use href="#s-alert"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--status-error)">مخزون حرج</b><span class="cap" style="color:var(--status-error)">الرصيد أقل من الحد الحرج المعدّ للمحطة. مطلوب توريد عاجل.</span></span>
+            </span>
+            <div class="card" style="padding:13px;display:flex;gap:12px">
+              <span class="tank"><i style="height:8%;background:var(--status-error)"></i></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:7px">
+                <span class="chip" style="align-self:flex-start;background:var(--status-error-bg);border:1px solid var(--status-error-bd);color:var(--status-error)"><svg class="i" style="width:12px;height:12px" viewBox="0 0 20 20"><use href="#s-alert"></use></svg>حرج</span>
+                <sc-for list="{{criticalMeta}}" as="m" hint-placeholder-count="4">
+                  <span style="display:flex;align-items:center;justify-content:space-between;gap:9px"><span class="cap">{{m.k}}</span><b class="{{m.cls}}" style="font-size:12px;font-weight:600;color:var(--text-primary)">{{m.v}}</b></span>
+                </sc-for>
+              </span>
+            </div>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-down"></use></svg>استلام توريد لهذا الخزان</button>
+              <button class="btn3">تسجيل قراءة المخزون</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M44</span>offline_cached_inventory</span>
+        <article class="f" data-screen-label="M44 Offline cached">
+          <div class="sbl"><span>11:18</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-offline"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>المخزون والخزانات</b><span class="sub">بيانات محلية</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span style="display:flex;align-items:center;gap:9px;min-height:40px;box-sizing:border-box;padding:9px 12px;border-radius:12px;background:var(--status-neutral-bg);border:1px solid var(--status-neutral-bd)"><svg class="i" style="width:17px;height:17px;color:var(--status-neutral)" viewBox="0 0 20 20"><use href="#s-offline"></use></svg><span style="flex:1;min-width:0;font:600 11.5px/18px 'Noto Sans Arabic',sans-serif;color:var(--status-neutral)">لا يوجد اتصال — آخر تحديث <span class="mono">09:12</span></span></span>
+            <sc-for list="{{cachedTanks}}" as="t" hint-placeholder-count="2">
+              <span class="card" style="display:flex;flex-direction:column;gap:7px;padding:12px">
+                <span style="display:flex;align-items:center;gap:9px"><b style="flex:1;min-width:0;font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">{{t.name}} · {{t.fuel}}</b><span class="chip" style="background:var(--status-neutral-bg);border:1px solid var(--status-neutral-bd);color:var(--status-neutral)">بيانات مخزّنة</span></span>
+                <span style="display:flex;align-items:baseline;gap:7px"><b class="mono" style="font-size:15px;font-weight:600;color:var(--brand-deep)">{{t.balance}}</b><span class="cap">لتر · <span class="mono">{{t.pctLabel}}</span></span></span>
+                <span class="bar"><span class="fill-b" style="width:{{t.pct}};background:var(--status-neutral)"></span></span>
+              </span>
+            </sc-for>
+            <span style="display:flex;align-items:flex-start;gap:9px;padding:12px;border-radius:12px;background:var(--status-warning-bg);border:1px solid var(--status-warning-bd)">
+              <svg class="i" style="width:17px;height:17px;color:var(--status-warning)" viewBox="0 0 20 20"><use href="#s-lock"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--status-warning)">تأكيد التوريد يتطلب اتصالاً بالإنترنت</b><span class="cap" style="color:var(--status-warning)">لا يُعتمد التوريد محلياً. حفظ قراءة المخزون محلياً يتبع عقد الخادم ولا يُفترض.</span></span>
+            </span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn" disabled>استلام توريد</button>
+              <button class="btn3"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-sync"></use></svg>محاولة المزامنة</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M45</span>tank_record_changed · recordVersion</span>
+        <article class="f" data-screen-label="M45 Record changed">
+          <div class="sbl"><span>11:20</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>تفاصيل الخزان</b><span class="sub">تم تحديث البيانات</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span style="display:flex;align-items:flex-start;gap:10px;padding:13px;border-radius:12px;background:var(--status-info-bg);border:1px solid var(--status-info-bd)">
+              <svg class="i" style="width:19px;height:19px;color:var(--status-info)" viewBox="0 0 20 20"><use href="#s-sync"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 13px/20px 'Noto Sans Arabic',sans-serif;color:var(--status-info)">تم تحديث بيانات الخزان</b><span class="cap" style="color:var(--status-info)">سُجِّل توريد أو قراءة من جهة أخرى بعد فتحك الشاشة. لن تُكتب بياناتك فوق النسخة الأحدث.</span></span>
+            </span>
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:8px">
+              <sc-for list="{{recordDiff}}" as="r" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span class="cap">{{r.k}}</span><b class="mono" style="font-size:12.5px;font-weight:600;color:{{r.ink}}">{{r.v}}</b></span>
+              </sc-for>
+            </div>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-sync"></use></svg>تحديث البيانات</button>
+              <button class="btn3">العودة للخزانات</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M47</span>inventory_sync_failed</span>
+        <article class="f" data-screen-label="M47 Sync failed">
+          <div class="sbl"><span>11:22</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-sync"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>حالة المزامنة</b><span class="sub">المخزون</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span style="display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--status-error-bg);border:1px solid var(--status-error-bd)"><svg class="i" style="width:17px;height:17px;color:var(--status-error)" viewBox="0 0 20 20"><use href="#s-alert"></use></svg><span style="flex:1;min-width:0;font:600 11.5px/18px 'Noto Sans Arabic',sans-serif;color:var(--status-error)">فشل مزامنة المخزون — عنصران لم يُرفعا</span></span>
+            <sc-for list="{{syncRows}}" as="s" hint-placeholder-count="4">
+              <span class="row" style="border-color:{{s.bd}}">
+                <svg class="i" style="width:16px;height:16px;color:{{s.ink}}" viewBox="0 0 20 20"><use href="{{s.icon}}"></use></svg>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:600 12px/18px 'Noto Sans Arabic',sans-serif;color:var(--text-primary)">{{s.title}}</b><span class="cap mono">{{s.time}}</span></span>
+                <span class="chip" style="background:{{s.bg}};border:1px solid {{s.bd}};color:{{s.ink}}">{{s.state}}</span>
+              </span>
+            </sc-for>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <span class="cap mono" style="text-align:center">syncStatus: synced · syncing · pending · failed · offline</span>
+              <button class="btn"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-sync"></use></svg>إعادة المزامنة</button>
+              <button class="btn3">عرض التفاصيل</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M48</span>station_switch · loading state</span>
+        <article class="f" data-screen-label="M48 Station switch loading">
+          <div class="sbl"><span>11:24</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>المخزون والخزانات</b><span class="sub">محطة الخرطوم — الجنوب</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span style="display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--status-info-bg);border:1px solid var(--status-info-bd)"><svg class="i" style="width:17px;height:17px;color:var(--status-info)" viewBox="0 0 20 20"><use href="#s-station"></use></svg><span style="flex:1;min-width:0;font:600 11.5px/18px 'Noto Sans Arabic',sans-serif;color:var(--status-info)">تم تبديل المحطة — جلب خزانات <span class="mono">activeStationId</span></span></span>
+            <sc-for list="{{skeletons}}" as="s" hint-placeholder-count="3">
+              <span class="card" style="display:flex;flex-direction:column;gap:9px;padding:13px">
+                <span style="display:flex;align-items:center;gap:9px"><span style="width:30px;height:30px;flex:none;border-radius:9px;background:var(--surface-raised)"></span><span style="flex:1;min-width:0;height:12px;border-radius:6px;background:var(--surface-raised)"></span><span style="width:54px;height:20px;flex:none;border-radius:7px;background:var(--surface-raised)"></span></span>
+                <span style="width:{{s.w}};height:16px;border-radius:7px;background:var(--surface-raised)"></span>
+                <span class="bar"></span>
+              </span>
+            </sc-for>
+            <span style="margin-top:auto"><span class="cap">لا تُعرض بيانات المحطة السابقة بعد التبديل — حالة تحميل صريحة.</span></span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">TB</span>tenant_b · same screen · theme only</span>
+        <article class="f tB" data-screen-label="TB Tenant B theme">
+          <div class="sbl"><span>10:45</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>المخزون والخزانات</b><span class="sub">{{tenantB.stationName}}</span></span></div>
+          <div class="bd">
+            <span style="display:flex;gap:8px"><span class="kpi"><b>4</b><span>إجمالي الخزانات</span></span><span class="kpi"><b>2</b><span>تنبيهات</span></span><span class="kpi"><b>10:45</b><span>آخر تحديث</span></span></span>
+            <sc-for list="{{fuelStock}}" as="s" hint-placeholder-count="2">
+              <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:9px">
+                <span style="display:flex;align-items:center;gap:9px">
+                  <span class="plate" style="width:32px;height:32px;border-radius:9px;background:{{s.bg}};color:{{s.ink}}"><svg class="i" style="width:16px;height:16px" viewBox="0 0 20 20"><use href="#s-fuel"></use></svg></span>
+                  <b class="t3" style="flex:1;min-width:0">{{s.fuel}}</b>
+                  <span class="chip" style="background:{{s.bg}};border:1px solid {{s.bd}};color:{{s.ink}}">{{s.state}}</span>
+                </span>
+                <span style="display:flex;align-items:flex-end;gap:8px">
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span class="cap">الرصيد الحالي — لتر</span><b class="mono" style="font-size:18px;font-weight:600;color:var(--brand-deep)">{{s.balance}}</b></span>
+                  <span style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:1px"><span class="cap">السعة</span><b class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-primary)">{{s.capacity}}</b></span>
+                </span>
+                <span style="display:flex;align-items:center;gap:9px"><span class="bar"><span class="fill-b" style="width:{{s.pct}};background:{{s.ink}}"></span></span><b class="mono" style="flex:none;font-size:12px;font-weight:600;color:{{s.ink}}">{{s.pctLabel}}</b></span>
+              </div>
+            </sc-for>
+            <span class="row"><svg class="i" style="width:16px;height:16px;color:var(--brand-primary)" viewBox="0 0 20 20"><use href="#s-info"></use></svg><span class="cap" style="flex:1;min-width:0">نفس الشاشة ونفس المكوّنات — تغيّرت قيم <span class="mono">tenant.theme</span> فقط.</span></span>
+            <span style="margin-top:auto"><button class="btn">استلام توريد</button></span>
+          </div>
+          <div class="nav">
+            <sc-for list="{{navStation}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}"><svg class="i" style="width:22px;height:22px" viewBox="0 0 20 20"><use href="{{t.icon}}"></use></svg>{{t.label}}<sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:var(--brand-primary)"></span></sc-if></span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">DK4</span>inventory · dark</span>
+        <article class="f dk" data-screen-label="DK4 Inventory dark">
+          <div class="sbl"><span>22:40</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>المخزون والخزانات</b><span class="sub">الوضع الداكن</span></span></div>
+          <div class="bd">
+            <span style="display:flex;gap:8px"><span class="kpi"><b>4</b><span>الخزانات</span></span><span class="kpi"><b>1</b><span>تنبيه</span></span><span class="kpi"><b>22:40</b><span>آخر تحديث</span></span></span>
+            <sc-for list="{{fuelStock}}" as="s" hint-placeholder-count="2">
+              <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:9px">
+                <span style="display:flex;align-items:center;gap:9px"><span class="plate" style="width:32px;height:32px;border-radius:9px;background:{{s.bg}};color:{{s.ink}}"><svg class="i" style="width:16px;height:16px" viewBox="0 0 20 20"><use href="#s-fuel"></use></svg></span><b class="t3" style="flex:1;min-width:0">{{s.fuel}}</b><span class="chip" style="background:{{s.bg}};border:1px solid {{s.bd}};color:{{s.ink}}">{{s.state}}</span></span>
+                <span style="display:flex;align-items:flex-end;gap:8px"><span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span class="cap">الرصيد — لتر</span><b class="mono" style="font-size:18px;font-weight:600;color:var(--brand-primary)">{{s.balance}}</b></span><span class="cap mono">{{s.capacity}}</span></span>
+                <span style="display:flex;align-items:center;gap:9px"><span class="bar"><span class="fill-b" style="width:{{s.pct}};background:{{s.ink}}"></span></span><b class="mono" style="flex:none;font-size:12px;font-weight:600;color:{{s.ink}}">{{s.pctLabel}}</b></span>
+              </div>
+            </sc-for>
+            <span class="row"><svg class="i" style="width:16px;height:16px;color:var(--brand-primary)" viewBox="0 0 20 20"><use href="#s-tank"></use></svg><span class="cap" style="flex:1;min-width:0">تباين مستوى الخزان مقروء في الوضع الداكن — لا نص شبه شفاف.</span></span>
+            <span style="margin-top:auto"><button class="btn">تسجيل قراءة المخزون</button></span>
+          </div>
+          <div class="nav">
+            <sc-for list="{{navStation}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}"><svg class="i" style="width:22px;height:22px" viewBox="0 0 20 20"><use href="{{t.icon}}"></use></svg>{{t.label}}<sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:var(--brand-primary)"></span></sc-if></span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">DK5</span>tank_details · dark</span>
+        <article class="f dk" data-screen-label="DK5 Tank details dark">
+          <div class="sbl"><span>22:42</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>تفاصيل الخزان</b><span class="sub">الخزان 03 · جاز</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:13px;display:flex;gap:12px">
+              <span class="tank"><i style="height:31%;background:var(--status-warning)"></i></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:7px">
+                <span class="chip" style="align-self:flex-start;background:var(--status-warning-bg);border:1px solid var(--status-warning-bd);color:var(--status-warning)"><svg class="i" style="width:12px;height:12px" viewBox="0 0 20 20"><use href="#s-alert"></use></svg>منخفض</span>
+                <sc-for list="{{darkTankMeta}}" as="m" hint-placeholder-count="4">
+                  <span style="display:flex;align-items:center;justify-content:space-between;gap:9px"><span class="cap">{{m.k}}</span><b class="{{m.cls}}" style="font-size:12px;font-weight:600;color:var(--text-primary)">{{m.v}}</b></span>
+                </sc-for>
+              </span>
+            </div>
+            <sc-for list="{{darkSections}}" as="s" hint-placeholder-count="3">
+              <span class="row"><svg class="i" style="width:16px;height:16px;color:var(--brand-primary)" viewBox="0 0 20 20"><use href="{{s.icon}}"></use></svg><span class="cap" style="flex:1;min-width:0">{{s.title}}</span><span class="chip" style="background:{{s.bg}};border:1px solid {{s.bd}};color:{{s.ink}}">{{s.meta}}</span></span>
+            </sc-for>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn">استلام توريد</button>
+              <button class="btn3">تسجيل قراءة</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <sc-if value="{{showFlow}}" hint-placeholder-val="{{ true }}">
+    <section class="sec" style="max-width:1160px">
+      <h2 class="sh">05 — مسارات النموذج الأولي · مسارات مسدودة = 0</h2>
+      <div class="panel" style="gap:12px">
+        <sc-for list="{{flows}}" as="f" hint-placeholder-count="3">
+          <span style="display:flex;flex-direction:column;gap:9px">
+            <b style="font:700 13px/20px 'Noto Sans Arabic',sans-serif;color:#1A237E">{{f.title}}</b>
+            <span style="display:flex;flex-wrap:wrap;align-items:center;gap:7px">
+              <sc-for list="{{f.steps}}" as="s" hint-placeholder-count="8">
+                <span style="display:flex;align-items:center;gap:7px">
+                  <span style="display:inline-flex;align-items:center;height:32px;padding:0 11px;border-radius:9px;background:{{s.bg}};border:1px solid {{s.bd}};font:600 11.5px/1 'Noto Sans Arabic',sans-serif;color:{{s.ink}}">{{s.label}}</span>
+                  <sc-if value="{{s.arrow}}" hint-placeholder-val="{{ false }}"><svg class="i" style="width:13px;height:13px;color:#90A4AE" viewBox="0 0 20 20"><use href="#s-chevron"></use></svg></sc-if>
+                </span>
+              </sc-for>
+            </span>
+          </span>
+        </sc-for>
+        <span class="cap" style="line-height:20px;color:#455A64">كل تنبيه مخزون يفتح سجله (خزان · توريد · فرق)، وكل حالة منع لها سبب نصي وإجراء بديل.</span>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{showHandoff}}" hint-placeholder-val="{{ true }}">
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;max-width:1160px">
+      <div class="panel">
+        <h2 style="font:800 17px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">06 — المكوّنات (جديدة + معاد استخدامها)</h2>
+        <sc-for list="{{components}}" as="c" hint-placeholder-count="12">
+          <span style="display:flex;align-items:flex-start;gap:10px;padding-bottom:8px;border-bottom:1px solid #EDF1F6">
+            <span class="mono" style="flex:none;width:176px;font-size:11px;color:#1A237E">{{c.name}}</span>
+            <span class="cap" style="flex:1;min-width:0;color:#455A64">{{c.use}}</span>
+          </span>
+        </sc-for>
+        <span class="cap" style="color:#455A64">معاد استخدامها بلا تكرار: <span class="mono">NPStatusBadge · NPPrimaryButton · NPInfoBanner · NPConnectivityBanner · NPConfirmationSheet · NPStatusTimeline · NPBlockingReason</span>.</span>
+      </div>
+
+      <div class="panel">
+        <h2 style="font:800 17px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">07 — عقد التسليم · Flutter (UX contract)</h2>
+        <sc-for list="{{contract}}" as="c" hint-placeholder-count="12">
+          <span style="display:flex;align-items:flex-start;gap:10px;padding-bottom:8px;border-bottom:1px solid #EDF1F6">
+            <span class="mono" style="flex:none;width:176px;font-size:11px;color:#1A237E">{{c.key}}</span>
+            <span class="cap" style="flex:1;min-width:0;color:#455A64">{{c.rule}}</span>
+          </span>
+        </sc-for>
+        <span class="cap" style="line-height:20px;color:#455A64">أسماء واجهة فقط — ليست مخطط قاعدة بيانات. الدقة العشرية وأنواع الوقود والحدود كلها من الإعداد.</span>
+      </div>
+    </section>
+
+    <section class="panel" style="gap:12px;max-width:1160px">
+      <h2 style="font:800 17px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">08 — تقرير المراجعة NP-WO-CD-08 · Phase 3</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:10px">
+        <sc-for list="{{report}}" as="r" hint-placeholder-count="18">
+          <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border:1px solid #E8EDF3;border-radius:12px;background:#FCFDFF">
+            <span class="cap" style="flex:1;min-width:0;color:#455A64">{{r.label}}</span>
+            <b class="mono" style="flex:none;font-size:12px;font-weight:600;color:{{r.ink}}">{{r.value}}</b>
+          </span>
+        </sc-for>
+      </div>
+      <span class="cap" style="line-height:20px;color:#455A64">قرارات المالك المطلوبة: (١) هل يدعم الخادم حفظ قراءة المخزون محلياً عند انقطاع الاتصال، أم منع كامل كالتوريد؟ (٢) معادلة الفرق وحدوده — من يملك القيم ومن يقرّها؟ (٣) هل تُدار إعدادات الخزانات من الويب فقط أم يُمنح المدير <span class="mono">canConfigureTank</span>؟ (٤) الدقة العشرية للكميات (٣ خانات كمثال) لكل مستأجر أم عامة؟ نقطة التوقف: لا تقارير ولا أجهزة ولا مالية ولا Manager Web حتى الاعتماد.</span>
+    </section>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showFlow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;العرض&quot;},&quot;showHandoff&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;العرض&quot;},&quot;stationName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;محطة الخرطوم — الشرق&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;المستأجر&quot;},&quot;tenantBStation&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;محطة النيل الأزرق — المركز&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;المستأجر&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const OK = "var(--status-success)", WARN = "var(--status-warning)", ERR = "var(--status-error)", INFO = "var(--status-info)", NEU = "var(--status-neutral)", B = "var(--brand-deep)";
+    const s = {
+      ok: { bg: "var(--status-success-bg)", bd: "var(--status-success-bd)", ink: OK, icon: "#s-check" },
+      warn: { bg: "var(--status-warning-bg)", bd: "var(--status-warning-bd)", ink: WARN, icon: "#s-alert" },
+      err: { bg: "var(--status-error-bg)", bd: "var(--status-error-bd)", ink: ERR, icon: "#s-alert" },
+      info: { bg: "var(--status-info-bg)", bd: "var(--status-info-bd)", ink: INFO, icon: "#s-sync" },
+      neutral: { bg: "var(--status-neutral-bg)", bd: "var(--status-neutral-bd)", ink: NEU, icon: "#s-info" }
+    };
+    const step = (label, kind, arrow) => ({
+      label, arrow,
+      bg: kind === "s" ? "#E8F5EC" : kind === "d" ? "#FFF6E8" : "#fff",
+      bd: kind === "s" ? "#BEDFC9" : kind === "d" ? "#F3D9AE" : "#E4E7EC",
+      ink: kind === "s" ? "#0B6B3A" : kind === "d" ? "#7A4A00" : "#1F2330"
+    });
+    return {
+      showFlow: this.props.showFlow ?? true,
+      showHandoff: this.props.showHandoff ?? true,
+      tenant: { stationName: this.props.stationName ?? "محطة الخرطوم — الشرق" },
+      tenantB: { stationName: this.props.tenantBStation ?? "محطة النيل الأزرق — المركز" },
+      pills: ["390×844", "Semantic Tokens", "tenant.theme A/B", "activeStationId", "خادم مرجعي · تقديري/مؤكد", "بنزين · جاز", "ديزل = 0", "بلا تبويب خامس"],
+      navStation: [
+        { label: "الرئيسية", icon: "#s-home", active: false, badge: false, count: "", ink: "var(--text-muted)" },
+        { label: "المحطة", icon: "#s-station", active: true, badge: false, count: "", ink: "var(--brand-primary)" },
+        { label: "التنبيهات", icon: "#s-bell", active: false, badge: true, count: "2", ink: "var(--text-muted)" },
+        { label: "حسابي", icon: "#s-profile", active: false, badge: false, count: "", ink: "var(--text-muted)" }
+      ],
+      fuelStock: [
+        { fuel: "بنزين", balance: "9,320.000", capacity: "20,000", pct: "46.6%", pctLabel: "46.6%", state: "طبيعي", ...s.ok },
+        { fuel: "جاز", balance: "3,145.000", capacity: "16,000", pct: "19.7%", pctLabel: "19.7%", state: "منخفض", ...s.warn }
+      ],
+      invEntries: [
+        { icon: "#s-tank", title: "الخزانات", desc: "4 خزانات · تنبيهان" },
+        { icon: "#s-meter", title: "تسجيل قراءة المخزون", desc: "آخر قراءة 06:10" },
+        { icon: "#s-truck", title: "التوريدات", desc: "1 قيد الاستلام · 1 تحتاج مراجعة" }
+      ],
+      tankFilters: [
+        { label: "الكل", count: "4", cls: "on" },
+        { label: "بنزين", count: "2", cls: "" },
+        { label: "جاز", count: "2", cls: "" },
+        { label: "تحتاج انتباه", count: "2", cls: "" }
+      ],
+      tanks: [
+        { name: "الخزان 01", fuel: "بنزين", balance: "5,320.000", capacity: "10,000", pct: "53.2%", pctLabel: "53.2%", state: "طبيعي", lastReading: "06:10", ...s.ok },
+        { name: "الخزان 02", fuel: "بنزين", balance: "4,000.000", capacity: "10,000", pct: "40%", pctLabel: "40.0%", state: "طبيعي", lastReading: "06:12", ...s.ok },
+        { name: "الخزان 03", fuel: "جاز", balance: "2,480.000", capacity: "8,000", pct: "31%", pctLabel: "31.0%", state: "منخفض", lastReading: "06:15", ...s.warn },
+        { name: "الخزان 04", fuel: "جاز", balance: "665.000", capacity: "8,000", pct: "8.3%", pctLabel: "8.3%", state: "حرج", lastReading: "06:18", ...s.err }
+      ],
+      tankMeta: [
+        { k: "السعة القصوى", v: "10,000", cls: "mono" },
+        { k: "الرصيد الحالي", v: "5,320.000", cls: "mono" },
+        { k: "المساحة المتاحة", v: "4,680.000", cls: "mono" },
+        { k: "نسبة الامتلاء", v: "53.2%", cls: "mono" },
+        { k: "آخر قراءة", v: "06:10", cls: "mono" },
+        { k: "آخر توريد", v: "17/09 · 21:40", cls: "mono" }
+      ],
+      tankSections: [
+        { icon: "#s-fuel", title: "المخزون الحالي", desc: "بنزين · مؤكد من الخادم", meta: "5,320.000", ...s.ok },
+        { icon: "#s-meter", title: "آخر القراءات", desc: "3 قراءات في الفترة", meta: "06:10", ...s.neutral },
+        { icon: "#s-truck", title: "آخر التوريدات", desc: "توريد واحد أمس", meta: "1,800.000", ...s.neutral },
+        { icon: "#s-scale", title: "الفروقات", desc: "فرق الفترة يحتاج مراجعة", meta: "−140.500", ...s.warn },
+        { icon: "#s-alert", title: "التنبيهات", desc: "لا تنبيهات على هذا الخزان", meta: "0", ...s.ok }
+      ],
+      readingReview: [
+        { k: "الخزان · الوقود", v: "01 · بنزين", size: "12.5px", ink: "var(--text-primary)", extra: "" },
+        { k: "القراءة السابقة", v: "5,320.000", size: "13px", ink: "var(--text-primary)", extra: "" },
+        { k: "القراءة الحالية", v: "5,180.500", size: "13px", ink: "var(--text-primary)", extra: "" },
+        { k: "الفرق", v: "−139.500", size: "18px", ink: B, extra: "padding-top:9px;border-top:1px solid var(--border-soft)" }
+      ],
+      variance: [
+        { k: "الرصيد المتوقع", v: "5,321.000", size: "13px", ink: "var(--text-primary)", extra: "" },
+        { k: "الرصيد الفعلي", v: "5,180.500", size: "13px", ink: "var(--text-primary)", extra: "" },
+        { k: "الفرق", v: "−140.500", size: "18px", ink: WARN, extra: "padding-top:9px;border-top:1px solid var(--border-soft)" },
+        { k: "النسبة", v: "−2.64%", size: "13px", ink: WARN, extra: "" }
+      ],
+      supplyFilters: [
+        { label: "الكل", count: "4", cls: "on" },
+        { label: "قيد الاستلام", count: "1", cls: "" },
+        { label: "مكتمل", count: "2", cls: "" },
+        { label: "تحتاج مراجعة", count: "1", cls: "" }
+      ],
+      supplies: [
+        { fuel: "بنزين", tank: "الخزان 02", ref: "REF-2026-0918-07", qty: "1,320.000", time: "اليوم · 11:02", state: "قيد الاستلام", ...s.info },
+        { fuel: "جاز", tank: "الخزان 03", ref: "REF-2026-0917-21", qty: "4,000.000", time: "أمس · 21:40", state: "مكتمل", ...s.ok },
+        { fuel: "بنزين", tank: "الخزان 01", ref: "REF-2026-0917-18", qty: "1,800.000", time: "أمس · 18:05", state: "تحتاج مراجعة", ...s.warn }
+      ],
+      supplyCalc: [
+        { k: "الرصيد الحالي", v: "4,000.000", size: "13px", ink: "var(--text-primary)", extra: "" },
+        { k: "التوريد", v: "+1,320.000", size: "13px", ink: OK, extra: "" },
+        { k: "الرصيد بعد التوريد", v: "5,320.000", size: "17px", ink: B, extra: "padding-top:8px;border-top:1px solid var(--border-soft)" },
+        { k: "سعة الخزان", v: "8,000", size: "12.5px", ink: "var(--text-secondary)", extra: "" }
+      ],
+      capacityCalc: [
+        { k: "الرصيد الحالي", v: "4,000.000", size: "13px", ink: "var(--text-primary)", extra: "" },
+        { k: "التوريد المطلوب", v: "+7,500.000", size: "13px", ink: ERR, extra: "" },
+        { k: "الرصيد المتوقع", v: "11,500.000", size: "17px", ink: ERR, extra: "padding-top:8px;border-top:1px solid var(--border-soft)" },
+        { k: "سعة الخزان", v: "10,000", size: "12.5px", ink: "var(--text-secondary)", extra: "" }
+      ],
+      supplyReview: [
+        { k: "نوع الوقود · الخزان", v: "بنزين · 02", size: "12.5px", ink: "var(--text-primary)", extra: "" },
+        { k: "الكمية", v: "1,320.000", size: "13px", ink: "var(--text-primary)", extra: "" },
+        { k: "الرصيد الحالي", v: "5,330.000", size: "13px", ink: "var(--text-primary)", extra: "" },
+        { k: "الرصيد بعد التوريد", v: "6,650.000", size: "18px", ink: B, extra: "padding-top:9px;border-top:1px solid var(--border-soft)" },
+        { k: "المرفق", v: "supply_0918.pdf", size: "11.5px", ink: "var(--text-secondary)", extra: "" }
+      ],
+      invAlerts: [
+        { icon: "#s-fuel", title: "مخزون منخفض — جاز", desc: "الخزان 03 · 31.0% من السعة", route: "→ tank_details(03)", ...s.warn },
+        { icon: "#s-alert", title: "مخزون حرج — جاز", desc: "الخزان 04 · 8.3% من السعة", route: "→ tank_details(04)", ...s.err },
+        { icon: "#s-truck", title: "توريد يحتاج مراجعة", desc: "REF-2026-0917-18 · بنزين", route: "→ supply_details", ...s.warn },
+        { icon: "#s-scale", title: "قراءة مخزون غير معتادة", desc: "الخزان 01 · فرق −140.500", route: "→ variance_details", ...s.warn },
+        { icon: "#s-sync", title: "فشل مزامنة المخزون", desc: "عنصران معلقان", route: "→ inventory_sync", ...s.err }
+      ],
+      criticalMeta: [
+        { k: "السعة القصوى", v: "8,000", cls: "mono" },
+        { k: "الرصيد الحالي", v: "665.000", cls: "mono" },
+        { k: "نسبة الامتلاء", v: "8.3%", cls: "mono" },
+        { k: "الحد الحرج (إعداد)", v: "10%", cls: "mono" },
+        { k: "آخر توريد", v: "16/09 · 08:20", cls: "mono" }
+      ],
+      cachedTanks: [
+        { name: "الخزان 01", fuel: "بنزين", balance: "5,320.000", pct: "53.2%", pctLabel: "53.2%" },
+        { name: "الخزان 03", fuel: "جاز", balance: "2,480.000", pct: "31%", pctLabel: "31.0%" }
+      ],
+      recordDiff: [
+        { k: "النسخة التي تراها", v: "recordVersion 9", ink: "var(--text-secondary)" },
+        { k: "النسخة على الخادم", v: "recordVersion 12", ink: "var(--text-primary)" },
+        { k: "الرصيد على الخادم", v: "6,650.000", ink: B }
+      ],
+      syncRows: [
+        { icon: "#s-meter", title: "قراءة مخزون — الخزان 01", time: "10:54", state: "فشل", ...s.err },
+        { icon: "#s-truck", title: "استلام توريد — الخزان 02", time: "11:06", state: "فشل", ...s.err },
+        { icon: "#s-meter", title: "قراءة مخزون — الخزان 03", time: "06:15", state: "تمت", ...s.ok },
+        { icon: "#s-truck", title: "توريد — الخزان 03", time: "أمس 21:40", state: "تمت", ...s.ok }
+      ],
+      skeletons: [{ w: "60%" }, { w: "45%" }, { w: "70%" }],
+      darkTankMeta: [
+        { k: "السعة", v: "8,000", cls: "mono" },
+        { k: "الرصيد", v: "2,480.000", cls: "mono" },
+        { k: "المتاح", v: "5,520.000", cls: "mono" },
+        { k: "الامتلاء", v: "31.0%", cls: "mono" }
+      ],
+      darkSections: [
+        { icon: "#s-meter", title: "آخر القراءات", meta: "06:15", ...s.neutral },
+        { icon: "#s-truck", title: "آخر التوريدات", meta: "4,000.000", ...s.neutral },
+        { icon: "#s-scale", title: "الفروقات", meta: "ضمن النطاق", ...s.ok }
+      ],
+      flows: [
+        { title: "مسار المخزون", steps: [
+          step("الرئيسية", "n", true), step("المحطة", "n", true), step("المخزون", "n", true), step("الخزانات", "n", true),
+          step("تفاصيل الخزان", "n", true), step("تسجيل قراءة", "n", true), step("تحقق السعة", "d", true),
+          step("مراجعة القراءة", "n", true), step("حفظ", "n", true), step("تحديث الخزان", "s", false)
+        ] },
+        { title: "مسار التوريد", steps: [
+          step("المحطة", "n", true), step("التوريدات", "n", true), step("استلام توريد", "n", true),
+          step("وقود + خزان", "n", true), step("الكمية", "n", true), step("تجاوز السعة → منع", "d", true),
+          step("مراجعة — تقديري", "n", true), step("تأكيد", "n", true), step("تحقق الخادم", "n", true),
+          step("نجاح — مؤكد", "s", true), step("الخزان محدّث", "s", false)
+        ] },
+        { title: "مسار التنبيه", steps: [
+          step("تنبيه", "n", true), step("مخزون منخفض", "d", true), step("تفاصيل الخزان", "n", true),
+          step("توريد يحتاج مراجعة", "d", true), step("تفاصيل التوريد", "n", true), step("فرق", "d", true), step("تفاصيل الفرق", "n", false)
+        ] }
+      ],
+      components: [
+        { name: "NPInventorySummary", use: "ملخص المحطة: عدد الخزانات · التنبيهات · آخر تحديث" },
+        { name: "NPFuelStockCard", use: "رصيد وسعة ونسبة امتلاء لكل نوع وقود — يستقبل fuelTypeId لا اسماً مثبّتاً" },
+        { name: "NPTankCard", use: "خزان: الاسم · الوقود · الرصيد · السعة · النسبة · الحالة · آخر قراءة" },
+        { name: "NPTankLevel", use: "current · capacity · percentage · status — مؤشر تعبئة خفيف بلا رسم ثلاثي الأبعاد" },
+        { name: "NPInventoryReadingCard", use: "قراءة سابقة/حالية ووقتها مع صورة وملاحظة اختياريتين" },
+        { name: "NPInventoryVariance", use: "يعرض expectedBalance · actualBalance · variance من الخادم — لا معادلة في الواجهة" },
+        { name: "NPSupplyCard", use: "عنصر توريد: وقود · خزان · كمية · حالة · وقت · مرجع" },
+        { name: "NPSupplyReview", use: "مراجعة التوريد مع أثر السعة ووسم تقديري/مؤكد" },
+        { name: "NPTankStatusBadge", use: "طبيعي · منخفض · حرج · ممتلئ · بانتظار المزامنة · غير معروف — أيقونة + نص + لون" },
+        { name: "NPQuantityDisplay", use: "كمية LTR معزولة بأرقام جدولية ودقة عشرية من الإعداد + وحدة منفصلة" },
+        { name: "NPRecordFreshness", use: "آخر تحديث / آخر مزامنة + حالة الاتصال" },
+        { name: "NPInventoryAlertRow", use: "صف تنبيه مخزون يوجّه للخزان أو التوريد أو الفرق" }
+      ],
+      contract: [
+        { key: "tenantId · activeStationId", rule: "نطاق كل شاشة — تبديل المحطة يمسح البيانات ويعرض حالة تحميل" },
+        { key: "tankId · fuelTypeId", rule: "الوقود من الإعداد (بنزين · جاز حالياً) — لا اسم وقود داخل مكوّن" },
+        { key: "capacity · currentBalance", rule: "من الخادم — الرصيد المؤكد لا يُحدَّث تفاؤلياً" },
+        { key: "availableCapacity · fillPercentage", rule: "مشتقة للعرض فقط — تُعرض كما يرسلها الخادم إن أرسلها" },
+        { key: "tankStatus", rule: "normal · low · critical · full · sync_pending · unknown" },
+        { key: "lowThreshold · criticalThreshold", rule: "من إعداد المستأجر/المحطة — لا نسبة مثبّتة" },
+        { key: "lastReadingAt · lastSupplyAt", rule: "طوابع زمنية للعرض وحساب حداثة البيانات" },
+        { key: "inventoryReading", rule: "required · numeric · non-negative · ≤ capacity (منع) · فرق غير معتاد (تحذير)" },
+        { key: "expectedBalance · actualBalance · variance", rule: "قيم الخادم — الواجهة لا تخترع معادلة محاسبية" },
+        { key: "supplyQuantity · expectedBalanceAfterSupply", rule: "حساب أمان قبلي بوسم تقديري — يتجاوز السعة = منع التأكيد" },
+        { key: "recordVersion", rule: "للخزان والقراءة والتوريد — نسخة أقدم تعرض «تم تحديث بيانات الخزان»" },
+        { key: "syncStatus", rule: "synced · syncing · pending · failed · offline مع طوابع زمنية" },
+        { key: "permissions", rule: "canViewInventory · canViewTank · canRecordInventoryReading · canReceiveSupply · canReviewVariance · canConfigureTank" },
+        { key: "decimalPrecision", rule: "من الإعداد — العرض هنا ٣ خانات كمثال فقط" }
+      ],
+      report: [
+        { label: "شاشات المرحلة الثالثة", value: "17", ink: B },
+        { label: "مكوّنات جديدة", value: "12", ink: B },
+        { label: "نظرة المخزون + الخزانات", value: "PASS", ink: OK },
+        { label: "تفاصيل الخزان + NPTankLevel", value: "PASS", ink: OK },
+        { label: "قراءة المخزون + المراجعة", value: "PASS", ink: OK },
+        { label: "تحقق السعة (منع)", value: "PASS", ink: OK },
+        { label: "الفروقات من الخادم", value: "PASS", ink: OK },
+        { label: "التوريد: استلام · مراجعة · نجاح", value: "PASS", ink: OK },
+        { label: "أرصدة مرجعها الخادم (تقديري/مؤكد)", value: "PASS", ink: OK },
+        { label: "recordVersion للخزان/القراءة/التوريد", value: "PASS", ink: OK },
+        { label: "دون اتصال + حالات المزامنة", value: "PASS", ink: OK },
+        { label: "توجيه تنبيهات المخزون", value: "PASS", ink: OK },
+        { label: "نطاق تعدد المحطات + حالة تحميل", value: "PASS", ink: OK },
+        { label: "إجراءات مبنية على الصلاحية", value: "PASS", ink: OK },
+        { label: "اختبار العلامة: مستأجر A / B", value: "PASS", ink: OK },
+        { label: "قيم علامة مثبّتة في المكوّنات", value: "0", ink: OK },
+        { label: "فاتح / داكن / تلقائي", value: "PASS", ink: OK },
+        { label: "RTL · LTR-ready · أرقام معزولة", value: "PASS", ink: OK },
+        { label: "تبويب خامس · تقارير · مالية", value: "0", ink: OK },
+        { label: "«ديزل» مثبّتة", value: "0", ink: OK },
+        { label: "مسارات مسدودة", value: "0", ink: OK },
+        { label: "أخطاء كونسول", value: "0", ink: OK }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

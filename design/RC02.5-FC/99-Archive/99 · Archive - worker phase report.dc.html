@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="../doc-page.js"></script>
+<style>
+doc-page:not(:defined){visibility:hidden}
+h1,h2,h3,p{margin:0}
+table{border-collapse:collapse;width:100%}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+.mono{font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate}
+</style>
+</helmet>
+<doc-page margin="0.7in">
+
+<header slot="header" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:9px;border-bottom:2px solid #1A237E;font-family:Tajawal,system-ui,sans-serif" dir="rtl">
+  <span style="display:flex;align-items:center;gap:9px">
+    <img src="../assets/np-logo-symbol.png" alt="" style="height:24px;width:auto">
+    <b style="font-size:12px;color:#1A237E">نايل بترو — تقرير تطبيق العامل</b>
+  </span>
+  <span class="mono" style="font-size:10.5px;color:#607D8B">17/09/2026 · NP-WO-CD-07 · PHASE 1</span>
+</header>
+
+<footer slot="footer" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:8px;border-top:1px solid #CFD8DC;font-family:Tajawal,system-ui,sans-serif;font-size:10px;color:#607D8B" dir="rtl">
+  <span>وثيقة حكومة تصميم — لمراجعة المالك</span>
+  <span class="mono">Nile Petro © 2025</span>
+</footer>
+
+<div dir="rtl" style="font-family:Tajawal,system-ui,sans-serif;color:#37474F;line-height:1.7">
+
+  <div style="display:flex;flex-direction:column;gap:9px;padding-bottom:16px;border-bottom:1px solid #E0E6ED">
+    <span class="mono" style="display:inline-flex;align-self:flex-start;align-items:center;height:24px;padding:0 10px;border-radius:6px;background:#E8EEFF;color:#1A237E;font-size:10.5px;font-weight:600">NP-WO-CD-07 · PHASE 1 · OWNER REVIEW</span>
+    <h1 style="font-size:25px;font-weight:800;color:#1A237E">تطبيق العامل — أساس الجوال والمصادقة وهيكل التطبيق</h1>
+    <p style="font-size:13px;color:#546E7A;text-wrap:pretty">المرحلة الأولى من تطبيق العامل: مسار المصادقة كاملاً، هيكل التطبيق بأربع تبويبات، والشاشة الرئيسية بحالتيها. مبني على الأساس المُجمَّد <span class="mono">1.5.4</span> — دون أي تعديل على ملف مُجمَّد.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;padding-top:5px">
+      <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+        <span style="display:flex;flex-direction:column;gap:2px;padding:10px 11px;border:1px solid #E0E6ED;border-radius:9px;background:#F7F9FC">
+          <b class="mono" style="font-size:17px;color:#1A237E">{{k.value}}</b>
+          <span style="font-size:10.5px;color:#607D8B">{{k.label}}</span>
+        </span>
+      </sc-for>
+    </div>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:800;color:#1A237E;padding:18px 0 9px">١ · الشاشات المُسلَّمة</h2>
+  <table style="font-size:11px">
+    <thead>
+      <tr style="background:#1A237E;color:#fff">
+        <th style="text-align:start;padding:8px 9px;font-size:10.5px;font-weight:600">#</th>
+        <th style="text-align:start;padding:8px 9px;font-size:10.5px;font-weight:600">المعرّف</th>
+        <th style="text-align:start;padding:8px 9px;font-size:10.5px;font-weight:600">الشاشة</th>
+        <th style="text-align:start;padding:8px 9px;font-size:10.5px;font-weight:600">القرار التصميمي</th>
+      </tr>
+    </thead>
+    <tbody>
+      <sc-for list="{{screens}}" as="s" hint-placeholder-count="7">
+        <tr style="break-inside:avoid">
+          <td class="mono" style="padding:9px;border-bottom:1px solid #E8EDF3;font-size:10.5px;font-weight:600;color:#1A237E">{{s.n}}</td>
+          <td class="mono" style="padding:9px;border-bottom:1px solid #E8EDF3;font-size:10px;color:#546E7A">{{s.key}}</td>
+          <td style="padding:9px;border-bottom:1px solid #E8EDF3;font-weight:700;color:#263238;white-space:nowrap">{{s.title}}</td>
+          <td style="padding:9px;border-bottom:1px solid #E8EDF3;color:#546E7A">{{s.note}}</td>
+        </tr>
+      </sc-for>
+    </tbody>
+  </table>
+
+  <h2 style="font-size:17px;font-weight:800;color:#1A237E;padding:20px 0 9px">٢ · القواعد المطبَّقة من الأساس</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px">
+    <sc-for list="{{rules}}" as="r" hint-placeholder-count="6">
+      <div style="padding:11px 12px;border:1px solid #E0E6ED;border-radius:10px;background:#FBFCFE;break-inside:avoid">
+        <b style="display:block;font-size:11.5px;color:#1A237E;padding-bottom:3px">{{r.title}}</b>
+        <span style="font-size:10.5px;line-height:1.65;color:#546E7A">{{r.body}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:800;color:#1A237E;padding:20px 0 9px">٣ · مكتبة الحالات المشتركة</h2>
+  <p style="font-size:11.5px;color:#546E7A;padding-bottom:9px">كل حالة موثّقة مرة واحدة على مستوى التطبيق، لا داخل الشاشة — فلا تتكرر التعريفات في المراحل التالية.</p>
+  <table style="font-size:11px">
+    <thead>
+      <tr style="background:#F1F5FB;color:#1A237E">
+        <th style="text-align:start;padding:8px 9px;font-size:10.5px">المجموعة</th>
+        <th style="text-align:center;padding:8px 9px;font-size:10.5px">العدد</th>
+        <th style="text-align:start;padding:8px 9px;font-size:10.5px">المحتوى</th>
+      </tr>
+    </thead>
+    <tbody>
+      <sc-for list="{{states}}" as="t" hint-placeholder-count="4">
+        <tr style="break-inside:avoid">
+          <td style="padding:8px 9px;border-bottom:1px solid #E8EDF3;font-weight:700;color:#263238">{{t.group}}</td>
+          <td class="mono" style="padding:8px 9px;border-bottom:1px solid #E8EDF3;text-align:center;font-size:10.5px;font-weight:600;color:#1A237E">{{t.count}}</td>
+          <td style="padding:8px 9px;border-bottom:1px solid #E8EDF3;color:#546E7A">{{t.items}}</td>
+        </tr>
+      </sc-for>
+    </tbody>
+  </table>
+
+  <h2 style="font-size:17px;font-weight:800;color:#1A237E;padding:20px 0 9px">٤ · قياسات التسليم إلى Flutter</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 18px;font-size:11px">
+    <sc-for list="{{handoff}}" as="h" hint-placeholder-count="12">
+      <span style="display:flex;align-items:center;gap:9px;padding:6px 0;border-bottom:1px solid #EDF1F6;break-inside:avoid">
+        <span class="mono" style="flex:1;min-width:0;font-size:10px;color:#546E7A">{{h.key}}</span>
+        <b class="mono" style="flex:none;font-size:10.5px;color:#1A237E">{{h.value}}</b>
+      </span>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:800;color:#1A237E;padding:20px 0 9px">٥ · نتائج التحقق</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;font-size:11.5px">
+    <sc-for list="{{checks}}" as="c" hint-placeholder-count="10">
+      <span style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid #EDF1F6">
+        <span style="flex:1;min-width:0;color:#546E7A">{{c.label}}</span>
+        <b class="mono" style="flex:none;font-size:11px;color:{{c.ink}}">{{c.value}}</b>
+      </span>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:800;color:#1A237E;padding:20px 0 9px">٦ · فجوات مُبلَّغ عنها — لم تُنفَّذ</h2>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <sc-for list="{{gaps}}" as="g" hint-placeholder-count="3">
+      <div style="padding:11px 12px;border:1px solid #FFE0B2;border-radius:10px;background:#FFF8EE;break-inside:avoid">
+        <b style="font-size:11.5px;color:#8D4E00">{{g.title}}</b>
+        <span style="display:block;font-size:10.5px;line-height:1.6;color:#6D5228">{{g.body}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:800;color:#1A237E;padding:20px 0 9px">٧ · مطلوب قرار المالك</h2>
+  <ol style="margin:0;padding-inline-start:19px;font-size:11.5px;color:#546E7A;display:flex;flex-direction:column;gap:6px">
+    <sc-for list="{{decisions}}" as="d" hint-placeholder-count="4">
+      <li style="break-inside:avoid"><b style="color:#263238">{{d.title}}</b> — {{d.body}}</li>
+    </sc-for>
+  </ol>
+
+  <div style="margin-top:18px;padding:13px 15px;border-radius:11px;background:#1A237E;color:#fff;display:flex;flex-direction:column;gap:3px;break-inside:avoid">
+    <b style="font-size:12.5px">الخلاصة</b>
+    <span style="font-size:11px;color:#C5CFF5;text-wrap:pretty">المرحلة الأولى من تطبيق العامل جاهزة للمراجعة: سبعة إطارات إنتاجية بمقاس <span class="mono">390×844</span>، RTL أصلي، مكتبة حالات كاملة، وجدول قياسات قابل للتسليم المباشر إلى Flutter. الأساس <span class="mono">1.5.4</span> ما زال مُجمَّداً — صفر تعديل، صفر أخطاء كونسول، صفر مسار مسدود. متوقف لمراجعة المالك قبل المرحلة الثانية (الوردية والقراءات).</span>
+  </div>
+</div>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() {
+    const OK = "#0B6B3A", B = "#1A237E";
+    return {
+      kpis: [
+        { value: "7", label: "إطار منفّذ (٦ شاشات + حالة)" },
+        { value: "1.5.4", label: "الأساس — مُجمَّد بلا تعديل" },
+        { value: "21", label: "سطر قياسات للتسليم" },
+        { value: "0", label: "أخطاء كونسول" }
+      ],
+      screens: [
+        { n: "01", key: "screen_splash", title: "الافتتاح", note: "خلفية الهوية العميقة مع الشعار المعتمد — جاهزة للحركة، دون نص تسويقي." },
+        { n: "02", key: "screen_worker_login", title: "دخول العامل", note: "رمز العامل + كلمة المرور، وبديل البصمة. لا يوجد إنشاء حساب — العامل يُنشأ من الكونسول." },
+        { n: "03", key: "screen_worker_otp", title: "رمز التحقق", note: "ستة صناديق ٤٦×٥٦ باتجاه معزول، عدّاد إعادة الإرسال، وحالة خطأ نصية لا لونية فقط." },
+        { n: "04", key: "screen_verification_success", title: "نجاح التحقق", note: "تأكيد قصير ثم متابعة تلقائية — لا تصبح محطة دائمة في المسار." },
+        { n: "05", key: "screen_enable_biometrics", title: "تفعيل البصمة", note: "ثلاث فوائد صريحة + تصريح بأن البصمة لا تُرسل ولا تُخزَّن. التخطّي متاح دائماً." },
+        { n: "06", key: "screen_worker_home", title: "الرئيسية — لا وردية", note: "حالة فراغ بإجراء أساسي واحد: بدء وردية. أربع بطاقات إجراء معطّلة بسبب ظاهر." },
+        { n: "06b", key: "screen_worker_home__active", title: "الرئيسية — وردية مفتوحة", note: "ملخص الوردية (٣/٦ قراءات · ٢ مصروفات · ١ توريد) مع شريط «دون اتصال» وحفظ محلي." }
+      ],
+      rules: [
+        { title: "الخطوط", body: "Tajawal للنصوص العربية، IBM Plex Sans Arabic احتياطياً، وIBM Plex Mono لكل رقم وقراءة وتوقيت مع عزل الاتجاه." },
+        { title: "الألوان", body: "#1A237E للترويسات والتبويب النشط · #2962FF للإجراء الأساسي والتركيز · #F6F7FB للسطح · #E4E7EC للحدود. لا لون خارج الهوية." },
+        { title: "أهداف اللمس", body: "لا هدف أقل من 48×48؛ الإجراء الأساسي للعامل 56 بارتفاع ثابت ونصف قطر 12 — مناسب للاستخدام بقفّاز في المحطة." },
+        { title: "RTL أصلي", body: "كل التخطيط بخصائص منطقية (inset-inline · padding-inline)، لا انعكاس بصري ولا صور شاشة." },
+        { title: "أنواع الوقود", body: "بنزين و جاز فقط، كبيانات قابلة للتهيئة. «ديزل» المثبّتة في الكود: صفر." },
+        { title: "الأصول", body: "الشعار وأيقونة التطبيق كما اعتُمدا دون تعديل؛ أصل المسدس والمحطة تزييني ومحصور في المصادقة والرئيسية." }
+      ],
+      states: [
+        { group: "حالات الأزرار", count: "4", items: "أساسي · جارٍ التنفيذ · ثانوي (بصمة) · غير متاح" },
+        { group: "حالات الحقول", count: "5", items: "فارغ · تركيز · مُعبّأ · خطأ برسالة · معطّل برسالة سبب" },
+        { group: "حالات الاتصال", count: "6", items: "متصل · جارٍ المزامنة · بانتظار المزامنة · غير متصل · تمت · فشلت" },
+        { group: "حالات الشاشة", count: "4", items: "لا وردية · جارٍ التحميل (هيكل) · انتهت الجلسة · غير مصرّح" }
+      ],
+      handoff: [
+        { key: "frame.primary", value: "390 × 844" },
+        { key: "screen.padding", value: "20" },
+        { key: "spacing.base", value: "4" },
+        { key: "touch.min", value: "48 × 48" },
+        { key: "action.worker.primary", value: "56 · r12" },
+        { key: "input.height", value: "56 · r12" },
+        { key: "otp.box", value: "46 × 56 · r12" },
+        { key: "card.radius", value: "16" },
+        { key: "bottomnav.height", value: "78 · 4 tabs" },
+        { key: "color.deep", value: "#1A237E" },
+        { key: "color.primary", value: "#2962FF" },
+        { key: "color.canvas", value: "#F6F7FB" },
+        { key: "color.border", value: "#E4E7EC" },
+        { key: "color.text", value: "#1F2330 / #455A64 / #90A4AE" },
+        { key: "font.arabic", value: "Tajawal 400·500·700·800" },
+        { key: "font.values", value: "IBM Plex Mono" },
+        { key: "tested.widths", value: "360 · 393 · 430" },
+        { key: "asset.logo", value: "np-logo-wordmark.png" },
+        { key: "asset.icon", value: "np-logo-symbol.png" },
+        { key: "asset.nozzle", value: "np-nozzle-3d.png" },
+        { key: "asset.station", value: "np-station-illus.png" }
+      ],
+      checks: [
+        { label: "شاشات منفّذة", value: "6 (+1 حالة)", ink: B },
+        { label: "تبويبات التنقل السفلي", value: "4", ink: B },
+        { label: "حالات أزرار / حقول", value: "4 / 5", ink: B },
+        { label: "حالات الاتصال", value: "6", ink: B },
+        { label: "ملفات أساس مُعدَّلة", value: "0", ink: OK },
+        { label: "«ديزل» مثبّتة في الكود", value: "0", ink: OK },
+        { label: "إنشاء حساب في التطبيق", value: "0", ink: OK },
+        { label: "هاتف مجسّم / صور شاشة", value: "0", ink: OK },
+        { label: "مسارات مسدودة", value: "0", ink: OK },
+        { label: "الأمان داخل «حسابي»", value: "PASS", ink: OK },
+        { label: "أهداف لمس دون 48", value: "0", ink: OK },
+        { label: "أخطاء كونسول", value: "0", ink: OK }
+      ],
+      gaps: [
+        { title: "أيقونات ناقصة في السجل المعتمد", body: "لا توجد lock / mail / fingerprint في سجل الأيقونات (46 أيقونة)؛ استُخدمت certificate و parties و worker-id بدلاً منها ولم يُعدَّل السجل. تحتاج CC إضافياً لتسجيلها رسمياً." },
+        { title: "لا يوجد مخطط Tokens داكن", body: "np-tokens.css يحتوي المخطط الفاتح فقط. شاشات العامل بُنيت على المخطط الفاتح؛ الوضع الداكن للجوال مؤجَّل حتى إقرار مجموعة Tokens داكنة." },
+        { title: "مكوّنات الجوال غير مُرقّاة إلى الأساس", body: "بطاقة الإجراء، شريط التنقل السفلي، وصناديق رمز التحقق ما زالت محتوى صفحة منتج — لم تُسجَّل كمكوّنات معتمدة انتظاراً لقرارك." }
+      ],
+      decisions: [
+        { title: "ترقية مكوّنات الجوال", body: "هل نفتح CC لتسجيل بطاقة الإجراء وشريط التنقل السفلي وصناديق OTP كمكوّنات معتمدة قبل المرحلة الثانية؟" },
+        { title: "سجل الأيقونات", body: "إضافة lock · mail · fingerprint إلى الـ46 أيقونة، أو الاكتفاء بالبدائل الحالية." },
+        { title: "Tokens الوضع الداكن", body: "إقرار مجموعة داكنة رسمية تغطي الويب والجوال معاً، أو تأجيل الوضع الداكن كلياً." },
+        { title: "نطاق المرحلة الثانية", body: "البدء بمسار الوردية والقراءات (بدء · قراءة مسدس · صورة عداد · إنهاء)، أو بالمصروفات والتوريد أولاً." }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+.stroke{fill:none;stroke:currentColor;stroke-width:4.6;stroke-linecap:round;stroke-linejoin:round}
+.strokeS{fill:none;stroke:currentColor;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:currentColor}
+.i{display:inline-flex;flex:none;width:22px;height:22px;color:inherit}
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic','Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+.f{position:relative;box-sizing:border-box;width:390px;height:844px;flex:none;overflow:hidden;border-radius:24px;background:#F6F7FB;border:1px solid #E4E7EC;box-shadow:0 16px 40px rgba(31,35,48,.12);color:#1F2330;display:flex;flex-direction:column}
+.f::before{content:"";position:absolute;z-index:0;inset-block-start:0;inset-inline:0;height:150px;background-color:#1A237E;background-image:radial-gradient(120% 80% at 76% 4%,rgba(41,98,255,.55),transparent 62%)}
+.f::after{content:"";position:absolute;z-index:1;inset-block-start:96px;inset-inline-start:-42%;width:184%;height:460px;background:#F6F7FB;border-radius:52% 52% 0 0/62% 62% 0 0}
+.sbl{position:relative;z-index:3;flex:none;display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 20px;background:transparent;font-family:Inter,system-ui,sans-serif;font-size:13px;color:#fff}
+.hdr{position:relative;z-index:3;flex:none;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px;background:transparent}
+.hdr b{font:800 17px/24px 'Noto Sans Arabic',sans-serif;color:#fff}
+.ib{display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin-inline-start:-10px;border:0;background:transparent;color:#fff;cursor:pointer}
+.bd{position:relative;z-index:3;flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:16px 20px;overflow:hidden}
+.nav{position:relative;z-index:3}
+.card{box-shadow:0 10px 28px rgba(31,35,48,.07)}
+.card{background:#fff;border:1px solid #E4E7EC;border-radius:16px}
+.btn{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;flex:none;box-sizing:border-box;border:0;border-radius:12px;background:#2962FF;color:#fff;font:700 16px/24px 'Noto Sans Arabic',sans-serif;cursor:pointer}
+.btn[disabled]{background:#F2F4F7;color:#90A4AE;border:1px solid #E4E7EC}
+.btn2{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;flex:none;box-sizing:border-box;border:1px solid #2962FF;border-radius:12px;background:#fff;color:#1A237E;font:700 15px/24px 'Noto Sans Arabic',sans-serif;cursor:pointer}
+.btn3{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;flex:none;box-sizing:border-box;border:1px solid #CFD8DC;border-radius:12px;background:#fff;color:#455A64;font:700 15px/24px 'Noto Sans Arabic',sans-serif;cursor:pointer}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+.val{font-family:Inter,'Noto Sans Arabic',sans-serif;direction:ltr;unicode-bidi:plaintext;font-variant-numeric:tabular-nums}
+.nav{flex:none;height:78px;display:flex;align-items:center;background:#fff;border-top:1px solid #E4E7EC}
+.tab{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:100%;font:600 11px/16px 'Noto Sans Arabic',sans-serif}
+.wrap{display:flex;flex-direction:column;gap:9px}
+.nm{display:flex;align-items:baseline;gap:8px;font:500 11px/1.3 Inter,system-ui,sans-serif;color:#455A64}
+.tag{font:500 10px/1 Inter,system-ui,sans-serif;padding:3px 7px;background:#E4F2FD;color:#1A237E;border-radius:5px}
+.chip{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;border-radius:8px;font:500 11px/1 'Noto Sans Arabic',sans-serif;white-space:nowrap}
+.plate{display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex:none;border-radius:12px;background:#F2F4F7;color:#2962FF}
+.t3{font:700 15px/22px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.cap{font:400 11.5px/18px 'Noto Sans Arabic',sans-serif;color:#455A64}
+.lb{font:600 13px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.fld{display:flex;align-items:center;gap:10px;height:56px;box-sizing:border-box;padding:0 14px;border:1px solid #E4E7EC;border-radius:12px;background:#fff}
+h1,h2,h3{margin:0}
+</style>
+</helmet>
+<div dir="rtl" style="padding:40px;display:flex;flex-direction:column;gap:32px;color:#455A64">
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
+<symbol id="s-home" viewBox="0 0 64 64"><path class="stroke" d="M10 28 32 12 54 28"></path><path class="stroke" d="M18 26v24h28V26"></path><path class="stroke" d="M27 50V36h10v14"></path></symbol>
+<symbol id="s-shift" viewBox="0 0 64 64"><rect x="15" y="10" width="34" height="44" rx="6" class="stroke"></rect><path class="stroke" d="M23 20h18M23 30h18M23 40h14"></path><path class="stroke" d="M24 8v8M40 8v8"></path></symbol>
+<symbol id="s-bell" viewBox="0 0 64 64"><path class="stroke" d="M20 26c0-7 5-12 12-12s12 5 12 12v11l5 7H5l5-7V26"></path><path class="stroke" d="M26 49c1.5 4 10.5 4 12 0"></path></symbol>
+<symbol id="s-profile" viewBox="0 0 64 64"><circle cx="32" cy="22" r="9" class="stroke"></circle><path class="stroke" d="M15 50c3-8 12-12 17-12s14 4 17 12"></path></symbol>
+<symbol id="s-pump" viewBox="0 0 64 64"><rect x="12" y="12" width="24" height="40" rx="4" class="stroke"></rect><path class="stroke" d="M19 21h10M19 29h10"></path><path class="stroke" d="M36 18c4 0 6 2 6 6v15c0 4 2 6 6 6h3"></path><path class="stroke" d="M42 19l8 7v16"></path></symbol>
+<symbol id="s-meter" viewBox="0 0 64 64"><path class="stroke" d="M14 40a18 18 0 1 1 36 0"></path><path class="stroke" d="M32 40l10-12"></path><circle cx="32" cy="40" r="3.5" class="fill"></circle></symbol>
+<symbol id="s-camera" viewBox="0 0 64 64"><path class="stroke" d="M13 20h11l4-5h8l4 5h11v29H13z"></path><circle cx="32" cy="35" r="10" class="stroke"></circle></symbol>
+<symbol id="s-wallet" viewBox="0 0 64 64"><rect x="10" y="18" width="44" height="30" rx="6" class="stroke"></rect><path class="stroke" d="M16 18v-4h22l9 4"></path><path class="stroke" d="M39 30h15v12H39a5 5 0 0 1 0-12z"></path></symbol>
+<symbol id="s-supply" viewBox="0 0 64 64"><path class="stroke" d="M10 22 32 12l22 10v20L32 52 10 42z"></path><path class="stroke" d="M10 22l22 10 22-10M32 32v20"></path></symbol>
+<symbol id="s-check" viewBox="0 0 64 64"><path class="stroke" d="M16 33l10 10 22-22"></path></symbol>
+<symbol id="s-alert" viewBox="0 0 64 64"><path class="stroke" d="M32 12 54 50H10z"></path><path class="stroke" d="M32 26v11M32 43v.2"></path></symbol>
+<symbol id="s-info" viewBox="0 0 64 64"><circle cx="32" cy="32" r="21" class="stroke"></circle><path class="stroke" d="M32 30v14M32 21v.2"></path></symbol>
+<symbol id="s-sync" viewBox="0 0 64 64"><path class="stroke" d="M49 24A18 18 0 0 0 19 18"></path><path class="stroke" d="M15 18h7v7"></path><path class="stroke" d="M15 40A18 18 0 0 0 45 46"></path><path class="stroke" d="M49 46h-7v-7"></path></symbol>
+<symbol id="s-offline" viewBox="0 0 64 64"><path class="strokeS" d="M13 25c11-10 27-10 38 0M20 32c8-7 16-7 24 0M28 39c3-3 5-3 8 0"></path><path class="stroke" d="M16 16 48 48"></path></symbol>
+<symbol id="s-chevron" viewBox="0 0 64 64"><path class="stroke" d="M38 16 22 32l16 16"></path></symbol>
+<symbol id="s-back" viewBox="0 0 64 64"><path class="stroke" d="M24 14 42 32 24 50"></path></symbol>
+<symbol id="s-close" viewBox="0 0 64 64"><path class="stroke" d="M18 18l28 28M46 18 18 46"></path></symbol>
+<symbol id="s-clock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" class="stroke"></circle><path class="stroke" d="M32 20v13l9 6"></path></symbol>
+<symbol id="s-lock" viewBox="0 0 64 64"><rect x="14" y="28" width="36" height="24" rx="6" class="stroke"></rect><path class="stroke" d="M23 28v-6a9 9 0 0 1 18 0v6"></path></symbol>
+</defs></svg>
+
+  <header style="display:flex;flex-direction:column;gap:10px;max-width:1160px">
+    <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:7px;background:#1A237E;color:#fff;font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:600">NP-WO-CD-07 · PHASE 2 · SHIFT + METER READINGS</span>
+    <h1 style="font:800 31px/1.25 'Noto Sans Arabic',sans-serif;color:#1A237E">ورديتي — مسدساتي المعيّنة وقراءات العدادات</h1>
+    <p style="font:400 14.5px/26px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:900px;text-wrap:pretty">القاعدة المصححة: كل عامل مسؤول فقط عن المسدسات المعيّنة له من واجهة المدير، ويرى ورديته الخاصة فقط. المثال المعروض — أحمد: <b style="color:#1F2330">٤ مسدسات</b> (بنزين ٠١، بنزين ٠٢، جاز ٠١، جاز ٠٢). كل الأعداد مشتقة من <span class="mono">assigned_nozzles.length</span> ولا يوجد رقم ثابت. إغلاق العامل لورديته لا يغلق وردية المحطة — التجميع والإغلاق النهائي من تطبيق المدير.</p>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;padding-top:3px">
+      <sc-for list="{{pills}}" as="p" hint-placeholder-count="6">
+        <span class="val" style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border:1px solid #DDE4EE;border-radius:8px;background:#fff;font-size:11.5px;font-weight:600;line-height:1;color:#1A237E">{{p}}</span>
+      </sc-for>
+    </div>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2 style="font:800 19px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">01 — بدء ورديتي وقراءات البداية (مسدساتي فقط)</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">07</span>screen_shift_empty</span>
+        <article class="f" data-screen-label="07 Shift empty">
+          <div class="sbl"><span>9:41</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>ورديتي</b></div>
+          <div class="bd">
+            <div class="card" style="padding:16px;display:flex;flex-direction:column;gap:14px">
+              <span style="display:flex;align-items:center;gap:11px">
+                <span class="plate"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-shift"></use></svg></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b class="t3">لا توجد وردية مفتوحة</b><span class="cap">ابدأ ورديتك لتسجيل قراءات مسدساتك</span></span>
+                <span class="chip" style="background:#F2F4F7;border:1px solid #E4E7EC;color:#455A64">لم تبدأ</span>
+              </span>
+              <span style="display:flex;gap:9px">
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding:9px 12px;border-radius:12px;background:#F6F7FB"><span class="cap">المحطة</span><b style="font:700 13px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330">محطة الخرطوم — الشرق</b></span>
+                <span style="flex:none;display:flex;flex-direction:column;gap:3px;padding:9px 12px;border-radius:12px;background:#F6F7FB"><span class="cap">الوقت الحالي</span><b class="mono" style="font-size:13px;font-weight:600;color:#1F2330">09:41</b></span>
+              </span>
+              <span style="display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:12px;background:#E4F2FD;border:1px solid #CFE0FD">
+                <svg class="i" style="width:17px;height:17px;color:#1A237E" viewBox="0 0 64 64"><use href="#s-pump"></use></svg>
+                <span style="flex:1;min-width:0;font:600 12px/19px 'Noto Sans Arabic',sans-serif;color:#1A237E">مسدساتي المعيّنة: <span class="mono">4</span> — بنزين <span class="mono">2</span> · جاز <span class="mono">2</span></span>
+              </span>
+              <button class="btn">بدء ورديتي</button>
+            </div>
+            <span style="display:flex;align-items:flex-start;gap:10px;padding:13px 14px;border-radius:12px;background:#F6F7FB;border:1px solid #E4E7EC">
+              <svg class="i" style="width:17px;height:17px;color:#1A237E" viewBox="0 0 64 64"><use href="#s-info"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#1A237E">قبل البدء</b><span class="cap">تُسجَّل قراءات بداية مسدساتك أنت فقط، ثم تُفعَّل ورديتك. التعيين يأتي من المدير ولا يمكنك تغييره.</span></span>
+            </span>
+          </div>
+          <div class="nav">
+            <sc-for list="{{tabsShift}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}">
+                <span style="position:relative;display:flex"><svg class="i" style="width:22px;height:22px" viewBox="0 0 64 64"><use href="{{t.icon}}"></use></svg><sc-if value="{{t.badge}}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset-block-start:-4px;inset-inline-end:-6px;min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:8px;background:#C62828;color:#fff;font-family:Inter,system-ui,sans-serif;font-size:9.5px;display:flex;align-items:center;justify-content:center">{{t.count}}</span></sc-if></span>
+                {{t.label}}
+                <sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:#2962FF"></span></sc-if>
+              </span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">07b</span>empty_assignment · assigned_nozzles = 0</span>
+        <article class="f" data-screen-label="07b No assignment">
+          <div class="sbl"><span>9:40</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>ورديتي</b></div>
+          <div class="bd" style="align-items:center;text-align:center;gap:13px">
+            <span style="margin-top:26px;display:flex;align-items:center;justify-content:center;width:80px;height:80px;border-radius:99px;background:#FFF6E8;color:#B45309"><svg class="i" style="width:36px;height:36px" viewBox="0 0 64 64"><use href="#s-pump"></use></svg></span>
+            <b style="font:800 21px/30px 'Noto Sans Arabic',sans-serif;color:#1F2330">لا توجد مسدسات مخصصة لك</b>
+            <span class="cap" style="max-width:290px">راجع مدير المحطة لتعيين المسدسات قبل بدء الوردية. لا يمكن بدء وردية بدون تعيين.</span>
+            <span style="width:100%;display:flex;align-items:center;gap:9px;padding:11px 12px;box-sizing:border-box;border-radius:12px;background:#F6F7FB;border:1px solid #E4E7EC;text-align:start">
+              <svg class="i" style="width:16px;height:16px;color:#1A237E" viewBox="0 0 64 64"><use href="#s-lock"></use></svg>
+              <span style="flex:1;min-width:0;font:500 11.5px/19px 'Noto Sans Arabic',sans-serif;color:#455A64">مسدساتي المعيّنة: <span class="mono">0</span> — زر «بدء ورديتي» غير معروض</span>
+            </span>
+            <span style="width:100%;margin-top:auto;display:flex;flex-direction:column;gap:10px">
+              <button class="btn2"><svg class="i" style="width:18px;height:18px" viewBox="0 0 64 64"><use href="#s-sync"></use></svg>إعادة المحاولة — تحديث التعيين</button>
+              <span class="cap">يُحدَّث التعيين تلقائياً عند تغييره من المدير.</span>
+            </span>
+          </div>
+          <div class="nav">
+            <sc-for list="{{tabsShift}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}">
+                <span style="position:relative;display:flex"><svg class="i" style="width:22px;height:22px" viewBox="0 0 64 64"><use href="{{t.icon}}"></use></svg></span>
+                {{t.label}}
+                <sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:#2962FF"></span></sc-if>
+              </span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">08</span>screen_shift_start_confirmation</span>
+        <article class="f" data-screen-label="08 Start confirmation">
+          <div class="sbl"><span>9:41</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>بدء ورديتي</b></div>
+          <div class="bd">
+            <div class="card" style="padding:16px;display:flex;flex-direction:column;gap:11px">
+              <sc-for list="{{startSummary}}" as="r" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:9px;border-bottom:1px solid #F2F4F7"><span class="cap">{{r.k}}</span><b class="{{r.cls}}" style="font-size:13.5px;font-weight:700;color:#1F2330">{{r.v}}</b></span>
+              </sc-for>
+              <span style="display:flex;align-items:center;gap:9px"><span class="plate" style="width:34px;height:34px;border-radius:10px;background:#E4F2FD;color:#1A237E"><svg class="i" style="width:18px;height:18px" viewBox="0 0 64 64"><use href="#s-pump"></use></svg></span><span class="cap">مسدساتي: <span class="mono">4</span> · بنزين <span class="mono">2</span> · جاز <span class="mono">2</span></span></span>
+            </div>
+            <span style="display:flex;align-items:flex-start;gap:10px;padding:13px 14px;border-radius:12px;background:#FFF6E8;border:1px solid #F3D9AE">
+              <svg class="i" style="width:17px;height:17px;color:#B45309" viewBox="0 0 64 64"><use href="#s-alert"></use></svg>
+              <span style="flex:1;min-width:0;font:400 11.5px/19px 'Noto Sans Arabic',sans-serif;color:#7A4A00">سيطلب منك تسجيل قراءات البداية لمسدساتك الأربعة قبل تفعيل ورديتك. يُثبَّت التعيين كـ Snapshot عند البدء ولا يتغير وسط الوردية.</span>
+            </span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+              <button class="btn">بدء تسجيل القراءات</button>
+              <button class="btn3">إلغاء</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">09</span>screen_opening_readings · reading_mode = opening</span>
+        <article class="f" data-screen-label="09 Opening readings">
+          <div class="sbl"><span>9:44</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>قراءات بداية ورديتي</b></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="display:flex;flex-direction:column;gap:7px;padding:12px 14px">
+              <span style="display:flex;align-items:center;justify-content:space-between"><span class="lb">التقدم — مسدساتي</span><b style="font:600 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#1A237E"><span class="mono">2</span> من <span class="mono">4</span></b></span>
+              <span style="height:8px;border-radius:99px;background:#E7EBF2;overflow:hidden"><span style="display:block;width:50%;height:100%;border-radius:99px;background:#2962FF"></span></span>
+              <span style="display:flex;gap:7px;padding-top:2px"><span class="chip" style="background:#F6F7FB;border:1px solid #E4E7EC;color:#1A237E;font-weight:600">مسدساتي <span class="mono">4</span></span><span class="chip" style="background:#E8F5EC;border:1px solid #BEDFC9;color:#0B6B3A;font-weight:600">مكتمل <span class="mono">2</span></span><span class="chip" style="background:#FFF6E8;border:1px solid #F3D9AE;color:#7A4A00;font-weight:600">متبقي <span class="mono">2</span></span></span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;overflow:hidden">
+              <sc-for list="{{nozzles}}" as="n" hint-placeholder-count="4">
+                <span style="display:flex;align-items:center;gap:11px;padding:11px 12px;box-sizing:border-box;min-height:64px;border:1px solid {{n.bd}};border-radius:12px;background:{{n.bg}}">
+                  <span class="plate" style="width:36px;height:36px;border-radius:10px;background:#F2F4F7;color:{{n.ink}}"><svg class="i" style="width:19px;height:19px" viewBox="0 0 64 64"><use href="#s-pump"></use></svg></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+                    <b style="font:700 13.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330">المضخة <span class="mono">{{n.pump}}</span> · المسدس <span class="mono">{{n.nozzle}}</span></b>
+                    <span style="display:flex;align-items:center;gap:7px"><span class="chip" style="height:22px;background:#F6F7FB;border:1px solid #E4E7EC;color:#1A237E;font-weight:600">{{n.fuel}}</span><sc-if value="{{n.hasValue}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size:11px;color:#455A64">{{n.value}}</span></sc-if></span>
+                  </span>
+                  <span class="chip" style="background:{{n.chipBg}};border:1px solid {{n.chipBd}};color:{{n.chipInk}}">{{n.status}}</span>
+                  <svg class="i" style="width:16px;height:16px;color:#90A4AE" viewBox="0 0 64 64"><use href="#s-chevron"></use></svg>
+                </span>
+              </sc-for>
+            </div>
+            <button class="btn" disabled style="margin-top:auto">إكمال قراءات البداية — مسدسان متبقيان</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">10</span>screen_meter_reading · فارغ</span>
+        <article class="f" data-screen-label="10 Meter reading">
+          <div class="sbl"><span>9:46</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>قراءة العداد</b><span class="chip" style="margin-inline-start:auto;background:#F6F7FB;border:1px solid #E4E7EC;color:#455A64">بداية</span></div>
+          <div class="bd">
+            <div class="card" style="padding:14px;display:flex;align-items:center;gap:11px">
+              <span class="plate"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-pump"></use></svg></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+                <b class="t3">المضخة <span class="mono">02</span> · المسدس <span class="mono">01</span></b>
+                <span class="cap">القراءة الأخيرة المعتمدة: <span class="mono">24,102.480</span></span>
+              </span>
+              <span class="chip" style="background:#F6F7FB;border:1px solid #E4E7EC;color:#1A237E;font-weight:600">بنزين</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span class="lb">قراءة العداد الحالية</span>
+              <span class="fld" style="border-color:#2962FF;box-shadow:0 0 0 3px rgba(41,98,255,.16)">
+                <svg class="i" style="width:20px;height:20px;color:#2962FF" viewBox="0 0 64 64"><use href="#s-meter"></use></svg>
+                <span class="mono" style="flex:1;min-width:0;font-size:17px;font-weight:600;color:#90A4AE">0.000</span>
+                <span class="cap">لتر</span>
+              </span>
+              <span style="display:flex;align-items:flex-start;gap:7px"><svg class="i" style="width:15px;height:15px;color:#90A4AE" viewBox="0 0 64 64"><use href="#s-info"></use></svg><span class="cap">حقل مطلوب — أرقام فقط، بدون قيم سالبة، ثلاث خانات عشرية.</span></span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span class="lb">صورة العداد <span class="cap">— مطلوبة</span></span>
+              <span style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;height:140px;border:1px dashed #CFD8DC;border-radius:12px;background:#F6F7FB;color:#90A4AE">
+                <svg class="i" style="width:26px;height:26px" viewBox="0 0 64 64"><use href="#s-camera"></use></svg>
+                <span class="cap">التقط صورة واضحة لشاشة العداد</span>
+              </span>
+              <button class="btn2" style="height:48px"><svg class="i" style="width:19px;height:19px" viewBox="0 0 64 64"><use href="#s-camera"></use></svg>التقاط صورة</button>
+            </div>
+            <button class="btn" disabled style="margin-top:auto">حفظ والمتابعة</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2 style="font:800 19px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">02 — الصورة والحفظ وتفعيل ورديتي</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">11</span>screen_meter_reading · صورة مُلتقطة</span>
+        <article class="f" data-screen-label="11 Photo captured">
+          <div class="sbl"><span>9:47</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>قراءة العداد</b><span class="chip" style="margin-inline-start:auto;background:#F6F7FB;border:1px solid #E4E7EC;color:#455A64">بداية</span></div>
+          <div class="bd">
+            <div class="card" style="padding:14px;display:flex;align-items:center;gap:11px">
+              <span class="plate"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-pump"></use></svg></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><b class="t3">المضخة <span class="mono">02</span> · المسدس <span class="mono">01</span></b><span class="cap">القراءة الأخيرة المعتمدة: <span class="mono">24,102.480</span></span></span>
+              <span class="chip" style="background:#F6F7FB;border:1px solid #E4E7EC;color:#1A237E;font-weight:600">بنزين</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span class="lb">قراءة العداد الحالية</span>
+              <span class="fld">
+                <svg class="i" style="width:20px;height:20px;color:#2962FF" viewBox="0 0 64 64"><use href="#s-meter"></use></svg>
+                <span class="mono" style="flex:1;min-width:0;font-size:17px;font-weight:600;color:#1F2330">24,580.120</span>
+                <span class="cap">لتر</span>
+              </span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span class="lb">صورة العداد <span class="cap">— مطلوبة</span></span>
+              <span style="position:relative;display:block;height:150px;border:1px solid #E4E7EC;border-radius:12px;background:linear-gradient(170deg,#2C3A4B,#14202E 58%,#0B1420);overflow:hidden">
+                <span style="position:absolute;inset:14px 16px 42px;display:flex;flex-direction:column;gap:6px;padding:10px 12px;box-sizing:border-box;border-radius:9px;background:linear-gradient(180deg,#F3F5F8,#D7DDE5);box-shadow:0 8px 18px rgba(4,10,18,.45),inset 0 1px 0 rgba(255,255,255,.9)">
+                  <span style="display:flex;align-items:center;justify-content:space-between"><span style="font:700 8.5px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;color:#5A6875">VOLUME · لتر</span><span style="width:26px;height:6px;border-radius:2px;background:#C62828"></span></span>
+                  <span dir="ltr" style="display:flex;gap:2px;align-items:stretch">
+                    <sc-for list="{{meterDigits}}" as="d" hint-placeholder-count="9">
+                      <span style="flex:{{d.flex}};display:flex;align-items:center;justify-content:center;height:40px;border-radius:3px;background:{{d.bg}};color:{{d.ink}};font-family:Inter,system-ui,sans-serif;font-size:{{d.size}};font-weight:600;box-shadow:inset 0 -6px 10px rgba(0,0,0,.35),inset 0 6px 8px rgba(255,255,255,.08)">{{d.v}}</span>
+                    </sc-for>
+                  </span>
+                  <span style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 8px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;color:#7B8896">PUMP 02 · NOZZLE 01</span><span style="font:600 8px/1 Inter,system-ui,sans-serif;color:#7B8896">TOTALIZER</span></span>
+                </span>
+                <span style="position:absolute;inset-block-end:0;inset-inline:0;height:42px;background:linear-gradient(180deg,rgba(11,20,32,0),rgba(11,20,32,.9))"></span>
+                <span style="position:absolute;inset-block-start:-30px;inset-inline-start:-10%;width:60%;height:200px;transform:rotate(18deg);background:linear-gradient(90deg,rgba(255,255,255,.14),rgba(255,255,255,0))"></span>
+                <span style="position:absolute;inset-block-end:9px;inset-inline-start:10px;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 9px;border-radius:8px;background:rgba(7,20,38,.72);color:#fff;font:500 11px/1 'Noto Sans Arabic',sans-serif"><svg class="i" style="width:14px;height:14px" viewBox="0 0 64 64"><use href="#s-camera"></use></svg>مضخة 02 · مسدس 01</span>
+                <span style="position:absolute;inset-block-end:13px;inset-inline-end:11px"><span class="mono" style="font-size:9.5px;color:rgba(255,255,255,.82)">09:47 · 18/09</span></span>
+              </span>
+              <span style="display:flex;align-items:center;gap:9px">
+                <button class="btn2" style="flex:1;height:48px"><svg class="i" style="width:19px;height:19px" viewBox="0 0 64 64"><use href="#s-camera"></use></svg>إعادة التصوير</button>
+                <span class="chip" style="background:#FFF6E8;border:1px solid #F3D9AE;color:#7A4A00"><svg class="i" style="width:14px;height:14px" viewBox="0 0 64 64"><use href="#s-sync"></use></svg>بانتظار المزامنة</span>
+              </span>
+            </div>
+            <button class="btn" style="margin-top:auto"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-check"></use></svg>حفظ والمتابعة</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">12</span>reading_saved · NPSuccessState</span>
+        <article class="f" data-screen-label="12 Reading saved">
+          <div class="sbl"><span>9:48</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>قراءة العداد</b><span class="chip" style="margin-inline-start:auto;background:#E8F5EC;border:1px solid #BEDFC9;color:#0B6B3A">تم الحفظ</span></div>
+          <div class="bd" style="align-items:center;justify-content:center;text-align:center;gap:14px">
+            <span style="display:flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:99px;background:#E8F5EC;color:#0B6B3A"><svg class="i" style="width:32px;height:32px" viewBox="0 0 64 64"><use href="#s-check"></use></svg></span>
+            <b style="font:800 21px/30px 'Noto Sans Arabic',sans-serif;color:#1F2330">تم حفظ القراءة</b>
+            <span class="cap" style="max-width:280px">المضخة <span class="mono">02</span> · المسدس <span class="mono">01</span> — <span class="mono">24,580.120</span> لتر</span>
+            <span class="chip" style="background:#F6F7FB;border:1px solid #E4E7EC;color:#1A237E;font-weight:600"><span class="mono">3</span> من <span class="mono">4</span> — مسدساتي</span>
+            <span style="width:100%;margin-top:auto;display:flex;flex-direction:column;gap:10px">
+              <button class="btn">المسدس التالي من مسدساتي</button>
+              <button class="btn3">العودة إلى قائمة قراءاتي</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">13</span>screen_opening_complete</span>
+        <article class="f" data-screen-label="13 Opening complete">
+          <div class="sbl"><span>9:58</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>قراءات بداية ورديتي</b></div>
+          <div class="bd" style="align-items:center;text-align:center;gap:14px">
+            <span style="margin-top:22px;display:flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:99px;background:#E8F5EC;color:#0B6B3A"><svg class="i" style="width:38px;height:38px" viewBox="0 0 64 64"><use href="#s-check"></use></svg></span>
+            <b style="font:800 23px/32px 'Noto Sans Arabic',sans-serif;color:#1F2330">اكتملت قراءات البداية</b>
+            <span class="cap" style="max-width:290px">تم حفظ قراءات مسدساتي الأربعة. بتفعيل ورديتي يبدأ تسجيل العمليات.</span>
+            <span style="width:100%;display:flex;gap:9px;padding-top:4px">
+              <sc-for list="{{openingDone}}" as="d" hint-placeholder-count="3">
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding:11px;border-radius:12px;background:#fff;border:1px solid #E4E7EC"><span class="cap">{{d.k}}</span><b class="val" style="font-size:15px;font-weight:600;color:#1A237E">{{d.v}}</b></span>
+              </sc-for>
+            </span>
+            <button class="btn" style="width:100%;margin-top:auto">تفعيل ورديتي</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">14</span>screen_shift_active</span>
+        <article class="f" data-screen-label="14 Shift active">
+          <div class="sbl"><span>13:06</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>ورديتي</b><span class="chip" style="margin-inline-start:auto;background:#E8F5EC;border:1px solid #BEDFC9;color:#0B6B3A">ورديتي نشطة</span></div>
+          <div class="bd" style="gap:11px">
+            <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:11px;border-color:#BEDFC9">
+              <span style="display:flex;align-items:center;gap:11px">
+                <span class="plate" style="background:#E8F5EC;color:#0B6B3A"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-clock"></use></svg></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b class="t3">ورديتي — أحمد</b><span class="cap">محطة الخرطوم — الشرق · وردية المحطة تبقى مفتوحة</span></span>
+              </span>
+              <span style="display:flex;gap:9px">
+                <span style="flex:1;display:flex;flex-direction:column;gap:3px;padding:9px 12px;border-radius:12px;background:#F6F7FB"><span class="cap">وقت البداية</span><b class="mono" style="font-size:13.5px;font-weight:600;color:#1F2330">09:58</b></span>
+                <span style="flex:1;display:flex;flex-direction:column;gap:3px;padding:9px 12px;border-radius:12px;background:#F6F7FB"><span class="cap">مدة الوردية</span><b class="mono" style="font-size:13.5px;font-weight:600;color:#1F2330">03:08</b></span>
+              </span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px">
+              <sc-for list="{{activeKpis}}" as="k" hint-placeholder-count="3">
+                <span style="display:flex;flex-direction:column;gap:3px;padding:11px;border-radius:12px;background:#fff;border:1px solid #E4E7EC"><span class="cap">{{k.k}}</span><b class="val" style="font-size:15px;font-weight:600;color:#1A237E">{{k.v}}</b></span>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <sc-for list="{{activeOps}}" as="o" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center;gap:11px;min-height:64px;padding:11px 12px;box-sizing:border-box;border:1px solid #E4E7EC;border-radius:12px;background:#fff">
+                  <span class="plate" style="width:36px;height:36px;border-radius:10px"><svg class="i" style="width:19px;height:19px" viewBox="0 0 64 64"><use href="{{o.icon}}"></use></svg></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 13.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330">{{o.t}}</b><span class="cap">{{o.d}}</span></span>
+                  <svg class="i" style="width:16px;height:16px;color:#90A4AE" viewBox="0 0 64 64"><use href="#s-chevron"></use></svg>
+                </span>
+              </sc-for>
+            </div>
+            <button class="btn3" style="margin-top:auto;border-color:#E0B4B4;color:#8E2A2A">إنهاء ورديتي</button>
+          </div>
+          <div class="nav">
+            <sc-for list="{{tabsShift}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}">
+                <span style="position:relative;display:flex"><svg class="i" style="width:22px;height:22px" viewBox="0 0 64 64"><use href="{{t.icon}}"></use></svg><sc-if value="{{t.badge}}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset-block-start:-4px;inset-inline-end:-6px;min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:8px;background:#C62828;color:#fff;font-family:Inter,system-ui,sans-serif;font-size:9.5px;display:flex;align-items:center;justify-content:center">{{t.count}}</span></sc-if></span>
+                {{t.label}}
+                <sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:#2962FF"></span></sc-if>
+              </span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2 style="font:800 19px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">03 — إنهاء ورديتي وقراءات النهاية</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">15</span>screen_shift_close_confirmation</span>
+        <article class="f" data-screen-label="15 Close start">
+          <div class="sbl"><span>17:02</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>إنهاء ورديتي</b></div>
+          <div class="bd">
+            <div class="card" style="padding:16px;display:flex;flex-direction:column;gap:12px">
+              <span style="display:flex;align-items:center;gap:11px"><span class="plate" style="background:#FFF6E8;color:#B45309"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-alert"></use></svg></span><b class="t3">قراءات النهاية مطلوبة</b></span>
+              <span class="cap">قبل إنهاء ورديتي يجب تسجيل قراءات النهاية لمسدساتي المعيّنة فقط. لا يؤثر ذلك على ورديات العمال الآخرين.</span>
+              <span style="display:flex;gap:9px">
+                <span style="flex:1;display:flex;flex-direction:column;gap:3px;padding:9px 12px;border-radius:12px;background:#F6F7FB"><span class="cap">مسدساتي</span><b class="mono" style="font-size:13.5px;font-weight:600;color:#1F2330">4</b></span>
+                <span style="flex:1;display:flex;flex-direction:column;gap:3px;padding:9px 12px;border-radius:12px;background:#F6F7FB"><span class="cap">مدة الوردية</span><b class="mono" style="font-size:13.5px;font-weight:600;color:#1F2330">07:04</b></span>
+              </span>
+            </div>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+              <button class="btn">بدء قراءات نهاية ورديتي</button>
+              <button class="btn3">العودة لورديتي</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">16</span>screen_meter_reading · reading_mode = closing</span>
+        <article class="f" data-screen-label="16 Closing reading">
+          <div class="sbl"><span>17:10</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>قراءة العداد</b><span class="chip" style="margin-inline-start:auto;background:#E8EEFF;border:1px solid #C9D6FB;color:#1A237E">نهاية</span></div>
+          <div class="bd">
+            <div class="card" style="padding:14px;display:flex;align-items:center;gap:11px">
+              <span class="plate"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-pump"></use></svg></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><b class="t3">المضخة <span class="mono">02</span> · المسدس <span class="mono">01</span></b><span class="cap">قراءات نهاية ورديتي — <span class="mono">3</span> من <span class="mono">4</span></span></span>
+              <span class="chip" style="background:#F6F7FB;border:1px solid #E4E7EC;color:#1A237E;font-weight:600">بنزين</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span class="lb">قراءة العداد الحالية</span>
+              <span class="fld"><svg class="i" style="width:20px;height:20px;color:#2962FF" viewBox="0 0 64 64"><use href="#s-meter"></use></svg><span class="mono" style="flex:1;min-width:0;font-size:17px;font-weight:600;color:#1F2330">24,930.240</span><span class="cap">لتر</span></span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px;padding:13px;border:1px solid #E4E7EC;border-radius:12px;background:#F6F7FB">
+              <sc-for list="{{delta}}" as="d" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:12px;{{d.extra}}"><span class="cap">{{d.k}}</span><b class="mono" style="font-size:{{d.size}};font-weight:600;color:{{d.ink}}">{{d.v}}</b></span>
+              </sc-for>
+              <span style="display:flex;align-items:center;gap:6px;font:400 10.5px/16px 'Noto Sans Arabic',sans-serif;color:#90A4AE"><svg class="i" style="width:13px;height:13px" viewBox="0 0 64 64"><use href="#s-lock"></use></svg>محسوبة تلقائياً — لا يمكن تعديل الفرق</span>
+            </div>
+            <span style="display:flex;align-items:flex-start;gap:9px;padding:12px;border-radius:12px;background:#FFF6E8;border:1px solid #F3D9AE">
+              <svg class="i" style="width:16px;height:16px;color:#B45309" viewBox="0 0 64 64"><use href="#s-alert"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:7px">
+                <span style="font:500 11.5px/19px 'Noto Sans Arabic',sans-serif;color:#7A4A00">القراءة تحتاج مراجعة — الفرق أعلى من المتوسط اليومي.</span>
+                <span style="display:flex;gap:8px"><span class="chip" style="height:30px;background:#fff;border:1px solid #2962FF;color:#1A237E;font-weight:700">تأكيد القراءة</span><span class="chip" style="height:30px;background:#fff;border:1px solid #E4E7EC;color:#455A64;font-weight:700">العودة للتعديل</span></span>
+              </span>
+            </span>
+            <button class="btn" style="margin-top:auto">حفظ والمتابعة</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">17</span>screen_shift_review</span>
+        <article class="f" data-screen-label="17 Shift review">
+          <div class="sbl"><span>17:26</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-sync"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>مراجعة ورديتي</b></div>
+          <div class="bd" style="gap:9px">
+            <span style="display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:12px;background:#FFF6E8;border:1px solid #F3D9AE"><svg class="i" style="width:16px;height:16px;color:#B45309" viewBox="0 0 64 64"><use href="#s-sync"></use></svg><span style="flex:1;min-width:0;font:500 11.5px/18px 'Noto Sans Arabic',sans-serif;color:#7A4A00">عنصران بانتظار المزامنة — لن تُحذف البيانات المحلية قبل نجاح المزامنة.</span></span>
+            <sc-for list="{{review}}" as="r" hint-placeholder-count="5">
+              <div style="display:flex;flex-direction:column;gap:6px;padding:12px 13px;border:1px solid #E4E7EC;border-radius:12px;background:#fff">
+                <span style="display:flex;align-items:center;gap:7px;font:600 12px/18px 'Noto Sans Arabic',sans-serif;color:#1A237E"><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="{{r.icon}}"></use></svg>{{r.title}}</span>
+                <sc-for list="{{r.rows}}" as="x" hint-placeholder-count="2">
+                  <span style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span class="cap">{{x.k}}</span><b class="{{x.cls}}" style="font-size:12px;font-weight:700;color:#1F2330">{{x.v}}</b></span>
+                </sc-for>
+              </div>
+            </sc-for>
+            <button class="btn" style="margin-top:auto">تأكيد إنهاء ورديتي</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">18</span>close_confirmation · NPConfirmationSheet</span>
+        <article class="f" data-screen-label="18 Close confirm sheet">
+          <div class="sbl"><span>17:27</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-sync"></use></svg></div>
+          <div class="hdr"><b>مراجعة ورديتي</b></div>
+          <div class="bd" style="position:relative;overflow:hidden">
+            <span style="position:absolute;inset:0;background:rgba(14,17,22,.45)"></span>
+            <div style="opacity:.5;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{review}}" as="r" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 13px;border:1px solid #E4E7EC;border-radius:12px;background:#fff"><span style="font:600 12px/18px 'Noto Sans Arabic',sans-serif;color:#1A237E">{{r.title}}</span><span class="cap">{{r.sum}}</span></span>
+              </sc-for>
+            </div>
+            <div style="position:absolute;inset-inline:0;inset-block-end:0;display:flex;flex-direction:column;gap:12px;padding:14px 16px 18px;background:#fff;border-radius:18px 18px 0 0;box-shadow:0 -12px 30px rgba(14,17,22,.18)">
+              <span style="align-self:center;width:32px;height:4px;border-radius:99px;background:#CFD8DC"></span>
+              <span style="display:flex;flex-direction:column;gap:5px"><b style="font:800 17px/25px 'Noto Sans Arabic',sans-serif;color:#1F2330">هل تريد إنهاء ورديتك؟</b><span class="cap">سيتم إغلاق ورديتك أنت فقط وحفظ قراءات مسدساتك. وردية المحطة وورديات بقية العمال لا تتأثر. لا يمكن التعديل بعد الإنهاء.</span></span>
+              <span style="display:flex;gap:9px"><button class="btn3" style="flex:1">إلغاء</button><button class="btn" style="flex:1">إنهاء ورديتي</button></span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">19</span>screen_shift_closed_success</span>
+        <article class="f" data-screen-label="19 Shift success">
+          <div class="sbl"><span>17:28</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-check"></use></svg></div>
+          <div class="hdr"><b>ورديتي</b></div>
+          <div class="bd" style="align-items:center;text-align:center;gap:14px">
+            <span style="margin-top:26px;display:flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:99px;background:#E8F5EC;color:#0B6B3A"><svg class="i" style="width:38px;height:38px" viewBox="0 0 64 64"><use href="#s-check"></use></svg></span>
+            <b style="font:800 23px/32px 'Noto Sans Arabic',sans-serif;color:#1F2330">تم إنهاء ورديتك بنجاح</b>
+            <span class="cap" style="max-width:290px">تم حفظ وتسليم بيانات ورديتك ومزامنتها. وردية المحطة ما زالت مفتوحة — يغلقها المدير بعد تجميع ورديات جميع العمال.</span>
+            <span style="width:100%;display:flex;gap:9px;padding-top:2px">
+              <sc-for list="{{closedSummary}}" as="d" hint-placeholder-count="3">
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding:11px;border-radius:12px;background:#fff;border:1px solid #E4E7EC"><span class="cap">{{d.k}}</span><b class="val" style="font-size:14px;font-weight:600;color:#1A237E">{{d.v}}</b></span>
+              </sc-for>
+            </span>
+            <button class="btn" style="width:100%;margin-top:auto">العودة للرئيسية</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2 style="font:800 19px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">04 — الحالات: دون اتصال · خطأ تحقق · بانتظار المزامنة</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">S1</span>offline_reading · حفظ محلي</span>
+        <article class="f" data-screen-label="S1 Offline reading">
+          <div class="sbl"><span>11:02</span><svg class="i" style="width:15px;height:15px;color:#B45309" viewBox="0 0 64 64"><use href="#s-offline"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>قراءة العداد</b></div>
+          <div class="bd">
+            <span style="display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:12px;background:#FFF6E8;border:1px solid #F3D9AE"><svg class="i" style="width:16px;height:16px;color:#B45309" viewBox="0 0 64 64"><use href="#s-offline"></use></svg><span style="flex:1;min-width:0;font:500 11.5px/18px 'Noto Sans Arabic',sans-serif;color:#7A4A00">أنت غير متصل بالإنترنت — يتم الحفظ محلياً</span></span>
+            <div class="card" style="padding:14px;display:flex;align-items:center;gap:11px">
+              <span class="plate"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-pump"></use></svg></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><b class="t3">المضخة <span class="mono">02</span> · المسدس <span class="mono">02</span></b><span class="cap">القراءة محفوظة على الجهاز</span></span>
+              <span class="chip" style="background:#F6F7FB;border:1px solid #E4E7EC;color:#1A237E;font-weight:600">جاز</span>
+            </div>
+            <span class="fld"><svg class="i" style="width:20px;height:20px;color:#2962FF" viewBox="0 0 64 64"><use href="#s-meter"></use></svg><span class="mono" style="flex:1;min-width:0;font-size:17px;font-weight:600;color:#1F2330">18,441.700</span><span class="cap">لتر</span></span>
+            <span style="display:flex;align-items:center;gap:8px"><span class="chip" style="background:#FFF6E8;border:1px solid #F3D9AE;color:#7A4A00"><svg class="i" style="width:14px;height:14px" viewBox="0 0 64 64"><use href="#s-sync"></use></svg>بانتظار المزامنة</span><span class="cap">لن تُحذف القراءة قبل نجاح المزامنة</span></span>
+            <button class="btn" style="margin-top:auto">حفظ محلياً والمتابعة</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">S2</span>validation_failed</span>
+        <article class="f" data-screen-label="S2 Validation error">
+          <div class="sbl"><span>11:06</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>قراءة العداد</b></div>
+          <div class="bd">
+            <div class="card" style="padding:14px;display:flex;align-items:center;gap:11px">
+              <span class="plate"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-pump"></use></svg></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><b class="t3">المضخة <span class="mono">01</span> · المسدس <span class="mono">02</span></b><span class="cap">القراءة الأخيرة المعتمدة: <span class="mono">30,880.000</span></span></span>
+              <span class="chip" style="background:#F6F7FB;border:1px solid #E4E7EC;color:#1A237E;font-weight:600">بنزين</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span class="lb">قراءة العداد الحالية</span>
+              <span class="fld" style="border-color:#E0B4B4;background:#FDF3F3"><svg class="i" style="width:20px;height:20px;color:#C62828" viewBox="0 0 64 64"><use href="#s-meter"></use></svg><span class="mono" style="flex:1;min-width:0;font-size:17px;font-weight:600;color:#1F2330">-120.000</span><span class="cap">لتر</span></span>
+              <span style="display:flex;align-items:flex-start;gap:7px"><svg class="i" style="width:15px;height:15px;color:#C62828" viewBox="0 0 64 64"><use href="#s-alert"></use></svg><span style="font:500 11.5px/18px 'Noto Sans Arabic',sans-serif;color:#9B2222">قيمة غير صالحة — أدخل رقماً موجباً لا يقل عن القراءة الأخيرة المعتمدة.</span></span>
+            </div>
+            <span style="display:flex;flex-direction:column;gap:7px;padding:12px 13px;border-radius:12px;background:#F6F7FB;border:1px solid #E4E7EC">
+              <b style="font:700 12px/18px 'Noto Sans Arabic',sans-serif;color:#1F2330">قواعد التحقق المعروضة</b>
+              <sc-for list="{{rules}}" as="r" hint-placeholder-count="4">
+                <span style="display:flex;align-items:center;gap:7px"><span style="width:5px;height:5px;border-radius:99px;background:#90A4AE"></span><span class="cap">{{r}}</span></span>
+              </sc-for>
+            </span>
+            <button class="btn" disabled style="margin-top:auto">حفظ والمتابعة</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">S3</span>sync_pending · جارٍ المزامنة</span>
+        <article class="f" data-screen-label="S3 Sync pending">
+          <div class="sbl"><span>17:24</span><svg class="i" style="width:15px;height:15px;color:#0277BD" viewBox="0 0 64 64"><use href="#s-sync"></use></svg></div>
+          <div class="hdr"><b>قراءات نهاية ورديتي</b></div>
+          <div class="bd" style="gap:10px">
+            <span style="display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:12px;background:#E8F4FD;border:1px solid #BEDCF2"><svg class="i" style="width:16px;height:16px;color:#01579B" viewBox="0 0 64 64"><use href="#s-sync"></use></svg><span style="flex:1;min-width:0;font:500 11.5px/18px 'Noto Sans Arabic',sans-serif;color:#01579B">جارٍ المزامنة — <span class="mono">2</span> عنصران</span></span>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <sc-for list="{{syncRows}}" as="s" hint-placeholder-count="4">
+                <span style="display:flex;align-items:center;gap:11px;min-height:60px;padding:11px 12px;box-sizing:border-box;border:1px solid #E4E7EC;border-radius:12px;background:#fff">
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><b style="font:700 13px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330">المضخة <span class="mono">{{s.pump}}</span> · المسدس <span class="mono">{{s.nozzle}}</span></b><span class="mono" style="font-size:11px;color:#455A64">{{s.value}}</span></span>
+                  <span class="chip" style="background:{{s.bg}};border:1px solid {{s.bd}};color:{{s.ink}}"><svg class="i" style="width:14px;height:14px" viewBox="0 0 64 64"><use href="{{s.icon}}"></use></svg>{{s.label}}</span>
+                </span>
+              </sc-for>
+            </div>
+            <span style="display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:#FDF3F3;border:1px solid #E9C9C9">
+              <svg class="i" style="width:16px;height:16px;color:#C62828" viewBox="0 0 64 64"><use href="#s-alert"></use></svg>
+              <span style="flex:1;min-width:0;font:500 11.5px/18px 'Noto Sans Arabic',sans-serif;color:#9B2222">تعذر مزامنة عنصر واحد</span>
+              <span class="chip" style="height:30px;background:#fff;border:1px solid #2962FF;color:#1A237E;font-weight:700">إعادة المحاولة</span>
+            </span>
+            <button class="btn" disabled style="margin-top:auto">المتابعة بعد المزامنة</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2 style="font:800 19px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">05 — سياق المدير: من أين يأتي التعيين ومن يغلق وردية المحطة</h2>
+    <span class="cap" style="max-width:900px">هاتان الشاشتان خارج تطبيق العامل تماماً — معروضتان هنا لتوضيح مصدر التعيين والتجميع. العامل لا يرى أياً منهما ولا يرى بيانات عامل آخر.</span>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M1</span>manager · إعداد المسدسات</span>
+        <article class="f" data-screen-label="M1 Nozzle assignment">
+          <div class="sbl"><span>8:30</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>تعيين المسدسات</b></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:13px 14px;display:flex;align-items:center;gap:11px">
+              <span class="plate"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-profile"></use></svg></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b class="t3">أحمد</b><span class="cap">المسدسات المعيّنة: <span class="mono">4</span></span></span>
+              <svg class="i" style="width:16px;height:16px;color:#90A4AE" viewBox="0 0 64 64"><use href="#s-chevron"></use></svg>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;overflow:hidden">
+              <sc-for list="{{assignRows}}" as="a" hint-placeholder-count="6">
+                <span style="display:flex;align-items:center;gap:10px;min-height:58px;padding:10px 12px;box-sizing:border-box;border:1px solid {{a.bd}};border-radius:12px;background:#fff">
+                  <span style="display:flex;align-items:center;justify-content:center;width:22px;height:22px;flex:none;border-radius:6px;background:{{a.boxBg}};border:1px solid {{a.bd}};color:{{a.ink}}"><svg class="i" style="width:14px;height:14px" viewBox="0 0 64 64"><use href="{{a.icon}}"></use></svg></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:#1F2330">مضخة <span class="mono">{{a.pump}}</span> · مسدس <span class="mono">{{a.nozzle}}</span> · {{a.fuel}}</b><span class="cap">{{a.note}}</span></span>
+                  <span class="chip" style="background:{{a.chipBg}};border:1px solid {{a.bd}};color:{{a.ink}};font-weight:600">{{a.state}}</span>
+                </span>
+              </sc-for>
+            </div>
+            <span style="display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border-radius:12px;background:#F6F7FB;border:1px solid #E4E7EC"><svg class="i" style="width:16px;height:16px;color:#1A237E" viewBox="0 0 64 64"><use href="#s-lock"></use></svg><span style="flex:1;min-width:0;font:500 11px/18px 'Noto Sans Arabic',sans-serif;color:#455A64">مسدس مرتبط بوردية نشطة لا يُعاد تعيينه من هنا — لا توجد آلية نقل أثناء الوردية في هذه المرحلة.</span></span>
+            <button class="btn" style="margin-top:auto">حفظ التعيين</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M2</span>manager · وردية المحطة (تجميع)</span>
+        <article class="f" data-screen-label="M2 Station shift">
+          <div class="sbl"><span>17:40</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#s-sync"></use></svg></div>
+          <div class="hdr"><button class="ib"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#s-back"></use></svg></button><b>وردية المحطة</b></div>
+          <div class="bd" style="gap:10px">
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px">
+              <sc-for list="{{stationTotals}}" as="s" hint-placeholder-count="4">
+                <span style="display:flex;flex-direction:column;gap:3px;padding:11px 12px;border-radius:12px;background:#fff;border:1px solid #E4E7EC"><span class="cap">{{s.k}}</span><b class="val" style="font-size:15px;font-weight:600;color:#1A237E">{{s.v}}</b></span>
+              </sc-for>
+            </div>
+            <span class="lb">ورديات العمال</span>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <sc-for list="{{workerShifts}}" as="w" hint-placeholder-count="2">
+                <span style="display:flex;align-items:center;gap:11px;min-height:62px;padding:11px 12px;box-sizing:border-box;border:1px solid {{w.bd}};border-radius:12px;background:#fff">
+                  <span class="plate" style="width:36px;height:36px;border-radius:10px;background:{{w.chipBg}};color:{{w.ink}}"><svg class="i" style="width:19px;height:19px" viewBox="0 0 64 64"><use href="#s-profile"></use></svg></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 13.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330">{{w.name}}</b><span class="cap">مسدساته: <span class="mono">{{w.nozzles}}</span> · القراءات <span class="mono">{{w.readings}}</span></span></span>
+                  <span class="chip" style="background:{{w.chipBg}};border:1px solid {{w.bd}};color:{{w.ink}};font-weight:600">{{w.state}}</span>
+                </span>
+              </sc-for>
+            </div>
+            <span style="display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border-radius:12px;background:#FFF6E8;border:1px solid #F3D9AE"><svg class="i" style="width:16px;height:16px;color:#B45309" viewBox="0 0 64 64"><use href="#s-alert"></use></svg><span style="flex:1;min-width:0;font:500 11px/18px 'Noto Sans Arabic',sans-serif;color:#7A4A00">لا يمكن إغلاق وردية المحطة قبل إغلاق جميع ورديات العمال — وردية عثمان ما زالت نشطة.</span></span>
+            <button class="btn" disabled style="margin-top:auto">إغلاق وردية المحطة</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap" style="flex:1 1 360px;min-width:340px">
+        <span class="nm"><span class="tag">DR</span>data_relation · ملكية الوردية</span>
+        <div style="display:flex;flex-direction:column;gap:10px;padding:18px;background:#fff;border:1px solid #E4E7EC;border-radius:16px">
+          <sc-for list="{{relation}}" as="r" hint-placeholder-count="8">
+            <span style="display:flex;align-items:center;gap:9px">
+              <span class="mono" style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;background:#F6F7FB;border:1px solid #E4E7EC;font-size:10.5px;color:#1A237E">{{r.n}}</span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:#1F2330">{{r.t}}</b><span class="cap">{{r.d}}</span></span>
+            </span>
+          </sc-for>
+          <span style="display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border-radius:12px;background:#E4F2FD;border:1px solid #CFE0FD"><svg class="i" style="width:16px;height:16px;color:#1A237E" viewBox="0 0 64 64"><use href="#s-info"></use></svg><span style="flex:1;min-width:0;font:500 11px/18px 'Noto Sans Arabic',sans-serif;color:#1A237E">Shift Assignment Snapshot: تستخدم وردية العامل نسخة التعيين الملتقطة عند البدء؛ أي تعديل من المدير يسري على الوردية التالية.</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:12px;padding:20px 22px;background:#fff;border:1px solid #E4E7EC;border-radius:16px;max-width:1160px">
+    <h2 style="font:800 18px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">06 — حالات الخطأ الثمانية</h2>
+    <span class="cap">كل حالة: أيقونة + عنوان + رسالة + إجراء استرجاع. لا توجد رسالة «حدث خطأ» بلا توجيه.</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:10px">
+      <sc-for list="{{errors}}" as="e" hint-placeholder-count="8">
+        <div style="display:flex;gap:11px;padding:13px;border:1px solid #E4E7EC;border-radius:12px;background:#FBFCFE">
+          <span class="plate" style="width:34px;height:34px;border-radius:10px;background:#FDF3F3;color:#C62828"><svg class="i" style="width:18px;height:18px" viewBox="0 0 64 64"><use href="{{e.icon}}"></use></svg></span>
+          <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+            <b style="font:700 13px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330">{{e.title}}</b>
+            <span class="cap">{{e.msg}}</span>
+            <span style="display:inline-flex;align-self:flex-start;align-items:center;height:26px;padding:0 9px;margin-top:2px;border-radius:8px;background:#fff;border:1px solid #2962FF;font:700 11px/1 'Noto Sans Arabic',sans-serif;color:#1A237E">{{e.action}}</span>
+          </span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:12px;padding:20px 22px;background:#fff;border:1px solid #E4E7EC;border-radius:16px;max-width:1160px">
+    <h2 style="font:800 18px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">07 — مسار النموذج الأولي · صفر مسار مسدود</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;align-items:center">
+      <sc-for list="{{flow}}" as="f" hint-placeholder-count="18">
+        <span style="display:inline-flex;align-items:center;gap:7px">
+          <span style="display:inline-flex;align-items:center;height:30px;padding:0 11px;border-radius:8px;background:{{f.bg}};border:1px solid {{f.bd}};font:600 11.5px/1 'Noto Sans Arabic',sans-serif;color:{{f.ink}}">{{f.label}}</span>
+          <sc-if value="{{f.arrow}}" hint-placeholder-val="{{ true }}"><span style="color:#90A4AE">←</span></sc-if>
+        </span>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:11px;padding:20px 22px;background:#fff;border:1px solid #E4E7EC;border-radius:16px;max-width:1160px">
+    <h2 style="font:800 18px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">08 — تسليم Flutter · قياسات ومكوّنات</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid #E4E7EC;border-radius:12px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:240px 170px minmax(0,1fr);gap:10px;padding:9px 12px;background:#F6F7FB;font:600 11px/18px Inter,system-ui,sans-serif;color:#1A237E"><span>component / token</span><span>value</span><span style="font-family:'Noto Sans Arabic',sans-serif">الاستخدام</span></div>
+      <sc-for list="{{handoff}}" as="row" hint-placeholder-count="16">
+        <div style="display:grid;grid-template-columns:240px 170px minmax(0,1fr);gap:10px;padding:8px 12px;border-top:1px solid #F2F4F7">
+          <span class="mono" style="font-size:10.5px;color:#1A237E">{{row.key}}</span>
+          <span class="val" style="font-size:10.5px;color:#1F2330">{{row.value}}</span>
+          <span style="font:400 11.5px/19px 'Noto Sans Arabic',sans-serif;color:#455A64">{{row.use}}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px;padding-top:2px">
+      <sc-for list="{{report}}" as="r" hint-placeholder-count="12">
+        <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:10px;background:#F6F7FB;border:1px solid #E4E7EC">
+          <span class="cap">{{r.label}}</span>
+          <b class="val" style="font-size:11.5px;color:{{r.ink}}">{{r.value}}</b>
+        </span>
+      </sc-for>
+    </div>
+    <span class="cap" style="line-height:20px">جميع البيانات المعروضة عناصر عرض بصرية فقط. عدد المسدسات في كل شاشة مشتق من <span class="mono">assigned_nozzles.length</span> (أحمد = 4)، ويعمل التصميم مع 3 أو 6 مسدسات دون تعديل. أنواع الوقود بنزين وجاز فقط، و«ديزل» المثبّتة في الكود: صفر.</span>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() {
+    const OK = "#0B6B3A", B = "#1A237E";
+    const chip = {
+      todo:  { status: "لم يبدأ",   chipBg: "#F2F4F7", chipBd: "#E4E7EC", chipInk: "#455A64", bg: "#fff",     bd: "#E4E7EC", ink: "#90A4AE" },
+      doing: { status: "قيد الإدخال", chipBg: "#E8F4FD", chipBd: "#BEDCF2", chipInk: "#01579B", bg: "#fff",     bd: "#2962FF", ink: "#2962FF" },
+      done:  { status: "مكتمل",      chipBg: "#E8F5EC", chipBd: "#BEDFC9", chipInk: "#0B6B3A", bg: "#fff",     bd: "#BEDFC9", ink: "#0B6B3A" },
+      err:   { status: "خطأ",        chipBg: "#FDF3F3", chipBd: "#E9C9C9", chipInk: "#9B2222", bg: "#FDF3F3", bd: "#E9C9C9", ink: "#C62828" }
+    };
+    const nz = (pump, nozzle, fuel, st, value) => ({ pump, nozzle, fuel, ...chip[st], hasValue: !!value, value: value || "" });
+    const step = (label, kind, arrow) => ({
+      label, arrow,
+      bg: kind === "s" ? "#E8F5EC" : (kind === "d" ? "#FFF6E8" : "#fff"),
+      bd: kind === "s" ? "#BEDFC9" : (kind === "d" ? "#F3D9AE" : "#E4E7EC"),
+      ink: kind === "s" ? "#0B6B3A" : (kind === "d" ? "#7A4A00" : "#1F2330")
+    });
+    return {
+      pills: ["390×844", "RTL أصلي", "بنزين · جاز", "ديزل = 0", "assigned_nozzles = 4", "عدد ديناميكي", "وردية العامل مستقلة"],
+      tabsShift: [
+        { label: "الرئيسية", icon: "#s-home", ink: "#90A4AE", active: false, badge: false, count: "" },
+        { label: "الوردية", icon: "#s-shift", ink: "#2962FF", active: true, badge: false, count: "" },
+        { label: "التنبيهات", icon: "#s-bell", ink: "#90A4AE", active: false, badge: true, count: "2" },
+        { label: "حسابي", icon: "#s-profile", ink: "#90A4AE", active: false, badge: false, count: "" }
+      ],
+      startSummary: [
+        { k: "العامل", v: "أحمد", cls: "" },
+        { k: "المحطة", v: "محطة الخرطوم — الشرق", cls: "" },
+        { k: "التاريخ", v: "18/09/2026", cls: "mono" },
+        { k: "الوقت", v: "09:44", cls: "mono" }
+      ],
+      nozzles: [
+        nz("01", "01", "بنزين", "done", "24,102.480"),
+        nz("01", "02", "بنزين", "done", "30,880.000"),
+        nz("02", "01", "جاز", "doing", ""),
+        nz("02", "02", "جاز", "todo", "")
+      ],
+      assignRows: [
+        { pump: "01", nozzle: "01", fuel: "بنزين", state: "معيّن", note: "أحمد", icon: "#s-check", bd: "#BEDFC9", chipBg: "#E8F5EC", boxBg: "#E8F5EC", ink: "#0B6B3A" },
+        { pump: "01", nozzle: "02", fuel: "بنزين", state: "معيّن", note: "أحمد", icon: "#s-check", bd: "#BEDFC9", chipBg: "#E8F5EC", boxBg: "#E8F5EC", ink: "#0B6B3A" },
+        { pump: "02", nozzle: "01", fuel: "جاز", state: "معيّن", note: "أحمد", icon: "#s-check", bd: "#BEDFC9", chipBg: "#E8F5EC", boxBg: "#E8F5EC", ink: "#0B6B3A" },
+        { pump: "02", nozzle: "02", fuel: "جاز", state: "معيّن", note: "أحمد", icon: "#s-check", bd: "#BEDFC9", chipBg: "#E8F5EC", boxBg: "#E8F5EC", ink: "#0B6B3A" },
+        { pump: "03", nozzle: "01", fuel: "بنزين", state: "مرتبط بوردية نشطة", note: "عثمان — مُقفل الآن", icon: "#s-lock", bd: "#F3D9AE", chipBg: "#FFF6E8", boxBg: "#FFF6E8", ink: "#7A4A00" },
+        { pump: "03", nozzle: "02", fuel: "جاز", state: "غير معيّن", note: "متاح للتعيين", icon: "#s-close", bd: "#E4E7EC", chipBg: "#F6F7FB", boxBg: "#F6F7FB", ink: "#455A64" }
+      ],
+      workerShifts: [
+        { name: "أحمد", nozzles: "4", readings: "8 / 8", state: "مغلقة", bd: "#BEDFC9", chipBg: "#E8F5EC", ink: "#0B6B3A" },
+        { name: "عثمان", nozzles: "4", readings: "4 / 8", state: "نشطة", bd: "#BEDCF2", chipBg: "#E8F4FD", ink: "#01579B" }
+      ],
+      stationTotals: [
+        { k: "العمال", v: "2" },
+        { k: "مسدسات المحطة", v: "8 — بنزين 4 · جاز 4" },
+        { k: "الورديات المغلقة / النشطة", v: "1 / 1" },
+        { k: "قراءات مكتملة", v: "4 / 8" }
+      ],
+      relation: [
+        { n: "01", t: "Station → Pump → Nozzle", d: "هيكل المحطة ومسدساتها" },
+        { n: "02", t: "Worker Assignment", d: "المدير يعين: عامل → مضخة → مسدس → نوع الوقود" },
+        { n: "03", t: "Worker Shift", d: "وردية مستقلة لكل عامل داخل نفس فترة تشغيل المحطة" },
+        { n: "04", t: "Opening Reading", d: "لمسدسات العامل فقط — assignedNozzles" },
+        { n: "05", t: "Closing Reading", d: "لمسدسات العامل فقط + الفرق المحسوب" },
+        { n: "06", t: "Close Worker Shift", d: "يغلق ورديته وحده دون أثر على الآخرين" },
+        { n: "07", t: "Manager Aggregate", d: "تجميع ورديات جميع العمال" },
+        { n: "08", t: "Close Station Shift", d: "من المدير حصراً — ممنوع على العامل" }
+      ],
+      openingDone: [
+        { k: "مسدساتي", v: "4 من 4" },
+        { k: "الصور", v: "4" },
+        { k: "المزامنة", v: "تمت" }
+      ],
+      activeKpis: [
+        { k: "مسدساتي", v: "4" },
+        { k: "قراءاتي", v: "4 / 4" },
+        { k: "مصروفاتي", v: "2" }
+      ],
+      activeOps: [
+        { icon: "#s-meter", t: "قراءة العدادات", d: "تسجيل قراءة مسدس خلال الوردية" },
+        { icon: "#s-wallet", t: "تسجيل مصروف", d: "يُنفَّذ في مرحلة لاحقة" },
+        { icon: "#s-supply", t: "تسجيل توريد", d: "يُنفَّذ في مرحلة لاحقة" }
+      ],
+      meterDigits: "24580.120".split("").map(c => c === "." ? ({ v: ".", flex: "0 0 10px", bg: "#0E1620", ink: "#F4B740", size: "16px" }) : ({ v: c, flex: "1", bg: "#0E1620", ink: "#F7FAFF", size: "19px" })),
+      delta: [
+        { k: "قراءة البداية", v: "24,580.120", size: "13px", ink: "#1F2330", extra: "" },
+        { k: "قراءة النهاية", v: "24,930.240", size: "13px", ink: "#1F2330", extra: "" },
+        { k: "الفرق", v: "350.120", size: "17px", ink: "#1A237E", extra: "padding-top:9px;border-top:1px solid #E4E7EC" }
+      ],
+      review: [
+        { icon: "#s-clock", title: "مدة ورديتي", sum: "07:30", rows: [ { k: "البداية", v: "09:58", cls: "mono" }, { k: "النهاية", v: "17:28", cls: "mono" }, { k: "المدة", v: "07:30", cls: "mono" } ] },
+        { icon: "#s-pump", title: "مسدساتي", sum: "4 مسدسات", rows: [ { k: "بنزين — مسدس 01 · 02", v: "2", cls: "mono" }, { k: "جاز — مسدس 01 · 02", v: "2", cls: "mono" } ] },
+        { icon: "#s-meter", title: "قراءاتي — بداية ونهاية", sum: "4 من 4", rows: [ { k: "بنزين — الفرق", v: "1,204.360", cls: "mono" }, { k: "جاز — الفرق", v: "612.100", cls: "mono" } ] },
+        { icon: "#s-wallet", title: "مصروفاتي", sum: "2 عناصر", rows: [ { k: "عدد العناصر", v: "2", cls: "mono" }, { k: "الحالة", v: "بانتظار المزامنة", cls: "" } ] },
+        { icon: "#s-supply", title: "توريداتي", sum: "1 عنصر", rows: [ { k: "عدد العناصر", v: "1", cls: "mono" }, { k: "الحالة", v: "تمت المزامنة", cls: "" } ] },
+        { icon: "#s-alert", title: "ملاحطات ورديتي", sum: "1 ملاحطة", rows: [ { k: "قراءة تحتاج مراجعة", v: "مضخة 02 · مسدس 01", cls: "" } ] }
+      ],
+      closedSummary: [
+        { k: "المدة", v: "07:30" },
+        { k: "قراءاتي", v: "8" },
+        { k: "وردية المحطة", v: "مفتوحة" }
+      ],
+      rules: [
+        "حقل مطلوب — لا يمكن الحفظ وهو فارغ",
+        "أرقام فقط — لا حروف ولا رموز",
+        "لا تُقبل القيم السالبة",
+        "القاعدة النهائية من الخادم — القراءة غير المتوقعة تحذير لا رفض"
+      ],
+      syncRows: [
+        { pump: "01", nozzle: "01", value: "24,980.140", label: "تمت المزامنة", bg: "#E8F5EC", bd: "#BEDFC9", ink: "#0B6B3A", icon: "#s-check" },
+        { pump: "01", nozzle: "02", value: "31,240.000", label: "جارٍ المزامنة", bg: "#E8F4FD", bd: "#BEDCF2", ink: "#01579B", icon: "#s-sync" },
+        { pump: "02", nozzle: "01", value: "18,441.700", label: "بانتظار المزامنة", bg: "#FFF6E8", bd: "#F3D9AE", ink: "#7A4A00", icon: "#s-sync" },
+        { pump: "02", nozzle: "02", value: "19,002.500", label: "تعذر المزامنة", bg: "#FDF3F3", bd: "#E9C9C9", ink: "#9B2222", icon: "#s-alert" }
+      ],
+      errors: [
+        { icon: "#s-alert", title: "تعذر حفظ القراءة", msg: "لم يُستجب من الخادم. القراءة محفوظة على الجهاز ولم تُفقد.", action: "إعادة المحاولة" },
+        { icon: "#s-camera", title: "تعذر رفع الصورة", msg: "الصورة محفوظة محلياً وسترفع تلقائياً عند عودة الاتصال.", action: "إعادة الرفع" },
+        { icon: "#s-shift", title: "تعذر بدء ورديتي", msg: "قد تكون لديك وردية مفتوحة على جهاز آخر.", action: "تحديث الحالة" },
+        { icon: "#s-pump", title: "لا توجد مسدسات مخصصة لك", msg: "راجع مدير المحطة لتعيين المسدسات قبل بدء الوردية.", action: "إعادة المحاولة" },
+        { icon: "#s-lock", title: "تعذر إنهاء ورديتي", msg: "عناصر بانتظار المزامنة تمنع الإغلاق النهائي.", action: "مزامنة ثم الإنهاء" },
+        { icon: "#s-alert", title: "فشل التحقق", msg: "القراءة أقل من القراءة الأخيرة المعتمدة لهذا المسدس.", action: "تعديل القراءة" },
+        { icon: "#s-clock", title: "انتهت الجلسة", msg: "انتهت مدة الجلسة لأسباب أمنية. بياناتك المحلية محفوظة.", action: "تسجيل الدخول" },
+        { icon: "#s-lock", title: "غير مصرّح", msg: "لا تملك صلاحية هذه العملية على هذه المحطة.", action: "التواصل مع المسؤول" },
+        { icon: "#s-offline", title: "إجراء غير متاح دون اتصال", msg: "تفعيل الوردية وإغلاقها يتطلبان اتصالاً بالخادم.", action: "المحاولة عند الاتصال" }
+      ],
+      flow: [
+        step("الرئيسية", "n", true), step("مسدساتي ٤", "n", true), step("بدء ورديتي", "n", true),
+        step("تأكيد البدء + Snapshot", "n", true), step("قراءات البداية 0/4", "n", true), step("قراءة + صورة", "n", true),
+        step("حفظ", "n", true), step("4/4", "s", true), step("تفعيل ورديتي", "n", true),
+        step("ورديتي نشطة", "s", true), step("إنهاء ورديتي", "d", true), step("قراءات النهاية 0/4", "n", true),
+        step("الفرق المحسوب", "n", true), step("مراجعة ورديتي", "n", true), step("تأكيد الإنهاء", "d", true),
+        step("ورديتي مغلقة", "s", true), step("وردية عثمان نشطة", "d", true), step("المدير: تجميع", "n", true), step("إغلاق وردية المحطة", "s", false)
+      ],
+      handoff: [
+        { key: "NPActionCard", value: "min-h 112 · r16", use: "بطاقة إجراء عامة — لا نسخة للعامل ولا للمدير" },
+        { key: "NPBottomNavigation", value: "78 · 4 tabs", use: "الرئيسية · الوردية · التنبيهات · حسابي فقط" },
+        { key: "NPOTPInput", value: "46×56 · r12", use: "ست خانات باتجاه LTR معزول" },
+        { key: "NPShiftStatusCard", value: "r16 · pad 16", use: "حالة الوردية: لا وردية / نشطة" },
+        { key: "NPShiftProgress", value: "total_assigned · completed · remaining", use: "التقدم مشتق من assigned_nozzles.length — لا رقم ثابت" },
+        { key: "NPMeterReadingList", value: "source = assigned_nozzles", use: "قائمة قراءات العامل وحده — لا عدد عناصر ستاتيكي" },
+        { key: "shift.assignment_snapshot", value: "captured at shift start", use: "عدد المسدسات لا يتغير وسط الوردية" },
+        { key: "scope.worker", value: "own shift only", use: "لا قراءات ولا ورديات عمال آخرين داخل تطبيق العامل" },
+        { key: "close_station_shift", value: "manager only", use: "إغلاق وردية العامل لا يغلق وردية المحطة" },
+        { key: "NPReadingListItem", value: "min-h 64", use: "صف مسدس بأربع حالات" },
+        { key: "NPMeterReadingField", value: "56 · r12", use: "إدخال القراءة بست حالات" },
+        { key: "NPMeterPhoto", value: "box 160 · r12", use: "صورة العداد بخمس حالات" },
+        { key: "NPReadingDifference", value: "r12", use: "الفرق محسوب تلقائياً وغير قابل للتعديل" },
+        { key: "NPConfirmationSheet", value: "max-w 390 · r16", use: "يمتد من NPBottomSheet — لا هندسة ثانية" },
+        { key: "NPConnectivityBanner", value: "min-h 40 · r12", use: "خمس حالات اتصال ومزامنة" },
+        { key: "NPSyncBadge", value: "h 28 · r8", use: "حالة مزامنة السجل الواحد" },
+        { key: "action.primary", value: "56 · r12", use: "الإجراء الأساسي في كل شاشة" },
+        { key: "touch.min", value: "48 × 48", use: "أصغر هدف لمس مسموح" },
+        { key: "reading.decimals", value: "3", use: "خانات عشرية للقراءة — 24,580.120" },
+        { key: "numerals", value: "Inter · LTR", use: "كل رقم معزول الاتجاه وجدولي" },
+        { key: "theme.modes", value: "light · dark · system", use: "من مجموعة Tokens المشتركة" },
+        { key: "tested.widths", value: "360 · 390 · 393 · 430", use: "دون فائض أو قصّ أو تعارض مع التنقل" }
+      ],
+      report: [
+        { label: "مسدسات أحمد", value: "4", ink: B },
+        { label: "مسدسات عثمان", value: "4", ink: B },
+        { label: "أرقام مسدسات ثابتة", value: "0", ink: OK },
+        { label: "بيانات عمال آخرين في تطبيق العامل", value: "0", ink: OK },
+        { label: "حالة بدون تعيين", value: "PASS", ink: OK },
+        { label: "Assignment Snapshot", value: "PASS", ink: OK },
+        { label: "إغلاق المحطة من المدير", value: "PASS", ink: OK },
+        { label: "مسارات مسدودة", value: "0", ink: OK },
+        { label: "«ديزل» مثبّتة", value: "0", ink: OK },
+        { label: "أخطاء كونسول", value: "0", ink: OK },
+        { label: "RTL", value: "PASS", ink: OK },
+        { label: "فاتح / داكن", value: "PASS", ink: OK }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

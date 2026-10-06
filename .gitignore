@@ -5,3 +5,7 @@ Thumbs.db
 .tmp/
 .scratch/
 coverage/
+
+packages/*/dist/
+
+packages/*/dist/

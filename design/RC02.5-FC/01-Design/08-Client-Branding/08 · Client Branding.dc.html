@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+h1,h2,h3{margin:0}
+.wrap{padding:36px 40px 80px;display:flex;flex-direction:column;gap:32px;max-width:1400px}
+.sec{display:flex;flex-direction:column;gap:12px}
+.sh{font:800 20px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.sh small{display:block;font:600 11.5px/17px Inter,system-ui,sans-serif;color:#90A4AE;letter-spacing:.04em}
+.p{font:400 13.5px/22px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:900px;text-wrap:pretty}
+.panel{display:flex;flex-direction:column;gap:11px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.lbl{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#37474F;white-space:nowrap}
+.lbl.ok{background:#E8F5EC;border-color:#BEDFC9;color:#0B6B3A}
+.lbl.wn{background:#FFF6E8;border-color:#F3D9AE;color:#7A4A00}
+.lbl.bad{background:#FDF3F3;border-color:#E9C9C9;color:#9B2222}
+.lbl.info{background:#E8F4FD;border-color:#BEDCF2;color:#01579B}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:start;vertical-align:top;padding:8px 10px;border-bottom:1px solid #EEF1F6;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+th{font-weight:700;color:#455A64;background:#F6F7FB;white-space:nowrap}
+td.m{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;font-size:11px}
+.tree{display:flex;flex-direction:column;gap:5px;overflow-x:auto;font:500 12px/19px Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;color:#1F2330}
+.tree span{white-space:pre}
+.chk{display:flex;flex-direction:column;gap:8px}
+.chk div{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;background:#F6F7FB;border:1px solid #E4E7EC;border-radius:12px;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.chk div b{flex:none;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#fff;border:1px solid #DDE4EE;font:700 11px/1 Inter,system-ui,sans-serif;color:#1A237E}
+.prev{display:flex;gap:14px;flex-wrap:wrap}
+.ph{width:250px;border-radius:16px;overflow:hidden;border:1px solid #DDE4EE}
+.ph .bar{height:54px;display:flex;align-items:center;gap:9px;padding:0 13px;color:#fff;font:800 13px/19px 'Noto Sans Arabic',sans-serif}
+.ph .bd{display:flex;flex-direction:column;gap:8px;padding:13px}
+.ph .c{padding:11px;border-radius:12px;font:600 11.5px/18px 'Noto Sans Arabic',sans-serif}
+.ph .b{height:38px;display:flex;align-items:center;justify-content:center;border-radius:11px;font:700 12px/1 'Noto Sans Arabic',sans-serif}
+.note{padding:13px 15px;border-radius:14px;background:#FFF6E8;border:1px solid #F3D9AE;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#7A4A00}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate}
+</style>
+</helmet>
+
+<div dir="rtl" class="wrap">
+
+<div class="sec">
+<div class="row"><span class="lbl info">08 · Client Branding</span><span class="lbl">دليل تخصيص نسخة العميل</span><span class="lbl bad">ليست واجهة تبديل عملاء</span><span class="lbl ok">عميل واحد لكل نشر</span></div>
+<h1 class="sh">تخصيص نسخة العميل<small>MASTER SOURCE + CLIENT CONFIGURATION · ONE TENANT PER DEPLOYMENT</small></h1>
+<p class="p">هذه الصفحة تشرح كيف تُبنى نسخة عميل جديدة من نفس الكود: تهيئة وأصول وبيئة وقاعدة بيانات ونشر مستقل. لا شاشة مكرّرة، ولا فرع كود، ولا مُبدِّل عملاء في وقت التشغيل.</p>
+</div>
+
+<div class="sec">
+<h2 class="sh">سلسلة النشر<small>DEPLOYMENT CHAIN</small></h2>
+<div class="panel">
+<div class="tree">
+<sc-for list="{{ chain }}" as="r" hint-placeholder-count="7">
+<span>{{ r }}</span>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">حقول التخصيص<small>CONFIGURATION FIELDS — نفس الأسماء في الويب و Flutter</small></h2>
+<div class="panel">
+<table>
+<tr><th>الحقل</th><th>المفتاح</th><th>الإلزام</th><th>أثره في الواجهة</th></tr>
+<sc-for list="{{ fields }}" as="r" hint-placeholder-count="18">
+<tr><td><b>{{ r.k }}</b></td><td class="m">{{ r.key }}</td><td><span class="{{ r.cls }}">{{ r.req }}</span></td><td>{{ r.eff }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">معاينة فاتح / داكن<small>SAME COMPONENTS · DERIVED DARK</small></h2>
+<div class="panel">
+<div class="prev">
+<div class="ph" style="background:#F6F7FB">
+<div class="bar" style="background:#1A237E">Tenant A — فاتح</div>
+<div class="bd">
+<div class="c" style="background:#fff;border:1px solid #E4E7EC;color:#1F2330">بطاقة على خلفية فاتحة</div>
+<div class="b" style="background:#2962FF;color:#fff">إجراء أساسي</div>
+</div>
+</div>
+<div class="ph" style="background:oklch(0.205 0.055 270.3)">
+<div class="bar" style="background:#1A237E">Tenant A — داكن مشتق</div>
+<div class="bd">
+<div class="c" style="background:oklch(0.245 0.055 270.3);border:1px solid oklch(0.590 0.047 270.3);color:#EFF3FF">بطاقة على Brand Dark</div>
+<div class="b" style="background:#81A9FD;color:oklch(0.205 0.055 270.3)">إجراء أساسي</div>
+</div>
+</div>
+<div class="ph" style="background:#F5FAF9">
+<div class="bar" style="background:#00453C">Tenant B — فاتح</div>
+<div class="bd">
+<div class="c" style="background:#fff;border:1px solid #E4E7EC;color:#1F2330">نفس المكوّنات · هوية أخرى</div>
+<div class="b" style="background:#00796B;color:#fff">إجراء أساسي</div>
+</div>
+</div>
+<div class="ph" style="background:oklch(0.205 0.030 180.5)">
+<div class="bar" style="background:#00453C">Tenant B — داكن مشتق</div>
+<div class="bd">
+<div class="c" style="background:oklch(0.245 0.030 180.5);border:1px solid oklch(0.590 0.047 270.3);color:#EFF3FF">Deep Green لا Navy مستعار</div>
+<div class="b" style="background:#52C0AE;color:oklch(0.205 0.030 180.5)">إجراء أساسي</div>
+</div>
+</div>
+</div>
+<p class="p">سلّم الأسطح الكامل ومعايير القبول في <a href="01 · Foundation.dc.html#np-brand-dark">01 · Foundation — Brand Dark</a>. Tenant A/B/C اختبارات تكافؤ تهيئة فقط — ليست عملاء في وقت التشغيل.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">حالات تهيئة العميل<small>loading · loaded · failed</small></h2>
+<div class="panel">
+<table>
+<tr><th>الحالة</th><th>سلوك التطبيق</th><th>ممنوع</th></tr>
+<sc-for list="{{ states }}" as="r" hint-placeholder-count="3">
+<tr><td><span class="{{ r.cls }}">{{ r.k }}</span></td><td>{{ r.v }}</td><td>{{ r.no }}</td></tr>
+</sc-for>
+</table>
+<div class="note">فشل التهيئة حالة حاجزة للتطبيق: لا رجوع صامت إلى قيَم Nile Petro ولا هوية افتراضية — رسالة واضحة + إعادة محاولة + مسار دعم.</div>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">قائمة تحقق بناء نسخة العميل<small>CLIENT BUILD CHECKLIST</small></h2>
+<div class="panel">
+<div class="chk">
+<sc-for list="{{ checklist }}" as="r" hint-placeholder-count="14">
+<div><b>{{ r.n }}</b><span>{{ r.v }}</span></div>
+</sc-for>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    const REQ = "lbl bad", OPT = "lbl", REC = "lbl wn";
+    return {
+      chain: [
+        "Master Source            (one code base · all clients)",
+        "  ↓ Client Configuration  (tenant manifest: brand · company · theme · features · localization · operationalConfig)",
+        "  ↓ Client Assets         (assets/tenants/{tenantId}/ — logo · logoDark · appIcon)",
+        "  ↓ Client Environment    (domain · endpoints · keys)",
+        "  ↓ Client Database       (isolated per client)",
+        "  ↓ Client Deployment     (resolves exactly ONE tenantId)",
+        "     future SaaS: Login / Domain → resolve tenantId → same chain, same UI"
+      ],
+      fields: [
+        { k: "اسم التطبيق", key: "brand.appName", req: "إلزامي", cls: REQ, eff: "الدخول · الترويسات · الحقوق · اسم الحزمة" },
+        { k: "الاسم المختصر", key: "brand.shortName", req: "إلزامي", cls: REQ, eff: "المساحات الضيقة وأيقونة التطبيق" },
+        { k: "الشعار", key: "brand.logo", req: "إلزامي", cls: REQ, eff: "الدخول · القشرة · التقارير" },
+        { k: "الشعار الداكن", key: "brand.logoDark", req: "موصى به", cls: REC, eff: "الوضع الداكن — بديله لوحة الحماية" },
+        { k: "أيقونة التطبيق", key: "brand.appIcon", req: "إلزامي", cls: REQ, eff: "متاجر التطبيقات وشاشة الجهاز" },
+        { k: "اسم الشركة / القانوني", key: "company.name · company.legalName", req: "إلزامي", cls: REQ, eff: "حول التطبيق · التقارير · المستندات" },
+        { k: "الدعم", key: "company.supportPhone · supportEmail · supportUrl", req: "إلزامي", cls: REQ, eff: "شاشة الدعم ومسارات التعافي من الأخطاء" },
+        { k: "اللون الأساسي", key: "theme.light.primary", req: "إلزامي", cls: REQ, eff: "CTA · النشط · التركيز · المؤشرات" },
+        { k: "اللون العميق", key: "theme.light.deep", req: "إلزامي", cls: REQ, eff: "الترويسات + مصدر اشتقاق الوضع الداكن" },
+        { k: "اللون المساعد", key: "theme.light.accent", req: "موصى به", cls: REC, eff: "الخلفيات الهادئة واللوحات" },
+        { k: "معامل المزج الداكن", key: "theme.dark.brandMix", req: "افتراضي 0.35", cls: OPT, eff: "شدّة حضور الهوية في الأسطح الداكنة" },
+        { k: "الأساسي على الداكن", key: "theme.dark.primary", req: "إلزامي", cls: REQ, eff: "CTA والنشط في الوضع الداكن (A #81A9FD · B #52C0AE)" },
+        { k: "العملة", key: "operationalConfig.currencyCode · currencySymbol · currencyPrecision", req: "إلزامي", cls: REQ, eff: "كل قيمة مالية — لا عملة داخل مكوّن" },
+        { k: "دقة عرض الكميات", key: "operationalConfig.quantityDisplayPrecision", req: "افتراضي 3", cls: OPT, eff: "العرض فقط — دقة التخزين لا تُمَس" },
+        { k: "تسميات الوقود", key: "operationalConfig.fuelTypes", req: "إلزامي", cls: REQ, eff: "المسدسات والخزانات والتوريد — بيانات لا كود" },
+        { k: "الميزات", key: "features.*", req: "إلزامي", cls: REQ, eff: "ميزة معطّلة = لا مدخل UI مطلقاً" },
+        { k: "اللغة والأرقام", key: "localization.defaultLocale · locales · numerals", req: "إلزامي", cls: REQ, eff: "الاتجاه والخط وتنسيق الأرقام" },
+        { k: "النطاق والبيئة", key: "environment.domain · endpoints", req: "إلزامي", cls: REQ, eff: "ربط النسخة بقاعدة بيانات العميل" }
+      ],
+      states: [
+        { k: "loading", cls: "lbl", v: "شاشة تحميل محيّدة الهوية (بلا شعار افتراضي)", no: "استخدام هوية مؤقتة" },
+        { k: "loaded", cls: "lbl ok", v: "الهوية والميزات مطبَّقة قبل أول شاشة منتج", no: "وميض هوية خاطئة" },
+        { k: "failed", cls: "lbl bad", v: "حالة حاجزة: سبب واضح + إعادة محاولة + مسار دعم", no: "رجوع صامت إلى Nile Petro أو متابعة بميزات مفترضة" }
+      ],
+      checklist: [
+        { n: "01", v: "إنشاء tenantId وسجل التهيئة (manifest) للعميل" },
+        { n: "02", v: "رفع الأصول إلى assets/tenants/{tenantId}/ — logo · logoDark · appIcon" },
+        { n: "03", v: "تعبئة brand.appName · shortName والحقوق" },
+        { n: "04", v: "تعبئة company.* بالكامل بما فيها الدعم الثلاثي" },
+        { n: "05", v: "تعبئة theme.light (primary · deep · accent)" },
+        { n: "06", v: "تعبئة theme.dark.primary والتحقق من brandMix = 0.35 (أو قيمة معتمدة)" },
+        { n: "07", v: "فحص تباين الإجراء: إن سقط، يُشتق لون إجراء مقبول ويُسجَّل generated لا override" },
+        { n: "08", v: "تعبئة العملة والدقة وتسميات الوقود" },
+        { n: "09", v: "تفعيل/تعطيل الميزات وتأكيد اختفاء مداخل UI للمعطّل" },
+        { n: "10", v: "ضبط اللغة والأرقام والاتجاه" },
+        { n: "11", v: "ربط النطاق والبيئة وقاعدة بيانات العميل" },
+        { n: "12", v: "تشغيل تكافؤ التهيئة: فاتح · داكن · RTL · LTR على شاشة دخول + رئيسية + جدول" },
+        { n: "13", v: "التحقق من الأسماء الطويلة: اسم تطبيق طويل · شركة طويلة · بريد دعم طويل بلا انكسار" },
+        { n: "14", v: "تأكيد صفري القيَم الثابتة: لا اسم علامة/شركة/محطة/عملة/وقود داخل أي مكوّن" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

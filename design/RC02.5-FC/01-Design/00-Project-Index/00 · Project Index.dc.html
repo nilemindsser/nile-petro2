@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+h1,h2,h3{margin:0}
+.wrap{padding:36px 40px 80px;display:flex;flex-direction:column;gap:32px;max-width:1360px}
+.sec{display:flex;flex-direction:column;gap:12px}
+.sh{font:800 20px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.sh small{display:block;font:600 11.5px/17px Inter,system-ui,sans-serif;color:#90A4AE;letter-spacing:.04em}
+.p{font:400 13.5px/22px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:900px;text-wrap:pretty}
+.panel{display:flex;flex-direction:column;gap:11px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.lbl{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#37474F;white-space:nowrap}
+.lbl.ok{background:#E8F5EC;border-color:#BEDFC9;color:#0B6B3A}
+.lbl.wn{background:#FFF6E8;border-color:#F3D9AE;color:#7A4A00}
+.lbl.info{background:#E8F4FD;border-color:#BEDCF2;color:#01579B}
+.nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.card{display:flex;flex-direction:column;gap:6px;padding:15px 16px;background:#fff;border:1px solid #DDE4EE;border-radius:16px}
+.card a{font:800 14.5px/21px 'Noto Sans Arabic',sans-serif}
+.card span{font:400 12px/19px 'Noto Sans Arabic',sans-serif;color:#455A64}
+.card i{font-style:normal;font:600 10.5px/15px Inter,system-ui,sans-serif;color:#90A4AE;direction:ltr}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:start;vertical-align:top;padding:8px 10px;border-bottom:1px solid #EEF1F6;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+th{font-weight:700;color:#455A64;background:#F6F7FB;white-space:nowrap}
+.tree{display:flex;flex-direction:column;gap:5px;overflow-x:auto;font:500 12px/19px Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;color:#1F2330}
+.tree span{white-space:pre}
+.note{padding:13px 15px;border-radius:14px;background:#FFF6E8;border:1px solid #F3D9AE;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#7A4A00}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate}
+</style>
+</helmet>
+
+<div dir="rtl" class="wrap">
+
+<div class="sec">
+<div class="row"><span class="lbl info">00 · Project Index</span><span class="lbl ok">نقطة البداية اليومية الوحيدة</span><span class="lbl">NP-CLEANUP-01 · Phase 3 منفَّذة</span></div>
+<h1 class="sh">Nile Petro App — فهرس المشروع<small>SINGLE-TENANT WHITE-LABEL DEPLOYMENT · SaaS-READY CORE</small></h1>
+<p class="p">من هذه الصفحة تبدأ كل جلسة. لا تقارير كاملة هنا — روابط ومصادر حقيقة وحالة وقرارات مفتوحة فقط. النشر الحالي يحلّ <span class="mono">tenantId</span> واحداً؛ لا مُبدِّل عملاء ولا واجهة متعددة العملاء في وقت التشغيل، مع بقاء العقود جاهزة لـ SaaS.</p>
+</div>
+
+<div class="sec">
+<h2 class="sh">الصفحات القانونية</h2>
+<div class="nav">
+<sc-for list="{{ pages }}" as="p" hint-placeholder-count="14">
+<div class="card"><a href="{{ p.href }}">{{ p.t }}</a><span>{{ p.d }}</span><i>{{ p.meta }}</i></div>
+</sc-for>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">الحالة ومصادر الحقيقة<small>SOURCE OF TRUTH</small></h2>
+<div class="panel">
+<table>
+<tr><th>المجال</th><th>مصدر الحقيقة</th><th>الحالة</th></tr>
+<sc-for list="{{ status }}" as="r" hint-placeholder-count="10">
+<tr><td>{{ r.k }}</td><td class="mono" style="font-size:11.5px">{{ r.src }}</td><td><span class="{{ r.cls }}">{{ r.v }}</span></td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">آخر أحكام المعمارية<small>LAST APPROVED RULINGS</small></h2>
+<div class="panel">
+<div class="tree">
+<sc-for list="{{ rulings }}" as="r" hint-placeholder-count="6">
+<span>{{ r }}</span>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">قرارات المالك المفتوحة<small>OPEN DECISIONS — المصدر الوحيد لنصّها الكامل</small></h2>
+<div class="panel">
+<sc-for list="{{ decisions }}" as="r" hint-placeholder-count="8">
+<div class="note"><b>{{ r.k }}</b> — {{ r.v }}</div>
+</sc-for>
+<p class="p">لا يُعاد نصّ هذه القرارات في صفحات أخرى؛ صفحة <a href="12 · QA and Final Audit.dc.html">12 · QA</a> تشير إليها فقط.</p>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1360,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      pages: [
+        { t: "01 · Foundation", href: "01 · Foundation.dc.html", d: "Tokens · الطباعة · الألوان · Light · Brand Dark · المسافات · الأنصاف · الارتفاع · الشبكة · الاستجابة · RTL/LTR · الإتاحة · الحركة · الكثافة", meta: "356 tokens · sources: mobile · Brand Dark" },
+        { t: "02 · Components", href: "02 · Components.dc.html", d: "السجل القانوني بالمجموعات + مجموعة القوالب + طابور مراجعة العقود", meta: "65 production · 2 QA scaffolding" },
+        { t: "03 · Icons & Assets", href: "03 · Icons and Assets.dc.html", d: "سجل الأيقونات الوظيفية وقواعد الانعكاس وأصول العلامة وفتحات أصول العميل", meta: "54 ids · 8 mirrored" },
+        { t: "04 · Web Console", href: "04 · Web Console.dc.html", d: "لوحة الويب + فهرس المسارات القانوني", meta: "16 routes + 4 drawers/modals" },
+        { t: "05 · Worker App", href: "05 · Worker App.dc.html", d: "تطبيق العامل منظَّماً بالنطاق: وردية · قراءات · مصروفات · توريدات · تنبيهات · تصحيحات · مزامنة · حسابي", meta: "54 frames · 3 sources" },
+        { t: "06 · Manager App", href: "06 · Manager App.dc.html", d: "تطبيق المدير: مركز المحطة · التعيين · الورديات · الموافقات · المخزون · التقارير · الأجهزة", meta: "98 frames · one canonical source" },
+        { t: "07 · Authentication", href: "07 · Authentication.dc.html", d: "دخول الويب والعامل والمدير · OTP · رمز وصول · بصمة · Passkeys · جلسات · كلمة المرور", meta: "4 variants · policy conflicts flagged" },
+        { t: "08 · Client Branding", href: "08 · Client Branding.dc.html", d: "دليل تخصيص نسخة العميل: الهوية · الدعم · العملة · الوقود · الميزات + قائمة تحقق البناء", meta: "no runtime switching" },
+        { t: "09 · States & Responsive", href: "09 · States and Responsive.dc.html", d: "الحالات العامة الثلاثة عشر + مراجع القياسات للجوال والويب", meta: "13 states · 4+5 breakpoints" },
+        { t: "10 · Prototype Flows", href: "10 · Prototype Flows.dc.html", d: "المسارات من الطرف إلى الطرف — بلا تكرار مخططات", meta: "13 flows · dead ends 0" },
+        { t: "11 · Flutter Handoff", href: "11 · Flutter Handoff.dc.html", d: "خرائط Tokens والمكوّنات والمسارات + السجلات والعقود وفجوات التعيين", meta: "handoff only — no code" },
+        { t: "12 · QA & Final Audit", href: "12 · QA and Final Audit.dc.html", d: "التدقيق الحالي: القيَم الثابتة · التكرار · المسارات · الإتاحة · الاستجابة · الوضعان · تكافؤ التهيئة", meta: "PASS / BLOCKED / UNVERIFIED" },
+        { t: "99 · Archive", href: "99 · Archive.dc.html", d: "الوثائق التاريخية وأوامر العمل السابقة — قابلة للقراءة، ليست مصدر حقيقة", meta: "13 archived items" },
+        { t: "Canonical Manifest (.md)", href: "Nile-Petro-App-Canonical-Manifest.md", d: "سجل الإصدارات والقرارات المعتمدة للأساس والمكوّنات", meta: "reference source" }
+      ],
+      status: [
+        { k: "نموذج المعمارية", src: "Single-Tenant White-Label Deployment · SaaS-Ready Core", v: "APPROVED", cls: "lbl ok" },
+        { k: "الأساس (Foundation)", src: "np-tokens.css · np-system.css · 01 · Foundation", v: "FROZEN · 356 tokens", cls: "lbl ok" },
+        { k: "الويب", src: "04 · Web Console", v: "DESIGN COMPLETE", cls: "lbl ok" },
+        { k: "تطبيق العامل", src: "05 · Worker App", v: "DESIGN COMPLETE", cls: "lbl ok" },
+        { k: "تطبيق المدير", src: "06 · Manager App", v: "DESIGN COMPLETE", cls: "lbl ok" },
+        { k: "المصادقة", src: "07 · Authentication", v: "تعارضات سياسة مفتوحة", cls: "lbl wn" },
+        { k: "العلامة البيضاء", src: "08 · Client Branding", v: "APPROVED · 0 قيمة عميل في مكوّن", cls: "lbl ok" },
+        { k: "الوضع الداكن", src: "01 · Foundation — Brand Dark", v: "CC-015 CLOSED · Brand-tinted", cls: "lbl ok" },
+        { k: "التنظيف", src: "99 · Archive — NP-CLEANUP-01", v: "Phase 3/4 منفَّذة", cls: "lbl ok" },
+        { k: "جاهزية Flutter", src: "11 · Flutter Handoff", v: "تُقرَّر في المراجعة الرئيسية — لا هنا", cls: "lbl wn" }
+      ],
+      rulings: [
+        "NP-DARK-01 · CC-015 ......... Brand-tinted dark derived from tenant deep · black surfaces 0",
+        "ARCHITECTURE CORRECTION ..... tenantId stays in domain contracts · no runtime tenant switching",
+        "NP-WO-CD-09 ................. cross-app QA · final design gate PASS at design level",
+        "NP-CLEANUP-01 Phase 1/2 ..... inventory + migration map APPROVED",
+        "NP-CLEANUP-01 Phase 3 ....... NPSurfaceA/B = QA scaffolding · 16 unused components KEEP",
+        "                              promotions DEFERRED · overlaps NOT merged · typography unchanged"
+      ],
+      decisions: [
+        { k: "canRecordExpense يتطلب وردية نشطة", v: "التصميم يفترض «نعم»؛ القاعدة تنتظر قرارك." },
+        { k: "مسودة مصروف محلية بلا وردية نشطة", v: "هل تُسمح وتُربط لاحقاً بالوردية؟ يمسّ عقد الانقطاع." },
+        { k: "تسجيل الخروج مع مزامنة معلّقة", v: "تحذير أم منع صلب؟" },
+        { k: "سياسة الأجهزة الافتراضية revoke_then_wipe", v: "العقد قابل للتهيئة؛ القيمة الافتراضية قرار أمني." },
+        { k: "تعارضات سياسة المصادقة", v: "عقود معتمدة متعارضة بين وثيقتين — لم تُحسم في التنظيف." },
+        { k: "سياسة إعادة المحاولة / Idempotency للمزامنة", v: "مغلقة — P3: idempotencyKey لكل عملية مُطابَرة · تراجع أسي مع jitter · الخادم مرجع." },
+        { k: "الطباعة ('Noto Sans Arabic' · Inter · Inter · Noto Sans Arabic)", v: "لا تطبيع بالتخمين — يحتاج قرار علامة." },
+        { k: "ترقية المكوّنات المرشّحة + تسمية NPStatusChip/Badge + إعادة تسمية أسطح المراجعة", v: "مؤجّلة إلى أمر عمل توحيد المكوّنات قبل Flutter." }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

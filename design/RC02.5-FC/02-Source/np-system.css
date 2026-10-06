@@ -1,0 +1,1121 @@
+/* ==========================================================================
+   NILE PETRO APP — SHARED SYSTEM RULES
+   Structure, component chrome, patterns, responsive + container behaviour.
+   NO literal brand or size values. Everything resolves through np-tokens.css.
+   Logical properties only — one rule set serves RTL and LTR.
+   ========================================================================== */
+
+/* ==========================================================================
+   0. BASE
+   ========================================================================== */
+.np-root { font-family: var(--np-font-ui); color: var(--np-text-primary); background: var(--np-canvas); }
+.np-display { font-family: var(--np-font-display); font-size: var(--np-type-display-size); line-height: var(--np-type-display-line); font-weight: var(--np-type-display-weight); margin: 0; }
+.np-h1 { font-size: var(--np-type-h1-size); line-height: var(--np-type-h1-line); font-weight: var(--np-type-h1-weight); margin: 0; }
+.np-h2 { font-size: var(--np-type-h2-size); line-height: var(--np-type-h2-line); font-weight: var(--np-type-h2-weight); margin: 0; }
+.np-h3 { font-size: var(--np-type-h3-size); line-height: var(--np-type-h3-line); font-weight: var(--np-type-h3-weight); margin: 0; }
+.np-body { font-size: var(--np-type-body-size); line-height: var(--np-type-body-line); font-weight: var(--np-type-body-weight); }
+.np-label { font-size: var(--np-type-label-size); line-height: var(--np-type-label-line); font-weight: var(--np-type-label-weight); }
+.np-caption { font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line); color: var(--np-text-secondary); }
+.np-kpi { font-size: var(--np-type-kpi-size); line-height: var(--np-type-kpi-line); font-weight: var(--np-type-kpi-weight); }
+
+/* Numeric treatment — financial figures, meter readings, IDs, dates,
+   times and technical values. Always LTR-isolated inside Arabic UI. */
+.np-num {
+  font-family: var(--np-numeric-family);
+  font-variant-numeric: var(--np-numeric-variant);
+  font-feature-settings: var(--np-numeric-feature);
+  letter-spacing: var(--np-numeric-tracking);
+  direction: var(--np-numeric-direction);
+  unicode-bidi: isolate;
+}
+.np-kpi.np-num, .np-num.np-kpi { font-weight: var(--np-type-kpi-weight); }
+
+/* Icon mirroring — driven by registry metadata, never by forked components.
+   :dir() resolves the element's real direction, so an RTL surface nested in
+   an LTR wrapper (and vice-versa) still mirrors correctly. */
+/* The legacy [dir=] fallback is gated so modern engines use :dir() alone —
+   otherwise the descendant fallback (0,2,1) outranks the reset (0,1,1) and a
+   nested dir="ltr" subtree inherits the RTL mirror. CC-004 fix. */
+@supports not selector(:dir(rtl)) {
+  [dir="rtl"] np-icon[data-mirror="true"] { transform: scaleX(-1); }
+  [dir="ltr"] np-icon[data-mirror="true"] { transform: none; }
+}
+@supports selector(:dir(rtl)) {
+  np-icon[data-mirror="true"] { transform: none; }
+  np-icon[data-mirror="true"]:dir(rtl) { transform: scaleX(-1); }
+}
+
+/* Focus */
+.np-focusable:focus-visible,
+.np-btn:focus-visible, .np-input:focus-visible, .np-tab:focus-visible,
+.np-nav-item:focus-visible, .np-menu__item:focus-visible, .np-table__row:focus-visible {
+  outline: var(--np-focus-width) solid var(--np-focus-ring);
+  outline-offset: var(--np-focus-offset);
+}
+
+/* ==========================================================================
+   1. BUTTON  (canonical: NPButton.dc.html)
+   ========================================================================== */
+.np-btn {
+  box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--np-button-gap); height: var(--np-button-h); padding-inline: var(--np-button-px);
+  border-radius: var(--np-button-radius); border: 1px solid transparent;
+  font-family: var(--np-font-ui); font-size: var(--np-button-font-size);
+  line-height: var(--np-type-body-line); font-weight: var(--np-button-font-weight);
+  cursor: pointer; white-space: nowrap;
+  transition: background-color var(--np-motion-fast) var(--np-ease), border-color var(--np-motion-fast) var(--np-ease);
+}
+.np-btn--primary { background: var(--np-action-primary); color: var(--np-action-primary-ink); }
+.np-btn--primary:hover { background: var(--np-action-primary-hover); }
+.np-btn--primary:active { background: var(--np-action-primary-active); }
+.np-btn--secondary { background: var(--np-action-secondary-bg); color: var(--np-action-secondary-ink); border-color: var(--np-border-strong); }
+.np-btn--secondary:hover { background: var(--np-surface-subtle); }
+.np-btn--ghost { background: transparent; color: var(--np-action-ghost-ink); }
+.np-btn--ghost:hover { background: var(--np-surface-subtle); }
+.np-btn--destructive { background: var(--np-action-destructive); color: var(--np-action-destructive-ink); }
+.np-btn--destructive:hover { background: color-mix(in srgb, var(--np-action-destructive) 86%, var(--np-color-ink)); }
+.np-btn--worker { height: var(--np-action-worker-h); font-size: var(--np-type-h3-size); }
+.np-btn--block { width: 100%; }
+.np-btn[disabled], .np-btn[aria-disabled="true"] { color: var(--np-action-disabled-ink); background: var(--np-surface-subtle); border-color: var(--np-border); cursor: not-allowed; box-shadow: none; }
+.np-btn__spinner { width: var(--np-icon-sm); height: var(--np-icon-sm); border-radius: var(--np-radius-full); border: 2px solid currentColor; border-block-start-color: transparent; animation: np-spin .8s linear infinite; }
+@keyframes np-spin { to { transform: rotate(360deg); } }
+
+/* ICON BUTTON (canonical: NPIconButton.dc.html) */
+.np-iconbtn {
+  box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
+  width: var(--np-iconbutton-size); height: var(--np-iconbutton-size);
+  border-radius: var(--np-iconbutton-radius); border: 1px solid var(--np-border);
+  background: var(--np-surface); color: var(--np-text-secondary); cursor: pointer; position: relative;
+  transition: background-color var(--np-motion-fast) var(--np-ease);
+}
+.np-iconbtn:hover { background: var(--np-surface-subtle); color: var(--np-text-primary); }
+.np-iconbtn--accent { color: var(--np-action-primary); }
+.np-iconbtn--destructive { color: var(--np-action-destructive); border-color: var(--np-danger-border); }
+.np-iconbtn--bare { border-color: transparent; background: transparent; }
+.np-iconbtn[disabled] { color: var(--np-action-disabled-ink); cursor: not-allowed; }
+.np-iconbtn__dot { position: absolute; inset-block-start: var(--np-dot-size); inset-inline-end: var(--np-dot-size); width: var(--np-dot-size); height: var(--np-dot-size); border-radius: var(--np-radius-full); background: var(--np-danger); border: var(--np-dot-ring) solid var(--np-surface); }
+
+/* ==========================================================================
+   2. INPUT / SELECT / FIELD
+   ========================================================================== */
+.np-field { display: flex; flex-direction: column; gap: var(--np-space-2); }
+.np-field__l { font-size: var(--np-type-label-size); line-height: var(--np-type-label-line); font-weight: var(--np-type-label-weight); }
+.np-field__help { font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-field__err { font-size: var(--np-type-caption-size); color: var(--np-danger-ink); }
+.np-input {
+  box-sizing: border-box; height: var(--np-input-h); width: 100%;
+  border: 1px solid var(--np-input-border); border-radius: var(--np-input-radius);
+  background: var(--np-surface); padding-inline: var(--np-input-px);
+  font-family: var(--np-font-ui); font-size: var(--np-type-body-size); color: var(--np-text-primary);
+}
+.np-input::placeholder { color: var(--np-text-disabled); }
+.np-input--error { border-color: var(--np-danger); }
+.np-input--readonly { background: var(--np-surface-subtle); color: var(--np-text-secondary); }
+.np-input[disabled] { background: var(--np-surface-subtle); color: var(--np-text-disabled); cursor: not-allowed; }
+
+/* ==========================================================================
+   3. APP SHELL  (canonical: NPAppShell.dc.html)
+   ========================================================================== */
+.np-surface-root {
+  container-type: inline-size; container-name: npsurface;
+  background: var(--np-canvas); font-family: var(--np-font-ui); color: var(--np-text-primary);
+  height: 100%; overflow: hidden;
+}
+.np-shell { display: flex; height: 100%; min-height: 0; }
+.np-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.np-content { flex: 1; min-height: 0; overflow: auto; padding: var(--np-space-6); display: flex; flex-direction: column; gap: var(--np-space-4); }
+
+/* SIDEBAR (canonical: NPSidebar.dc.html) */
+/* SIDEBAR (canonical: NPSidebar.dc.html) */
+/* CC-010 · W-4 — a flex item's automatic minimum size let the sidebar grow
+   past the shell height, so its nav could never reach its own overflow and
+   the rows became unreachable. min-height:0 caps the column; the nav is the
+   only scrolling region, and it scrolls WITHOUT a visible scrollbar. */
+.np-sidebar {
+  box-sizing: border-box; width: var(--np-sidebar-w); flex: none;
+  min-height: 0; height: 100%; position: relative;
+  background: var(--np-nav-bg); color: var(--np-nav-ink);
+  display: flex; flex-direction: column; font-family: var(--np-font-ui);
+}
+.np-sidebar__brand { display: flex; align-items: center; gap: var(--np-space-3); padding: var(--np-space-4); }
+.np-sidebar__name { font-size: var(--np-type-body-size); font-weight: var(--np-weight-bold); color: var(--np-nav-ink-active); }
+.np-sidebar__sub { font-size: var(--np-type-caption-size); color: var(--np-nav-ink); }
+.np-sidebar__rule { height: 1px; background: var(--np-nav-rule); margin-block: 0 var(--np-space-2); margin-inline: var(--np-space-4); }
+.np-sidebar__nav { display: flex; flex-direction: column; gap: 2px; padding-inline: var(--np-space-2); flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; -ms-overflow-style: none; }
+.np-sidebar__nav::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+/* CC-010 · W-5 — consumer-owned collapse control. Opt-in (`collapsible`):
+   a capsule seated in the sidebar's inline edge, arrow only, revealed on
+   sidebar hover or keyboard focus, 22×54 with a 44-high hit area. */
+.np-sidebar__collapse {
+  position: absolute; inset-inline-end: 0; inset-block-start: 50%;
+  transform: translateY(-50%);
+  width: 18px; height: 54px; padding: 0; border: 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 0;
+  background: var(--np-action-primary); color: var(--np-action-primary-ink);
+  box-shadow: var(--np-elevation-2);
+  z-index: var(--np-z-sticky);
+  opacity: 0;
+  transition: opacity var(--np-motion-fast) var(--np-ease), width var(--np-motion-fast) var(--np-ease), background var(--np-motion-fast) var(--np-ease);
+}
+/* The control is always clickable — only its ink is revealed on hover/focus,
+   so the pointer never has to "find" it through a nav row. The nav keeps an
+   inline-end gutter so no row content sits underneath it. */
+.np-sidebar:has(.np-sidebar__collapse) .np-sidebar__nav { padding-inline-end: 24px; }
+.np-sidebar:hover .np-sidebar__collapse,
+.np-sidebar__collapse:focus-visible { opacity: 1; }
+.np-sidebar:hover .np-sidebar__collapse:hover { width: 22px; background: var(--np-action-primary-hover); }
+.np-sidebar__collapse::after {
+  content: ""; position: absolute; inset-block: -12px; inset-inline: -11px;
+}
+/* Explicit collapse forces the rail state at any container width; an
+   explicitly EXPANDED collapsible sidebar keeps its full width above the
+   compact breakpoint, so the control visibly works at every desk size. */
+.np-sidebar[data-collapsed="true"] { width: var(--np-sidebar-rail-w); }
+@container npsurface (min-width: 768px) {
+  .np-sidebar[data-collapsed="false"] { width: var(--np-sidebar-w); }
+  .np-sidebar[data-collapsed="false"] .np-usercard__meta { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+  .np-sidebar[data-collapsed="false"] .np-usercard__meta > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .np-sidebar[data-collapsed="false"] .np-sidebar__label,
+  .np-sidebar[data-collapsed="false"] .np-sidebar__name,
+  .np-sidebar[data-collapsed="false"] .np-sidebar__sub,
+  .np-sidebar[data-collapsed="false"] .np-logo__word { display: block; }
+  .np-sidebar[data-collapsed="false"] .np-sidebar__brand,
+  .np-sidebar[data-collapsed="false"] .np-nav-item,
+  .np-sidebar[data-collapsed="false"] .np-usercard { justify-content: flex-start; padding-inline: var(--np-space-3); }
+}
+.np-sidebar[data-collapsed="true"] .np-sidebar__label,
+.np-sidebar[data-collapsed="true"] .np-sidebar__name,
+.np-sidebar[data-collapsed="true"] .np-sidebar__sub,
+.np-sidebar[data-collapsed="true"] .np-usercard__meta,
+.np-sidebar[data-collapsed="true"] .np-navgroup__label,
+.np-sidebar[data-collapsed="true"] .np-usercard__chev,
+.np-sidebar[data-collapsed="true"] .np-logo__word { display: none; }
+.np-sidebar[data-collapsed="true"] .np-sidebar__brand,
+.np-sidebar[data-collapsed="true"] .np-nav-item,
+.np-sidebar[data-collapsed="true"] .np-usercard { justify-content: center; padding-inline: 0; }
+.np-sidebar[data-collapsed="true"] .np-nav-item[data-active="true"]::before { inset-inline-end: 0; }
+/* RAIL ORGANISATION — in the rail the row is an icon tile: the label is gone,
+   so the row must centre on its icon and the count badge must not push it
+   off-axis. The badge becomes a corner marker on the tile and keeps its
+   digits (C18-2/C18-4 unchanged: the count is still in the row's
+   accessible name). Applies to BOTH rail triggers. */
+.np-sidebar[data-collapsed="true"]:has(.np-sidebar__collapse) .np-sidebar__nav { padding-inline-end: var(--np-space-2); }
+.np-sidebar[data-collapsed="true"] .np-nav-item { position: relative; gap: 0; }
+.np-sidebar[data-collapsed="true"] .np-nav-badge {
+  position: absolute; inset-block-start: 6px; inset-inline-start: 8px;
+  min-width: 18px; height: 18px; padding-inline: 4px;
+  font-size: var(--np-type-caption-size); line-height: 18px;
+}
+@container npsurface (max-width: 1279px) {
+  .np-sidebar:not([data-collapsed="false"]):has(.np-sidebar__collapse) .np-sidebar__nav { padding-inline-end: var(--np-space-2); }
+  .np-sidebar:not([data-collapsed="false"]) .np-nav-item { position: relative; gap: 0; }
+  .np-sidebar:not([data-collapsed="false"]) .np-nav-badge {
+    position: absolute; inset-block-start: 6px; inset-inline-start: 8px;
+    min-width: 18px; height: 18px; padding-inline: 4px;
+    font-size: var(--np-type-caption-size); line-height: 18px;
+  }
+}
+
+/* RAIL PEEK — hovering a collapsed sidebar reveals the row names without
+   moving the workspace: the column keeps the rail's layout width (negative
+   inline-start margin) and paints over the content while hovered. */
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) {
+  width: var(--np-sidebar-w);
+  margin-inline-end: calc(var(--np-sidebar-rail-w) - var(--np-sidebar-w));
+  z-index: var(--np-z-drawer);
+  box-shadow: var(--np-elevation-3);
+}
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-sidebar__label,
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-sidebar__name,
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-sidebar__sub,
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-navgroup__label,
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-usercard__chev,
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-logo__word { display: block; }
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-usercard__meta {
+  display: flex; flex-direction: column; flex: 1; min-width: 0; text-align: start;
+}
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-usercard__meta > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-sidebar__brand,
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-nav-item,
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-usercard { justify-content: flex-start; padding-inline: var(--np-space-3); }
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-nav-item { gap: var(--np-space-3); }
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within) .np-nav-badge {
+  position: static; inset: auto; min-width: 22px; height: 22px;
+  padding-inline: var(--np-space-2); line-height: normal;
+}
+.np-sidebar[data-collapsed="true"]:is(:hover,:focus-within):has(.np-sidebar__collapse) .np-sidebar__nav { padding-inline-end: 24px; }
+.np-nav-item { box-sizing: border-box;
+  position: relative; display: flex; align-items: center; gap: var(--np-space-3);
+  height: var(--np-sidebar-item-h); padding-inline: var(--np-space-3);
+  border-radius: var(--np-sidebar-item-radius);
+  font-size: var(--np-type-label-size); font-weight: var(--np-weight-medium);
+  color: var(--np-nav-ink); cursor: pointer;
+}
+.np-nav-item:hover { background: var(--np-nav-hover-bg); color: var(--np-nav-ink-active); }
+.np-nav-item[data-active="true"] { background: var(--np-nav-active-bg); color: var(--np-nav-ink-active); font-weight: var(--np-weight-bold); }
+.np-nav-item[data-active="true"]::before {
+  content: ""; position: absolute; inset-inline-end: calc(var(--np-space-2) * -1); inset-block-start: var(--np-nav-marker-offset);
+  width: var(--np-nav-marker-w); height: var(--np-nav-marker-h); border-radius: var(--np-radius-full); background: var(--np-nav-marker);
+}
+.np-sidebar__foot { padding-block: var(--np-space-3) var(--np-space-4); padding-inline: var(--np-space-2); }
+.np-usercard { display: flex; align-items: center; gap: var(--np-space-3); height: var(--np-size-action-worker); padding-inline: var(--np-space-3); border-radius: var(--np-radius-md); background: var(--np-nav-hover-bg); }
+/* CC-006: the meta block used an INLINE display:flex, which outranked the
+   rail's display:none and leaked the user name past the 76px rail. The
+   layout now lives here so the rail rule can win. */
+.np-usercard__meta { min-width: 0; display: flex; flex-direction: column; }
+.np-usercard__meta > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.np-avatar { width: var(--np-avatar-size); height: var(--np-avatar-size); flex: none; border-radius: var(--np-radius-full); background: var(--np-action-primary); color: var(--np-text-onbrand); display: flex; align-items: center; justify-content: center; font-size: var(--np-type-label-size); font-weight: var(--np-weight-bold); }
+
+/* TOPBAR (canonical: NPTopbar.dc.html) */
+.np-surface-root, .np-surface-root *, .np-root, .np-root * { box-sizing: border-box; }
+.np-topbar {
+  height: var(--np-topbar-h); flex: none; background: var(--np-topbar-bg);
+  border-block-end: 1px solid var(--np-topbar-border);
+  display: flex; align-items: center; gap: var(--np-space-3); padding-inline: var(--np-space-6);
+}
+.np-topbar__context { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+/* the context can never wrap the bar taller than --np-topbar-h */
+.np-topbar__station, .np-topbar__context .np-caption { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.np-topbar__station { font-size: var(--np-type-body-size); font-weight: var(--np-weight-bold); }
+.np-topbar__menu { display: none; }
+/* CC-006: the brand mark appears in the topbar exactly where the sidebar
+   brand disappears — compact only, same single NPLogo entry point. */
+.np-topbar__brand { display: none; }
+.np-sync { display: inline-flex; align-items: center; gap: var(--np-space-2); height: var(--np-chip-h); padding-inline: var(--np-space-2); border-radius: var(--np-chip-radius); font-size: var(--np-type-caption-size); font-weight: var(--np-weight-semibold); border: 1px solid transparent; }
+.np-sync__dot { width: var(--np-dot-size); height: var(--np-dot-size); border-radius: var(--np-radius-full); background: currentColor; }
+.np-sync--online { background: var(--np-success-soft); color: var(--np-success-ink); border-color: var(--np-success-border); }
+.np-sync--syncing { background: var(--np-warning-soft); color: var(--np-warning-ink); border-color: var(--np-warning-border); }
+.np-sync--offline { background: var(--np-neutral-soft); color: var(--np-neutral-ink); border-color: var(--np-neutral-border); }
+.np-sync--error { background: var(--np-danger-soft); color: var(--np-danger-ink); border-color: var(--np-danger-border); }
+
+/* PAGE HEADER (canonical: NPPageHeader.dc.html) */
+.np-pageheader { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--np-space-4); background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-card-radius); padding: var(--np-space-4) var(--np-space-5); }
+.np-pageheader__crumbs { display: flex; align-items: center; gap: var(--np-space-2); font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-pageheader__actions { display: flex; align-items: center; gap: var(--np-space-2); flex: none; }
+
+/* TOOLBAR (canonical: NPToolbar.dc.html) — single row */
+.np-toolbar { height: var(--np-toolbar-h); flex: none; background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-card-radius); display: flex; align-items: center; gap: var(--np-toolbar-gap); padding-inline: var(--np-toolbar-px); }
+.np-toolbar__spacer { flex: 1; }
+.np-toolbar__overflow { display: none; }
+
+/* ==========================================================================
+   4. CONTENT COMPONENTS
+   ========================================================================== */
+.np-card { background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-card-radius); padding: var(--np-card-pad); display: flex; flex-direction: column; gap: var(--np-space-2); }
+.np-card__k { font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--np-space-4); }
+.np-row { display: flex; gap: var(--np-space-3); align-items: center; flex-wrap: wrap; }
+.np-stack { display: flex; flex-direction: column; gap: var(--np-space-3); }
+
+/* STATUS CHIP */
+.np-chip { display: inline-flex; align-items: center; gap: var(--np-space-1); height: var(--np-chip-h); padding-inline: var(--np-space-2); border-radius: var(--np-chip-radius); font-size: var(--np-type-caption-size); font-weight: var(--np-weight-semibold); border: 1px solid transparent; }
+.np-chip--success { background: var(--np-success-soft); color: var(--np-success-ink); border-color: var(--np-success-border); }
+.np-chip--warning { background: var(--np-warning-soft); color: var(--np-warning-ink); border-color: var(--np-warning-border); }
+.np-chip--danger  { background: var(--np-danger-soft);  color: var(--np-danger-ink);  border-color: var(--np-danger-border); }
+.np-chip--info    { background: var(--np-info-soft);    color: var(--np-info-ink);    border-color: var(--np-info-border); }
+.np-chip--neutral { background: var(--np-neutral-soft); color: var(--np-neutral-ink); border-color: var(--np-neutral-border); }
+
+/* TABLE */
+.np-table { width: 100%; border-collapse: collapse; background: var(--np-surface); font-size: var(--np-type-body-size); }
+.np-table__wrap { border: 1px solid var(--np-border); border-radius: var(--np-card-radius); overflow: hidden; }
+.np-table th { text-align: start; background: var(--np-table-head-bg); color: var(--np-text-secondary); font-size: var(--np-type-label-size); font-weight: var(--np-type-label-weight); height: var(--np-control-h); padding-inline: var(--np-space-4); border-block-end: 1px solid var(--np-border); white-space: nowrap; }
+.np-table td { height: var(--np-table-row-h); padding-inline: var(--np-space-4); border-block-end: 1px solid var(--np-border); }
+.np-table__row:hover td { background: var(--np-surface-subtle); }
+.np-table__row[data-selected="true"] td { background: color-mix(in srgb, var(--np-action-primary) 8%, var(--np-surface)); }
+.np-table tr:last-child td { border-block-end: none; }
+
+/* PAGINATION */
+.np-pager { display: flex; align-items: center; gap: var(--np-space-2); height: var(--np-control-h); }
+.np-pager__page { box-sizing: border-box; min-width: var(--np-control-h); height: var(--np-control-h); display: inline-flex; align-items: center; justify-content: center; border-radius: var(--np-radius-sm); border: 1px solid var(--np-border); background: var(--np-surface); font-size: var(--np-type-label-size); cursor: pointer; }
+.np-pager__page[data-current="true"] { background: var(--np-action-primary); color: var(--np-action-primary-ink); border-color: var(--np-action-primary); }
+
+/* TABS — CC-001. Line tabs are the default; segmented is the only secondary variant. */
+.np-tabs { display: flex; align-items: stretch; gap: var(--np-tabs-gap); height: var(--np-tabs-h); border-block-end: 1px solid var(--np-border); overflow-x: auto; overflow-y: hidden; scrollbar-width: none; scroll-snap-type: inline proximity; }
+.np-tabs::-webkit-scrollbar { display: none; }
+.np-tab { position: relative; display: inline-flex; align-items: center; gap: var(--np-space-2); height: 100%; padding-inline: var(--np-tabs-px); border: 0; background: transparent; font-family: var(--np-font-ui); font-size: var(--np-type-label-size); font-weight: var(--np-weight-medium); color: var(--np-text-secondary); cursor: pointer; white-space: nowrap; scroll-snap-align: center; transition: color var(--np-motion-fast) var(--np-ease); }
+.np-tab::after { content: ""; position: absolute; inset-inline: 0; inset-block-end: 0; height: var(--np-tabs-indicator); background: transparent; border-start-start-radius: var(--np-radius-full); border-start-end-radius: var(--np-radius-full); }
+.np-tab:hover { color: var(--np-text-primary); }
+.np-tab:hover::after { background: var(--np-border-strong); }
+.np-tab:active { color: var(--np-action-primary-active); }
+.np-tab[aria-selected="true"] { color: var(--np-text-primary); font-weight: var(--np-weight-semibold); }
+.np-tab[aria-selected="true"]::after { background: var(--np-action-primary); }
+.np-tab[aria-disabled="true"], .np-tab:disabled { color: var(--np-text-disabled); cursor: not-allowed; }
+.np-tab[aria-disabled="true"]:hover::after, .np-tab:disabled:hover::after { background: transparent; }
+.np-tab__count { display: inline-flex; align-items: center; justify-content: center; min-width: var(--np-tabs-count-size); height: var(--np-tabs-count-size); padding-inline: var(--np-space-1); border-radius: var(--np-radius-full); background: var(--np-surface-subtle); color: var(--np-text-secondary); font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant); font-size: var(--np-type-caption-size); font-weight: var(--np-weight-medium); direction: ltr; unicode-bidi: isolate; }
+.np-tab[aria-selected="true"] .np-tab__count { background: color-mix(in srgb, var(--np-action-primary) 10%, var(--np-surface)); color: var(--np-action-primary); }
+/* segmented — genuine 2–3 option mode switches only */
+.np-tabs--segmented { box-sizing: border-box; display: inline-flex; align-items: stretch; height: var(--np-segmented-h); gap: var(--np-space-1); padding: var(--np-space-1); border: 1px solid var(--np-border); border-radius: var(--np-segmented-radius); background: var(--np-segmented-bg); overflow: visible; }
+.np-tabs--segmented .np-tab { justify-content: center; padding-inline: var(--np-space-4); border-radius: var(--np-radius-sm); }
+.np-tabs--segmented .np-tab::after { display: none; }
+.np-tabs--segmented .np-tab:hover { background: color-mix(in srgb, var(--np-color-white) 55%, transparent); }
+.np-tabs--segmented .np-tab[aria-selected="true"] { background: var(--np-surface-raised); color: var(--np-text-primary); box-shadow: var(--np-elevation-1); }
+
+/* MENU / DROPDOWN — CC-001 compact enterprise popover */
+.np-menu { display: flex; flex-direction: column; min-width: var(--np-menu-w-min); max-width: var(--np-menu-w-max); padding: var(--np-menu-pad); background: var(--np-surface-raised); border: 1px solid var(--np-border); border-radius: var(--np-menu-radius); box-shadow: var(--np-menu-elevation); }
+.np-menu__label { padding: var(--np-space-2) var(--np-space-3) var(--np-space-1); font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line); font-weight: var(--np-weight-semibold); color: var(--np-text-secondary); }
+.np-menu__item { box-sizing: border-box; display: flex; align-items: center; gap: var(--np-space-3); width: 100%; height: var(--np-menu-row-h); padding-inline: var(--np-space-3); border: 0; background: transparent; border-radius: var(--np-radius-sm); font-family: var(--np-font-ui); font-size: var(--np-type-body-size); color: var(--np-text-primary); text-align: start; cursor: pointer; transition: background var(--np-motion-fast) var(--np-ease); }
+.np-menu__item > np-icon { flex: none; color: var(--np-text-secondary); }
+.np-menu__text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.np-menu__meta, .np-menu__shortcut { flex: none; color: var(--np-text-secondary); font-size: var(--np-type-caption-size); }
+.np-menu__shortcut { font-family: var(--np-family-latin); direction: ltr; unicode-bidi: isolate; }
+.np-menu__item:hover { background: var(--np-surface-subtle); }
+.np-menu__item:active { background: color-mix(in srgb, var(--np-color-sky) 65%, var(--np-color-white)); }
+.np-menu__item[data-selected="true"] { background: color-mix(in srgb, var(--np-action-primary) 8%, var(--np-surface)); font-weight: var(--np-weight-semibold); }
+.np-menu__item[data-selected="true"] > np-icon { color: var(--np-action-primary); }
+.np-menu__item[aria-disabled="true"], .np-menu__item:disabled { color: var(--np-text-disabled); cursor: not-allowed; }
+.np-menu__item[aria-disabled="true"] > np-icon, .np-menu__item:disabled > np-icon { color: var(--np-text-disabled); }
+.np-menu__item[aria-disabled="true"]:hover, .np-menu__item:disabled:hover { background: transparent; }
+.np-menu__item--destructive, .np-menu__item--destructive > np-icon { color: var(--np-danger-ink); }
+.np-menu__item--destructive:hover { background: var(--np-danger-soft); }
+.np-menu__sep { height: 1px; background: var(--np-border); margin-block: var(--np-space-1); }
+
+/* SELECT / DATE FIELD (canonical: NPSelect.dc.html · NPDatePicker.dc.html) — CC-004 */
+.np-select, .np-datefield {
+  box-sizing: border-box; display: flex; align-items: center; gap: var(--np-space-2);
+  width: 100%; height: var(--np-control-h); padding-inline: var(--np-select-px);
+  border: 1px solid var(--np-input-border); border-radius: var(--np-select-radius);
+  background: var(--np-surface); color: var(--np-text-primary);
+  font-family: var(--np-font-ui); font-size: var(--np-type-body-size); cursor: pointer;
+}
+.np-select__value, .np-datefield__value { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.np-select[data-placeholder="true"] .np-select__value, .np-datefield[data-placeholder="true"] .np-datefield__value { color: var(--np-text-secondary); }
+.np-select > np-icon, .np-datefield > np-icon { flex: none; color: var(--np-text-secondary); }
+/* CC-005: the disclosure indicator is the STATIC chevron-down; the open state
+   rotates the SAME icon rather than introducing a second asset. */
+.np-select[aria-expanded="true"] > np-icon { transform: rotate(180deg); }
+.np-select:hover, .np-datefield:hover { border-color: var(--np-action-primary); }
+.np-select:focus-visible, .np-datefield:focus-visible { outline: var(--np-focus-width) solid var(--np-focus-ring); outline-offset: var(--np-focus-offset); }
+.np-select--error, .np-datefield--error { border-color: var(--np-danger-border); background: var(--np-danger-soft); }
+.np-select[aria-disabled="true"], .np-datefield[aria-disabled="true"] { color: var(--np-text-disabled); background: var(--np-surface-subtle); cursor: not-allowed; }
+.np-select[aria-disabled="true"] > np-icon, .np-datefield[aria-disabled="true"] > np-icon { color: var(--np-text-disabled); }
+.np-select--readonly, .np-datefield--readonly { background: var(--np-surface-subtle); cursor: default; }
+.np-datefield__value { font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant); direction: ltr; unicode-bidi: isolate; }
+
+/* CHOICE CONTROLS (canonical: NPCheckbox.dc.html · NPRadio.dc.html) — CC-004 */
+.np-choice { display: inline-flex; align-items: center; gap: var(--np-space-3); min-height: var(--np-choice-target); padding-inline: var(--np-space-1); cursor: pointer; font-family: var(--np-font-ui); font-size: var(--np-type-body-size); color: var(--np-text-primary); }
+.np-choice__box { box-sizing: border-box; flex: none; display: inline-flex; align-items: center; justify-content: center; width: var(--np-choice-box); height: var(--np-choice-box); border: 1px solid var(--np-choice-border); border-radius: var(--np-choice-radius); background: var(--np-surface); color: var(--np-action-primary-ink); }
+.np-choice--radio .np-choice__box { border-radius: var(--np-radius-full); }
+.np-choice input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.np-choice:hover .np-choice__box { border-color: var(--np-action-primary); }
+.np-choice input:focus-visible + .np-choice__box { outline: var(--np-focus-width) solid var(--np-focus-ring); outline-offset: var(--np-focus-offset); }
+.np-choice[data-state="checked"] .np-choice__box, .np-choice[data-state="indeterminate"] .np-choice__box { background: var(--np-action-primary); border-color: var(--np-action-primary); }
+.np-choice--radio[data-state="checked"] .np-choice__box { background: var(--np-surface); }
+.np-choice--radio[data-state="checked"] .np-choice__box::after { content: ""; width: var(--np-choice-dot); height: var(--np-choice-dot); border-radius: var(--np-radius-full); background: var(--np-action-primary); }
+.np-choice[aria-disabled="true"] { color: var(--np-text-disabled); cursor: not-allowed; }
+.np-choice[aria-disabled="true"] .np-choice__box { background: var(--np-surface-subtle); border-color: var(--np-border); }
+.np-choice--error .np-choice__box { border-color: var(--np-danger-border); }
+.np-choice__bar { width: var(--np-space-3); height: var(--np-nav-marker-w); border-radius: var(--np-radius-full); background: var(--np-action-primary-ink); }
+.np-choicegroup { display: flex; flex-direction: column; gap: var(--np-space-1); }
+
+/* SEARCH */
+.np-search { display: inline-flex; align-items: center; }
+.np-search__field { box-sizing: border-box; display: flex; align-items: center; gap: var(--np-space-2); height: var(--np-control-h); padding-inline: var(--np-space-3); border: 1px solid var(--np-input-border); border-radius: var(--np-input-radius); background: var(--np-surface); min-width: var(--np-search-w-min); }
+.np-search__input { border: 0; outline: 0; background: transparent; flex: 1; min-width: 0; font-family: var(--np-font-ui); font-size: var(--np-type-body-size); color: var(--np-text-primary); }
+
+/* MODAL */
+.np-overlay { position: absolute; inset: 0; background: var(--np-scrim); display: flex; align-items: center; justify-content: center; padding: var(--np-space-6); z-index: var(--np-z-modal); }
+.np-modal { width: var(--np-modal-w); max-width: 100%; background: var(--np-surface-raised); border-radius: var(--np-modal-radius); box-shadow: var(--np-elevation-3); display: flex; flex-direction: column; overflow: hidden; }
+.np-modal__head { display: flex; align-items: flex-start; gap: var(--np-space-3); padding: var(--np-space-5); border-block-end: 1px solid var(--np-border); }
+.np-modal__body { padding: var(--np-space-5); display: flex; flex-direction: column; gap: var(--np-space-4); }
+.np-modal__foot { padding: var(--np-space-4) var(--np-space-5); border-block-start: 1px solid var(--np-border); display: flex; justify-content: flex-end; gap: var(--np-space-2); background: var(--np-surface-subtle); }
+.np-modal--destructive .np-modal__head { background: var(--np-danger-soft); }
+
+/* DRAWER */
+.np-drawer { position: absolute; inset-block: 0; inset-inline-end: 0; width: var(--np-drawer-w); max-width: 100%; background: var(--np-surface-raised); box-shadow: var(--np-elevation-3); display: flex; flex-direction: column; z-index: var(--np-z-drawer); border-start-start-radius: var(--np-drawer-radius); border-end-start-radius: var(--np-drawer-radius); }
+.np-drawer__head { display: flex; align-items: center; gap: var(--np-space-3); padding: var(--np-space-5); border-block-end: 1px solid var(--np-border); }
+.np-drawer__body { flex: 1; min-height: 0; overflow: auto; padding: var(--np-space-5); display: flex; flex-direction: column; gap: var(--np-space-4); }
+.np-drawer__foot { padding: var(--np-space-4) var(--np-space-5); border-block-start: 1px solid var(--np-border); display: flex; justify-content: flex-end; gap: var(--np-space-2); background: var(--np-surface-subtle); }
+
+/* BOTTOM SHEET — CC-001 mobile-native utility surface */
+.np-overlay--sheet { align-items: flex-end; justify-content: stretch; padding: 0; }
+.np-sheet { position: absolute; inset-inline: 0; inset-block-end: 0; display: flex; flex-direction: column; max-inline-size: var(--np-sheet-w-max); margin-inline: auto; max-height: 100%; background: var(--np-surface-raised); border-start-start-radius: var(--np-sheet-radius); border-start-end-radius: var(--np-sheet-radius); box-shadow: var(--np-elevation-3); overflow: hidden; z-index: var(--np-z-drawer); }
+/* fit — compact bottom action list: content height, inset from the screen
+   edges, capped so a short list never reads as a panel. */
+.np-sheet--fit { height: auto; max-height: none; border-radius: var(--np-sheet-radius); inset-inline: var(--np-sheet-inset-inline); inset-block-end: var(--np-sheet-inset-block); width: auto; max-inline-size: calc(var(--np-sheet-w-max) - var(--np-sheet-inset-inline) * 2); }
+.np-sheet--fit.np-sheet--static { inset: auto; width: auto; margin-inline: var(--np-sheet-inset-inline); margin-block-end: var(--np-sheet-inset-block); }
+/* standalone / inline mount: the sheet IS the component — no screen stage */
+.np-sheet--static { position: relative; inset: auto; width: 100%; }
+.np-sheet__stage { display: flex; flex-direction: column; justify-content: flex-end; width: 100%; max-inline-size: var(--np-sheet-w-max); margin-inline: auto; height: 100%; min-height: var(--np-sheet-stage-min); }
+.np-sheet--fit.np-sheet--static { align-self: stretch; }
+/* action row — touch first: 56 visual height, never below 48 */
+.np-sheet__row { flex: none; display: flex; align-items: center; gap: var(--np-space-3); width: 100%; min-height: var(--np-size-control-touch); height: var(--np-sheet-row-h); padding-inline: var(--np-space-2); border: 0; background: transparent; border-radius: var(--np-radius-sm); font-family: var(--np-font-ui); font-size: var(--np-type-body-size); color: var(--np-text-primary); text-align: start; cursor: pointer; transition: background var(--np-motion-fast) var(--np-ease); }
+.np-sheet__row > np-icon { flex: none; color: var(--np-text-secondary); }
+.np-sheet__row:hover { background: var(--np-surface-subtle); }
+.np-sheet__row:active { background: color-mix(in srgb, var(--np-color-sky) 65%, var(--np-color-white)); }
+.np-sheet__row[data-selected="true"] { background: color-mix(in srgb, var(--np-action-primary) 8%, var(--np-surface)); font-weight: var(--np-weight-semibold); }
+.np-sheet__row[data-selected="true"] > np-icon { color: var(--np-action-primary); }
+.np-sheet__row--destructive, .np-sheet__row--destructive > np-icon { color: var(--np-danger-ink); }
+.np-sheet__row--destructive:hover { background: var(--np-danger-soft); }
+.np-sheet__row:focus-visible { outline: var(--np-focus-width) solid var(--np-focus-ring); outline-offset: var(--np-focus-offset); }
+.np-sheet--tall { height: var(--np-sheet-h-tall); }
+.np-sheet--full { height: var(--np-sheet-h-full); }
+.np-sheet__grip, .np-sheet__handle { flex: none; width: var(--np-sheet-handle-w); height: var(--np-sheet-handle-h); border-radius: var(--np-radius-full); background: var(--np-border-strong); align-self: center; margin-block: var(--np-space-3) var(--np-space-1); }
+.np-sheet__head { flex: none; display: flex; align-items: center; gap: var(--np-space-3); padding: var(--np-space-1) var(--np-sheet-pad) var(--np-space-2); }
+/* fit caps the LIST, never the sheet box: a short list never scrolls, and the
+   cap is measured against the mounting surface (cqh) not the browser window. */
+.np-sheet--fit .np-sheet__body { gap: 0; padding-block-end: var(--np-space-2); max-height: var(--np-sheet-fit-body-max); }
+
+.np-sheet__title { flex: 1; min-width: 0; font-size: var(--np-type-h3-size); line-height: var(--np-type-h3-line); font-weight: var(--np-type-h3-weight); color: var(--np-text-primary); }
+.np-sheet__sub { display: block; font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line); font-weight: var(--np-weight-regular); color: var(--np-text-secondary); }
+.np-sheet__body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; gap: var(--np-space-1); padding: 0 var(--np-sheet-pad) var(--np-space-3); }
+.np-sheet__body--pad { gap: var(--np-space-4); padding-block-start: var(--np-space-1); }
+.np-sheet__divider { flex: none; height: 1px; background: var(--np-border); }
+.np-sheet__foot { flex: none; display: flex; align-items: center; gap: var(--np-space-2); padding: var(--np-space-3) var(--np-sheet-pad); padding-block-end: calc(var(--np-space-3) + var(--np-sheet-safe)); border-block-start: 1px solid var(--np-border); background: var(--np-surface-raised); }
+.np-sheet__foot > * { flex: 1; }
+.np-sheet .np-menu__item { height: var(--np-size-control-touch); font-size: var(--np-type-body-size); }
+.np-sheet .np-menu__item > np-icon { color: var(--np-text-secondary); }
+
+/* LOGO — CC-001 identity asset component. Artwork is never redrawn or retyped. */
+.np-logo { display: inline-flex; align-items: center; gap: var(--np-space-3); }
+.np-logo__art { display: block; width: auto; height: var(--np-logo-h-md); object-fit: contain; padding-inline: var(--np-logo-clearspace); }
+.np-logo[data-size="sm"] .np-logo__art { height: var(--np-logo-h-sm); }
+.np-logo[data-size="md"] .np-logo__art { height: var(--np-logo-h-md); }
+.np-logo[data-size="lg"] .np-logo__art { height: var(--np-logo-h-lg); }
+.np-logo__plate { display: inline-flex; align-items: center; justify-content: center; background: var(--np-color-white); border-radius: var(--np-logo-plate-radius); padding: var(--np-space-2); }
+.np-logo__pending { display: inline-flex; align-items: center; gap: var(--np-space-2); height: var(--np-size-navrow-desktop); padding-inline: var(--np-space-3); border: 1px dashed var(--np-border-strong); border-radius: var(--np-radius-md); background: var(--np-surface); color: var(--np-text-secondary); }
+.np-logo__pending span { font-family: var(--np-family-latin); font-size: var(--np-type-caption-size); font-weight: var(--np-weight-semibold); letter-spacing: var(--np-logo-pending-tracking); }
+.np-logo__word { display: inline-flex; flex-direction: column; }
+.np-logo__word b { font-family: var(--np-family-latin); font-size: var(--np-logo-word-size); line-height: var(--np-type-h3-line); font-weight: var(--np-logo-word-weight); letter-spacing: var(--np-logo-word-tracking); color: var(--np-text-primary); }
+.np-logo__word span { font-family: var(--np-family-latin); font-size: var(--np-logo-word-sub-size); line-height: var(--np-type-caption-line); font-weight: var(--np-weight-medium); color: var(--np-text-secondary); }
+.np-logo[data-on-dark="true"] .np-logo__word b { color: var(--np-nav-ink-active); }
+.np-logo[data-on-dark="true"] .np-logo__word span { color: var(--np-nav-ink); }
+.np-logo[data-lockup="symbol"] .np-logo__art { padding-inline: 0; }
+.np-logo__descriptor { font-family: var(--np-font-ui); font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+
+/* TOAST */
+.np-toast { display: flex; align-items: flex-start; gap: var(--np-space-3); min-width: var(--np-toast-w-min); max-width: var(--np-toast-w-max); padding: var(--np-space-3) var(--np-space-4); border-radius: var(--np-toast-radius); background: var(--np-surface-raised); border: 1px solid var(--np-border); box-shadow: var(--np-elevation-2); z-index: var(--np-z-toast); }
+.np-toast--success { border-color: var(--np-success-border); background: var(--np-success-soft); color: var(--np-success-ink); }
+.np-toast--warning { border-color: var(--np-warning-border); background: var(--np-warning-soft); color: var(--np-warning-ink); }
+.np-toast--danger  { border-color: var(--np-danger-border);  background: var(--np-danger-soft);  color: var(--np-danger-ink); }
+.np-toast--info    { border-color: var(--np-info-border);    background: var(--np-info-soft);    color: var(--np-info-ink); }
+
+/* STATE BLOCKS — empty / error / loading */
+.np-state { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--np-space-3); padding: var(--np-space-8) var(--np-space-6); background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-card-radius); }
+.np-state__icon { width: var(--np-size-action-worker); height: var(--np-size-action-worker); border-radius: var(--np-radius-full); display: flex; align-items: center; justify-content: center; background: var(--np-surface-subtle); color: var(--np-text-secondary); }
+.np-state--error .np-state__icon { background: var(--np-danger-soft); color: var(--np-danger-ink); }
+.np-state--offline .np-state__icon { background: var(--np-neutral-soft); color: var(--np-neutral-ink); }
+.np-skel { background: linear-gradient(90deg, var(--np-surface-subtle) 25%, var(--np-surface) 50%, var(--np-surface-subtle) 75%); background-size: 400% 100%; animation: np-shimmer 1.4s ease infinite; border-radius: var(--np-radius-sm); }
+@keyframes np-shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+
+/* ==========================================================================
+   5. PATTERNS
+   ========================================================================== */
+/* bulk selection */
+.np-bulkbar__overflow { display: none; }
+.np-bulkbar__spacer { flex: 1; }
+.np-bulkbar { display: flex; align-items: center; gap: var(--np-space-3); min-width: 0; height: var(--np-toolbar-h); padding-inline: var(--np-space-4); border-radius: var(--np-card-radius); background: color-mix(in srgb, var(--np-action-primary) 8%, var(--np-surface)); border: 1px solid color-mix(in srgb, var(--np-action-primary) 28%, var(--np-surface)); }
+/* masked reveal */
+.np-masked { display: inline-flex; align-items: center; gap: var(--np-space-2); }
+.np-masked__value { font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant); direction: ltr; unicode-bidi: isolate; }
+/* audit before/after */
+.np-audit { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); gap: var(--np-space-3); align-items: center; }
+.np-audit__before { background: var(--np-danger-soft); color: var(--np-danger-ink); border: 1px solid var(--np-danger-border); border-radius: var(--np-radius-sm); padding: var(--np-space-2) var(--np-space-3); }
+.np-audit__after { background: var(--np-success-soft); color: var(--np-success-ink); border: 1px solid var(--np-success-border); border-radius: var(--np-radius-sm); padding: var(--np-space-2) var(--np-space-3); }
+/* offline guard */
+.np-offline { display: flex; align-items: center; gap: var(--np-space-3); padding: var(--np-space-3) var(--np-space-4); border-radius: var(--np-radius-md); background: var(--np-neutral-soft); border: 1px solid var(--np-neutral-border); color: var(--np-text-secondary); }
+.np-guarded { opacity: .55; pointer-events: none; }
+
+/* COLUMN PRIORITY (CC-004) — the component owns HOW columns respond,
+   the screen owns WHICH columns exist. */
+.np-table [data-align="end"] { text-align: end; }
+.np-table [data-align="center"] { text-align: center; }
+
+/* BULK BAR compact (CC-004) and PAGER compact (CC-004) live in the layout
+   mode block below so they resolve from the surface container. */
+
+/* ==========================================================================
+   6. LAYOUT MODES — one rule set, driven by the SURFACE CONTAINER.
+   1440 is a reference viewport and defines no rule.
+   ========================================================================== */
+
+/* medium : 768–1279 */
+@container npsurface (max-width: 1279px) {
+  .np-table [data-priority="low"] { display: none; }
+  .np-pager__page[data-far="true"] { display: none; }
+  .np-sidebar { width: var(--np-sidebar-rail-w); }
+  .np-sidebar__label, .np-sidebar__name, .np-sidebar__sub, .np-usercard__meta, .np-logo__word, .np-logo [data-asset-pending] span { display: none; }
+  .np-logo [data-asset-pending] { padding-inline: var(--np-space-2); }
+  .np-sidebar__brand, .np-nav-item, .np-usercard { justify-content: center; padding-inline: 0; }
+  .np-nav-item[data-active="true"]::before { inset-inline-end: 0; }
+  .np-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .np-content { padding: var(--np-space-5); }
+  .np-toolbar__overflow { display: inline-flex; }
+  .np-toolbar__demote { display: none; }
+}
+
+/* compact : <768 — off-canvas navigation, touch density */
+@container npsurface (max-width: 767px) {
+  .np-surface-root { --np-control-h: var(--np-size-control-touch); --np-navrow-h: var(--np-size-navrow-touch); --np-icon-size: var(--np-icon-lg); }
+  .np-sidebar { display: none; }
+  .np-topbar__menu { display: inline-flex; }
+  .np-topbar, .np-toolbar { padding-inline: var(--np-space-3); }
+  .np-toolbar { height: auto; padding-block: var(--np-space-3); flex-wrap: wrap; }
+  .np-toolbar__spacer { display: none; }
+  .np-grid, .np-audit { grid-template-columns: minmax(0, 1fr); }
+  .np-content { padding: var(--np-space-4); }
+  .np-btn { height: var(--np-size-control-touch); }
+  .np-iconbtn { width: var(--np-size-control-touch); height: var(--np-size-control-touch); }
+  .np-input, .np-search__field { height: var(--np-size-control-touch); }
+  .np-search__field { min-width: 0; width: 100%; }
+  .np-modal, .np-drawer { width: 100%; }
+  /* CC-006: the compact topbar had NO rule of its own and kept the full
+     desktop composition; the brand mark made an already-marginal row
+     overflow. The sync chip collapses to its status dot (its label is the
+     single biggest consumer at 151 of 366px) and the context keeps the
+     station name on one elided line. */
+  .np-topbar__brand { display: inline-flex; }
+  .np-topbar { padding-inline: var(--np-space-3); gap: var(--np-space-2); }
+  .np-sync { gap: 0; padding-inline: var(--np-space-2); }
+  .np-sync > span:not(.np-sync__dot) { display: none; }
+  .np-topbar__context .np-caption { display: none; }
+  .np-table [data-priority="medium"] { display: none; }
+  /* BulkBar stays available and useful: count + one primary action + overflow */
+  .np-bulkbar { height: auto; min-height: var(--np-size-control-touch); padding-block: var(--np-space-2); flex-wrap: nowrap; }
+  .np-bulkbar__demote { display: none; }
+  .np-bulkbar__overflow { display: inline-flex; }
+  .np-bulkbar__count { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Pagination condenses to prev / current / next — never a page sequence */
+  .np-pager__page { display: none; }
+  .np-pager__page[data-current="true"] { display: inline-flex; }
+  .np-pager { gap: var(--np-space-2); }
+  .np-btn--grow { flex: 1; }
+  .np-table__wrap { display: none; }
+}
+
+/* very narrow : <=360 */
+@container npsurface (max-width: 360px) {
+  .np-toolbar .np-btn--grow { flex: 1 1 100%; }
+  .np-pageheader { flex-direction: column; align-items: stretch; }
+}
+
+/* ==========================================================================
+   7. COMPONENT-LEVEL CONTAINER BEHAVIOUR
+   Components respond to their own box, never to the viewport.
+   ========================================================================== */
+.np-cq { container-type: inline-size; container-name: npcomponent; }
+.np-cq__body { display: grid; grid-template-columns: var(--np-cq-thumb-w) minmax(0, 1fr); gap: var(--np-space-4); align-items: center; }
+.np-cq__mode::after { content: "wide"; }
+@container npcomponent (max-width: 420px) {
+  .np-cq__body { grid-template-columns: minmax(0, 1fr); }
+  .np-cq__mode::after { content: "narrow"; }
+}
+
+/* legacy probe aliases retained for the Capability Gate regression test */
+.np-probe { container-type: inline-size; container-name: npprobe; }
+.np-probe__body { display: grid; grid-template-columns: var(--np-cq-thumb-w) minmax(0, 1fr); gap: var(--np-space-4); align-items: center; background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-card-radius); padding: var(--np-space-4); }
+.np-probe__thumb { height: var(--np-cq-thumb-h); border-radius: var(--np-radius-md); background: var(--np-surface-subtle); border: 1px solid var(--np-border); display: flex; align-items: center; justify-content: center; color: var(--np-action-primary); }
+.np-probe__mode::after { content: "wide"; }
+@container npprobe (max-width: 420px) {
+  .np-probe__body { grid-template-columns: minmax(0, 1fr); }
+  .np-probe__mode::after { content: "narrow"; }
+}
+
+/* ==========================================================================
+   8. LEGACY ALIASES — keep the Capability Gate green without forking rules
+   ========================================================================== */
+.np-sidebar__item { position: relative; display: flex; align-items: center; gap: var(--np-space-3); height: var(--np-sidebar-item-h); padding-inline: var(--np-space-3); border-radius: var(--np-sidebar-item-radius); font-size: var(--np-type-label-size); font-weight: var(--np-weight-medium); color: var(--np-nav-ink); }
+.np-sidebar__item:hover { background: var(--np-nav-hover-bg); color: var(--np-nav-ink-active); }
+.np-sidebar__item[data-active="true"] { background: var(--np-nav-active-bg); color: var(--np-nav-ink-active); font-weight: var(--np-weight-bold); }
+.np-sidebar__item[data-active="true"]::before { content: ""; position: absolute; inset-inline-end: calc(var(--np-space-2) * -1); inset-block-start: var(--np-nav-marker-offset); width: var(--np-nav-marker-w); height: var(--np-nav-marker-h); border-radius: var(--np-radius-full); background: var(--np-nav-marker); }
+.np-sidebar__mark { width: var(--np-sidebar-mark-size); height: var(--np-sidebar-mark-size); flex: none; border-radius: var(--np-radius-md); background: var(--np-action-primary); color: var(--np-text-onbrand); display: flex; align-items: center; justify-content: center; font-weight: var(--np-weight-bold); font-size: var(--np-type-label-size); }
+.np-card__v { font-size: var(--np-type-h2-size); line-height: var(--np-type-h2-line); font-weight: var(--np-weight-bold); font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant); direction: ltr; unicode-bidi: isolate; }
+.np-badge { display: inline-flex; align-items: center; gap: var(--np-space-1); height: var(--np-badge-h); padding-inline: var(--np-space-2); border-radius: var(--np-radius-sm); background: var(--np-surface-subtle); color: var(--np-action-secondary-ink); font-size: var(--np-type-caption-size); font-weight: var(--np-weight-semibold); font-family: var(--np-numeric-family); direction: ltr; unicode-bidi: isolate; }
+.np-sub { font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line); color: var(--np-text-secondary); }
+.np-btn--icon { width: var(--np-iconbutton-size); padding: 0; background: var(--np-surface); color: var(--np-text-secondary); border-color: var(--np-border); }
+@container npsurface (max-width: 767px) { .np-btn--icon { width: var(--np-size-control-touch); } }
+@container npsurface (max-width: 1279px) { .np-sidebar__label { display: none; } }
+
+
+/* ==========================================================================
+   9. CC-007 — OPERATIONAL DOMAIN COMPONENTS + ACCESSIBILITY CORRECTIONS
+   Zero literals. Every value resolves to a registered token.
+   ========================================================================== */
+
+/* --- 9.0 Dark-surface focus (owner ruling R1 §4) ------------------------
+   Colour remap only — the focus GEOMETRY (2px at 2px offset) is untouched
+   and the light-surface treatment, which already passes at 4.90:1, is not
+   changed. .np-on-dark makes the correction reusable on any dark
+   structural surface; .np-sidebar is simply its first consumer. */
+.np-sidebar, .np-on-dark { --np-focus-ring: var(--np-focus-ring-ondark); }
+
+/* Screen-reader-only text utility (CC-007) — used where a state must be
+   announced in words without repeating it visually. */
+.np-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* --- 9.1 C02 Textarea --------------------------------------------------- */
+.np-textarea {
+  box-sizing: border-box; width: 100%; display: block;
+  min-height: var(--np-textarea-min-h); max-height: var(--np-textarea-max-h);
+  overflow-y: auto; resize: none;
+  border: 1px solid var(--np-input-border); border-radius: var(--np-input-radius);
+  background: var(--np-surface);
+  padding-block: var(--np-textarea-py); padding-inline: var(--np-input-px);
+  font-family: var(--np-font-ui); font-size: var(--np-type-body-size);
+  line-height: var(--np-type-body-line); color: var(--np-text-primary);
+}
+.np-textarea::placeholder { color: var(--np-text-disabled); }
+.np-textarea--error { border-color: var(--np-danger); }
+.np-textarea--readonly { background: var(--np-surface-subtle); color: var(--np-text-secondary); }
+.np-textarea[disabled] { background: var(--np-surface-subtle); color: var(--np-text-disabled); cursor: not-allowed; }
+.np-field__foot { display: flex; align-items: baseline; justify-content: space-between; gap: var(--np-space-2); }
+.np-counter { font-size: var(--np-type-caption-size); color: var(--np-text-secondary); font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant); direction: ltr; unicode-bidi: isolate; }
+.np-counter[data-over="true"] { color: var(--np-danger-ink); }
+
+/* --- 9.2 C03–C05 numeric field shell ------------------------------------
+   ONE control height from --np-input-h, the value run LTR-isolated, the
+   unit/currency label pinned to the INLINE-END and not editable. */
+.np-numfield {
+  box-sizing: border-box; display: flex; align-items: center; gap: var(--np-space-2);
+  height: var(--np-input-h); padding-inline: var(--np-input-px);
+  border: 1px solid var(--np-input-border); border-radius: var(--np-input-radius);
+  background: var(--np-surface); min-width: 0;
+}
+.np-numfield:focus-within { outline: var(--np-focus-width) solid var(--np-focus-ring); outline-offset: var(--np-focus-offset); }
+.np-numfield__input {
+  flex: 1; min-width: 0; border: 0; outline: 0; background: transparent;
+  font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant);
+  font-size: var(--np-type-body-size); color: var(--np-text-primary);
+  direction: ltr; unicode-bidi: isolate; text-align: start;
+}
+.np-numfield__input::placeholder { color: var(--np-text-disabled); }
+.np-numfield__unit { flex: none; font-size: var(--np-type-label-size); color: var(--np-text-secondary); white-space: nowrap; }
+.np-numfield--error { border-color: var(--np-danger); }
+.np-numfield--readonly, .np-numfield[data-disabled="true"] { background: var(--np-surface-subtle); }
+.np-numfield[data-disabled="true"] .np-numfield__input { color: var(--np-text-disabled); cursor: not-allowed; }
+
+/* --- 9.3 C06 Access code — ONE accessible input, never a slot array ----- */
+.np-code {
+  box-sizing: border-box; width: 100%; height: var(--np-input-h);
+  border: 1px solid var(--np-input-border); border-radius: var(--np-input-radius);
+  background: var(--np-surface); padding-inline: var(--np-input-px);
+  font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant);
+  font-size: var(--np-type-h3-size); letter-spacing: var(--np-code-tracking);
+  text-align: center; direction: ltr; unicode-bidi: isolate; color: var(--np-text-primary);
+}
+.np-code::placeholder { color: var(--np-text-disabled); letter-spacing: var(--np-code-tracking); }
+.np-code--error { border-color: var(--np-danger); }
+.np-code[disabled], .np-code[aria-busy="true"] { background: var(--np-surface-subtle); color: var(--np-text-disabled); cursor: not-allowed; }
+.np-coderow { display: flex; align-items: center; gap: var(--np-space-2); min-width: 0; }
+.np-coderow > .np-code { flex: 1; min-width: 0; }
+
+/* --- 9.4 C07 Photo capture / C23 attachment shared progress ------------- */
+.np-photo { display: flex; flex-direction: column; gap: var(--np-space-3); min-width: 0; }
+.np-photo__frame {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--np-space-2); text-align: center; min-height: var(--np-photo-h);
+  padding: var(--np-space-4); border: 1px dashed var(--np-border-strong);
+  border-radius: var(--np-card-radius); background: var(--np-surface-subtle); color: var(--np-text-secondary);
+}
+.np-photo__frame[data-state="preview"] { border-style: solid; border-color: var(--np-border); background: var(--np-surface); color: var(--np-text-primary); }
+.np-photo__frame[data-state="permission-denied"], .np-photo__frame[data-state="unsupported"], .np-photo__frame[data-state="failed"], .np-photo__frame[data-state="required-error"] { border-style: solid; border-color: var(--np-danger-border); background: var(--np-danger-soft); color: var(--np-danger-ink); }
+.np-photo__actions { display: flex; gap: var(--np-space-2); flex-wrap: wrap; }
+.np-progress { width: 100%; height: var(--np-progress-h); border-radius: var(--np-radius-full); background: var(--np-surface-subtle); overflow: hidden; }
+.np-progress__fill { height: 100%; border-radius: var(--np-radius-full); background: var(--np-action-primary); }
+
+/* --- 9.5 C08 Sync status — EXTENDS the existing .np-sync chip ----------- */
+.np-sync--pending { background: var(--np-info-soft); color: var(--np-info-ink); border-color: var(--np-info-border); }
+.np-sync--failed  { background: var(--np-danger-soft); color: var(--np-danger-ink); border-color: var(--np-danger-border); }
+.np-sync__count { font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant); direction: ltr; unicode-bidi: isolate; }
+
+/* --- 9.6 C09 Alert list ------------------------------------------------- */
+.np-alerts { display: flex; flex-direction: column; gap: var(--np-space-2); min-width: 0; }
+.np-alert { display: flex; align-items: flex-start; gap: var(--np-space-3); min-width: 0; padding: var(--np-space-3); border: 1px solid; border-radius: var(--np-radius-md); flex-wrap: wrap; }
+.np-alert--warning { background: var(--np-warning-soft); border-color: var(--np-warning-border); color: var(--np-warning-ink); }
+.np-alert--danger  { background: var(--np-danger-soft);  border-color: var(--np-danger-border);  color: var(--np-danger-ink); }
+.np-alert__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--np-space-1); }
+.np-alert__title { font-size: var(--np-type-label-size); font-weight: var(--np-weight-semibold); }
+.np-alert__detail { font-size: var(--np-type-caption-size); }
+
+/* --- 9.7 C10 KPI / stat block ------------------------------------------ */
+.np-stat { display: flex; flex-direction: column; gap: var(--np-kpi-gap); min-width: 0; padding: var(--np-card-pad); background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-card-radius); }
+.np-stat__label { font-size: var(--np-type-label-size); color: var(--np-text-secondary); }
+.np-stat__meta { font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-stat__unavailable { font-size: var(--np-type-body-size); color: var(--np-text-secondary); }
+
+/* --- 9.8 C11 Tank gauge — state by text + indicator, never colour alone - */
+.np-gauge { display: flex; flex-direction: column; gap: var(--np-space-2); min-width: 0; padding: var(--np-card-pad); background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-card-radius); }
+.np-gauge__head { display: flex; align-items: center; justify-content: space-between; gap: var(--np-space-2); flex-wrap: wrap; }
+.np-gauge__track { height: var(--np-gauge-track-h); border-radius: var(--np-radius-full); background: var(--np-surface-subtle); overflow: hidden; }
+.np-gauge__fill { height: 100%; border-radius: var(--np-radius-full); background: var(--np-action-primary); }
+.np-gauge[data-state="warning"] .np-gauge__fill { background: var(--np-warning); }
+.np-gauge[data-state="danger"] .np-gauge__fill { background: var(--np-danger); }
+.np-gauge[data-state="over-capacity"] .np-gauge__fill { background: var(--np-info); }
+.np-gauge[data-state="capacity-unknown"] .np-gauge__track, .np-gauge[data-state="data-error"] .np-gauge__track { background: repeating-linear-gradient(135deg, var(--np-surface-subtle), var(--np-surface-subtle) var(--np-space-2), var(--np-surface) var(--np-space-2), var(--np-surface) var(--np-space-4)); }
+.np-gauge__foot { display: flex; align-items: baseline; justify-content: space-between; gap: var(--np-space-2); flex-wrap: wrap; font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+
+/* --- 9.9 C12 Trend chart (CTO-R-023 / R-024) ----------------------------
+   The plot is a logical flex row, so the OLDEST point sits at inline-start
+   and the newest at inline-end in both directions, and the value axis is
+   the inline-start border. No gradient, glow or decorative fill. */
+.np-chart { display: flex; flex-direction: column; gap: var(--np-space-3); min-width: 0; }
+.np-chart__plot { display: flex; align-items: flex-end; gap: var(--np-space-2); height: var(--np-chart-h); padding: var(--np-space-2); border-inline-start: 1px solid var(--np-border-strong); border-block-end: 1px solid var(--np-border-strong); }
+.np-chart__col { flex: 1; min-width: 0; height: 100%; display: flex; align-items: flex-end; justify-content: center; gap: var(--np-space-1); }
+.np-chart__bar { width: var(--np-chart-bar-w); max-width: 100%; border-start-start-radius: var(--np-radius-sm); border-start-end-radius: var(--np-radius-sm); background: var(--np-data-series-1); }
+.np-chart__bar--s2 { background: var(--np-data-series-2); }
+.np-chart__axis { display: flex; gap: var(--np-space-2); font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-chart__axis > span { flex: 1; min-width: 0; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.np-chart__legend { display: flex; gap: var(--np-space-4); flex-wrap: wrap; font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-chart__key { display: inline-flex; align-items: center; gap: var(--np-space-2); }
+.np-chart__swatch { width: var(--np-space-3); height: var(--np-space-3); border-radius: var(--np-radius-sm); background: var(--np-data-series-1); }
+.np-chart__swatch--s2 { background: var(--np-data-series-2); }
+
+/* --- 9.10 C13 NPDataTable tree rows + total row (extension) ------------- */
+.np-table__row[data-parent="true"] { background: var(--np-table-head-bg); }
+.np-table__row[data-parent="true"] > td { font-weight: var(--np-weight-semibold); }
+.np-table__toggle { display: inline-flex; align-items: center; gap: var(--np-space-2); min-width: 0; padding: 0; border: 0; background: transparent; font: inherit; color: inherit; cursor: pointer; }
+.np-table__toggle > np-icon { flex: none; transition: transform var(--np-motion-fast) var(--np-ease); }
+.np-table__row[aria-expanded="true"] .np-table__toggle > np-icon { transform: rotate(180deg); }
+.np-table__row[data-branch="true"] [data-tree-cell] { padding-inline-start: var(--np-tree-indent); }
+.np-table__row[data-actionable="false"] { color: var(--np-text-secondary); }
+.np-table tfoot td { border-block-start: 1px solid var(--np-border-strong); background: var(--np-table-head-bg); font-weight: var(--np-weight-bold); }
+.np-treecard { display: flex; flex-direction: column; gap: var(--np-space-3); padding: var(--np-card-pad); background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-card-radius); }
+.np-treecard__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--np-space-2); flex-wrap: wrap; }
+.np-treecard__branch { display: flex; align-items: baseline; justify-content: space-between; gap: var(--np-space-2); padding-inline-start: var(--np-tree-indent); font-size: var(--np-type-body-size); }
+
+/* --- 9.11 C14 Typed confirmation (pattern) ------------------------------ */
+.np-typed { display: flex; flex-direction: column; gap: var(--np-space-4); min-width: 0; }
+.np-typed__lists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--np-space-3); }
+.np-typed__list { display: flex; flex-direction: column; gap: var(--np-space-2); padding: var(--np-space-3); border: 1px solid; border-radius: var(--np-radius-md); font-size: var(--np-type-caption-size); }
+.np-typed__list--remove { background: var(--np-danger-soft); border-color: var(--np-danger-border); color: var(--np-danger-ink); }
+.np-typed__list--keep { background: var(--np-success-soft); border-color: var(--np-success-border); color: var(--np-success-ink); }
+.np-typed__phrase { padding-block: var(--np-space-2); padding-inline: var(--np-space-3); border: 1px solid var(--np-border); border-radius: var(--np-radius-sm); background: var(--np-surface-subtle); font-weight: var(--np-weight-semibold); }
+
+/* --- 9.12 C15 Step flow (pattern) --------------------------------------- */
+.np-steps { display: flex; align-items: flex-start; gap: var(--np-space-3); min-width: 0; }
+.np-step { flex: 1; min-width: 0; display: flex; align-items: center; gap: var(--np-space-2); }
+.np-step__dot { flex: none; width: var(--np-step-dot); height: var(--np-step-dot); border-radius: var(--np-radius-full); border: 1px solid var(--np-border-strong); background: var(--np-surface); color: var(--np-text-secondary); display: flex; align-items: center; justify-content: center; font-family: var(--np-numeric-family); font-size: var(--np-type-caption-size); }
+.np-step[data-state="current"] .np-step__dot { background: var(--np-action-primary); border-color: var(--np-action-primary); color: var(--np-action-primary-ink); }
+.np-step[data-state="completed"] .np-step__dot { background: var(--np-success); border-color: var(--np-success); color: var(--np-text-onbrand); }
+.np-step[data-state="error"] .np-step__dot { background: var(--np-danger); border-color: var(--np-danger); color: var(--np-text-onbrand); }
+.np-step__label { min-width: 0; font-size: var(--np-type-label-size); color: var(--np-text-secondary); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.np-step[data-state="current"] .np-step__label { color: var(--np-text-primary); font-weight: var(--np-weight-semibold); }
+.np-steps__compact { display: none; flex-direction: column; gap: var(--np-space-2); min-width: 0; }
+
+/* --- 9.13 C19 Passkey row ----------------------------------------------- */
+.np-passkey { display: flex; align-items: center; gap: var(--np-space-3); flex-wrap: wrap; min-width: 0; min-height: var(--np-size-tablerow); padding: var(--np-space-3); border: 1px solid var(--np-border); border-radius: var(--np-radius-md); background: var(--np-surface); }
+.np-passkey__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--np-space-1); }
+.np-passkey[data-state="last-remaining"] { border-color: var(--np-warning-border); background: var(--np-warning-soft); }
+.np-passkey[data-state="error"] { border-color: var(--np-danger-border); background: var(--np-danger-soft); }
+
+/* --- 9.14 C20 Inline notice --------------------------------------------
+   Persistent and contextual. Distinct from NPToast (transient) and
+   NPErrorState (replaces content). On Deep Tech Blue the soft + ink
+   treatment is the only permitted one — solids measure 2.36–3.12 there. */
+.np-notice { display: flex; align-items: flex-start; gap: var(--np-space-3); min-width: 0; padding: var(--np-notice-pad); border: 1px solid; border-radius: var(--np-notice-radius); }
+.np-notice--info    { background: var(--np-info-soft);    border-color: var(--np-info-border);    color: var(--np-info-ink); }
+.np-notice--success { background: var(--np-success-soft); border-color: var(--np-success-border); color: var(--np-success-ink); }
+.np-notice--warning { background: var(--np-warning-soft); border-color: var(--np-warning-border); color: var(--np-warning-ink); }
+.np-notice--danger  { background: var(--np-danger-soft);  border-color: var(--np-danger-border);  color: var(--np-danger-ink); }
+.np-notice__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--np-space-1); }
+.np-notice__title { font-size: var(--np-type-label-size); font-weight: var(--np-weight-semibold); }
+.np-notice__msg { font-size: var(--np-type-body-size); line-height: var(--np-type-body-line); }
+
+/* --- 9.15 C21 Formatted value ------------------------------------------- */
+.np-value { display: inline-flex; align-items: baseline; gap: var(--np-space-1); min-width: 0; }
+.np-value__unit { flex: none; font-size: var(--np-type-label-size); color: var(--np-text-secondary); white-space: nowrap; }
+.np-value--emphasis > .np-num { font-size: var(--np-type-kpi-size); line-height: var(--np-type-kpi-line); font-weight: var(--np-type-kpi-weight); }
+.np-value--unavailable { color: var(--np-text-secondary); font-size: var(--np-type-body-size); }
+
+/* --- 9.16 C23 File attachment ------------------------------------------- */
+.np-attach { display: flex; flex-direction: column; gap: var(--np-space-2); min-width: 0; }
+.np-attach__drop { display: flex; align-items: center; gap: var(--np-space-3); flex-wrap: wrap; padding: var(--np-space-4); border: 1px dashed var(--np-border-strong); border-radius: var(--np-card-radius); background: var(--np-surface-subtle); color: var(--np-text-secondary); }
+.np-attach__row { display: flex; align-items: center; gap: var(--np-space-3); flex-wrap: wrap; min-width: 0; min-height: var(--np-attach-row-h); padding-block: var(--np-space-2); padding-inline: var(--np-space-3); border: 1px solid var(--np-border); border-radius: var(--np-radius-md); background: var(--np-surface); }
+.np-attach__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--np-space-1); }
+.np-attach__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--np-type-label-size); }
+.np-attach__row[data-state="invalid"], .np-attach__row[data-state="failed"] { border-color: var(--np-danger-border); background: var(--np-danger-soft); color: var(--np-danger-ink); }
+.np-attach__row[data-state="uploaded"] { border-color: var(--np-success-border); }
+.np-attach[data-disabled="true"] { opacity: .55; pointer-events: none; }
+
+/* --- 9.17 C24 Disclosure ------------------------------------------------ */
+.np-disclosure { border: 1px solid var(--np-border); border-radius: var(--np-radius-md); background: var(--np-surface); overflow: hidden; }
+.np-disclosure__head { box-sizing: border-box; display: flex; align-items: center; gap: var(--np-space-3); width: 100%; min-height: var(--np-disclosure-h); padding: var(--np-space-3); border: 0; background: transparent; text-align: start; cursor: pointer; font-family: var(--np-font-ui); font-size: var(--np-type-h3-size); font-weight: var(--np-weight-semibold); color: var(--np-text-primary); }
+.np-disclosure__head:hover { background: var(--np-surface-subtle); }
+.np-disclosure__head:focus-visible { outline: var(--np-focus-width) solid var(--np-focus-ring); outline-offset: calc(var(--np-focus-offset) * -1); }
+.np-disclosure__head[disabled] { color: var(--np-text-disabled); cursor: not-allowed; }
+.np-disclosure__title { flex: 1; min-width: 0; text-wrap: pretty; }
+.np-disclosure__head > np-icon { flex: none; transition: transform var(--np-motion-fast) var(--np-ease); }
+.np-disclosure__head[aria-expanded="true"] > np-icon { transform: rotate(180deg); }
+.np-disclosure__body { padding-inline: var(--np-space-3); padding-block-end: var(--np-space-3); font-size: var(--np-type-body-size); line-height: var(--np-type-body-line); color: var(--np-text-secondary); }
+
+/* --- 9.18 Component-owned narrow behaviour -------------------------------
+   Uses the REGISTERED component threshold (--np-cq-narrow-max 420). No new
+   breakpoint is introduced; see the CC-007 report, section AF. */
+@container npcomponent (max-width: 420px) {
+  .np-typed__lists { grid-template-columns: minmax(0, 1fr); }
+  .np-steps { display: none; }
+  .np-steps__compact { display: flex; }
+}
+
+/* --- 9.19 Compact surface (registered 767 threshold) --------------------- */
+@container npsurface (max-width: 767px) {
+  .np-typed__lists { grid-template-columns: minmax(0, 1fr); }
+  .np-steps { display: none; }
+  .np-steps__compact { display: flex; }
+  .np-chart__plot { gap: var(--np-space-1); }
+  .np-code { font-size: var(--np-type-h3-size); }
+}
+
+
+/* ==========================================================================
+   10. CC-008 — PRODUCT SHELL SEPARATION + NAVIGATION CAPABILITY
+   Zero new tokens: every value below resolves to a Foundation 1.4.0 token.
+   ========================================================================== */
+
+/* --- 10.1 NPTaskShell — Station / Auth, no sidebar ----------------------
+   Declares the SAME container name as the Console shell surface, so every
+   frozen layout-mode rule keeps working inside it without a second rule set. */
+.np-taskshell { display: flex; flex-direction: column; min-height: 100%; min-width: 0; background: var(--np-canvas); container-type: inline-size; container-name: npsurface; }
+.np-taskshell__head { display: flex; align-items: center; gap: var(--np-space-3); min-height: var(--np-topbar-h); padding-inline: var(--np-space-4); padding-block: var(--np-space-2); background: var(--np-topbar-bg); border-block-end: 1px solid var(--np-topbar-border); }
+.np-taskshell__title { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.np-taskshell__title > span { overflow: hidden; text-overflow: ellipsis; }
+.np-taskshell__utility { flex: none; display: flex; align-items: center; gap: var(--np-space-2); }
+.np-taskshell__notice { padding-inline: var(--np-space-4); padding-block-start: var(--np-space-3); }
+.np-taskshell__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--np-space-4); padding: var(--np-space-4); overflow: auto; }
+/* The sticky region is a normal flow sibling pinned to the block-end edge;
+   it reserves its own space, so nothing is ever hidden behind it. */
+.np-taskshell__sticky { position: sticky; inset-block-end: 0; display: flex; flex-direction: column; gap: var(--np-space-2); padding: var(--np-space-4); padding-block-end: calc(var(--np-space-4) + var(--np-sheet-safe)); background: var(--np-surface); border-block-start: 1px solid var(--np-border); }
+.np-taskshell__action { width: 100%; height: var(--np-action-worker-h); font-size: var(--np-type-h3-size); }
+.np-taskshell--auth .np-taskshell__body { align-items: center; justify-content: center; }
+.np-taskshell__auth { width: 100%; max-inline-size: var(--np-modal-w); display: flex; flex-direction: column; gap: var(--np-space-4); padding: var(--np-card-pad); background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-card-radius); }
+.np-taskshell__legal { font-size: var(--np-type-caption-size); color: var(--np-text-secondary); text-align: center; }
+
+/* --- 10.2 C18 · Sidebar navigation groups + count badge ------------------ */
+.np-navgroup { display: flex; flex-direction: column; gap: var(--np-space-1); }
+.np-navgroup__label { padding-inline: var(--np-space-3); padding-block: var(--np-space-2); font-size: var(--np-type-caption-size); font-weight: var(--np-weight-semibold); color: var(--np-nav-ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.np-nav-item__label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* The badge is a count, never a colour signal: it always carries its digits,
+   and the row's accessible name repeats the count in words. */
+.np-nav-badge { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: var(--np-badge-h); height: var(--np-badge-h); padding-inline: var(--np-space-2); border-radius: var(--np-radius-full); background: var(--np-nav-active-bg); color: var(--np-nav-ink-active); font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant); font-size: var(--np-type-caption-size); font-weight: var(--np-weight-semibold); direction: ltr; unicode-bidi: isolate; }
+.np-nav-item[data-active="true"] .np-nav-badge { background: var(--np-action-primary); color: var(--np-action-primary-ink); }
+.np-nav-item[aria-disabled="true"] { opacity: .55; pointer-events: none; }
+
+/* --- 10.3 C17 · User Card as a real interaction target ------------------- */
+.np-usercard--button { box-sizing: border-box; width: 100%; min-height: var(--np-size-action-worker); border: 0; background: var(--np-nav-hover-bg); color: inherit; font: inherit; text-align: start; cursor: pointer; }
+.np-usercard--button:hover { background: var(--np-nav-active-bg); }
+.np-usercard--button:focus-visible { outline: var(--np-focus-width) solid var(--np-focus-ring); outline-offset: var(--np-focus-offset); }
+.np-usercard__chev { flex: none; color: var(--np-nav-ink); }
+.np-usercard-wrap { position: relative; }
+.np-usercard__menu { position: absolute; inset-block-end: calc(100% + var(--np-space-2)); inset-inline-start: 0; inline-size: max-content; z-index: var(--np-z-sticky); }
+
+/* --- 10.4 Collapsed rail (registered 1279 threshold) --------------------- */
+@container npsurface (max-width: 1279px) {
+  .np-navgroup__label { display: none; }
+  .np-navgroup { gap: 0; }
+  .np-usercard__chev { display: none; }
+}
+
+/* ==========================================================================
+   9. MOBILE COMPONENTS — CC-013
+   NPMobileActionCard · NPBottomNavigation · NPOTPInput.
+   Generic and role-free: there is no worker/manager fork. Zero literals.
+   ========================================================================== */
+
+/* ACTION CARD (canonical: NPMobileActionCard.dc.html) */
+.np-mcard {
+  box-sizing: border-box; display: flex; align-items: flex-start; gap: var(--np-mcard-gap);
+  width: 100%; min-height: var(--np-mcard-min-h); padding: var(--np-mcard-pad);
+  text-align: start; font-family: var(--np-font-ui); color: var(--np-text-primary);
+  background: var(--np-surface); border: 1px solid var(--np-border);
+  border-radius: var(--np-mcard-radius); cursor: pointer;
+  transition: background var(--np-motion-fast) var(--np-ease), border-color var(--np-motion-fast) var(--np-ease), transform var(--np-motion-fast) var(--np-ease);
+}
+.np-mcard:focus-visible { outline: var(--np-focus-width) solid var(--np-focus-ring); outline-offset: var(--np-focus-offset); }
+.np-mcard__plate {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: var(--np-mcard-icon-box); height: var(--np-mcard-icon-box);
+  border-radius: var(--np-radius-md); background: var(--np-surface-subtle); color: var(--np-action-primary);
+}
+.np-mcard__body { min-width: 0; display: flex; flex-direction: column; gap: var(--np-space-1); }
+.np-mcard__t { font-size: var(--np-type-h3-size); line-height: var(--np-type-h3-line); font-weight: var(--np-type-h3-weight); }
+.np-mcard__d { font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line); color: var(--np-text-secondary); text-wrap: pretty; }
+.np-mcard__reason { display: inline-flex; align-items: center; gap: var(--np-space-1); font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line); color: var(--np-warning-ink); }
+.np-mcard__end { margin-inline-start: auto; flex: none; display: flex; align-items: center; gap: var(--np-space-2); color: var(--np-text-secondary); }
+/* STATES — 4. pressed is a real state, not a hover styling. */
+.np-mcard[data-state="pressed"], .np-mcard:active {
+  background: var(--np-surface-subtle); border-color: var(--np-border-strong); transform: scale(.995);
+}
+.np-mcard[data-state="attention"] { border-color: var(--np-warning-border); }
+.np-mcard[data-state="attention"] .np-mcard__plate { background: var(--np-warning-soft); color: var(--np-warning-ink); }
+.np-mcard[data-state="disabled"], .np-mcard[aria-disabled="true"] {
+  background: var(--np-surface-subtle); border-color: var(--np-border);
+  color: var(--np-text-disabled); cursor: not-allowed; transform: none;
+}
+.np-mcard[aria-disabled="true"] .np-mcard__plate { background: transparent; border: 1px solid var(--np-border); color: var(--np-text-disabled); }
+.np-mcard[aria-disabled="true"] .np-mcard__d { color: var(--np-text-disabled); }
+.np-mcard__badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: var(--np-tabs-count-size); height: var(--np-tabs-count-size); padding-inline: var(--np-space-1);
+  border-radius: var(--np-radius-full); background: var(--np-action-primary); color: var(--np-action-primary-ink);
+  font-size: var(--np-type-caption-size); font-weight: var(--np-weight-semibold);
+}
+
+/* BOTTOM NAVIGATION (canonical: NPBottomNavigation.dc.html) — exactly 4 tabs */
+.np-bottomnav {
+  box-sizing: border-box; display: flex; align-items: stretch;
+  height: calc(var(--np-bottomnav-h) + var(--np-bottomnav-safe));
+  padding-block-end: var(--np-bottomnav-safe);
+  background: var(--np-surface); border-block-start: 1px solid var(--np-border);
+  font-family: var(--np-font-ui);
+}
+.np-bottomnav__item {
+  flex: 1; min-width: var(--np-bottomnav-item-min); min-height: var(--np-bottomnav-item-min);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--np-space-1);
+  position: relative; border: 0; background: transparent; cursor: pointer;
+  font-family: inherit; font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line);
+  font-weight: var(--np-weight-medium); color: var(--np-text-secondary);
+}
+.np-bottomnav__item:focus-visible { outline: var(--np-focus-width) solid var(--np-focus-ring); outline-offset: calc(var(--np-focus-offset) * -1); }
+.np-bottomnav__item[aria-current="page"] { color: var(--np-action-primary); font-weight: var(--np-weight-semibold); }
+.np-bottomnav__item[aria-disabled="true"] { color: var(--np-text-disabled); cursor: not-allowed; }
+.np-bottomnav__ic { position: relative; display: inline-flex; }
+.np-bottomnav__badge {
+  position: absolute; inset-block-start: calc(var(--np-dot-size) * -.6); inset-inline-end: calc(var(--np-dot-size) * -.9);
+  min-width: var(--np-space-4); height: var(--np-space-4); padding-inline: var(--np-space-1);
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--np-radius-full); background: var(--np-danger); color: var(--np-color-white);
+  border: var(--np-dot-ring) solid var(--np-surface);
+  font-size: calc(var(--np-type-caption-size) - var(--np-space-1) / 2); font-weight: var(--np-weight-semibold);
+}
+
+/* OTP INPUT (canonical: NPOTPInput.dc.html) — 6 cells, LTR-isolated run */
+.np-otp { display: flex; flex-direction: column; gap: var(--np-space-2); }
+.np-otp__run { display: flex; gap: var(--np-otp-gap); direction: ltr; unicode-bidi: isolate; }
+.np-otp__cell {
+  box-sizing: border-box; flex: none; width: var(--np-otp-cell-w); height: var(--np-otp-cell-h);
+  text-align: center; border: 1px solid var(--np-input-border); border-radius: var(--np-otp-radius);
+  background: var(--np-surface); color: var(--np-text-primary);
+  font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant);
+  font-size: var(--np-type-h2-size); font-weight: var(--np-weight-semibold);
+}
+.np-otp__cell:focus-visible { outline: var(--np-focus-width) solid var(--np-focus-ring); outline-offset: var(--np-focus-offset); border-color: var(--np-action-primary); }
+.np-otp__cell[data-filled="true"] { border-color: var(--np-border-strong); }
+.np-otp[data-state="error"] .np-otp__cell { border-color: var(--np-danger-border); background: var(--np-danger-soft); }
+.np-otp__cell[disabled] { background: var(--np-surface-subtle); color: var(--np-text-disabled); cursor: not-allowed; }
+.np-otp__msg { display: inline-flex; align-items: center; gap: var(--np-space-2); font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line); color: var(--np-danger-ink); }
+.np-otp__help { font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line); color: var(--np-text-secondary); }
+
+/* ==========================================================================
+   10. MOBILE SHIFT & METER DOMAIN — CC-014 / Phase 2
+   NPConnectivityBanner · NPSuccessState · NPShiftStatusCard · NPShiftProgress
+   NPReadingListItem · NPMeterReadingField · NPMeterPhoto · NPFuelBadge
+   NPNozzleLabel · NPReadingDifference · NPReviewSection · NPSyncBadge.
+   readingMode (opening|closing) never forks geometry — labels only.
+   ========================================================================== */
+
+/* CONNECTIVITY BANNER (canonical: NPConnectivityBanner.dc.html) */
+.np-cbanner {
+  box-sizing: border-box; display: flex; align-items: center; gap: var(--np-space-2);
+  width: 100%; min-height: var(--np-size-control-desktop); padding: var(--np-space-2) var(--np-space-3);
+  border: 1px solid var(--np-neutral-border); border-radius: var(--np-notice-radius);
+  background: var(--np-neutral-soft); color: var(--np-text-secondary);
+  font-family: var(--np-font-ui); font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line);
+}
+.np-cbanner__t { flex: 1; min-width: 0; font-weight: var(--np-weight-medium); }
+.np-cbanner--offline { background: var(--np-warning-soft); border-color: var(--np-warning-border); color: var(--np-warning-ink); }
+.np-cbanner--syncing { background: var(--np-info-soft); border-color: var(--np-info-border); color: var(--np-info-ink); }
+.np-cbanner--synced { background: var(--np-success-soft); border-color: var(--np-success-border); color: var(--np-success-ink); }
+.np-cbanner--failed { background: var(--np-danger-soft); border-color: var(--np-danger-border); color: var(--np-danger-ink); }
+
+/* SYNC BADGE — per-record, not the app-level NPSyncStatus chip */
+.np-syncbadge {
+  display: inline-flex; align-items: center; gap: var(--np-space-1); height: var(--np-chip-h);
+  padding-inline: var(--np-space-2); border-radius: var(--np-chip-radius);
+  border: 1px solid var(--np-neutral-border); background: var(--np-neutral-soft); color: var(--np-neutral-ink);
+  font-family: var(--np-font-ui); font-size: var(--np-type-caption-size); font-weight: var(--np-weight-medium);
+}
+.np-syncbadge--pending { background: var(--np-warning-soft); border-color: var(--np-warning-border); color: var(--np-warning-ink); }
+.np-syncbadge--syncing { background: var(--np-info-soft); border-color: var(--np-info-border); color: var(--np-info-ink); }
+.np-syncbadge--synced { background: var(--np-success-soft); border-color: var(--np-success-border); color: var(--np-success-ink); }
+.np-syncbadge--failed { background: var(--np-danger-soft); border-color: var(--np-danger-border); color: var(--np-danger-ink); }
+
+/* SUCCESS STATE (canonical: NPSuccessState.dc.html) — sibling of Empty/Error */
+.np-success-state { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--np-space-3); padding: var(--np-space-6); font-family: var(--np-font-ui); }
+.np-success-state__disc {
+  width: calc(var(--np-space-10) + var(--np-space-6)); height: calc(var(--np-space-10) + var(--np-space-6));
+  border-radius: var(--np-radius-full); background: var(--np-success-soft); color: var(--np-success-ink);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.np-success-state__t { font-size: var(--np-type-h2-size); line-height: var(--np-type-h2-line); font-weight: var(--np-type-h2-weight); color: var(--np-text-primary); }
+.np-success-state__d { font-size: var(--np-type-body-size); line-height: var(--np-type-body-line); color: var(--np-text-secondary); text-wrap: pretty; }
+
+/* SHIFT STATUS CARD */
+.np-shiftcard {
+  box-sizing: border-box; display: flex; flex-direction: column; gap: var(--np-space-3);
+  padding: var(--np-mcard-pad); background: var(--np-surface); border: 1px solid var(--np-border);
+  border-radius: var(--np-mcard-radius); font-family: var(--np-font-ui);
+}
+.np-shiftcard__head { display: flex; align-items: center; gap: var(--np-space-3); }
+.np-shiftcard__t { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.np-shiftcard__t > b { font-size: var(--np-type-h3-size); line-height: var(--np-type-h3-line); font-weight: var(--np-type-h3-weight); color: var(--np-text-primary); }
+.np-shiftcard__t > span { font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line); color: var(--np-text-secondary); }
+.np-shiftcard__meta { display: flex; gap: var(--np-space-2); }
+.np-shiftcard__cell { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--np-kpi-gap); padding: var(--np-space-2) var(--np-space-3); border-radius: var(--np-radius-md); background: var(--np-surface-subtle); }
+.np-shiftcard__cell > span { font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-shiftcard[data-state="active"] { border-color: var(--np-success-border); }
+
+/* SHIFT PROGRESS */
+.np-prog { display: flex; flex-direction: column; gap: var(--np-space-2); font-family: var(--np-font-ui); }
+.np-prog__row { display: flex; align-items: center; justify-content: space-between; gap: var(--np-space-3); font-size: var(--np-type-label-size); font-weight: var(--np-weight-medium); color: var(--np-text-secondary); }
+.np-prog__track { height: var(--np-progress-h); border-radius: var(--np-radius-full); background: var(--np-surface-subtle); overflow: hidden; }
+.np-prog__fill { height: 100%; border-radius: var(--np-radius-full); background: var(--np-action-primary); }
+.np-prog[data-mode="closing"] .np-prog__fill { background: var(--np-color-blue-deep); }
+
+/* READING LIST ITEM */
+.np-readrow {
+  box-sizing: border-box; display: flex; align-items: center; gap: var(--np-space-3); width: 100%;
+  min-height: var(--np-size-control-touch); padding: var(--np-space-3); text-align: start;
+  background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-radius-md);
+  font-family: var(--np-font-ui); color: var(--np-text-primary); cursor: pointer;
+}
+.np-readrow:focus-visible { outline: var(--np-focus-width) solid var(--np-focus-ring); outline-offset: var(--np-focus-offset); }
+.np-readrow__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--np-kpi-gap); }
+.np-readrow__v { font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-readrow[data-status="done"] { border-color: var(--np-success-border); }
+.np-readrow[data-status="active"] { border-color: var(--np-action-primary); }
+.np-readrow[data-status="error"] { border-color: var(--np-danger-border); background: var(--np-danger-soft); }
+
+/* FUEL BADGE — configurable label; no hard-coded fuel name in the component */
+.np-fuel { display: inline-flex; align-items: center; gap: var(--np-space-1); height: var(--np-chip-h); padding-inline: var(--np-space-2); border-radius: var(--np-chip-radius); border: 1px solid var(--np-border); background: var(--np-surface-subtle); color: var(--np-color-blue-deep); font-family: var(--np-font-ui); font-size: var(--np-type-caption-size); font-weight: var(--np-weight-semibold); }
+.np-fuel__dot { width: var(--np-dot-size); height: var(--np-dot-size); border-radius: var(--np-radius-full); background: currentColor; }
+
+/* NOZZLE LABEL — pump + nozzle numbers, numerals LTR-isolated */
+.np-nozzle { display: inline-flex; align-items: baseline; gap: var(--np-space-2); font-family: var(--np-font-ui); font-size: var(--np-type-body-size); font-weight: var(--np-weight-semibold); color: var(--np-text-primary); }
+.np-nozzle__sep { color: var(--np-text-disabled); }
+
+/* METER READING FIELD */
+.np-mfield { display: flex; flex-direction: column; gap: var(--np-space-2); font-family: var(--np-font-ui); }
+.np-mfield__box { box-sizing: border-box; display: flex; align-items: center; gap: var(--np-space-2); height: var(--np-size-action-worker); padding-inline: var(--np-space-3); border: 1px solid var(--np-input-border); border-radius: var(--np-input-radius); background: var(--np-surface); }
+.np-mfield__in { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--np-text-primary); font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant); font-size: var(--np-type-h3-size); font-weight: var(--np-weight-semibold); direction: ltr; unicode-bidi: isolate; text-align: start; }
+.np-mfield__unit { flex: none; font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-mfield[data-state="focused"] .np-mfield__box { border-color: var(--np-action-primary); box-shadow: 0 0 0 var(--np-focus-width) color-mix(in srgb, var(--np-action-primary) 26%, transparent); }
+.np-mfield[data-state="error"] .np-mfield__box { border-color: var(--np-danger-border); background: var(--np-danger-soft); }
+.np-mfield[data-state="warning"] .np-mfield__box { border-color: var(--np-warning-border); }
+.np-mfield[data-state="disabled"] .np-mfield__box { background: var(--np-surface-subtle); }
+.np-mfield__msg { display: flex; align-items: flex-start; gap: var(--np-space-2); font-size: var(--np-type-caption-size); line-height: var(--np-type-caption-line); }
+.np-mfield__msg--err { color: var(--np-danger-ink); }
+.np-mfield__msg--warn { color: var(--np-warning-ink); }
+.np-mfield__msg--help { color: var(--np-text-secondary); }
+
+/* METER PHOTO */
+.np-mphoto { display: flex; flex-direction: column; gap: var(--np-space-2); font-family: var(--np-font-ui); }
+.np-mphoto__box { box-sizing: border-box; position: relative; height: var(--np-photo-h); border: 1px dashed var(--np-border-strong); border-radius: var(--np-radius-md); background: var(--np-surface-subtle); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--np-space-2); overflow: hidden; color: var(--np-text-secondary); font-size: var(--np-type-caption-size); }
+.np-mphoto[data-state="captured"] .np-mphoto__box, .np-mphoto[data-state="saved"] .np-mphoto__box, .np-mphoto[data-state="uploading"] .np-mphoto__box { border-style: solid; }
+.np-mphoto[data-state="error"] .np-mphoto__box { border-style: solid; border-color: var(--np-danger-border); background: var(--np-danger-soft); color: var(--np-danger-ink); }
+.np-mphoto__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.np-mphoto__foot { display: flex; align-items: center; gap: var(--np-space-2); }
+
+/* READING DIFFERENCE — system-calculated, never editable */
+.np-delta { display: flex; flex-direction: column; gap: var(--np-space-2); padding: var(--np-space-3); border: 1px solid var(--np-border); border-radius: var(--np-radius-md); background: var(--np-surface-subtle); font-family: var(--np-font-ui); }
+.np-delta__row { display: flex; align-items: center; justify-content: space-between; gap: var(--np-space-3); font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-delta__row > b { font-family: var(--np-numeric-family); font-variant-numeric: var(--np-numeric-variant); font-size: var(--np-type-body-size); color: var(--np-text-primary); direction: ltr; unicode-bidi: isolate; }
+.np-delta__row--total { padding-block-start: var(--np-space-2); border-block-start: 1px solid var(--np-border); }
+.np-delta__row--total > b { font-size: var(--np-type-h3-size); color: var(--np-color-blue-deep); }
+.np-delta__note { display: inline-flex; align-items: center; gap: var(--np-space-1); font-size: var(--np-type-caption-size); color: var(--np-text-disabled); }
+
+/* REVIEW SECTION */
+.np-review { display: flex; flex-direction: column; gap: var(--np-space-2); padding: var(--np-space-3) var(--np-space-4); background: var(--np-surface); border: 1px solid var(--np-border); border-radius: var(--np-radius-md); font-family: var(--np-font-ui); }
+.np-review__h { display: flex; align-items: center; gap: var(--np-space-2); font-size: var(--np-type-label-size); font-weight: var(--np-weight-semibold); color: var(--np-color-blue-deep); }
+.np-review__row { display: flex; align-items: center; justify-content: space-between; gap: var(--np-space-3); padding-block: var(--np-space-1); font-size: var(--np-type-caption-size); color: var(--np-text-secondary); }
+.np-review__row > b { color: var(--np-text-primary); }

@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="np-tokens.css">
+<link rel="stylesheet" href="np-system.css">
+<script src="np-icons.js"></script>
+<style>body{margin:0;background:var(--np-canvas);font-family:var(--np-font-ui);color:var(--np-text-primary)}
+a{color:var(--np-text-link);text-decoration:none}a:hover{color:var(--np-action-primary-hover)}
+/* —— migrated from «01 · Foundation - Brand Dark source» (NP-PHYSICAL-MERGE-FOUNDATION-01).
+   Every rule is scoped under #np-brand-dark so the generic local class names
+   (.sec .sh .panel .lbl .col .mono …) and the bare table selectors cannot leak
+   into the rest of Foundation. Values are unchanged. */
+#np-brand-dark h1,#np-brand-dark h2,#np-brand-dark h3{margin:0}
+#np-brand-dark .stroke{fill:none;stroke:currentColor;stroke-width:4.6;stroke-linecap:round;stroke-linejoin:round}
+#np-brand-dark .L{--sc:#F6F7FB;--sf:#FFFFFF;--sr:#F1F3F7;--se:#E9EDF4;--bd:#E4E7EC;--bd2:#F1F3F7;
+--t1:#1F2330;--t2:#455A64;--t3:#90A4AE;--pri:#2962FF;--deep:#1A237E;--onPri:#FFFFFF;
+--ok:#0B6B3A;--okbg:#E8F5EC;--okbd:#BEDFC9;--warn:#7A4A00;--warnbg:#FFF6E8;--warnbd:#F3D9AE}
+/* ═══ BRAND DARK — RUNTIME DERIVATION (NP-DESIGN-CLOSURE-01 · P2 · CLOSED 2026-09-20)
+   Owner ruling: Dark derives from the CLIENT identity colour and keeps its hue.
+   Never black · never charcoal · never a brand↔black blend.
+   INPUT  theme.brand.deep (authoritative) → fallback theme.brand.primary
+   SPACE  OKLCH
+   H = hue(deep)                                    preserved exactly
+   C = clamp(chroma(deep) × 0.42, 0.030, 0.055)     brand-chroma guard
+   L = canvas .205 · surface .245 · raised .285 · elevated .325
+       darkness guard L ≥ 0.18 · constant .040 step → hierarchy always readable
+   border L .590, C×0.85, same H      → ≥3:1 on all four surfaces
+   text   L .965/.845/.700, C×0.30, same H
+   action L max(.74, L(primary)), C clamp(.10,.13), H(primary)
+   on-action #0A1020 fixed ink (≥4.5:1 on every tenant)
+   focus  L .860 C .140 same H
+   ROUNDING L,C → 3dp · H → 1dp · sRGB 8-bit gamut-clamped
+   Status colours stay semantic (not re-hued); only dark variants tuned.
+   tA/tB/tC below = the SAME formula on three configured brands. */
+#np-brand-dark .BD{
+  --bd-hue:270.3; --bd-chroma:0.055;
+  --sc:#0E1530; --sf:#161E3B; --sr:#202845; --se:#293250;
+  --bd:#727C9A; --bd2:#202845;
+  --t1:#EFF3FF; --t2:#C8CCD8; --t3:#9A9EA9;
+  --pri:#81A9FD; --onPri:#0A1020; --focus:#AECCFF;
+  --deep:#293250;
+  --ok:#7FD6A2;--okbg:color-mix(in srgb,#7FD6A2 15%,var(--sf));--okbd:color-mix(in srgb,#7FD6A2 34%,var(--sf));
+  --warn:#F0C478;--warnbg:color-mix(in srgb,#F0C478 15%,var(--sf));--warnbd:color-mix(in srgb,#F0C478 34%,var(--sf));
+  --danger:#FF9A94;--info:#8FC3FF}
+#np-brand-dark .tA{--deepsrc:#1A237E;--bd-hue:270.3;--bd-chroma:0.055;--sc:#0E1530;--sf:#161E3B;--sr:#202845;--se:#293250;--bd:#727C9A;--bd2:#202845;--t1:#EFF3FF;--t2:#C8CCD8;--t3:#9A9EA9;--pri:#81A9FD;--onPri:#0A1020;--focus:#AECCFF;--deep:#293250}
+#np-brand-dark .tB{--deepsrc:#00453C;--bd-hue:180.5;--bd-chroma:0.03;--sc:#051C18;--sf:#0E2521;--sr:#182F2B;--se:#223935;--bd:#6E827E;--bd2:#182F2B;--t1:#EDF6F4;--t2:#C6CECC;--t3:#99A09F;--pri:#55C0B0;--onPri:#0A1020;--focus:#45EFD5;--deep:#223935}
+#np-brand-dark .tC{--deepsrc:#7A1F5C;--bd-hue:344.1;--bd-chroma:0.055;--sc:#280B1D;--sf:#321527;--sr:#3D1E31;--se:#48283B;--bd:#927284;--bd2:#3D1E31;--t1:#FCEFF6;--t2:#D5C8CF;--t3:#A79AA1;--pri:#EA86AE;--onPri:#0A1020;--focus:#FFABE7;--deep:#48283B}
+#np-brand-dark .mini{position:relative;box-sizing:border-box;width:268px;flex:none;overflow:hidden;border-radius:18px;background:var(--sc);border:1px solid var(--bd);color:var(--t1);display:flex;flex-direction:column}
+#np-brand-dark .mh{flex:none;box-sizing:border-box;display:flex;align-items:center;gap:9px;min-height:60px;padding:11px 13px;background:var(--deep);color:#fff}
+#np-brand-dark .mh b{font:800 13.5px/20px 'Noto Sans Arabic',sans-serif;color:#fff}
+#np-brand-dark .mh span{font:500 10.5px/15px 'Noto Sans Arabic',sans-serif;color:rgba(255,255,255,.8)}
+#np-brand-dark .mlogo{display:flex;align-items:center;justify-content:center;width:32px;height:32px;flex:none;border-radius:10px;background:rgba(255,255,255,.16);color:#fff;font:800 12px/1 Inter,system-ui,sans-serif}
+#np-brand-dark .mb{flex:1;display:flex;flex-direction:column;gap:8px;padding:11px 13px}
+#np-brand-dark .mcard{box-sizing:border-box;display:flex;flex-direction:column;gap:7px;padding:10px;border-radius:13px;background:var(--sf);border:1px solid var(--bd)}
+#np-brand-dark .mrow{box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:11px;background:var(--sf);border:1px solid var(--bd)}
+#np-brand-dark .mk{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;padding:7px 9px;box-sizing:border-box;border-radius:11px;background:var(--sr);border:1px solid var(--bd2)}
+#np-brand-dark .mk b{font:700 13px/18px Inter,system-ui,sans-serif;direction:ltr;color:var(--pri)}
+#np-brand-dark .mk span{font:400 9.5px/14px 'Noto Sans Arabic',sans-serif;color:var(--t2)}
+#np-brand-dark .mt{font:700 12.5px/18px 'Noto Sans Arabic',sans-serif;color:var(--t1)}
+#np-brand-dark .mc{font:400 10.5px/16px 'Noto Sans Arabic',sans-serif;color:var(--t2)}
+#np-brand-dark .mfield{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;height:40px;padding:0 11px;border-radius:11px;background:var(--sr);border:1px solid var(--bd);font:500 11px/1 'Noto Sans Arabic',sans-serif;color:var(--t3)}
+#np-brand-dark .mbtn{display:flex;align-items:center;justify-content:center;height:40px;border-radius:11px;background:var(--pri);color:var(--onPri);border:0;font:700 12.5px/1 'Noto Sans Arabic',sans-serif}
+#np-brand-dark .mbtn2{display:flex;align-items:center;justify-content:center;height:40px;border-radius:11px;background:var(--sf);color:var(--pri);border:1px solid var(--pri);font:700 12.5px/1 'Noto Sans Arabic',sans-serif}
+#np-brand-dark .mchip{display:inline-flex;align-items:center;gap:4px;height:23px;padding:0 8px;border-radius:7px;font:600 10px/1 'Noto Sans Arabic',sans-serif}
+#np-brand-dark .mchip.ok{background:var(--okbg);border:1px solid var(--okbd);color:var(--ok)}
+#np-brand-dark .mchip.wn{background:var(--warnbg);border:1px solid var(--warnbd);color:var(--warn)}
+#np-brand-dark .mnav{flex:none;display:flex;align-items:center;height:52px;background:var(--se);border-top:1px solid var(--bd)}
+#np-brand-dark .mnav i{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:600 9px/13px 'Noto Sans Arabic',sans-serif;font-style:normal;color:var(--t3)}
+#np-brand-dark .mnav i.on{color:var(--pri)}
+#np-brand-dark .mdot{width:16px;height:16px;border-radius:5px;background:currentColor;opacity:.85}
+#np-brand-dark .mtb{overflow:hidden;border-radius:13px;border:1px solid var(--bd);background:var(--sf)}
+#np-brand-dark .mtb .th{display:flex;align-items:center;gap:8px;height:34px;padding:0 10px;background:var(--sr);font:700 10.5px/1 'Noto Sans Arabic',sans-serif;color:var(--t2);border-bottom:1px solid var(--bd2)}
+#np-brand-dark .mtb .tr{display:flex;align-items:center;gap:8px;height:36px;padding:0 10px;font:500 10.5px/1 'Noto Sans Arabic',sans-serif;color:var(--t1);border-bottom:1px solid var(--bd2)}
+#np-brand-dark .mtb .tr.sel{background:color-mix(in srgb,var(--pri) 16%,var(--sf))}
+#np-brand-dark .mtb .tr span:first-child{flex:1;min-width:0}
+#np-brand-dark .mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+#np-brand-dark .sec{display:flex;flex-direction:column;gap:16px}
+#np-brand-dark .sh{font:800 20px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330}
+#np-brand-dark .sc2{font:400 13px/21px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:860px;text-wrap:pretty}
+#np-brand-dark .panel{display:flex;flex-direction:column;gap:12px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+#np-brand-dark .lbl{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#37474F}
+#np-brand-dark .lbl.bad{background:#FDF3F3;border-color:#E9C9C9;color:#9B2222}
+#np-brand-dark .lbl.good{background:#E8F5EC;border-color:#BEDFC9;color:#0B6B3A}
+#np-brand-dark .cols{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+#np-brand-dark .col{display:flex;flex-direction:column;gap:8px}
+#np-brand-dark .rung{display:flex;gap:8px;flex-wrap:wrap}
+#np-brand-dark .rung div{width:118px;box-sizing:border-box;border-radius:11px;border:1px solid #DDE4EE;overflow:hidden}
+#np-brand-dark .rung div i{display:block;height:46px}
+#np-brand-dark .rung div p{margin:0;padding:6px 8px;background:#fff;font:600 9.5px/14px Inter,system-ui,sans-serif;color:#37474F}
+#np-brand-dark table{border-collapse:collapse;width:100%}
+#np-brand-dark th,#np-brand-dark td{text-align:start;padding:8px 10px;border-bottom:1px solid #EEF1F6;font:500 12px/19px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+#np-brand-dark th{font-weight:700;color:#455A64;background:#F6F7FB}</style>
+</helmet>
+
+<div dir="rtl" style="padding:26px 40px 0;display:flex;flex-direction:column;gap:10px;font-family:'Noto Sans Arabic',system-ui,sans-serif;background:#F6F7FB">
+<div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#E8F4FD;border:1px solid #BEDCF2;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#01579B">01 · Foundation</span>
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#E8F5EC;border:1px solid #BEDFC9;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#0B6B3A">مصدر الحقيقة للـ Tokens والهندسة والتفاعل والاتجاه والإتاحة</span>
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 Inter,system-ui,sans-serif;color:#37474F;direction:ltr">356 tokens · np-tokens.css · np-system.css</span>
+</div>
+<p style="margin:0;font:400 13px/21px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:900px">أقسام هذا النطاق داخل هذه الصفحة نفسها: الأساس والمكوّنات والتوكنز · <a href="#np-mobile-foundation" style="color:#2962FF;text-decoration:none">قواعد الجوال</a> (الكثافة · اللمس · Safe Area · الشريط السفلي) · <a href="#np-brand-dark" style="color:#2962FF;text-decoration:none">Brand Dark</a> (سلّم الأسطح المشتق ومعايير القبول). دُمج الملفان المصدريان هنا في NP-PHYSICAL-MERGE-FOUNDATION-01 دون تغيير أي قيمة. لا تُعرَّف Tokens أو هندسة داخل أي صفحة تطبيق؛ أي تعريف محلي يُحال إلى هنا. قيَم الـ Tokens لم تُمَس في التنظيف.</p>
+<div style="height:1px;background:#DDE4EE;margin-top:6px"></div>
+</div>
+
+<div class="np-root" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="desktop" style="padding:40px 44px 72px;display:flex;flex-direction:column;gap:44px">
+
+<div style="display:flex;flex-direction:column;gap:10px;max-width:960px">
+<div class="np-row"><dc-import name="NPLogo" hint-size="240px,48px"></dc-import></div>
+<h1 class="np-display">Nile Petro App — Production Foundation</h1>
+<div class="np-body" style="color:var(--np-text-secondary)">المصدر الإنتاجي المعتمد: توكنز مركزية · مكوّنات مشتركة · أنماط · هيكل تطبيق واحد. ليست شاشة منتج ولا تحتوي أي محتوى تشغيلي.</div>
+<div class="np-row">
+<span class="np-badge">theme nile-petro</span><span class="np-badge">scheme light</span><span class="np-badge">dir rtl / ltr</span><span class="np-badge">density desktop / touch</span><span class="np-badge">layout compact / medium / expanded</span>
+</div>
+</div>
+
+
+
+<section id="cc-004-review" style="display:flex;flex-direction:column;gap:var(--np-space-5);padding:var(--np-space-6);border:1px solid var(--np-border);border-radius:var(--np-card-radius);background:var(--np-surface)">
+<sc-if value="{{s1}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)">
+<div class="np-row"><span class="np-badge">CC-004</span><span class="np-badge">FOUNDATION 1.1.0</span><span class="np-badge">TEMPLATE DEPENDENCY CLOSURE</span></div>
+<h2 class="np-h1">إغلاق تبعيات القوالب</h2>
+<div class="np-body" style="color:var(--np-text-secondary)">عناصر تحكم جديدة + عقد أعمدة الجدول + سلوك compact لكل من BulkBar والترقيم. لا إعادة تصميم لأي مكوّن قائم.</div>
+</div>
+
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:300px"><span class="np-badge">A · NPSelect</span>
+<dc-import name="NPSelect" value="الخيار الأول" hint-size="300px,84px"></dc-import>
+<dc-import name="NPSelect" label="حقل مطلوب" required="{{ true }}" hint-size="300px,84px"></dc-import>
+<dc-import name="NPSelect" label="خطأ" error="سبب الخطأ يُذكر نصًا" hint-size="300px,104px"></dc-import>
+<dc-import name="NPSelect" label="معطّل" disabled="{{ true }}" hint-size="300px,84px"></dc-import>
+<div data-density="touch"><dc-import name="NPSelect" label="كثافة اللمس 48" value="الخيار الثاني" hint-size="300px,92px"></dc-import></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:300px"><span class="np-badge">B · NPDatePicker</span>
+<dc-import name="NPDatePicker" hint-size="300px,84px"></dc-import>
+<dc-import name="NPDatePicker" label="التاريخ" value="02/09/2026" hint-size="300px,84px"></dc-import>
+<dc-import name="NPDatePicker" label="خطأ" error="تاريخ غير صحيح" hint-size="300px,104px"></dc-import>
+<dc-import name="NPDatePicker" label="معطّل" disabled="{{ true }}" hint-size="300px,84px"></dc-import>
+<div data-density="touch"><dc-import name="NPDatePicker" label="كثافة اللمس 48" value="02/09/2026" hint-size="300px,92px"></dc-import></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:300px"><span class="np-badge">C · NPCheckbox</span>
+<dc-import name="NPCheckbox" label="غير محدد" hint-size="300px,48px"></dc-import>
+<dc-import name="NPCheckbox" label="محدد" state="checked" hint-size="300px,48px"></dc-import>
+<dc-import name="NPCheckbox" label="جزئي" state="indeterminate" hint-size="300px,48px"></dc-import>
+<dc-import name="NPCheckbox" label="معطّل" disabled="{{ true }}" hint-size="300px,48px"></dc-import>
+<span class="np-caption">هدف التفاعل 48 في الكثافتين · &lt;input type=checkbox&gt; داخل &lt;label&gt;</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:300px"><span class="np-badge">D · NPRadio</span>
+<dc-import name="NPRadio" hint-size="300px,170px"></dc-import>
+<dc-import name="NPRadio" group-label="مجموعة بعنصر معطّل" disabled-index="{{ 2 }}" hint-size="300px,170px"></dc-import>
+<span class="np-caption">role=radiogroup · اسم واحد لكل المجموعة · تنقّل بالأسهم أصلي</span>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">E · NPDataTable — عقد الأعمدة والاستجابة</span>
+<div class="np-caption">العقد: <code>id:label:priority:align:type:width:card</code> — expanded كامل · medium يخفي low ثم medium · compact يحوّل الصفوف إلى بطاقات من نفس البيانات.</div>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">expanded 1440</span>
+<div style="width:720px;height:200px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div class="np-surface-root" style="width:1440px;height:400px;transform:scale(0.5);transform-origin:top left" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="desktop"><div style="padding:var(--np-space-4)"><dc-import name="NPDataTable" row-count="{{ 3 }}" hint-size="100%,260px"></dc-import></div></div></div></div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">medium 1024 — low مخفي</span>
+<div style="width:512px;height:200px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div class="np-surface-root" style="width:1024px;height:400px;transform:scale(0.5);transform-origin:top left" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="desktop"><div style="padding:var(--np-space-4)"><dc-import name="NPDataTable" row-count="{{ 3 }}" hint-size="100%,260px"></dc-import></div></div></div></div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">compact 360 — بطاقات</span>
+<div style="width:360px;height:400px;overflow:auto;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div class="np-surface-root" style="width:360px;min-height:400px" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="touch"><div style="padding:var(--np-space-3)"><dc-import name="NPDataTable" row-count="{{ 3 }}" hint-size="100%,300px"></dc-import></div></div></div></div>
+</div>
+</div>
+
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">F · NPBulkBar compact 360</span>
+<div style="width:360px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div class="np-surface-root" style="width:360px" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="touch"><div style="padding:var(--np-space-3)"><dc-import name="NPBulkBar" count="{{ 12 }}" hint-size="100%,64px"></dc-import></div></div></div>
+<span class="np-caption" style="width:360px">العدد + الإجراء المدمّر مباشرةً + الباقي في القائمة. بلا فائض أفقي وبلا صف ثانٍ.</span>
+<span class="np-badge">expanded 1440</span>
+<div style="width:720px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div class="np-surface-root" style="width:1440px;transform:scale(0.5);transform-origin:top left" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="desktop"><div style="padding:var(--np-space-4)"><dc-import name="NPBulkBar" count="{{ 12 }}" hint-size="100%,64px"></dc-import></div></div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">G · NPPagination compact 360 · 12 صفحة</span>
+<div style="width:360px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div class="np-surface-root" style="width:360px" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="touch"><div style="padding:var(--np-space-3)"><dc-import name="NPPagination" total="{{ 12 }}" current="{{ 5 }}" hint-size="100%,48px"></dc-import></div></div></div>
+<span class="np-caption" style="width:360px">سابق · الصفحة الحالية · التالي · المدى — بلا سلسلة أرقام.</span>
+<span class="np-badge">medium 1024 — نافذة مختصرة</span>
+<div style="width:512px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div class="np-surface-root" style="width:1024px;transform:scale(0.5);transform-origin:top left" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="desktop"><div style="padding:var(--np-space-4)"><dc-import name="NPPagination" total="{{ 12 }}" current="{{ 5 }}" hint-size="100%,48px"></dc-import></div></div></div>
+<span class="np-badge">expanded 1440 — كامل</span>
+<div style="width:720px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div class="np-surface-root" style="width:1440px;transform:scale(0.5);transform-origin:top left" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="desktop"><div style="padding:var(--np-space-4)"><dc-import name="NPPagination" total="{{ 12 }}" current="{{ 5 }}" hint-size="100%,48px"></dc-import></div></div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">LTR — نفس المكوّنات</span>
+<div style="width:360px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div class="np-surface-root" style="width:360px" dir="ltr" data-theme="nile-petro" data-scheme="light" data-density="touch"><div style="padding:var(--np-space-3);display:flex;flex-direction:column;gap:var(--np-space-3)"><dc-import name="NPBulkBar" count="{{ 12 }}" hint-size="100%,64px"></dc-import><dc-import name="NPPagination" total="{{ 12 }}" current="{{ 5 }}" hint-size="100%,48px"></dc-import><dc-import name="NPSelect" label="Select" value="Option one" options="Option one, Option two" hint-size="100%,84px"></dc-import><dc-import name="NPCheckbox" label="Checkbox" state="checked" hint-size="100%,48px"></dc-import></div></div></div>
+</div>
+</div>
+</div></sc-if>
+</section>
+
+<section id="cc-007-review" style="display:flex;flex-direction:column;gap:var(--np-space-5);padding:var(--np-space-6);border:1px solid var(--np-border);border-radius:var(--np-card-radius);background:var(--np-surface)">
+<sc-if value="{{s2}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)">
+<div class="np-row"><span class="np-badge">CC-007</span><span class="np-badge">FOUNDATION 1.4.0-rc.1</span><span class="np-badge">OPERATIONAL DOMAIN COMPONENTS</span><span class="np-badge">A11Y CORRECTIONS</span></div>
+<h2 class="np-h1">مكوّنات المجال التشغيلي + تصحيحات الوصولية</h2>
+<div class="np-body" style="color:var(--np-text-secondary)">١٨ مكوّنًا/نمطًا جديدًا وثلاثة امتدادات متوافقة. لكل قدرة عيّنة حيّة واحدة وقائمة حالات مكتوبة — القائمة المكتوبة مقصودة: الفهرس يبقى قابلًا للفتح، والحالات الكاملة تُفحص في ملف المكوّن نفسه وفي بوابة القدرات.</div>
+<div class="np-row"><span class="np-badge">warning solid 4.24 → 5.02</span><span class="np-badge">focus on deep 2.70 → 11.62</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-3)">
+<h3 class="np-h2" style="margin:0">١ · الإدخال والقيم</h3>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:330px;max-width:100%"><span class="np-badge">C01 · حقل نصي</span>
+<div class="np-notice np-notice--info" role="status"><np-icon name="info"></np-icon><div class="np-notice__body"><span class="np-notice__title">قدرة قائمة — أُعيد استخدامها كما هي</span><span class="np-notice__msg">عقد الحقل القانوني (.np-field / .np-input) لم يتغيّر في CC-007، وكل الحقول الجديدة ترثه. عيّناته قائمة في أقسام الفهرس السابقة.</span></div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:330px;max-width:100%"><span class="np-badge">C02 · NPTextarea</span>
+<dc-import name="NPTextarea" max-length="{{ 120 }}" hint-size="330px,150px"></dc-import>
+<dc-import name="NPTextarea" label="خطأ" error="سبب الخطأ نصًا" hint-size="330px,150px"></dc-import>
+<span class="np-caption">٦ حالات: افتراضي · تركيز · معبّأ · خطأ · معطّل · للقراءة فقط. نمو رأسي بين حدّين من التوكنز، بلا مقبض تحجيم، وعدّاد اختياري بحدّ من المستهلك.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:330px;max-width:100%"><span class="np-badge">C03 · NPReadingInput</span>
+<dc-import name="NPReadingInput" value="1234567890.125" hint-size="330px,110px"></dc-import>
+<dc-import name="NPReadingInput" label="خطأ" error="لا يمكن أن تقل عن القراءة السابقة" hint-size="330px,110px"></dc-import>
+<span class="np-caption">٦ حالات · ٣ خانات عشرية كحد أقصى وبلا فواصل آلاف أثناء التحرير · الوحدة والمراجع من المستهلك · لا صيغة ولا نوع وقود داخل المكوّن · ١٠ أرقام صحيحة + ٣ عشرية تظهر كاملة عند ٣٦٠.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:330px;max-width:100%"><span class="np-badge">C04 · NPAmountInput</span>
+<dc-import name="NPAmountInput" value="12500.00" hint-size="330px,110px"></dc-import>
+<dc-import name="NPAmountInput" label="خطأ" error="مبلغ غير مقبول" hint-size="330px,110px"></dc-import>
+<span class="np-caption">٦ حالات · العملة من الإعدادات لا من المكوّن · خانتان عشريتان · التحويل إلى وحدات صغرى وتقريبه مسؤولية المستهلك · بلا سقف ائتمان.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:350px;max-width:100%"><span class="np-badge">C05 · NPUnitPriceInput</span>
+<dc-import name="NPUnitPriceInput" value="120.00" equivalent="30.00" hint-size="350px,140px"></dc-import>
+<span class="np-caption">٧ حالات: افتراضي · تركيز · معبّأ مع مكافئ · المكافئ غير متاح بسبب · خطأ · معطّل · للقراءة فقط. المستهلك يملك التحويل والتقريب والتخزين والتحقق، ومعامل التحويل بيانات مساعدة لا محرّك قواعد.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:330px;max-width:100%"><span class="np-badge">C06 · NPAccessCodeInput</span>
+<dc-import name="NPAccessCodeInput" hint-size="330px,200px"></dc-import>
+<span class="np-caption">٦ حالات دلالية: فارغ · جزئي · مكتمل · خطأ · منشغل · معطّل — ووضعا إظهار (مقنّع/ظاهر) ليسا حالة سابعة. حقل واحد فقط، بلا إرسال تلقائي، autocomplete=off، واللصق يُطبَّع ولا يُقتطع.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:280px;max-width:100%"><span class="np-badge">C21 · NPValue</span>
+<div class="np-stack" style="gap:var(--np-space-2);padding:var(--np-space-4);border:1px solid var(--np-border);border-radius:var(--np-card-radius)">
+<dc-import name="NPValue" type="money" value="12500" hint-size="190px,24px"></dc-import>
+<dc-import name="NPValue" type="date" value="2026-09-02" hint-size="190px,24px"></dc-import>
+<dc-import name="NPValue" type="money" value="" unavailable-reason="بانتظار سعر الشراء" hint-size="190px,24px"></dc-import>
+</div>
+<span class="np-caption">٩ أنواع: مبلغ · لترات · قراءة · نسبة · عدد · أيام · تاريخ · وقت · تاريخ ووقت. أرقام غربية جدولية معزولة LTR، والوحدة عند نهاية السطر، والإشارة داخل المقطع المعزول، ولا يُعرض صفر لقيمة مجهولة بل سبب نصي.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:400px;max-width:100%"><span class="np-badge">C22 · NPDatePicker — نطاق (امتداد)</span>
+<dc-import name="NPDatePicker" range="{{ true }}" label="نهاية قبل بداية" value="2026-09-10" end-value="2026-09-02" hint-size="400px,170px"></dc-import>
+<span class="np-caption">بداية ونهاية · النهاية لا تسبق البداية وإلا حالة خطأ برسالة من المستهلك · إعدادات مسبقة محايدة · إجراء مسح · العرض DD/MM/YYYY بتوقيت المحطة · الشكل المضغوط يستخدم NPBottomSheet ولا تُنشأ طبقة جديدة · الحقل المفرد دون أي تغيير.</span>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-3)">
+<h3 class="np-h2" style="margin:0">٢ · الالتقاط التشغيلي والمزامنة</h3>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:350px;max-width:100%"><span class="np-badge">C07 · NPPhotoCapture</span>
+<dc-import name="NPPhotoCapture" state="failed" hint-size="350px,290px"></dc-import>
+<span class="np-caption">١٠ حالات: فارغ · التقاط · تجهيز · معاينة · مطلوبة · إرسال · بانتظار المزامنة · فشل · إذن مرفوض · ملف غير مدعوم. إعادة الالتقاط متاحة من المعاينة والفشل وغير المدعوم. صورة واحدة لكل نسخة، بلا معرض وبلا أي مسار أو معرّف تقني.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:420px;max-width:100%"><span class="np-badge">C08 · NPSyncStatus</span>
+<dc-import name="NPSyncStatus" state="offline" pending="{{ 3 }}" hint-size="420px,56px"></dc-import>
+<dc-import name="NPSyncStatus" state="offline" failed="{{ 2 }}" pending="{{ 5 }}" hint-size="420px,56px"></dc-import>
+<span class="np-caption">٥ حالات: متزامن · دون اتصال · بانتظار(ن) · مزامنة(ن) · فشل(ن). الأسبقية: فشل &gt; مزامنة &gt; دون اتصال (مع العدد إن وُجد) &gt; بانتظار &gt; متزامن، والدمج الوحيد المسموح: دون اتصال+بانتظار، وفشل+بانتظار. أيقونة ونص وعدد دائمًا ولا لون وحده، والإعلان عند تغيّر الحالة لا عند تغيّر العدد.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:500px;max-width:100%"><span class="np-badge">C20 · NPInlineNotice</span>
+<dc-import name="NPInlineNotice" severity="warning" title="" message="الجهاز مسجّل ولكن غير موثّق." action-label="تفاصيل" hint-size="500px,70px"></dc-import>
+<dc-import name="NPInlineNotice" severity="danger" title="" message="سعر الشراء ناقص: العملية موقوفة." blocking="{{ true }}" hint-size="500px,70px"></dc-import>
+<span class="np-caption">٤ شدّات: معلومة · نجاح · تحذير · خطر · دائم وسياقي داخل المنطقة، ويختلف عن NPToast العابر و NPErrorState الذي يستبدل المحتوى · غير قابل للإغلاق افتراضيًا، والحالة الحاجبة لا تُغلق أبدًا وتأخذ role=alert بدل role=status · على الأزرق العميق: تعبئة ناعمة ونص فقط لأن الصلب يقيس 2.36–3.12 هناك.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:500px;max-width:100%"><span class="np-badge">C23 · NPFileAttachment</span>
+<dc-import name="NPFileAttachment" state="uploading" hint-size="500px,210px"></dc-import>
+<span class="np-caption">٧ حالات: فارغ · محدد · إرسال · تم · غير مقبول · فشل · معطّل. ليس بديلًا عن C07: صور العدّاد والقسيمة تبقى على NPPhotoCapture · الاسم والحجم المقروء فقط، بلا مسار ملف أو مفتاح تخزين أو معرّف تقني · التقدّم معلَن والفشل يعرض عقد إعادة محاولة.</span>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-3)">
+<h3 class="np-h2" style="margin:0">٣ · البيانات التشغيلية</h3>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:440px;max-width:100%"><span class="np-badge">C09 · NPAlertList</span>
+<dc-import name="NPAlertList" hint-size="440px,190px"></dc-import>
+<span class="np-caption">شدّتان فقط في V1: خطر ثم تحذير، مع حفظ ترتيب المستهلك داخل كل شدّة · العنصر بعداد صفر لا يُعرض إطلاقًا (العيّنة تتضمن عنصرًا صفريًا لإثبات ذلك) والقائمة الفارغة لا تُصيّر شيئًا.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:290px;max-width:100%"><span class="np-badge">C10 · NPKPI</span>
+<dc-import name="NPKPI" meta="مقارنة بالمناوبة السابقة" hint-size="290px,150px"></dc-import>
+<dc-import name="NPKPI" label="الربح" state="unavailable" hint-size="290px,130px"></dc-import>
+<span class="np-caption">٤ حالات: قيمة · غير متاحة بسبب · تحميل · خطأ. الصلاحية ليست حالة: القيمة الممنوعة عن المدير تُحذف من المصدر ولا تُعرض مموّهة أو محجوبة.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:350px;max-width:100%"><span class="np-badge">C11 · NPTankGauge</span>
+<dc-import name="NPTankGauge" hint-size="350px,170px"></dc-import>
+<dc-import name="NPTankGauge" tank="خزان 2" quantity="1500" hint-size="350px,170px"></dc-import>
+<span class="np-caption">٧ حالات: عادي · منخفض · حرج · يتجاوز السعة · سعة غير معروفة · تغطية غير متاحة · خطأ بيانات (كمية سالبة). الحدّان من المستهلك، والمساواة لا تُفعّل الحالة، والحالة نص ومؤشّر لا لون وحده. أي عدد من النسخ بلا تخطيط يفترض خزانين أو ثلاثة.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:540px;max-width:100%"><span class="np-badge">C12 · NPTrendChart</span>
+<dc-import name="NPTrendChart" series2="900,1020,880,1140,1010,1260" hint-size="540px,360px"></dc-import>
+<span class="np-caption">٤ حالات: بيانات · فارغ · تحميل · خطأ · سلسلة أو اثنتان · الأقدم عند بداية السطر والأحدث عند نهايته ومحور القيمة عند البداية · لونا السلسلتين مخصّصان ولا يستخدمان لون الإجراء ولا ألوان الحالة · البديل الوصولي إلزامي: ملخص نصي (الأول · الأحدث · الأدنى · الأعلى · التغيّر) وزر يحوّله إلى جدول مكافئ.</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">C13 · NPDataTable — صفوف شجرية + صف إجمالي (امتداد متوافق)</span>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">expanded 1400</span>
+<div style="width:700px;max-width:100%;height:230px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div class="np-surface-root" style="width:1400px;height:460px;transform:scale(0.5);transform-origin:top left" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="desktop"><div style="padding:var(--np-space-4)"><dc-import name="NPDataTable" tree="{{ true }}" row-count="{{ 2 }}" total-row="{{ true }}" hint-size="100%,340px"></dc-import></div></div></div></div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">compact 360 — بطاقة مجموعة</span>
+<div style="width:360px;max-width:100%;height:400px;overflow:auto;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div class="np-surface-root" style="width:360px;min-height:400px" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="touch"><div style="padding:var(--np-space-3)"><dc-import name="NPDataTable" tree="{{ true }}" row-count="{{ 2 }}" total-row="{{ true }}" hint-size="100%,360px"></dc-import></div></div></div></div>
+</div>
+<span class="np-caption">عمقان في V1 (مجموعة ← فرع) مع معامل يسمح بعمق أكبر · aria-level و aria-expanded · الأسهم تتبع الاتجاه (في RTL يسار يفتح ويمين يطوي، وفي LTR العكس) و Enter و Space يبدّلان · الصفوف الأم تُعلَّم كإجماليات نصًا ويمكن تعطيل إجراءاتها بسبب من المستهلك · صف إجمالي حقيقي في tfoot للكشوف وملخصات الأرباح · بلا عمود أو حالة سقف ائتمان · واجهة CC-004 دون أي تغيير.</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-3)">
+<h3 class="np-h2" style="margin:0">٤ · الأمان والإجراءات الحسّاسة</h3>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:520px;max-width:100%"><span class="np-badge">C14 · NPTypedConfirmation</span>
+<dc-import name="NPTypedConfirmation" require-secret="{{ true }}" hint-size="520px,620px"></dc-import>
+<span class="np-caption">٨ حالات: خامل · عدم مطابقة · جاهز · إرسال · محدود المحاولات (مقفل مع رسالة انتظار) · غير مُهيأ (النمط كله معطّل مع سبب) · ملخص نجاح · إخفاق. المطابقة نصية دقيقة بعد تشذيب الأطراف وجمع المسافات الداخلية فقط، واللصق مسموح، والتأكيد معطّل حتى المطابقة ووجود الرمز، وبلا أي منطق إعادة تعيين.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:380px;max-width:100%"><span class="np-badge">C16 · NPMaskedReveal — سر لمرة واحدة (امتداد)</span>
+<dc-import name="NPMaskedReveal" mode="one-time" value="8F42-9C17-6BD0" allow-copy="{{ true }}" hint-size="380px,230px"></dc-import>
+<span class="np-caption">المخرج الوحيد إقرار صريح · الغطاء و Escape لا يغلقان، و Escape ينقل التركيز إلى زر الإقرار · بعد الإقرار تُتلف القيمة من حالة المكوّن ولا يمكن إعادة عرضها · لا صياغة ولا إمكانية توحي بالاسترجاع · الوضع الافتراضي (كشف متكرر) دون أي تغيير.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:500px;max-width:100%"><span class="np-badge">C19 · NPPasskeyRow</span>
+<dc-import name="NPPasskeyRow" label="المفتاح الأخير" state="last-remaining" hint-size="500px,150px"></dc-import>
+<span class="np-caption">٥ حالات: افتراضي · هذا الجهاز · الأخير المتبقّي (تحذير أن إزالته توقف القفل الحيوي) · قيد الإزالة · خطأ. الحقول: التسمية وتاريخ الإنشاء وآخر استخدام أو خانة «لم يُستخدم» وعلامة هذا الجهاز. الإزالة تفتح تأكيدًا محميًا ولا تحذف مباشرة، ولا يُوضع هذا الصف في قائمة مستخدم الشريط الجانبي.</span>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-3)">
+<h3 class="np-h2" style="margin:0">٥ · البُنى وأوّليات التنقّل</h3>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:520px;max-width:100%"><span class="np-badge">C15 · NPStepFlow</span>
+<dc-import name="NPStepFlow" error-at="{{ 2 }}" hint-size="520px,70px"></dc-import>
+<span class="np-badge">compact 360</span>
+<div style="width:360px;max-width:100%;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div class="np-surface-root" style="width:360px" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="touch"><div style="padding:var(--np-space-3)"><dc-import name="NPStepFlow" current="{{ 1 }}" hint-size="100%,100px"></dc-import></div></div></div>
+<span class="np-caption">٤ حالات خطوة: حالية · مكتملة · لاحقة · بها خطأ · مهام خطّية محدودة حتى ٥ خطوات وليست دورة حياة المحطة · الشكل المضغوط: الخطوة ن من م والعنوان ومؤشّر تقدّم بلا قائمة كاملة وبلا فائض عند ٣٦٠ · العنوان العربي الطويل يلتف في سطرين.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:330px;max-width:100%"><span class="np-badge">C17 · بطاقة المستخدم + الصورة الرمزية</span>
+<div class="np-notice np-notice--info" role="status"><np-icon name="info"></np-icon><div class="np-notice__body"><span class="np-notice__title">VERIFY-ONLY · implementation deferred to CC-008</span><span class="np-notice__msg">القدرة قائمة كطبقة مظهر (.np-usercard · .np-avatar) ومركّبة مرة واحدة في تذييل NPSidebar. الناقص هو جاهزيتها كهدف تفاعل: ليست قابلة للتركيز، بلا دور، بلا اسم وصول، بلا حلقة تركيز. لم يُنشأ لها أي مكوّن في CC-007.</span></div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:330px;max-width:100%"><span class="np-badge">C18 · ترويسة مجموعة الشريط + شارة العدد</span>
+<div class="np-notice np-notice--info" role="status"><np-icon name="info"></np-icon><div class="np-notice__body"><span class="np-notice__title">VERIFY-ONLY · implementation deferred to CC-008</span><span class="np-notice__msg">أربع فجوات مصنّفة: ترويسة المجموعة · شارة العدد · إخفاء الشارة عند الصفر · اسم وصول يتضمّن العدد. NPSidebar لم يُمس في CC-007 وهو مطابق بالبايت لهاش 1.3.0.</span></div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:500px;max-width:100%"><span class="np-badge">C24 · NPDisclosure</span>
+<dc-import name="NPDisclosure" title="عنوان عربي طويل جدًا لا يجوز اقتطاعه لأن الاقتطاع يخفي معنى السؤال نفسه على القارئ" default-open="{{ true }}" hint-size="500px,140px"></dc-import>
+<span class="np-caption">٣ حالات: مطوي · مفتوح · معطّل · العنوان زر حقيقي مع aria-expanded و aria-controls و Enter و Space · المؤشّر chevron-down ساكن يدور ولا ينعكس · ترتيب التركيز منطقي في الاتجاهين · التجميع في أكورديون وسياسة «واحد مفتوح» مسؤولية المستهلك.</span>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-3)">
+<span class="np-badge">الكثافة والاتجاه — تُعرض حيث تختلف بصريًا فقط</span>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:320px;max-width:100%"><span class="np-caption">كثافة اللمس ٤٨ (متداخلة داخل سطح مكتب)</span>
+<div data-density="touch"><dc-import name="NPAmountInput" label="مبلغ" hint-size="320px,120px"></dc-import></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:320px;max-width:100%" dir="ltr"><span class="np-caption">LTR island nested inside the RTL root</span>
+<dc-import name="NPDisclosure" title="Disclosure in LTR — static indicator, never mirrored" hint-size="320px,64px"></dc-import>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);padding:var(--np-space-4);border:1px solid var(--np-border);border-radius:var(--np-radius-md);background:var(--np-surface-subtle)">
+<span class="np-badge">تصحيحا الوصولية — قرار المالك R1 §3 و §4</span>
+<span class="np-caption" style="display:block">warning صلب: <span class="np-num">#B26A00 → #B45309</span></span>
+<span class="np-caption" style="display:block">أبيض على الصلب: <span class="np-num">4.24 → 5.02</span></span>
+<span class="np-caption" style="display:block">الأدوار الناعمة والنص والحدود بقيت مشتقّة من <span class="np-num">#B26A00</span> لأنها ناجحة أصلًا، فلا تغيّر بصري على أي عيّنة تحذير قائمة.</span>
+<span class="np-caption" style="display:block">حلقة التركيز على الأسطح البنيوية الداكنة: <span class="np-num">#2962FF → #E4F2FD</span></span>
+<span class="np-caption" style="display:block">على الأزرق العميق: <span class="np-num">2.70 → 11.62</span></span>
+<span class="np-caption" style="display:block">الهندسة نفسها (٢ بإزاحة ٢)، والسطح الفاتح دون تغيير عند <span class="np-num">4.90</span>. الاسم الدلالي قابل لإعادة الاستخدام على أي سطح داكن لا على الشريط الجانبي وحده.</span>
+<div class="np-row" style="padding:var(--np-space-3);border-radius:var(--np-radius-md);background:var(--np-nav-bg)">
+<span style="color:var(--np-nav-ink-active);font-size:var(--np-type-label-size)">تركيز على سطح داكن (Tab للتجربة):</span>
+<span class="np-on-dark np-focusable" tabindex="0" style="display:inline-flex;align-items:center;height:var(--np-navrow-h);padding-inline:var(--np-space-3);border-radius:var(--np-radius-sm);background:var(--np-nav-active-bg);color:var(--np-nav-ink-active);font-size:var(--np-type-label-size)">عنصر تنقّل</span>
+</div>
+</div>
+
+</div></sc-if>
+</section>
+
+
+
+<section id="cc-008-review" style="display:flex;flex-direction:column;gap:var(--np-space-5);padding:var(--np-space-6);border:1px solid var(--np-border);border-radius:var(--np-card-radius);background:var(--np-surface)">
+<sc-if value="{{s17}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)">
+<div class="np-row"><span class="np-badge">CC-008</span><span class="np-badge">FOUNDATION 1.5.0-rc.1</span><span class="np-badge">PRODUCT SHELL SEPARATION</span><span class="np-badge">NAVIGATION CAPABILITY</span></div>
+<h2 class="np-h1">فصل أصداف المنتج + قدرة التنقّل</h2>
+<div class="np-body" style="color:var(--np-text-secondary)">NPAppShell للكونسول وحده · NPTaskShell للمحطة والدخول · إغلاق C17 و C18 · عقد قائمة حساب الكونسول · وضعا الحجب والانتظار في OfflineGuard. عيّنات محايدة، عدا عقد القائمة الثلاثي المعتمد.</div>
+</div>
+
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:520px;max-width:100%"><span class="np-badge">S01 · NPAppShell — الكونسول فقط</span>
+<div class="np-notice np-notice--info" role="status"><np-icon name="info"></np-icon><div class="np-notice__body"><span class="np-notice__title">قيد سطح المنتج — موثّق بلا تغيير واجهة</span><span class="np-notice__msg">NPAppShell هو صدفة الكونسول القانونية وحدها: شريط جانبي + شريط علوي + منطقة محتوى. لا يتحوّل إلى صدفة محطة أو دخول في أي عرض، ولا أُضيفت خاصية تزيينية لإعادة ذكر ذلك. مستهلكو المحطة والدخول يستخدمون NPTaskShell.</div></div>
+<span class="np-caption">عيّنته الحيّة قائمة في قسم الأصداف أدناه دون تعديل.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:390px;max-width:100%"><span class="np-badge">S02+S03+S04 · NPTaskShell · station @390</span>
+<div style="width:390px;max-width:100%;height:620px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><dc-import name="NPTaskShell" mode="station" sync-state="pending" sync-pending="{{ 4 }}" secondary-label="إلغاء" hint-size="390px,620px" style="height:100%"></dc-import></div>
+<span class="np-caption">بلا شريط جانبي · كثافة لمس · خانة مزامنة دائمة بـ NPSyncStatus · إجراء أساسي لاصق بارتفاع ٥٦ مع هامش المنطقة الآمنة · المنطقة اللاصقة في التدفق العادي فتحجز مساحتها ولا تغطّي محتوى.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:390px;max-width:100%"><span class="np-badge">S03 · محطة + إشعار تشغيلي حاجب</span>
+<div style="width:390px;max-width:100%;height:620px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><dc-import name="NPTaskShell" mode="station" show-back="{{ true }}" sync-state="failed" sync-failed="{{ 2 }}" notice-message="الجهاز مسحوب: إغلاق المناوبة متاح والبيع الآجل موقوف." notice-severity="danger" notice-blocking="{{ true }}" action-disabled="{{ true }}" hint-size="390px,620px" style="height:100%"></dc-import></div>
+<span class="np-caption">الصدفة لا تعرف قاعدة السحب: المستهلك يمرّر الإشعار وحالة الإجراء. لا انتقالات مناوبة ولا صيغ عدّادات ولا منطق مصادقة داخل الصدفة.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:420px;max-width:100%"><span class="np-badge">S05 · NPTaskShell · auth</span>
+<div style="width:420px;max-width:100%;height:560px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><dc-import name="NPTaskShell" mode="auth" title="الدخول" context="" auth-title="تحقّق من الهوية" auth-subtitle="أدخل رمز الدخول للمتابعة" legal="سياسة الاستخدام وسياسة الخصوصية" hint-size="420px,560px" style="height:100%"></dc-import></div>
+<span class="np-caption">بلا شريط جانبي · بلا خانة مزامنة دائمة · سطح مهمة محدود ومتمركز · بلا بطاقة مستخدم الكونسول وبلا تنقّل تشغيلي.</span>
+</div>
+</div>
+
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:256px;max-width:100%"><span class="np-badge">S06–S11 · الشريط الجانبي: مجموعات + عدّادات + بطاقة المستخدم</span>
+<div style="height:560px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><dc-import name="NPSidebar" items="a:عنصر أول:home:0:المجموعة الأولى:active, b:عنصر بعدّاد:device:3:المجموعة الأولى:, c:عنصر بعدّاد صفر:shift-log:0:المجموعة الأولى:, d:عنصر معطّل:inventory:0:المجموعة الثانية:disabled, e:عنصر بعدّاد كبير:parties:24:المجموعة الثانية:" hint-size="256px,560px"></dc-import></div>
+<span class="np-caption">C18-1 ترويسة مجموعة · C18-2 شارة عدد بتوكنز قائمة · C18-3 العدد صفر بلا شارة وبلا هيكل فارغ · C18-4 اسم الوصول يحمل العدد كاملًا («عنصر بعدّاد، 3 عنصر») والشارة aria-hidden فلا يُقرأ العدد مرتين.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:300px;max-width:100%"><span class="np-badge">S06 · C17 — بطاقة المستخدم كهدف تفاعل</span>
+<div style="padding:var(--np-space-3);border-radius:var(--np-card-radius);background:var(--np-nav-bg)">
+<div class="np-usercard-wrap">
+<button type="button" class="np-usercard np-usercard--button" aria-haspopup="menu" aria-expanded="false" aria-label="مستخدم النظام، مالك — فتح قائمة الحساب">
+<div class="np-avatar">NP</div>
+<div class="np-usercard__meta"><span style="font-size:var(--np-type-label-size);font-weight:600;color:var(--np-nav-ink-active)">مستخدم النظام</span><span style="font-size:var(--np-type-caption-size);color:var(--np-nav-ink)">مالك</span></div>
+<np-icon name="chevron-down" size="16" class="np-usercard__chev"></np-icon>
+</button>
+</div>
+</div>
+<span class="np-caption">زر حقيقي واحد يغطّي البطاقة كاملة · قابل للتركيز بحلقة مرئية على السطح الداكن (11.62) · ارتفاع ٥٦ فوق أرضية اللمس ٤٨ · اسم الوصول يحمل الهوية والغرض · يعمل موسّعًا ومطويًا · لا ينفّذ خروجًا ولا إجراء أمان بنفسه.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:280px;max-width:100%"><span class="np-badge">S11 · عقد قائمة الحساب — ٣ عناصر بالضبط</span>
+<dc-import name="NPMenu" label="قائمة الحساب" items="حسابي:user, الأمان والبصمة:certificate, تسجيل الخروج:logout" destructive-index="{{ 2 }}" hint-size="280px,150px"></dc-import>
+<span class="np-caption">حسابي ← تنقّل · الأمان والبصمة ← تنقّل إلى منطقة الأمان لا تنفيذ إجراء · تسجيل الخروج ← آخر عنصر وبمعالجة مدمّرة. لا عنصر رابع، ولا صف خروج منفصل في تذييل الشريط، ولا إنشاء أو حذف بصمة من هنا.</span>
+</div>
+</div>
+
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:560px;max-width:100%"><span class="np-badge">S12 · NPOfflineGuard · block</span>
+<dc-import name="NPOfflineGuard" mode="block" queue="{{ 0 }}" hint-size="560px,150px"></dc-import>
+<span class="np-caption">كتابات الكونسول الموثوقة من الخادم وبوابات التسجيل والتحقق الأولي: العملية غير متاحة، والسبب نصّ لا لون، وبلا أي إيحاء بنجاح زائف. إعادة المحاولة يملكها المستهلك.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);width:560px;max-width:100%"><span class="np-badge">S12 · NPOfflineGuard · queue</span>
+<dc-import name="NPOfflineGuard" mode="queue" queue="{{ 5 }}" failure-text="عملية واحدة فشلت مزامنتها وتحتاج مراجعة." hint-size="560px,220px"></dc-import>
+<span class="np-caption">عمليات المحطة المدعومة بعد أن يقرّر المستهلك قابليتها للانتظار: الإجراء يبقى متاحًا، وحالة الانتظار تُبلَّغ وتتركّب مع NPSyncStatus، والفشل يظهر عبر NPInlineNotice. النمط لا يقرّر أي عملية تُنتظر، ولا يخزّن سرًّا، ولا يشفّر تفاصيل صندوق الإرسال.</span>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2);padding:var(--np-space-4);border:1px solid var(--np-border);border-radius:var(--np-radius-md);background:var(--np-surface-subtle)">
+<span class="np-badge">قدرة التنقّل — بيانات لا هوية معلومات</span>
+<span class="np-caption">عقد الصف: <code>id:label:icon:count:group:state</code> — الترتيب والظهور والصلاحيات تُحسم قبل وصول البيانات. لا مصفوفة تنقّل لمالك ولا لمدير، ولا ترتيب وحدات نهائي، ولا محرّك صلاحيات، ولا عنصر Reports Hub داخل الأساس.</span>
+</div>
+</div></sc-if>
+</section>
+
+<section id="cc-001-review" style="display:flex;flex-direction:column;gap:20px;padding:var(--np-space-6);border:1px solid var(--np-border);border-radius:var(--np-card-radius);background:var(--np-surface)">
+<sc-if value="{{s3}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div class="np-row"><span class="np-badge">CC-001</span><span class="np-badge">FOUNDATION 1.0.1</span><span class="np-badge">OWNER VISUAL REVIEW</span></div>
+<h2 class="np-h1">مراجعة المالك — إعادة التصميم المضبوطة CC-001</h2>
+<div class="np-body" style="color:var(--np-text-secondary);max-width:900px">أربعة مكوّنات معتمدة للمراجعة: Bottom Sheet · Menu · Tabs · Logo. المرشّحون النهائيون معروضون بحجم مفيد مع الحالات واتجاهي RTL/LTR. لا شاشات منتج ولا محتوى تشغيلي.</div>
+</div>
+<section style="display:flex;flex-direction:column;gap:16px">
+<h2 class="np-h2">CC-001 · A — Tabs</h2>
+<div class="np-card">
+<span class="np-label">Anatomy — label · optional count · 2px indicator · 48px row</span>
+<dc-import name="NPTabs" tabs="نظرة عامة, السجلات:24, المخزون:8, التقارير" hint-size="100%,48px"></dc-import>
+<span class="np-caption">غير نشط: نص محايد · تمرير: نص أساسي + مؤشر رمادي خفيف · نشط: نص أساسي + مؤشر أزرق أساسي 2px · تركيز: حلقة التركيز المعتمدة 2px بإزاحة 2px. لا أزرار ممتلئة ولا كبسولات — التبويب اختيار حالة لا إجراء.</span>
+</div>
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+<div class="np-card" style="flex:1;min-width:320px">
+<span class="np-label">حالة معطّلة · index 2</span>
+<dc-import name="NPTabs" tabs="الكل, المعتمد, المؤرشف, المرفوض" disabled-index="{{ 2 }}" hint-size="100%,48px"></dc-import>
+<span class="np-label">كثافة اللمس — 48px</span>
+<div data-density="touch"><dc-import name="NPTabs" tabs="الكل, المعتمد:12, المؤرشف" hint-size="100%,48px"></dc-import></div>
+</div>
+<div class="np-card" style="flex:1;min-width:320px">
+<span class="np-label">Segmented — للتبديل بين وضعين أو ثلاثة فقط</span>
+<div class="np-row"><dc-import name="NPTabs" variant="segmented" tabs="جدول, بطاقات" hint-size="200px,40px"></dc-import></div>
+<div class="np-row"><dc-import name="NPTabs" variant="segmented" tabs="يومي, أسبوعي, شهري" active="{{ 1 }}" hint-size="280px,40px"></dc-import></div>
+<span class="np-caption">حاوية محايدة ناعمة · تعبئة نشطة بيضاء ضئيلة · بدون تدرجات ولا كبسولات مبالغة. لا يُستخدم للتنقل بين الصفحات.</span>
+</div>
+</div>
+<div style="display:flex;gap:20px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">overflow · 360 compact · RTL</span>
+<div style="width:360px;padding:var(--np-space-3);background:var(--np-surface);border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="rtl"><dc-import name="NPTabs" tabs="نظرة عامة, السجلات:24, المخزون:8, الجهات, الأسعار, التقارير" hint-size="100%,48px"></dc-import></div>
+<span class="np-caption" style="width:360px">تمرير أفقي بدون التفاف، والتبويب المحدد يبقى مرئيًا.</span></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">overflow · 360 compact · LTR</span>
+<div style="width:360px;padding:var(--np-space-3);background:var(--np-surface);border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><dc-import name="NPTabs" tabs="Overview, Records:24, Stock:8, Parties, Prices, Reports" hint-size="100%,48px"></dc-import></div>
+<span class="np-caption" style="width:360px">Same component, same rules — direction is the only switch.</span></div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s4}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">CC-001 · B — Menu</h2>
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">default · 40px rows · divider · destructive last</span>
+<dc-import name="NPMenu" section-label="إجراءات السجل" items="عرض التفاصيل:eye, تعديل:worker-id, تصدير:download, -, حذف:delete" hint-size="280px,240px"></dc-import></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">selected · metadata · shortcut</span>
+<dc-import name="NPMenu" section-label="الترتيب" items="الأحدث:sort:: ⌘1, الأقدم:sort:: ⌘2, الأعلى قيمة:sort:١٢ عنصرًا" selected-index="{{ 0 }}" hint-size="280px,180px"></dc-import></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">disabled row · index 1</span>
+<dc-import name="NPMenu" items="تحديث:refresh, تصدير:download, طباعة:certificate" disabled-index="{{ 1 }}" hint-size="280px,150px"></dc-import></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">touch · 48px rows</span>
+<div data-density="touch"><dc-import name="NPMenu" items="عرض التفاصيل:eye, تعديل:worker-id, -, حذف:delete" hint-size="280px,200px"></dc-import></div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">LTR — same component</span>
+<div dir="ltr"><dc-import name="NPMenu" section-label="Record actions" items="View details:eye, Edit:worker-id, Export:download, -, Delete:delete" hint-size="280px,240px"></dc-import></div></div>
+</div>
+<div class="np-card"><span class="np-caption">سطح أبيض · نصف قطر 12px · ارتفاع popover منخفض معتمد · العرض 240–280px حسب المحتوى · تمرير: خفيف محايد/سماوي · محدد: مقيّد وواضح · معطّل: حبر معطّل بلا تمرير · مدمّر: حبر الخطر الدلالي فقط في العنصر الأخير — القائمة لا تصبح حمراء.</span></div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+<sc-if value="{{s5}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">CC-001 · C — Bottom Sheet</h2>
+
+<div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">A · actions / fit — TIGHT PREVIEW</span>
+<div style="width:390px;--np-sheet-stage-min:auto">
+<dc-import name="NPBottomSheet" mode="actions" variant="fit" title="إجراءات" items="تحديث, تصدير, فلترة" hint-size="358px,248px" style="width:100%"></dc-import>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:8px;max-width:300px">
+<span class="np-label">قائمة إجراءات سفلية مدمجة</span>
+<span class="np-caption">عرض الورقة 358 · ارتفاع بالمحتوى ≈248 · مقبض 32×4 · صف 56 · بلا تذييل · بلا فراغ.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">B · actions / fit — REAL MOBILE BEHAVIOUR</span>
+<div style="width:390px;height:844px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-radius-lg);background:var(--np-canvas)">
+<div style="position:absolute;inset:0;background:var(--np-scrim)"></div>
+<dc-import name="NPBottomSheet" mode="actions" variant="fit" title="إجراءات" items="تحديث, تصدير, فلترة" hint-size="358px,248px" style="width:100%"></dc-import>
+</div>
+<span class="np-caption" style="width:390px">حاجب · ارتساء سفلي · سياق شاشة 390×844.</span></div>
+</div>
+
+<div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">C · filters / tall</span>
+<div style="width:390px;height:844px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-radius-lg);background:var(--np-canvas)">
+<div style="position:absolute;inset:0;background:var(--np-scrim)"></div>
+<dc-import name="NPBottomSheet" mode="filters" variant="tall" title="الفلاتر" subtitle="٣ فلاتر مطبّقة" items="الحالة:filter, الفترة:calendar, الفرع:home, المستخدم:user, النوع:price-tag" selected-index="{{ 0 }}" hint-size="390px,523px" style="width:100%;height:100%"></dc-import>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">D · search / full</span>
+<div style="width:390px;height:844px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-radius-lg);background:var(--np-canvas)">
+<div style="position:absolute;inset:0;background:var(--np-scrim)"></div>
+<dc-import name="NPBottomSheet" mode="search" variant="full" title="بحث" items="سجل 1024:eye:اليوم, سجل 1023:eye:اليوم, سجل 1022:eye:أمس, سجل 1021:eye:أمس, سجل 1020:eye:٠٩/٠٩, سجل 1019:eye:٠٩/٠٩, سجل 1018:eye:٠٨/٠٩, سجل 1017:eye:٠٨/٠٩" hint-size="390px,844px" style="width:100%;height:100%"></dc-import>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">E · actions / fit · LTR</span>
+<div style="width:390px;--np-sheet-stage-min:auto" dir="ltr">
+<dc-import name="NPBottomSheet" mode="actions" variant="fit" title="Actions" items="Refresh:refresh, Export:download, Delete:delete" hint-size="358px,248px" style="width:100%"></dc-import>
+</div>
+<span class="np-caption" style="width:390px">Same component — direction is the only switch.</span></div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s6}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">CC-001 · D — Logo (identity asset)</h2>
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+<div class="np-card" style="min-width:340px"><span class="np-label">horizontal — العمل الفني الرسمي المعتمد</span>
+<div class="np-row"><dc-import name="NPLogo" size="sm" hint-size="140px,24px"></dc-import></div>
+<div class="np-row"><dc-import name="NPLogo" size="md" hint-size="180px,32px"></dc-import></div>
+<div class="np-row"><dc-import name="NPLogo" size="lg" hint-size="220px,40px"></dc-import></div>
+<span class="np-caption">مقاسات مسجّلة sm 24 · md 32 · lg 40 — النسبة محفوظة دائمًا (العرض تلقائي) ولا تمديد.</span></div>
+<div class="np-card" style="min-width:340px;background:var(--np-color-blue-deep)"><span class="np-label" style="color:var(--np-nav-ink)">protected — لوحة الحماية البيضاء المعتمدة</span>
+<div class="np-row"><dc-import name="NPLogo" lockup="protected" size="md" hint-size="200px,52px"></dc-import></div>
+<span class="np-caption" style="color:var(--np-nav-ink)">على الأسطح الداكنة يوضع العمل الفني المعتمد كما هو على لوحة بيضاء. لا يوجد شعار معكوس أو داكن، ولا تلوين، ولا ظل أو توهج خلف الشعار.</span></div>
+<div class="np-card" style="min-width:340px"><span class="np-label">symbol — ملف الرمز المستقل</span>
+<div class="np-row"><dc-import name="NPLogo" lockup="symbol" hint-size="200px,44px"></dc-import></div>
+<span class="np-caption">الرمز المستقل يحتاج ملفًا معتمدًا خاصًا. لا يُقتطع الماستر الأفقي ولا يُعاد رسمه لتوليده — تظهر حالة أصل معلّق صريحة حتى تسليم الملف.</span></div>
+</div>
+<div class="np-card"><span class="np-caption">مدخل واحد فقط للأصل: خاصية <code>src</code> في NPLogo. كل نسخة في النظام — بما فيها Sidebar وAppShell — تقرأ من هذا المصدر، واستبدال PNG بـSVG لاحقًا تغيير خاصية واحدة بصفر تعديلات على الشاشات. مساحة الخلوص الرسمية محفوظة عبر <code>--np-logo-clearspace</code>.</span></div>
+</div></sc-if>
+</section>
+
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s7}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">01 — Colour tokens</h2>
+<div class="np-card">
+<span class="np-label">Brand primitives</span>
+<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px">
+<div><div style="height:56px;border-radius:var(--np-radius-md);background:var(--np-color-blue-primary)"></div><div class="np-badge" style="margin-block-start:6px">blue-primary</div></div>
+<div><div style="height:56px;border-radius:var(--np-radius-md);background:var(--np-color-blue-deep)"></div><div class="np-badge" style="margin-block-start:6px">blue-deep</div></div>
+<div><div style="height:56px;border-radius:var(--np-radius-md);background:var(--np-color-slate)"></div><div class="np-badge" style="margin-block-start:6px">slate</div></div>
+<div><div style="height:56px;border-radius:var(--np-radius-md);background:var(--np-color-silver)"></div><div class="np-badge" style="margin-block-start:6px">silver</div></div>
+<div><div style="height:56px;border-radius:var(--np-radius-md);background:var(--np-color-sky);border:1px solid var(--np-border)"></div><div class="np-badge" style="margin-block-start:6px">sky</div></div>
+</div>
+<span class="np-label" style="margin-block-start:8px">Feedback — independent of brand</span>
+<div class="np-row">
+<dc-import name="NPStatusChip" tone="success" label="نجاح" icon="check" hint-size="90px,28px"></dc-import>
+<dc-import name="NPStatusChip" tone="warning" label="تحذير" icon="alert" hint-size="90px,28px"></dc-import>
+<dc-import name="NPStatusChip" tone="danger" label="خطر" icon="alert" hint-size="90px,28px"></dc-import>
+<dc-import name="NPStatusChip" tone="info" label="معلومة" icon="info" hint-size="100px,28px"></dc-import>
+<dc-import name="NPStatusChip" tone="neutral" label="محايد" hint-size="90px,28px"></dc-import>
+</div>
+<span class="np-caption">لا يُسند أي لون علامة تجارية إلى دور دلالي. الأدوار الدلالية لها قيم مستقلة في طبقة Primitive.</span>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s8}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">02 — Typography &amp; numerics</h2>
+<div class="np-card">
+<div class="np-row" style="justify-content:space-between"><span class="np-display">Display</span><span class="np-badge">32 / 40 · 700 · Inter Display</span></div>
+<div class="np-row" style="justify-content:space-between"><span class="np-h1">عنوان الصفحة H1</span><span class="np-badge">24 / 32 · 700</span></div>
+<div class="np-row" style="justify-content:space-between"><span class="np-h2">عنوان قسم H2</span><span class="np-badge">20 / 28 · 700</span></div>
+<div class="np-row" style="justify-content:space-between"><span class="np-h3">عنوان بطاقة H3</span><span class="np-badge">16 / 24 · 600</span></div>
+<div class="np-row" style="justify-content:space-between"><span class="np-body">نص أساسي بخط Noto Sans Arabic</span><span class="np-badge">14 / 22 · 400</span></div>
+<div class="np-row" style="justify-content:space-between"><span class="np-label">تسمية حقل</span><span class="np-badge">13 / 20 · 500</span></div>
+<div class="np-row" style="justify-content:space-between"><span class="np-caption">نص مساعد</span><span class="np-badge">12 / 18 · 400</span></div>
+<div class="np-row" style="justify-content:space-between"><span class="np-kpi np-num">1,850,000.00</span><span class="np-badge">KPI 28 / 36 · 700 · tabular</span></div>
+<div class="np-row" style="gap:var(--np-space-4)">
+<span class="np-num">40,000,000.00</span><span class="np-num">2,000</span><span class="np-num">01/09/2026</span><span class="np-num">08:30</span><span class="np-num">NP-2026-1258</span>
+</div>
+<span class="np-caption">الأرقام والمعرّفات والتواريخ والأوقات والقيم التقنية معزولة LTR وبأرقام جدولية داخل واجهة عربية.</span>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s9}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">03 — Controls</h2>
+<div class="np-card">
+<div class="np-row">
+<dc-import name="NPButton" variant="primary" icon="plus" label="أساسي" hint-size="130px,40px"></dc-import>
+<dc-import name="NPButton" variant="secondary" label="ثانوي" hint-size="110px,40px"></dc-import>
+<dc-import name="NPButton" variant="ghost" label="شبح" hint-size="100px,40px"></dc-import>
+<dc-import name="NPButton" variant="destructive" icon="delete" label="حذف" hint-size="120px,40px"></dc-import>
+<dc-import name="NPButton" variant="primary" label="جارٍ الحفظ" loading="{{ true }}" hint-size="140px,40px"></dc-import>
+<dc-import name="NPButton" variant="primary" label="معطّل" disabled="{{ true }}" hint-size="110px,40px"></dc-import>
+</div>
+<div class="np-row">
+<dc-import name="NPIconButton" icon="search" label="بحث" hint-size="40px,40px"></dc-import>
+<dc-import name="NPIconButton" icon="bell" label="الإشعارات" badge="{{ true }}" hint-size="40px,40px"></dc-import>
+<dc-import name="NPIconButton" icon="more" label="المزيد" tone="accent" hint-size="40px,40px"></dc-import>
+<dc-import name="NPIconButton" icon="delete" label="حذف" tone="destructive" hint-size="40px,40px"></dc-import>
+<dc-import name="NPSearch" hint-size="40px,40px"></dc-import>
+<dc-import name="NPSearch" force-expanded="{{ true }}" hint-size="280px,40px"></dc-import>
+</div>
+<div class="np-row">
+<div class="np-field" style="width:220px"><label class="np-field__l">حقل نصي</label><input class="np-input" value="قيمة"></div>
+<div class="np-field" style="width:220px"><label class="np-field__l">حقل خطأ</label><input class="np-input np-input--error" value="قيمة غير صحيحة"><span class="np-field__err">سبب الخطأ يُذكر نصًا</span></div>
+<div class="np-field" style="width:220px"><label class="np-field__l">للقراءة فقط (محسوب)</label><input class="np-input np-input--readonly np-num" value="1,250,000" readonly></div>
+</div>
+<span class="np-caption">الكثافة: ديسكتوب 40px · لمس 48px · إجراء العامل 56px. كلها من توكنز، ولا قيمة مكتوبة داخل مكوّن.</span>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s10}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">04 — Navigation &amp; page chrome</h2>
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+<div style="width:256px;height:520px;border-radius:var(--np-card-radius);overflow:hidden;border:1px solid var(--np-border)"><dc-import name="NPSidebar" active="{{ 0 }}" hint-size="256px,520px"></dc-import></div>
+<div style="flex:1;min-width:420px;display:flex;flex-direction:column;gap:16px">
+<div style="border:1px solid var(--np-border);border-radius:var(--np-card-radius);overflow:hidden"><dc-import name="NPTopbar" sync="online" hint-size="100%,72px"></dc-import></div>
+<div style="border:1px solid var(--np-border);border-radius:var(--np-card-radius);overflow:hidden"><dc-import name="NPTopbar" sync="syncing" queue="{{ 3 }}" hint-size="100%,72px"></dc-import></div>
+<div style="border:1px solid var(--np-border);border-radius:var(--np-card-radius);overflow:hidden"><dc-import name="NPTopbar" sync="offline" hint-size="100%,72px"></dc-import></div>
+<div style="border:1px solid var(--np-border);border-radius:var(--np-card-radius);overflow:hidden"><dc-import name="NPTopbar" sync="error" hint-size="100%,72px"></dc-import></div>
+<dc-import name="NPPageHeader" hint-size="100%,150px"></dc-import>
+<dc-import name="NPToolbar" hint-size="100%,64px"></dc-import>
+<dc-import name="NPTabs" hint-size="100%,48px"></dc-import>
+</div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s11}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">05 — Data display</h2>
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+<div style="flex:1;min-width:520px"><dc-import name="NPDataTable" row-count="{{ 4 }}" show-selected="{{ true }}" hint-size="100%,320px"></dc-import></div>
+<div style="display:flex;flex-direction:column;gap:16px;min-width:360px">
+<dc-import name="NPPagination" hint-size="380px,40px"></dc-import>
+<dc-import name="NPMenu" hint-size="260px,220px"></dc-import>
+</div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s12}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">06 — Overlays</h2>
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+<dc-import name="NPModal" hint-size="560px,400px"></dc-import>
+<dc-import name="NPModal" destructive="{{ true }}" title="سحب الصلاحية" subtitle="إجراء غير قابل للتراجع" message="سيتم سحب صلاحية الجهاز ومسح بياناته محليًا." confirm-label="سحب الصلاحية" hint-size="560px,400px"></dc-import>
+<div style="width:520px;height:460px"><dc-import name="NPDrawer" hint-size="520px,460px"></dc-import></div>
+<div style="width:390px"><dc-import name="NPBottomSheet" hint-size="390px,300px" style="width:100%"></dc-import></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<dc-import name="NPToast" tone="success" hint-size="420px,100px"></dc-import>
+<dc-import name="NPToast" tone="warning" title="تحذير قبل المتابعة" body="راجع الفروقات قبل الاعتماد" hint-size="420px,100px"></dc-import>
+<dc-import name="NPToast" tone="danger" title="فشل تنفيذ العملية" body="لم يتم حفظ التغييرات" hint-size="420px,100px"></dc-import>
+<dc-import name="NPToast" tone="info" title="تمت جدولة العملية" body="ستنفَّذ عند عودة الاتصال" hint-size="420px,100px"></dc-import>
+</div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s13}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">07 — System states</h2>
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+<div style="width:420px"><dc-import name="NPEmptyState" variant="no-data" hint-size="420px,300px"></dc-import></div>
+<div style="width:420px"><dc-import name="NPEmptyState" variant="no-results" hint-size="420px,300px"></dc-import></div>
+<div style="width:420px"><dc-import name="NPErrorState" variant="block" hint-size="420px,320px"></dc-import></div>
+<div style="width:420px"><dc-import name="NPErrorState" variant="offline" hint-size="420px,320px"></dc-import></div>
+<div style="width:660px"><dc-import name="NPLoadingState" variant="card" hint-size="660px,180px"></dc-import></div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s14}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">08 — Patterns</h2>
+<div style="display:flex;flex-direction:column;gap:16px;max-width:1000px">
+<dc-import name="NPBulkBar" count="{{ 3 }}" hint-size="100%,64px"></dc-import>
+<div class="np-card"><span class="np-label">Masked reveal</span><dc-import name="NPMaskedReveal" hint-size="320px,40px"></dc-import><span class="np-caption">الكشف صريح ومؤقت ويُسجَّل في سجل التدقيق.</span></div>
+<dc-import name="NPAuditDiff" hint-size="100%,170px"></dc-import>
+<dc-import name="NPOfflineGuard" hint-size="100%,190px"></dc-import>
+<div class="np-card"><span class="np-label">Destructive confirmation</span><span class="np-caption">يُنفَّذ عبر NPModal بوضع destructive — العملية، الكائن المتأثر، الأثر، السبب، إلغاء، تأكيد.</span></div>
+<div class="np-card"><span class="np-label">Toolbar priority overflow</span><span class="np-caption">الأدوات منخفضة الأولوية تحمل np-toolbar__demote وتنتقل إلى قائمة الفائض عند medium وما دون — بدون صف أدوات ثانٍ.</span></div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s15}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">09 — Icon registry</h2>
+<div class="np-card">
+<div class="np-row"><span class="np-badge">definitions {{iconCount}}</span><span class="np-badge">mirrored {{mirroredCount}}</span><span class="np-badge">viewBox {{viewBox}}</span><span class="np-badge">stroke 1.6 · optical</span></div>
+<span class="np-label">غير اتجاهية — لا تُعكس</span>
+<div class="np-row" style="color:var(--np-action-primary);gap:var(--np-space-4)">
+<sc-for list="{{staticIcons}}" as="i" hint-placeholder-count="12">
+<span style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px"><np-icon name="{{i.name}}" size="24"></np-icon><span class="np-caption" style="font-size:10px">{{i.name}}</span></span>
+</sc-for>
+</div>
+<span class="np-label">اتجاهية — تُعكس تلقائيًا في RTL</span>
+<div class="np-row" style="color:var(--np-action-primary);gap:var(--np-space-4)">
+<sc-for list="{{mirrorIcons}}" as="i" hint-placeholder-count="6">
+<span style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px"><np-icon name="{{i.name}}" size="24"></np-icon><span class="np-caption" style="font-size:10px">{{i.name}}</span></span>
+</sc-for>
+</div>
+<span class="np-caption">بيانات الانعكاس تعيش في سجل الأيقونات المشترك، ولا يوجد مكوّن مُفرَّع لـRTL أو LTR.</span>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s16}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">10 — App Shell (canonical)</h2>
+<div class="np-card"><span class="np-caption">هيكل واحد: Sidebar + Topbar + منطقة المحتوى + سلوك التنقل المتجاوب. الشاشات تُركَّب داخل منطقة المحتوى ولا تعيد تعريف أي جزء من الهيكل.</span></div>
+<div style="display:flex;gap:20px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">RTL · expanded 1280</span>
+<div style="width:640px;height:400px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr">
+<div style="width:1280px;height:800px;transform:scale(0.5);transform-origin:top left"><dc-import name="NPAppShell" dir="rtl" hint-size="1280px,800px" style="width:100%;height:100%"></dc-import></div>
+</div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="np-badge">LTR · same components</span>
+<div style="width:640px;height:400px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr">
+<div style="width:1280px;height:800px;transform:scale(0.5);transform-origin:top left"><dc-import name="NPAppShell" dir="ltr" hint-size="1280px,800px" style="width:100%;height:100%"></dc-import></div>
+</div></div>
+</div>
+</div></sc-if>
+</section>
+
+<section id="np-mobile-foundation" style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s18}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">11 — أساس الجوال (migrated from «01 · Foundation - mobile source»)</h2>
+<div dir="rtl" style="display:flex;flex-direction:column;gap:30px;font-family:'Noto Sans Arabic',system-ui,sans-serif;color:#37474F;background:#EEF2F8;padding:28px;border-radius:18px;border:1px solid #DDE4EE">
+
+  <header style="display:flex;flex-direction:column;gap:10px;max-width:1120px">
+    <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:7px;background:#1A237E;color:#fff;font-family:Inter,sans-serif;font-size:11px;font-weight:700">NP-WO-CD-06 · MOBILE FOUNDATION</span>
+    <h3 style="margin:0;font-size:31px;font-weight:700;color:#1A237E">01 · أساس الجوال</h3>
+    <p style="margin:0;font-size:14.5px;line-height:26px;color:#546E7A;text-wrap:pretty">قيَم جاهزة للتسليم المباشر إلى Flutter: ألوان، خطوط، مسافات، أنصاف أقطار، ظلال، حقول، أزرار، بطاقات، تنقل سفلي، وحالات. مبنية على هوية نايل بترو المعتمدة — لا لون جديد ولا شعار بديل. RTL أصلي مع خصائص منطقية.</p>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;padding-top:3px">
+      <sc-for list="{{rules}}" as="r" hint-placeholder-count="5">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border:1px solid #DDE4EE;border-radius:8px;background:#fff;font-family:Inter,sans-serif;font-size:11.5px;font-weight:600;color:#1A237E">{{r}}</span>
+      </sc-for>
+    </div>
+  </header>
+
+  <div style="display:flex;flex-direction:column;gap:14px;padding:24px;background:#fff;border:1px solid #DDE4EE;border-radius:18px">
+    <h4 style="margin:0;font-size:19px;font-weight:700;color:#1A237E">١ · الألوان</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:11px">
+      <sc-for list="{{colors}}" as="c" hint-placeholder-count="8">
+        <div style="display:flex;flex-direction:column;border:1px solid #E0E6ED;border-radius:12px;overflow:hidden">
+          <span style="height:62px;background:{{c.hex}};border-bottom:1px solid #E0E6ED"></span>
+          <span style="display:flex;flex-direction:column;gap:2px;padding:10px 11px">
+            <b style="font-size:12px;color:#263238">{{c.name}}</b>
+            <span style="font-family:Inter,sans-serif;font-size:11px;color:#1A237E">{{c.hex}}</span>
+            <span style="font-family:Inter,sans-serif;font-size:9.5px;color:#78909C">{{c.token}}</span>
+          </span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px">
+    <div style="display:flex;flex-direction:column;gap:13px;padding:24px;background:#fff;border:1px solid #DDE4EE;border-radius:18px">
+      <h4 style="margin:0;font-size:19px;font-weight:700;color:#1A237E">٢ · الخطوط</h4>
+      <sc-for list="{{type}}" as="t" hint-placeholder-count="7">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid #EDF1F6">
+          <span style="font-size:{{t.size}};line-height:{{t.line}};font-weight:{{t.weight}};color:#1F2A37">{{t.sample}}</span>
+          <span style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:1px;font-family:Inter,sans-serif">
+            <b style="font-size:11px;color:#1A237E">{{t.name}}</b>
+            <span style="font-size:10px;color:#78909C">{{t.spec}}</span>
+          </span>
+        </div>
+      </sc-for>
+      <span style="font-size:11px;color:#607D8B">العربية: 'Noto Sans Arabic' · اللاتينية والأرقام: Inter بأرقام جدولية.</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:13px;padding:24px;background:#fff;border:1px solid #DDE4EE;border-radius:18px">
+      <h4 style="margin:0;font-size:19px;font-weight:700;color:#1A237E">٣ · المسافات وأنصاف الأقطار والظلال</h4>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{space}}" as="s" hint-placeholder-count="7">
+          <span style="display:flex;align-items:center;gap:11px">
+            <span style="height:12px;border-radius:3px;background:#2962FF;width:{{s.w}}"></span>
+            <b style="font-family:Inter,sans-serif;font-size:11px;color:#1A237E">{{s.name}}</b>
+            <span style="font-family:Inter,sans-serif;font-size:11px;color:#78909C">{{s.px}}</span>
+          </span>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;padding-top:4px">
+        <sc-for list="{{radii}}" as="r" hint-placeholder-count="4">
+          <span style="display:flex;flex-direction:column;align-items:center;gap:5px">
+            <span style="width:56px;height:44px;background:#EAF0FB;border:1.5px solid #2962FF;border-radius:{{r.px}}"></span>
+            <span style="font-family:Inter,sans-serif;font-size:10px;color:#546E7A">{{r.name}}</span>
+          </span>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;padding-top:6px">
+        <sc-for list="{{shadows}}" as="sh" hint-placeholder-count="3">
+          <span style="display:flex;flex-direction:column;align-items:center;gap:6px">
+            <span style="width:76px;height:48px;background:#fff;border-radius:12px;box-shadow:{{sh.css}}"></span>
+            <span style="font-family:Inter,sans-serif;font-size:10px;color:#546E7A">{{sh.name}}</span>
+          </span>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px;padding:24px;background:#fff;border:1px solid #DDE4EE;border-radius:18px">
+    <h4 style="margin:0;font-size:19px;font-weight:700;color:#1A237E">٤ · المكوّنات</h4>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px">
+
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <b style="font-size:13px;color:#455A64">الحقول — 58px</b>
+        <sc-for list="{{fields}}" as="f" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:12px;font-weight:600;color:#37474F">{{f.label}}</span>
+            <span style="display:flex;align-items:center;gap:11px;height:58px;box-sizing:border-box;padding:0 16px;border:1.5px solid {{f.bd}};border-radius:14px;background:{{f.bg}};color:{{f.ink}}">
+              <np-icon name="{{f.icon}}" size="19"></np-icon>
+              <span style="flex:1;min-width:0;font-size:14.5px;color:{{f.textInk}}">{{f.value}}</span>
+              <sc-if value="{{f.hasTrail}}" hint-placeholder-val="{{ false }}"><np-icon name="{{f.trail}}" size="19"></np-icon></sc-if>
+            </span>
+            <sc-if value="{{f.hasHint}}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;color:{{f.hintInk}}">{{f.hint}}</span></sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <b style="font-size:13px;color:#455A64">الأزرار — 56px</b>
+        <sc-for list="{{buttons}}" as="b" hint-placeholder-count="5">
+          <span style="display:flex;align-items:center;justify-content:center;gap:10px;height:56px;box-sizing:border-box;border:{{b.border}};border-radius:14px;background:{{b.bg}};color:{{b.ink}};font-size:15.5px;font-weight:700;opacity:{{b.opacity}}"><np-icon name="{{b.icon}}" size="19"></np-icon>{{b.label}}</span>
+        </sc-for>
+        <b style="font-size:13px;color:#455A64;padding-top:6px">البطاقات — 18px</b>
+        <div style="display:flex;flex-direction:column;gap:5px;padding:16px;border:1px solid #E3EAF3;border-radius:18px;background:#fff;box-shadow:0 6px 18px rgba(26,35,126,.06)">
+          <span style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <b style="font-size:14px;color:#1F2A37">مسدس 03 · بنزين</b>
+            <span style="display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:7px;background:#EFF8F2;color:#1B7F4D;border:1px solid #BFE3CE;font-size:11px;font-weight:700"><np-icon name="check" size="12"></np-icon>مُفعّل</span>
+          </span>
+          <span style="font-family:Inter,sans-serif;direction:ltr;font-size:20px;font-weight:700;color:#1A237E">15,420.350</span>
+          <span style="font-size:11.5px;color:#607D8B">قراءة البداية — لتر</span>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <b style="font-size:13px;color:#455A64">التنقل السفلي — 64px · هدف لمس 48px</b>
+        <div style="display:flex;align-items:stretch;height:64px;border:1px solid #E3EAF3;border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 -4px 16px rgba(26,35,126,.05)">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:{{t.ink}};background:{{t.bg}}">
+              <np-icon name="{{t.icon}}" size="21"></np-icon>
+              <span style="font-size:10.5px;font-weight:{{t.weight}}">{{t.label}}</span>
+            </span>
+          </sc-for>
+        </div>
+
+        <b style="font-size:13px;color:#455A64;padding-top:6px">الحالات</b>
+        <sc-for list="{{states}}" as="s" hint-placeholder-count="5">
+          <span style="display:flex;align-items:flex-start;gap:10px;padding:12px 13px;border:1px solid {{s.bd}};border-radius:14px;background:{{s.bg}}">
+            <np-icon name="{{s.icon}}" size="17"></np-icon>
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+              <b style="font-size:12.5px;color:{{s.ink}}">{{s.title}}</b>
+              <span style="font-size:11px;line-height:17px;color:#607D8B;text-wrap:pretty">{{s.body}}</span>
+            </span>
+          </span>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:11px;padding:24px;background:#fff;border:1px solid #DDE4EE;border-radius:18px;max-width:1120px">
+    <h4 style="margin:0;font-size:19px;font-weight:700;color:#1A237E">٥ · جدول تسليم Flutter</h4>
+    <div style="display:flex;flex-direction:column;border:1px solid #E8EDF3;border-radius:12px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:210px 160px minmax(0,1fr);gap:10px;padding:9px 12px;background:#F1F5FB;font-size:11px;font-weight:700;color:#1A237E">
+        <span>المتغيّر</span><span>القيمة</span><span>الاستخدام</span>
+      </div>
+      <sc-for list="{{handoff}}" as="row" hint-placeholder-count="10">
+        <div style="display:grid;grid-template-columns:210px 160px minmax(0,1fr);gap:10px;padding:8px 12px;border-top:1px solid #EDF1F6;font-size:11.5px">
+          <span style="font-family:Inter,sans-serif;font-size:10.5px;color:#1A237E">{{row.key}}</span>
+          <span style="font-family:Inter,sans-serif;font-size:10.5px;color:#263238">{{row.value}}</span>
+          <span style="color:#607D8B">{{row.use}}</span>
+        </div>
+      </sc-for>
+    </div>
+    <span style="font-size:11px;line-height:19px;color:#607D8B;text-wrap:pretty">فجوة مُبلَّغ عنها: لا يوجد مخطط Tokens داكن في np-tokens.css، وسجل الأيقونات لا يحتوي lock / mail / fingerprint. لم يُعدَّل الأساس المُجمَّد.</span>
+  </div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{s19}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<h2 class="np-h2">12 — Brand Dark (migrated from «01 · Foundation - Brand Dark source»)</h2>
+<div id="np-brand-dark" dir="rtl" style="padding:28px;display:flex;flex-direction:column;gap:40px;background:#F6F7FB;border:1px solid #DDE4EE;border-radius:18px">
+
+<div class="sec">
+<span class="lbl">NP-DARK-01 · CC-015 · مراجعة المالك</span>
+<h3 class="sh">الوضع الليلي: هوية العميل في الليل</h3>
+<p class="sc2">لوح داكن واحد مشتق من اللون العميق للعميل نفسه: كل درجة سطح = <b>brand.deep 35% + قاعدة رمادية داكنة</b>. لا يوجد <b>#000000</b> ولا سطح قريب من الأسود، ولا قيمة داكنة خاصة بـ Nile Petro داخل أي مكوّن قابل لإعادة الاستخدام — العميل الأزرق يحصل على Navy عميق، والعميل الأخضر على Deep Green، من القاعدة نفسها. الهندسة والمكوّنات والوضع النهاري لم تتغير.</p>
+</div>
+
+<div class="sec">
+<h3 class="sh">١ · سلّم الأسطح — Tenant A (أزرق) مقابل Tenant B (أخضر مزرق)</h3>
+<div class="cols">
+<div class="col"><span class="lbl">Tenant A · deep #1A237E</span>
+<div class="rung BD tA">
+<div><i style="background:var(--sc)"></i><p>canvas</p></div>
+<div><i style="background:var(--sf)"></i><p>surface / card</p></div>
+<div><i style="background:var(--sr)"></i><p>raised</p></div>
+<div><i style="background:var(--se)"></i><p>elevated / nav</p></div>
+<div><i style="background:var(--pri)"></i><p>primary on dark</p></div>
+</div>
+</div>
+<div class="col"><span class="lbl">Tenant B · deep #00453C</span>
+<div class="rung BD tB">
+<div><i style="background:var(--sc)"></i><p>canvas</p></div>
+<div><i style="background:var(--sf)"></i><p>surface / card</p></div>
+<div><i style="background:var(--sr)"></i><p>raised</p></div>
+<div><i style="background:var(--se)"></i><p>elevated / nav</p></div>
+<div><i style="background:var(--pri)"></i><p>primary on dark</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<sc-for list="{{ screens }}" as="s" hint-placeholder-count="8">
+<div class="sec">
+<h3 class="sh">{{ s.n }} · {{ s.title }}</h3>
+<p class="sc2">{{ s.note }}</p>
+<div class="cols">
+<sc-for list="{{ s.cells }}" as="c" hint-placeholder-count="3">
+<div class="col">
+<span class="{{ c.lbl }}">{{ c.name }}</span>
+<div class="mini {{ c.cls }}" style="{{ c.h }}">
+<div class="mh"><span class="mlogo">{{ s.mark }}</span><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>{{ s.hdr }}</b><span>{{ s.sub }}</span></span></div>
+<div class="mb">
+<sc-if value="{{ s.kpis }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:7px">
+<sc-for list="{{ s.kpis }}" as="k" hint-placeholder-count="3">
+<div class="mk"><b class="mono">{{ k.v }}</b><span>{{ k.l }}</span></div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ s.card }}" hint-placeholder-val="{{ true }}">
+<div class="mcard">
+<span class="mt">{{ s.card.t }}</span>
+<span class="mc">{{ s.card.c }}</span>
+<span style="display:flex;gap:6px"><span class="mchip ok">{{ s.card.ok }}</span><span class="mchip wn">{{ s.card.wn }}</span></span>
+</div>
+</sc-if>
+<sc-if value="{{ s.field }}" hint-placeholder-val="{{ true }}">
+<div class="mfield"><span>{{ s.field }}</span><span class="mono">—</span></div>
+</sc-if>
+<sc-if value="{{ s.rows }}" hint-placeholder-val="{{ true }}">
+<sc-for list="{{ s.rows }}" as="r" hint-placeholder-count="2">
+<div class="mrow"><span class="mt" style="flex:1;min-width:0">{{ r.t }}</span><span class="mono mc">{{ r.v }}</span></div>
+</sc-for>
+</sc-if>
+<sc-if value="{{ s.table }}" hint-placeholder-val="{{ true }}">
+<div class="mtb">
+<div class="th"><span style="flex:1">المحطة</span><span class="mono">اللتر</span><span class="mono">الحالة</span></div>
+<div class="tr"><span>فرع المعادي</span><span class="mono">12,400</span><span class="mono">نشط</span></div>
+<div class="tr sel"><span>فرع التجمع</span><span class="mono">9,120</span><span class="mono">نشط</span></div>
+<div class="tr" style="border-bottom:0"><span>فرع أكتوبر</span><span class="mono">6,830</span><span class="mono">متوقف</span></div>
+</div>
+</sc-if>
+<sc-if value="{{ s.cta }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:7px;margin-top:auto">
+<button class="mbtn">{{ s.cta }}</button>
+<button class="mbtn2">{{ s.cta2 }}</button>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{ s.nav }}" hint-placeholder-val="{{ true }}">
+<div class="mnav">
+<sc-for list="{{ s.nav }}" as="t" hint-placeholder-count="4">
+<i class="{{ t.c }}"><span class="mdot"></span>{{ t.l }}</i>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+
+<div class="sec">
+<h3 class="sh">٣ · معايير القبول</h3>
+<div class="panel">
+<table>
+<tr><th>المعيار</th><th>النتيجة</th><th>الدليل</th></tr>
+<sc-for list="{{ criteria }}" as="r" hint-placeholder-count="21">
+<tr><td>{{ r.k }}</td><td><span class="lbl good">{{ r.v }}</span></td><td style="color:#455A64">{{ r.e }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h3 class="sh">٤ · ما تغيّر في الملفات</h3>
+<div class="panel">
+<table>
+<tr><th>الملف</th><th>التغيير</th></tr>
+<sc-for list="{{ files }}" as="r" hint-placeholder-count="6">
+<tr><td class="mono" style="font-size:11px">{{ r.f }}</td><td style="color:#455A64">{{ r.c }}</td></tr>
+</sc-for>
+</table>
+<p class="sc2">اللوح الأسود القديم محذوف تمامًا: لا وجود له في أي ملف تطبيق ولا في صفحة المراجعة هذه. المقارنة الآن بين Light والوضع الليلي المشتق من الهوية فقط.</p>
+</div>
+</div>
+
+</div>
+</div></sc-if>
+</section>
+
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+/* Production foundation reference for Nile Petro App.
+   Catalogue only — contains no operational content and no product screen. */
+class Component extends DCLogic {
+  /* TD-004 — PROGRESSIVE SECTION MOUNTING (catalogue / review surface only).
+     The catalogue mounted ~130 specimens in one synchronous pass, which left
+     the page JS-busy for most of a minute on first open. Sections now mount
+     ONE AT A TIME, each scheduled on an idle callback (rAF fallback), so the
+     main thread yields between sections and the page is scrollable at once.
+     This is not a timeout guess: the chain is self-driving and always runs to
+     completion, so every specimen and every state still mounts — nothing is
+     deleted, merged, clipped, replaced by an image, or skipped. */
+  static get SECTIONS() { return 19; }
+  state = { ready: false, stage: 0 };
+  componentDidMount() {
+    setTimeout(() => this.setState({ ready: true }), 200);
+    this._stage = 0;
+    this.pump();
+  }
+  componentWillUnmount() { this._stopped = true; }
+  /* The cursor lives on the instance, not in state: the chain must advance
+     even if the runtime does not honour a setState callback. */
+  pump() {
+    if (this._stopped || this._stage >= Component.SECTIONS) return;
+    const step = () => {
+      if (this._stopped) return;
+      this._stage += 1;
+      this.setState({ stage: this._stage });
+      this.pump();
+    };
+    /* A chained macrotask yield, not a guessed delay: each section hands the
+       thread back to the browser before the next one mounts. An idle callback
+       was tried first and never fired — mounting keeps the thread busy, so
+       "idle" never arrives and the chain stalled after one section. */
+    setTimeout(step, 0);
+  }
+  /* —— migrated data: «01 · Foundation - mobile source» (NP-WO-CD-06), verbatim. */
+  mobileVals() {
+    return {
+      rules: ["هدف اللمس ≥ 48", "وحدة المسافة 4", "الزر الأساسي 56", "الحقول 58", "البطاقات 18", "RTL أصلي — خصائص منطقية"],
+      colors: [
+        { name: "الأزرق الأساسي", hex: "#2962FF", token: "color.primary" },
+        { name: "الأزرق العميق", hex: "#1A237E", token: "color.primary.deep" },
+        { name: "أزرق سماوي", hex: "#EAF0FB", token: "color.primary.surface" },
+        { name: "الخلفية", hex: "#F5F8FC", token: "color.background.light" },
+        { name: "السطح", hex: "#FFFFFF", token: "color.surface.light" },
+        { name: "النص الأساسي", hex: "#1F2A37", token: "color.text.primary.light" },
+        { name: "النص الثانوي", hex: "#607D8B", token: "color.text.secondary.light" },
+        { name: "الحدود", hex: "#E3EAF3", token: "color.border.light" },
+        { name: "نجاح", hex: "#1B7F4D", token: "color.success" },
+        { name: "تحذير", hex: "#F57C00", token: "color.warning" },
+        { name: "خطر", hex: "#B3261E", token: "color.danger" },
+        { name: "دون اتصال", hex: "#455A64", token: "color.offline" }
+      ],
+      type: [
+        { name: "Display", spec: "28 / 38 · 700", size: "28px", line: "38px", weight: "700", sample: "وردية نشطة" },
+        { name: "H1", spec: "22 / 32 · 700", size: "22px", line: "32px", weight: "700", sample: "قراءة العدادات" },
+        { name: "H2", spec: "18 / 26 · 700", size: "18px", line: "26px", weight: "700", sample: "ملخص الوردية" },
+        { name: "Body", spec: "15 / 24 · 400", size: "15px", line: "24px", weight: "400", sample: "أدخل قراءة المسدس الحالية" },
+        { name: "Body Small", spec: "13 / 20 · 400", size: "13px", line: "20px", weight: "400", sample: "بانتظار المزامنة" },
+        { name: "Label", spec: "13 / 18 · 600", size: "13px", line: "18px", weight: "600", sample: "نوع الوقود" },
+        { name: "Caption", spec: "11 / 16 · 500", size: "11px", line: "16px", weight: "500", sample: "آخر تحديث 06:12 ص" }
+      ],
+      space: [
+        { name: "space.1", px: "4px", w: "4px" },
+        { name: "space.2", px: "8px", w: "8px" },
+        { name: "space.3", px: "12px", w: "12px" },
+        { name: "space.4", px: "16px", w: "16px" },
+        { name: "space.5", px: "20px", w: "20px" },
+        { name: "space.6", px: "24px", w: "24px" },
+        { name: "space.8", px: "32px", w: "32px" }
+      ],
+      radii: [
+        { name: "radius.sm 8", px: "8px" },
+        { name: "radius.md 14", px: "14px" },
+        { name: "radius.lg 18", px: "18px" },
+        { name: "radius.full", px: "999px" }
+      ],
+      shadows: [
+        { name: "elevation.1", css: "0 4px 12px rgba(26,35,126,.08)" },
+        { name: "elevation.2", css: "0 8px 20px rgba(26,35,126,.12)" },
+        { name: "elevation.3", css: "0 16px 34px rgba(26,35,126,.18)" }
+      ],
+      fields: [
+        { label: "افتراضي", icon: "worker-id", value: "رمز العامل", bd: "#E3EAF3", bg: "#FCFDFF", ink: "#90A4AE", textInk: "#90A4AE", hasTrail: false, hasHint: false },
+        { label: "تركيز", icon: "certificate", value: "••••••••", bd: "#2962FF", bg: "#FFFFFF", ink: "#2962FF", textInk: "#1F2A37", hasTrail: true, trail: "eye", hasHint: false },
+        { label: "ممتلئ", icon: "fuel-pump", value: "مسدس 03 · بنزين", bd: "#E3EAF3", bg: "#FFFFFF", ink: "#1A237E", textInk: "#1F2A37", hasTrail: true, trail: "chevron-down", hasHint: false },
+        { label: "خطأ تحقق", icon: "gauge", value: "12,400.000", bd: "#E4736F", bg: "#FDF1F1", ink: "#B3261E", textInk: "#1F2A37", hasTrail: true, trail: "alert", hasHint: true, hint: "القراءة أقل من قراءة البداية — العداد يتناقص", hintInk: "#B3261E" },
+        { label: "معطّل", icon: "camera", value: "صورة العداد غير متاحة", bd: "#ECEFF3", bg: "#F5F7FA", ink: "#B0BEC5", textInk: "#B0BEC5", hasTrail: false, hasHint: true, hint: "غير متاح دون اتصال", hintInk: "#78909C" }
+      ],
+      buttons: [
+        { label: "بدء وردية", icon: "check", bg: "#2962FF", ink: "#fff", border: "0", opacity: "1" },
+        { label: "جارٍ الحفظ…", icon: "refresh", bg: "#1E52E0", ink: "#fff", border: "0", opacity: "1" },
+        { label: "حفظ محلي", icon: "download", bg: "#FFFFFF", ink: "#1A237E", border: "1.5px solid #2962FF", opacity: "1" },
+        { label: "إلغاء الوردية", icon: "alert", bg: "#FFFFFF", ink: "#B3261E", border: "1.5px solid #E4736F", opacity: "1" },
+        { label: "غير متاح", icon: "close", bg: "#ECEFF3", ink: "#78909C", border: "0", opacity: ".8" }
+      ],
+      tabs: [
+        { label: "الرئيسية", icon: "home", ink: "#1A237E", bg: "#EAF0FB", weight: "700" },
+        { label: "الوردية", icon: "shift-log", ink: "#78909C", bg: "transparent", weight: "500" },
+        { label: "التنبيهات", icon: "bell", ink: "#78909C", bg: "transparent", weight: "500" },
+        { label: "الحساب", icon: "user", ink: "#78909C", bg: "transparent", weight: "500" }
+      ],
+      states: [
+        { title: "لا توجد وردية مفتوحة", body: "حالة فراغ مع الإجراء الأساسي: بدء وردية.", icon: "empty", bg: "#F7F9FC", bd: "#E3EAF3", ink: "#37474F" },
+        { title: "جارٍ التحميل", body: "هيكل تحميل للبطاقات والقوائم — لا شاشة منفصلة.", icon: "refresh", bg: "#F4F1FB", bd: "#D6CEEA", ink: "#4527A0" },
+        { title: "بانتظار المزامنة", body: "حُفظ محلياً وسيُرسل تلقائياً عند عودة الشبكة.", icon: "wifi-off", bg: "#F3F6FB", bd: "#C7D3E6", ink: "#455A64" },
+        { title: "تم الحفظ", body: "تأكيد عابر ثم العودة إلى الوردية.", icon: "check", bg: "#EFF8F2", bd: "#BFE3CE", ink: "#1B7F4D" },
+        { title: "فشلت المزامنة", body: "إعادة المحاولة — البيانات تبقى محفوظة محلياً.", icon: "alert", bg: "#FDF1F1", bd: "#F0BFBD", ink: "#B3261E" },
+        { title: "غير مصرّح", body: "الإجراء معطّل بسبب ظاهر — لا مسار مسدود.", icon: "info", bg: "#FFF8EE", bd: "#F5D9AE", ink: "#8D4E00" }
+      ],
+      handoff: [
+        { key: "spacing.base", value: "4", use: "وحدة كل المسافات" },
+        { key: "touch.min", value: "48", use: "أصغر هدف لمس مسموح" },
+        { key: "button.primary.height", value: "56", use: "الزر الأساسي" },
+        { key: "input.height", value: "58", use: "الحقول (المدى المعتمد 56–60)" },
+        { key: "card.radius", value: "18", use: "البطاقات (المدى 16–20)" },
+        { key: "input.radius", value: "14", use: "الحقول والأزرار" },
+        { key: "bottomnav.height", value: "64", use: "التنقل السفلي" },
+        { key: "icon.size", value: "19 / 21", use: "داخل الحقول / التنقل السفلي" },
+        { key: "font.arabic", value: "'Noto Sans Arabic'", use: "كل النصوص العربية" },
+        { key: "font.latin", value: "Inter (tabular)", use: "الأرقام والقراءات والمبالغ" },
+        { key: "screen.padding", value: "16", use: "حشوة الشاشة الأفقية" },
+        { key: "breakpoint.compact", value: "< 768", use: "هاتف — التصميم الأساسي 390" }
+      ]
+    };
+  }
+  /* —— migrated data: «01 · Foundation - Brand Dark source» (NP-DARK-01 · CC-015), verbatim. */
+  darkVals() {
+    const cells = [
+      { name: "Light — لم يتغير", cls: "L", lbl: "lbl" },
+      { name: "الجديد — Brand Dark (Tenant A)", cls: "BD tA", lbl: "lbl good" },
+      { name: "الجديد — Brand Dark (Tenant B)", cls: "BD tB", lbl: "lbl good" }
+    ];
+    const S = (o) => Object.assign({ mark: "NP", cells, h: "" }, o);
+    const screens = [
+      S({ n: "٢‑١", title: "Login", note: "خلفية زرقاء عميقة من الهوية وكرت أفتح بدرجة — لا نصف أسود ولا كرت أسود؛ الشعار واسم المحطة والعلامة المائية كما هي.",
+        hdr: "Nile Petro", sub: "تسجيل الدخول — لوحة المحطة",
+        field: "اسم المستخدم", rows: [{ t: "كلمة المرور", v: "••••••" }], cta: "دخول", cta2: "استخدم البصمة" }),
+      S({ n: "٢‑٢", title: "Worker Home", note: "Canvas = Brand Dark · البطاقات = Raised · الشريط السفلي = Elevated وليس شريطاً أسود مستقلاً.",
+        hdr: "وردية الصباح", sub: "محطة المعادي — مسدس ٣",
+        kpis: [{ v: "3/6", l: "قراءات" }, { v: "2", l: "مصروفات" }, { v: "1", l: "توريد" }],
+        card: { t: "الوردية نشطة", c: "بدأت 06:00 — تنتهي 14:00", ok: "متصل", wn: "بانتظار المزامنة" },
+        nav: [{ l: "الرئيسية", c: "on" }, { l: "الوردية", c: "" }, { l: "التنبيهات", c: "" }, { l: "حسابي", c: "" }] }),
+      S({ n: "٢‑٣", title: "Worker Shift", note: "حقول القراءة بخلفية أفتح قليلاً من الـ Canvas — لا حقول سوداء، والتركيز بلون الهوية.",
+        hdr: "قراءة العدادات", sub: "مسدس ٣ — بنزين ٩٢",
+        field: "القراءة الحالية", rows: [{ t: "قراءة البداية", v: "24,580.120" }, { t: "الفرق", v: "312.400" }],
+        cta: "مراجعة وإرسال", cta2: "حفظ كمسودة" }),
+      S({ n: "٢‑٤", title: "Manager Home", note: "نفس السلّم على شاشة المدير: Canvas ← Card ← Raised مع حدود خفيفة جداً بدل حدود بيضاء.",
+        hdr: "لوحة المحطة", sub: "٣ فروع — اليوم",
+        kpis: [{ v: "28.3K", l: "لتر" }, { v: "4", l: "موافقات" }, { v: "2", l: "تنبيهات" }],
+        card: { t: "وردية نشطة — فرع التجمع", c: "٤ عمال · ٦ مسدسات", ok: "مكتملة", wn: "تحتاج مراجعة" },
+        nav: [{ l: "اللوحة", c: "on" }, { l: "المخزون", c: "" }, { l: "التقارير", c: "" }, { l: "حسابي", c: "" }] }),
+      S({ n: "٢‑٥", title: "Inventory", note: "المقاييس والخزانات على سطح مرتفع واضح عن الخلفية — بلا ظل ثقيل وبلا بطاقة سوداء على خلفية سوداء.",
+        hdr: "المخزون", sub: "خزانات المحطة",
+        kpis: [{ v: "62%", l: "بنزين ٩٢" }, { v: "41%", l: "ديزل" }, { v: "88%", l: "جاز" }],
+        rows: [{ t: "خزان ١ — بنزين ٩٢", v: "18,600 L" }, { t: "خزان ٢ — ديزل", v: "9,400 L" }],
+        card: { t: "توريد قادم", c: "اليوم 16:00 — 12,000 لتر", ok: "مؤكد", wn: "قرب السعة" } }),
+      S({ n: "٢‑٦", title: "Reports", note: "سلاسل البيانات تبقى دلالية ومقروءة على السطح الداكن؛ لون الهوية للمؤشر النشط فقط.",
+        hdr: "التقارير", sub: "أسبوعي — الفروع",
+        kpis: [{ v: "+8.4%", l: "مقابل الأسبوع" }, { v: "196K", l: "لتر" }, { v: "12", l: "ورديات" }],
+        table: true, cta: "تصدير", cta2: "تغيير المدى" }),
+      S({ n: "٢‑٧", title: "Account", note: "الصفوف والمفاتيح على سطح البطاقة، والنص الثانوي أهدأ من الأساسي بدل أبيض صريح في كل مكان.",
+        hdr: "حسابي", sub: "مدير المحطة",
+        rows: [{ t: "الملف الشخصي", v: "›" }, { t: "الأمان", v: "›" }, { t: "التفضيلات — الثيم", v: "ليلي" }],
+        card: { t: "الجلسات النشطة", c: "هذا الجهاز + جهاز واحد", ok: "محمي", wn: "مزامنة معلقة" },
+        nav: [{ l: "اللوحة", c: "" }, { l: "المخزون", c: "" }, { l: "التقارير", c: "" }, { l: "حسابي", c: "on" }] }),
+      S({ n: "٢‑٨", title: "NPDataTable", note: "ترويسة أفتح بدرجة بسيطة · صفوف على سطح البطاقة · فواصل منخفضة التباين · الصف المحدَّد بلمسة من لون الهوية — بلا جدول أسود وبلا شبكة بيضاء.",
+        hdr: "جدول البيانات", sub: "الفروع — الحالة",
+        table: true, field: "بحث في الفروع" })
+    ];
+    const criteria = [
+      { k: "أسطح سوداء صريحة", v: "0", e: "لا #000000 ولا #050505 ولا #080808 في أي سطح" },
+      { k: "Canvas مشتق من الهوية", v: "PASS", e: "brand.deep 35% + قاعدة رمادية داكنة" },
+      { k: "البطاقات واضحة عن Canvas", v: "PASS", e: "رُقيّ منفصلة: canvas / surface / raised / elevated" },
+      { k: "الأسطح المرتفعة واضحة", v: "PASS", e: "raised و elevated مسجّلتان كـ tokens" },
+      { k: "الشريط السفلي ليس أسود", v: "PASS", e: "nav = surface.dark.elevated" },
+      { k: "الحقول ليست سوداء", v: "PASS", e: "input = raised + حدود خفيفة + تركيز بلون الهوية" },
+      { k: "النوافذ والأوراق ليست سوداء", v: "PASS", e: "modal/sheet = surface أعلى + overlay شفاف داكن" },
+      { k: "هوية العميل مرئية", v: "PASS", e: "الترويسة والعمق واللون الأساسي كلها من الهوية" },
+      { k: "ألوان الحالات دلالية", v: "PASS", e: "نص الحالة + خلفية ممزوجة بالسطح، لا استبدال بلون الهوية" },
+      { k: "تباين النص", v: "PASS", e: "#F5F7FC / #C5CEE0 / #95A3BA على الرُقيّ الداكنة" },
+      { k: "Worker Dark", v: "PASS", e: "NP Worker Complete · Shift · Home" },
+      { k: "Manager Dark", v: "PASS", e: "Approvals · Inventory · Reports/Account · Station" },
+      { k: "Web Dark", v: "PASS", e: "np-tokens.css — نفس أسماء الـ tokens" },
+      { k: "Login Dark", v: "PASS", e: "NPAuthLogin يقرأ tokens المخطط بدل قيَم ثابتة" },
+      { k: "NPDataTable Dark", v: "PASS", e: "ترويسة raised · hover و selected بلمسة الهوية" },
+      { k: "Tenant A", v: "PASS", e: "Navy عميق من #1A237E" },
+      { k: "Tenant B", v: "PASS", e: "Deep Green من #00453C — لا Navy مستعار" },
+      { k: "قيَم داكنة ثابتة داخل مكوّنات مُعاد استخدامها", v: "0", e: "كلها مشتقة عبر color-mix من brand.deep" },
+      { k: "الهندسة", v: "UNCHANGED", e: "لا تغيير أبعاد أو حشو أو أنصاف أقطار" },
+      { k: "المكوّنات", v: "UNCHANGED", e: "لا مكوّن جديد ولا تفريع" },
+      { k: "الوضع النهاري", v: "UNCHANGED", e: "لم تُلمس قيَم light" }
+    ];
+    const files = [
+      { f: "np-tokens.css", c: "الطبقة ١: رُقيّ داكنة مشتقة من --np-dark-brand (يكفي تجاوزه لكل عميل) + نص ٣ مستويات · الطبقة ٤: elevated / selected / hover / input-bg / table-row-hover · nav و topbar صعدا درجة · حدود أخف" },
+      { f: "NPAuthLogin.dc.html", c: "لوح الليل صار قراءة tokens بالكامل — صفر قيمة داكنة ثابتة" },
+      { f: "NP Worker Complete.dc.html", c: ".dk مشتق من brand.deep + خلفيات الحالات ممزوجة بسطح البطاقة" },
+      { f: "NP Manager Inventory.dc.html · NP Manager Reports Account.dc.html", c: "نفس اشتقاق .dk ونفس أسماء المتغيّرات" },
+      { f: "NP Manager Approvals.dc.html", c: ".dk مشتق + ترويسة داكنة بلون العمق بدل رمادي مزرق" },
+      { f: "NP Manager Station.dc.html", c: "قواعد .dk المباشرة صارت تقرأ سلّم أسطح واحد" }
+    ];
+    return { screens, criteria, files };
+  }
+  renderVals() {
+    const reg = (typeof window !== "undefined" && window.NPIcons) || { names: [], mirrored: [], nonMirrored: [], viewBox: "0 0 20 20" };
+    const stages = {};
+    for (let i = 1; i <= Component.SECTIONS; i++) stages["s" + i] = this.state.stage >= i;
+    return Object.assign(stages, {
+      iconCount: String(reg.names.length),
+      mirroredCount: String(reg.mirrored.length),
+      viewBox: reg.viewBox,
+      staticIcons: reg.nonMirrored.map(name => ({ name })),
+      mirrorIcons: reg.mirrored.map(name => ({ name }))
+    }, this.mobileVals(), this.darkVals());
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="np-tokens.css">
+<style>html,body{margin:0;background:#EDF2F9}
+/* ═══ P4 · ACCESSIBILITY — controls inside the auth device mock meet the
+   48×48 mobile target. Hit area only; visible geometry unchanged.
+   Documentation prose links on this page are not mobile controls. ═══ */
+.npauth button,.npauth [role="button"],.npauth .ib{min-height:48px;min-width:48px}
+.npauth input,.npauth select,.npauth textarea{min-height:48px;min-width:48px;box-sizing:border-box}
+.npauth label{display:flex;align-items:center;min-height:48px}
+</style>
+</helmet>
+
+<div dir="rtl" style="padding:26px 40px 0;display:flex;flex-direction:column;gap:10px;font-family:'Noto Sans Arabic',system-ui,sans-serif;background:#F6F7FB">
+<div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#E8F4FD;border:1px solid #BEDCF2;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#01579B">07 · Authentication</span>
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#E8F5EC;border:1px solid #BEDFC9;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#0B6B3A">هوية العميل من props — 0 قيمة ثابتة</span>
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#FDF3F3;border:1px solid #E9C9C9;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#9B2222">No Sign Up</span>
+</div>
+<p style="margin:0;font:400 13px/21px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:940px">النطاق: دخول الويب (بريد + كلمة مرور) · دخول العامل (جهاز محطة معتمد ← رمز العامل ← رمز الدخول الشخصي — بلا كلمة مرور وبلا OTP يومي) · دخول المدير (بيانات المدير + OTP عند تسجيل جهاز أو جهاز جديد أو استرداد) · OTP للعامل في الحالات الاستثنائية فقط · رمز الوصول (<span style="font-family:Inter,system-ui,sans-serif;direction:ltr">NPAccessCodeInput</span>) · البصمة (بيانات الجهاز فقط ولا تُخزَّن على الخادم) · Passkeys (<span style="font-family:Inter,system-ui,sans-serif;direction:ltr">NPPasskeyRow</span>) · الجلسات داخل «حسابي» لا في تبويب أمان منفصل: المدير والويب يغيّران كلمة المرور، والعامل يغيّر رمز الدخول الشخصي (PIN) ولا يملك مفتاح OTP، والبصمة دخول سريع اختياري على الأجهزة الموثوقة المخصّصة وحدها (<span style="font-family:Inter,system-ui,sans-serif;direction:ltr">workerBiometricAllowed</span> من الخادم) ولا تظهر مطلقاً على جهاز المحطة المشترك ولا تكون عامل التحقق الأول ولا الوسيلة الوحيدة. سياسة كلمة المرور تُعرَض من الخادم ولا تُكتب في الواجهة.</p>
+<p style="margin:0;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#01579B;background:#E8F4FD;border:1px solid #BEDCF2;border-radius:12px;padding:11px 13px;max-width:940px"><b>NP-WORKER-BIOMETRIC-01 · 2026-09-19</b> — حكم مالك جديد ينسخ بنداً واحداً فقط من NP-WORKER-SECURITY-ALIGNMENT-01: «دخول العامل بالبصمة = لا» صار <b>مشروطاً بالسياسة</b>. البصمة متاحة بعد إثبات الهوية برمز الدخول الشخصي، على جهاز موثوق مؤهَّل، بموافقة العامل، وبديل رمز الدخول متاح دائماً. على الجهاز المشترك: لا زر ولا تفعيل ولا تفضيل. بقية العقد (لا كلمة مرور روتينية · لا OTP روتيني · W53 · الجلسات · بصمة المدير) دون تغيير. الشاشات: <a href="05 · Worker App.dc.html#np-worker-entry" style="color:#01579B">04b عرض التفعيل · 04c الدخول بالبصمة</a> و<span style="font-family:Inter,system-ui,sans-serif;direction:ltr">W51</span> الأمان.</p>
+<p style="margin:0;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#0B6B3A;background:#E8F5EC;border:1px solid #BEDFC9;border-radius:12px;padding:11px 13px;max-width:940px"><b>OD-01 — RESOLVED · 2026-09-19</b> — عقد المصادقة محسوم: الويب بريد + كلمة مرور (+OTP حسب السياسة) · المدير بياناته مع OTP عند أحداث الأجهزة والاسترداد والبصمة بعد اعتماد الجهاز · العامل جهاز معتمد + رمز عامل + رمز دخول شخصي بلا كلمة مرور وبلا OTP يومي. وووفق NP-WORKER-AUTH-CORRECTION-01 تمت مواءمة إطاري دخول العامل في <a href="05 · Worker App.dc.html#np-worker-entry" style="color:#0B6B3A">05 · Worker App</a> مع هذا العقد. النص الكامل في <a href="00 · Project Index.dc.html" style="color:#0B6B3A">00 · Project Index → Open Decisions</a>.</p>
+<div style="height:1px;background:#DDE4EE;margin-top:6px"></div>
+</div>
+<div dir="rtl" style="padding:40px;display:flex;flex-direction:column;gap:30px;font-family:'Noto Sans Arabic','Noto Sans Arabic',system-ui,sans-serif;background:#EDF2F9">
+
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <span style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;height:26px;padding:0 10px;border-radius:7px;background:#fff;border:1px solid var(--np-border);font-family:Inter,sans-serif;font-size:11.5px;font-weight:700;color:var(--np-color-blue-deep)">W01 · NPAuthLogin</span>
+    <h1 style="margin:0;font-size:26px;font-weight:700;color:var(--np-color-blue-deep)">شاشة الدخول — أربع نسخ من مكوّن واحد</h1>
+    <p style="margin:0;max-width:880px;font-size:14px;line-height:24px;color:#5C6B78;text-wrap:pretty">نفس التخطيط والمقاسات والمسافات ومواضع العناصر في النسخ الأربع. الفرق الوحيد: <b>locale</b> (ar / en) و<b>theme</b> (light / dark). الوضع الداكن تبديل Tokens فقط — وليس تصميماً ثانياً. صورة المحطة والشعار الشفاف والفوتر كما في المرجع.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(2,720px);gap:28px">
+    <sc-for list="{{frames}}" as="f" hint-placeholder-count="4">
+      <section style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <b style="font-family:Inter,sans-serif;font-size:13.5px;color:var(--np-color-blue-deep)">{{f.name}}</b>
+          <span style="display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:6px;background:#fff;border:1px solid var(--np-border);font-family:Inter,sans-serif;font-size:11px;font-weight:600;color:#5C6B78">{{f.meta}}</span>
+        </div>
+        <div style="width:720px;height:450px;overflow:hidden;border:1px solid rgba(38,67,120,.14);border-radius:14px;box-shadow:0 10px 30px rgba(26,35,126,.08)">
+          <div style="width:1440px;height:900px;transform:scale(.5);transform-origin:top left">
+            <dc-import name="NPAuthLogin" locale="{{f.locale}}" theme="{{f.theme}}" hint-size="1440px,900px" style="width:1440px;height:900px"></dc-import>
+          </div>
+        </div>
+      </section>
+    </sc-for>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;max-width:1500px">
+    <sc-for list="{{notes}}" as="n" hint-placeholder-count="3">
+      <article style="background:#fff;border:1px solid var(--np-border);border-radius:13px;padding:16px;display:flex;flex-direction:column;gap:7px">
+        <b style="font-size:14px;color:var(--np-color-blue-deep)">{{n.title}}</b>
+        <span style="font-size:12.5px;line-height:21px;color:#5C6B78;text-wrap:pretty">{{n.body}}</span>
+      </article>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      frames: [
+        { name: "NPAuthLogin / Arabic / Light", meta: "locale=ar · theme=light · RTL", locale: "ar", theme: "light" },
+        { name: "NPAuthLogin / Arabic / Dark", meta: "locale=ar · theme=dark · RTL", locale: "ar", theme: "dark" },
+        { name: "NPAuthLogin / English / Light", meta: "locale=en · theme=light · LTR", locale: "en", theme: "light" },
+        { name: "NPAuthLogin / English / Dark", meta: "locale=en · theme=dark · LTR", locale: "en", theme: "dark" }
+      ],
+      notes: [
+        { title: "مكوّن واحد — لا نسخ مكرّرة", body: "النسخ الأربع مثيلات من NPAuthLogin نفسه؛ وشاشة الدخول في تطبيق الويب تستهلك المكوّن ذاته، فلا يوجد تعريف ثانٍ للشاشة." },
+        { title: "الوضع الداكن = Tokens", body: "الخلفية #071426 / #0B1D35، السطح #102640، السطح المرتفع #142D4A، الحدود rgba(144,164,174,.28)، النص #FFFFFF / #B8C5D6، والأزرق الأساسي كما هو." },
+        { title: "معالجة صورة المحطة", body: "نفس الأصل في الوضعين: تدرّج داكن وتباين أعلى قليلاً مع الحفاظ على إضاءة المظلة الزرقاء — بدون استبدال الصورة أو تغييرها." },
+        { title: "الاتجاه واللغة", body: "العربية RTL بخط 'Noto Sans Arabic'، والإنجليزية LTR بخط Inter. الفوتر والحقول والأيقونات تتبع الاتجاه المنطقي تلقائياً دون تغيير موضع أي عنصر بالنسبة للإطار." },
+        { title: "فجوات مُبلَّغ عنها في الأساس", body: "np-tokens.css يحتوي المخطط الفاتح فقط (لا يوجد Dark scheme)، ولا توجد أيقونات lock / mail / fingerprint في السجل. لم يُعدَّل الأساس؛ لوحة الوضع الداكن محصورة داخل هذا المكوّن حتى إقرار Tokens داكنة." },
+        { title: "جاهزية Flutter", body: "كل القيم قابلة للنقل مباشرة: ارتفاع الحقل 52، الزر 54، حشوة البطاقة 30/34، Radius 12 للحقول و18 للبطاقة، الشعار 78، أقصى عرض للبطاقة 600، ومرجع العرض 1440." }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

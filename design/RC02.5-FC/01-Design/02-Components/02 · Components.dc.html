@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+h1,h2,h3{margin:0}
+.wrap{padding:36px 40px 80px;display:flex;flex-direction:column;gap:32px;max-width:1440px}
+.sec{display:flex;flex-direction:column;gap:12px}
+.sh{font:800 20px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.sh small{display:block;font:600 11.5px/17px Inter,system-ui,sans-serif;color:#90A4AE;letter-spacing:.04em}
+.p{font:400 13.5px/22px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:900px;text-wrap:pretty}
+.panel{display:flex;flex-direction:column;gap:11px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.lbl{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#37474F;white-space:nowrap}
+.lbl.ok{background:#E8F5EC;border-color:#BEDFC9;color:#0B6B3A}
+.lbl.wn{background:#FFF6E8;border-color:#F3D9AE;color:#7A4A00}
+.lbl.rev{background:#F3EAFB;border-color:#DCC9EE;color:#5B2A86}
+.lbl.info{background:#E8F4FD;border-color:#BEDCF2;color:#01579B}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:start;vertical-align:top;padding:8px 10px;border-bottom:1px solid #EEF1F6;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+th{font-weight:700;color:#455A64;background:#F6F7FB;white-space:nowrap}
+td.m{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;font-size:11px}
+.note{padding:13px 15px;border-radius:14px;background:#FFF6E8;border:1px solid #F3D9AE;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#7A4A00}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate}
+</style>
+</helmet>
+
+<div dir="rtl" class="wrap">
+
+<div class="sec">
+<div class="row"><span class="lbl info">02 · Components</span><span class="lbl ok">السجل القانوني</span><span class="lbl">65 مكوّن إنتاج + 2 سطح مراجعة</span><span class="lbl wn">لا ترقية ولا دمج ولا إعادة تسمية في التنظيف</span></div>
+<h1 class="sh">سجل المكوّنات القانوني<small>ONE DEFINITION PER BEHAVIOUR · NO PHASE-BASED PAGES</small></h1>
+<p class="p">كل مكوّن ملف واحد باسم <span class="mono">NP…</span> ويُستدعى بالاسم. الأساس والهندسة و Tokens تعود إلى <a href="01 · Foundation.dc.html">01 · Foundation</a> ولا يعاد تعريفها داخل أي مكوّن أو شاشة.</p>
+</div>
+
+<div class="sec">
+<h2 class="sh">المجموعات<small>OWNERSHIP</small></h2>
+<div class="panel">
+<table>
+<tr><th>المجموعة</th><th>العدد</th><th>المكوّنات</th></tr>
+<sc-for list="{{ groups }}" as="r" hint-placeholder-count="6">
+<tr><td><b>{{ r.k }}</b></td><td class="m">{{ r.n }}</td><td style="font-size:11.5px;line-height:19px">{{ r.list }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">عقود قانونية غير مُركَّبة حالياً<small>OWNER RULING — KEEP · لا تُحذف ولا تُحشر في شاشات</small></h2>
+<div class="panel">
+<div class="row">
+<sc-for list="{{ uninstantiated }}" as="c" hint-placeholder-count="16">
+<span class="lbl">{{ c }}</span>
+</sc-for>
+</div>
+<p class="p">١٦ مكوّناً قانونياً لا تستدعيه مصادر الشاشات الحالية (شاشات الجوال بُنيت كإطارات داخلية). تُصنَّف هنا كـ <b>Canonical component / Flutter contract — not currently instantiated by current screen source</b>. غياب الاستدعاء ليس سبباً للحذف.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">مجموعة القوالب<small>TEMPLATES — محتوى قابل للتحرير، ليست صوراً</small></h2>
+<div class="panel">
+<table>
+<tr><th>القالب</th><th>الاستخدام</th><th>المصدر</th></tr>
+<sc-for list="{{ templates }}" as="r" hint-placeholder-count="9">
+<tr><td><b>{{ r.k }}</b></td><td>{{ r.v }}</td><td><a href="{{ r.href }}">فتح</a></td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">طابور مراجعة العقود<small>CONTRACT REVIEW QUEUE — لا دمج ولا إعادة تسمية</small></h2>
+<div class="panel">
+<table>
+<tr><th>المجموعة</th><th>سبب الإدراج</th><th>الحالة</th></tr>
+<sc-for list="{{ queue }}" as="r" hint-placeholder-count="4">
+<tr><td class="m">{{ r.k }}</td><td>{{ r.v }}</td><td><span class="lbl rev">{{ r.st }}</span></td></tr>
+</sc-for>
+</table>
+<p class="p">عدم التطابق في التسمية بين <span class="mono">NPStatusChip</span> والمرشّح <span class="mono">NPStatusBadge</span> مسجَّل أيضاً في <a href="11 · Flutter Handoff.dc.html">11 · Flutter Handoff → فجوات التعيين</a>.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">مرشّحات الاستخراج — مؤجّلة<small>DEFERRED — أمر عمل توحيد مكوّنات قبل Flutter</small></h2>
+<div class="panel">
+<table>
+<tr><th>المكوّن المقترح</th><th>الحالة الحالية</th><th>القرار</th></tr>
+<sc-for list="{{ candidates }}" as="r" hint-placeholder-count="8">
+<tr><td class="m">{{ r.k }}</td><td>{{ r.now }}</td><td><span class="lbl wn">DEFERRED</span></td></tr>
+</sc-for>
+</table>
+<div class="note">لا مكوّن قانوني جديد في Phase 3: الترقية تغيّر السجل والعقد، وتحتاج أمر عمل مخصّصاً. التنفيذ الحالي محفوظ كما هو داخل الشاشات.</div>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">سقالة المراجعة — ليست مكوّنات منتج<small>OWNER RULING §3</small></h2>
+<div class="panel">
+<table>
+<tr><th>الملف</th><th>التصنيف</th><th>الموقع</th></tr>
+<sc-for list="{{ scaffold }}" as="r" hint-placeholder-count="2">
+<tr><td class="m">{{ r.k }}</td><td>{{ r.v }}</td><td><a href="{{ r.href }}">{{ r.to }}</a></td></tr>
+</sc-for>
+</table>
+<p class="p">لا تُحسب داخل عدّ مكوّنات الإنتاج (65)، ولم تُعد تسميتها.</p>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      groups: [
+        { k: "Foundation", n: "46", list: "NPButton · NPIconButton · NPStatusChip · NPValue · NPSearch · NPSelect · NPCheckbox · NPRadio · NPTextarea · NPDatePicker · NPMenu · NPTabs · NPModal · NPDrawer · NPToast · NPInlineNotice · NPPagination · NPBulkBar · NPToolbar · NPPageHeader · NPDisclosure · NPKPI · NPTrendChart · NPDataTable · NPEmptyState · NPErrorState · NPLoadingState · NPSuccessState · NPLogo · NPMaskedReveal · NPTypedConfirmation · NPAuditDiff · NPStepFlow · NPFileAttachment · NPFuelBadge · NPNozzleLabel · NPSyncBadge · NPSyncStatus · NPConnectivityBanner · NPOfflineGuard · NPPasskeyRow · NPAccessCodeInput · NPOTPInput · NPAmountInput · NPUnitPriceInput · NPTankGauge" },
+        { k: "Shared Mobile", n: "8", list: "NPBottomNavigation · NPBottomSheet · NPConfirmationSheet · NPTaskShell · NPActionCard · NPPhotoCapture · NPMeterPhoto · NPAlertList" },
+        { k: "Shared Web", n: "3", list: "NPAppShell · NPSidebar · NPTopbar" },
+        { k: "Authentication", n: "1", list: "NPAuthLogin — locale × theme × tenant brand كلها props" },
+        { k: "Worker Domain", n: "7", list: "NPReadingInput · NPMeterReadingField · NPReadingDifference · NPReadingListItem · NPReviewSection · NPShiftProgress · NPShiftStatusCard" },
+        { k: "Manager / Operational Domain", n: "0", list: "شاشات المدير تُركَّب من Foundation و Shared Mobile — انظر مرشّحات الاستخراج المؤجّلة" }
+      ],
+      uninstantiated: ["NPActionCard","NPBottomNavigation","NPConfirmationSheet","NPConnectivityBanner","NPFuelBadge","NPMeterPhoto","NPMeterReadingField","NPNozzleLabel","NPOTPInput","NPReadingDifference","NPReadingListItem","NPReviewSection","NPShiftProgress","NPShiftStatusCard","NPSuccessState","NPSyncBadge"],
+      templates: [
+        { k: "فهرس مجموعة القوالب (معرض حي للقوالب الثمانية)", v: "خريطة القوالب وقواعد استخدامها", href: "02 · Components - template set index.dc.html" },
+        { k: "NP Console Auth Template", v: "قالب دخول لوحة الويب", href: "NP Console Auth Template.dc.html" },
+        { k: "NP Mobile Auth Template", v: "قالب دخول الجوال", href: "NP Mobile Auth Template.dc.html" },
+        { k: "NP Dashboard Template", v: "قالب لوحة معلومات", href: "NP Dashboard Template.dc.html" },
+        { k: "NP Detail Template", v: "قالب تفاصيل + درج جانبي", href: "NP Detail Template.dc.html" },
+        { k: "NP Operational Form Template", v: "قالب نموذج تشغيلي (إدخال + مراجعة)", href: "NP Operational Form Template.dc.html" },
+        { k: "NP Operational List Template", v: "قالب قائمة تشغيلية (فلاتر + جدول/بطاقات)", href: "NP Operational List Template.dc.html" },
+        { k: "NP Station Gate Template", v: "قالب بوابة المحطة", href: "NP Station Gate Template.dc.html" },
+        { k: "NP Station Task Flow Template", v: "قالب مسار مهمة متعدد الخطوات", href: "NP Station Task Flow Template.dc.html" }
+      ],
+      queue: [
+        { k: "NPSyncBadge · NPSyncStatus · NPConnectivityBanner", v: "ثلاث طبقات لمفهوم الاتصال — قد تكون عقوداً متمايزة فعلاً", st: "REVIEW REQUIRED" },
+        { k: "NPReadingInput · NPMeterReadingField · NPReadingDifference", v: "إدخال مقابل حقل عدّاد مقابل عرض فرق", st: "REVIEW REQUIRED" },
+        { k: "NPPhotoCapture · NPMeterPhoto", v: "التقاط عام مقابل صورة عدّاد بسياق قراءة", st: "REVIEW REQUIRED" },
+        { k: "NPStatusChip ↔ NPStatusBadge", v: "عدم تطابق تسمية بين التصميم ومرشّح Flutter", st: "MISMATCH RECORDED" }
+      ],
+      candidates: [
+        { k: "NPStationCloseReadiness", now: "بطاقة داخل مركز المحطة" },
+        { k: "NPBlockingReason", now: "سبب منع داخل بوابة الإغلاق والموافقات" },
+        { k: "NPSessionRow", now: "صف جلسة داخل شاشة الجلسات" },
+        { k: "NPPreferenceRow", now: "صف تفضيل (لغة · ثيم · تنبيهات)" },
+        { k: "NPAccountSection", now: "مجموعة صفوف الحساب" },
+        { k: "NPProfileCard", now: "بطاقة ملف داخل حسابي" },
+        { k: "NPStatusTimeline", now: "خط زمني داخل المراجعة" },
+        { k: "NPActionHistory", now: "سجل إجراءات داخل التفاصيل" }
+      ],
+      scaffold: [
+        { k: "NPSurfaceA", v: "سطح مراجعة / QA — ليس مكوّن منتج", to: "12 · QA & Final Audit", href: "NPSurfaceA.dc.html" },
+        { k: "NPSurfaceB", v: "سطح مراجعة / QA — ليس مكوّن منتج", to: "12 · QA & Final Audit", href: "NPSurfaceB.dc.html" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+h1,h2,h3{margin:0}
+.wrap{padding:36px 40px 80px;display:flex;flex-direction:column;gap:32px;max-width:1400px}
+.sec{display:flex;flex-direction:column;gap:12px}
+.sh{font:800 20px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.sh small{display:block;font:600 11.5px/17px Inter,system-ui,sans-serif;color:#90A4AE;letter-spacing:.04em}
+.p{font:400 13.5px/22px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:900px;text-wrap:pretty}
+.panel{display:flex;flex-direction:column;gap:11px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.lbl{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#37474F;white-space:nowrap}
+.lbl.ok{background:#E8F5EC;border-color:#BEDFC9;color:#0B6B3A}
+.lbl.wn{background:#FFF6E8;border-color:#F3D9AE;color:#7A4A00}
+.lbl.bad{background:#FDF3F3;border-color:#E9C9C9;color:#9B2222}
+.lbl.info{background:#E8F4FD;border-color:#BEDCF2;color:#01579B}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:start;vertical-align:top;padding:8px 10px;border-bottom:1px solid #EEF1F6;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+th{font-weight:700;color:#455A64;background:#F6F7FB;white-space:nowrap}
+td.m{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;font-size:11px}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate}
+.bp{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:11px}
+.bp div{display:flex;flex-direction:column;gap:4px;padding:13px 14px;background:#fff;border:1px solid #DDE4EE;border-radius:14px}
+.bp div b{font:800 15px/1.2 Inter,system-ui,sans-serif;direction:ltr;color:#1A237E}
+.bp div span{font:500 11.5px/18px 'Noto Sans Arabic',sans-serif;color:#455A64}
+</style>
+</helmet>
+
+<div dir="rtl" class="wrap">
+
+<div class="sec">
+<div class="row"><span class="lbl info">09 · States &amp; Responsive</span><span class="lbl ok">16 حالة عامة</span><span class="lbl">4 قياسات جوال · 5 قياسات ويب</span><span class="lbl wn">لا تُكرَّر لوحة الحالات داخل أي نطاق</span></div>
+<h1 class="sh">الحالات العامة ومراجع الاستجابة<small>ONE CANONICAL STATE VOCABULARY</small></h1>
+<p class="p">كل شاشة في التطبيقات الثلاثة تستهلك هذه الحالات بنفس الأسماء والمكوّنات. أي رسالة خطأ تشرح ما حدث وما يفعله المستخدم — لا «حدث خطأ» مجرّدة.</p>
+</div>
+
+<div class="sec">
+<h2 class="sh">مفردات الحالات<small>STATE VOCABULARY · COMPONENT · RECOVERY</small></h2>
+<div class="panel">
+<table>
+<tr><th>الحالة</th><th>المكوّن القانوني</th><th>النص المطلوب</th><th>مسار التعافي</th></tr>
+<sc-for list="{{ states }}" as="r" hint-placeholder-count="16">
+<tr><td><span class="{{ r.cls }}">{{ r.k }}</span></td><td class="m">{{ r.c }}</td><td>{{ r.t }}</td><td>{{ r.r }}</td></tr>
+</sc-for>
+</table>
+<p class="p">مسودّة الاسترداد بيانات محلية محمية: تُحفظ قبل أي إعادة تحميل، وتبقى حتى نجاح الحل أو تجاهل صريح من المستخدم أو انتهاء مدة الاحتفاظ أو مسح/إلغاء الجهاز — ومدة الاحتفاظ قيمة تهيئة تنفيذية غير معرّفة في أي مصدر معتمد. العقد الكامل في <a href="11 · Flutter Handoff.dc.html">11 · Flutter Handoff</a> و<code>offline-sync.md</code>؛ لا شاشة جديدة.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">حالات الانقطاع السبع<small>OFFLINE MODEL — نفس الأسماء في التطبيقات الثلاثة</small></h2>
+<div class="panel">
+<div class="row">
+<sc-for list="{{ offline }}" as="s" hint-placeholder-count="7">
+<span class="lbl">{{ s }}</span>
+</sc-for>
+</div>
+<p class="p">المصفوفة الكاملة (عرض · إنشاء · طابور · يتطلب اتصالاً · تأكيد خادم) في <a href="12 · QA and Final Audit.dc.html">12 · QA</a>؛ لا تُعاد هنا.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">مراجع الجوال<small>MOBILE REFERENCES</small></h2>
+<div class="panel">
+<div class="bp">
+<sc-for list="{{ mobile }}" as="r" hint-placeholder-count="4">
+<div><b>{{ r.k }}</b><span>{{ r.v }}</span></div>
+</sc-for>
+</div>
+<table>
+<tr><th>البند</th><th>القاعدة</th></tr>
+<sc-for list="{{ mobileRules }}" as="r" hint-placeholder-count="6">
+<tr><td>{{ r.k }}</td><td>{{ r.v }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">مراجع الويب<small>WEB REFERENCES</small></h2>
+<div class="panel">
+<div class="bp">
+<sc-for list="{{ web }}" as="r" hint-placeholder-count="5">
+<div><b>{{ r.k }}</b><span>{{ r.v }}</span></div>
+</sc-for>
+</div>
+<table>
+<tr><th>البند</th><th>القاعدة</th></tr>
+<sc-for list="{{ webRules }}" as="r" hint-placeholder-count="6">
+<tr><td>{{ r.k }}</td><td>{{ r.v }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      states: [
+        { k: "Loading", cls: "lbl", c: "NPLoadingState", t: "ما الذي يُحمَّل", r: "لا إجراء — بلا قفل شاشة كامل إن أمكن" },
+        { k: "Empty", cls: "lbl", c: "NPEmptyState", t: "لا بيانات + سبب الفراغ", r: "إجراء إنشاء إن كان مسموحاً بالصلاحية" },
+        { k: "No Results", cls: "lbl", c: "NPEmptyState (variant)", t: "لا نتائج للفلاتر الحالية", r: "مسح الفلاتر · تعديل البحث" },
+        { k: "Error", cls: "lbl bad", c: "NPErrorState", t: "ما حدث بلغة المستخدم", r: "إعادة المحاولة · تحديث البيانات · العودة · اتصل بالدعم" },
+        { k: "Offline", cls: "lbl wn", c: "NPConnectivityBanner · NPOfflineGuard", t: "أنت دون اتصال وما يمكن عمله", r: "المتابعة محلياً حيث يُسمح · انتظار المزامنة" },
+        { k: "Pending Sync", cls: "lbl wn", c: "NPSyncBadge · NPSyncStatus", t: "عدد العناصر المعلّقة", r: "مزامنة الآن · عرض القائمة" },
+        { k: "Syncing", cls: "lbl", c: "NPSyncStatus", t: "جارٍ الإرسال", r: "لا إجراء مدمّر أثناء المزامنة" },
+        { k: "Success", cls: "lbl ok", c: "NPSuccessState · NPToast", t: "ما تم بالضبط + الحالة التالية من الخادم", r: "التالي · العودة للقائمة" },
+        { k: "Unauthorized", cls: "lbl bad", c: "NPErrorState (variant)", t: "لا صلاحية لهذا الإجراء", r: "العودة · طلب صلاحية من المدير" },
+        { k: "Session Expired", cls: "lbl bad", c: "NPErrorState + إعادة دخول", t: "انتهت الجلسة", r: "دخول من جديد مع حفظ المسودّات المحلية" },
+        { k: "Record Changed · DATA_CONFLICT", cls: "lbl wn", c: "NPInlineNotice + نمط المقارنة/الاسترداد", t: "تم تحديث هذا السجل من مستخدم آخر", r: "تحميل أحدث نسخة · حفظ المدخلات كمسودّة استرداد · إعادة تطبيق على مستوى الحقل بقرار صريح · إعادة الإرسال نيّة جديدة بمفتاح جديد — لا دمج تلقائي ولا كتابة فوق صامتة" },
+        { k: "Record Changed · DECISION_CONFLICT", cls: "lbl bad", c: "NPInlineNotice (حاجب)", t: "لم يعد هذا الإجراء متاحاً — النتيجة الحالية للسجل", r: "خروج · فتح للقراءة فقط — لا زر إعادة تطبيق · الفاعل والوقت يظهران فقط بصلاحية المشاهد · الخادم هو من يحدّد نوع التعارض" },
+        { k: "Sync Conflict", cls: "lbl wn", c: "NPSyncStatus (نقطة دخول فشل المزامنة)", t: "تعذر رفع عملية مؤجلة بسبب تعارض نسخة السجل", r: "الحالة sync_failed · مسودّة استرداد مرتبطة بالنيّة · الحل عبر نفس عقدَي التعارض — لا إعادة محاولة تلقائية والمفتاح يُتقاعد" },
+        { k: "Record Deleted / Voided", cls: "lbl bad", c: "NPErrorState (variant)", t: "لم يعد السجل موجوداً أو قابلاً للتعديل", r: "إبلاغ صريح · حفظ مسودّة الاسترداد حسب السياسة — لا إعادة تطبيق ولا إنشاء صامت" },
+        { k: "Permission Denied", cls: "lbl bad", c: "NPInlineNotice", t: "الإجراء محجوب وسببه", r: "بديل مسموح إن وُجد" },
+        { k: "Blocked", cls: "lbl bad", c: "NPInlineNotice (بوابة)", t: "شروط غير مكتملة مسرودة", r: "إكمال الشرط — لا حلّ تلقائي من العميل" }
+      ],
+      offline: ["online","offline","local_draft","pending_sync","syncing","confirmed","sync_failed"],
+      mobile: [
+        { k: "360 × 800", v: "الحد الأدنى — الشريط السفلي وأسماء طويلة بلا قصّ" },
+        { k: "390 × 844", v: "المرجع الأساسي لكل الإطارات" },
+        { k: "393 × 852", v: "تحقّق هامش علوي/سفلي" },
+        { k: "430 × 932", v: "أكبر قياس — لا تمدد مفرط للبطاقات" }
+      ],
+      mobileRules: [
+        { k: "مناطق اللمس", v: "≥ 48px لكل هدف · الشريط السفلي 78px" },
+        { k: "Safe Area", v: "الحشو السفلي يضيف env(safe-area-inset-bottom)" },
+        { k: "لوحة المفاتيح", v: "الحقل النشط والزر الأساسي يبقيان مرئيين — لا زر مدفون" },
+        { k: "الأسماء الطويلة", v: "سطران كحد أقصى ثم قصّ بثلاث نقاط — لا فائض أفقي" },
+        { k: "القيَم الرقمية الكبيرة", v: "خط أحادي + عزل LTR + تصغير درجة واحدة عند الطول" },
+        { k: "الأوراق السفلية", v: "ارتفاع يتكيّف · مقبض 44×4 · تمرير داخلي واحد" }
+      ],
+      web: [
+        { k: "1280", v: "Sidebar مطوي افتراضياً" },
+        { k: "1366", v: "المرجع الأكثر شيوعاً" },
+        { k: "1440", v: "مرجع التصميم الأساسي" },
+        { k: "1600", v: "أعمدة أوسع بلا تمدد النص" },
+        { k: "1920", v: "حد أقصى لعرض المحتوى" }
+      ],
+      webRules: [
+        { k: "Sidebar", v: "موسّع 256 · مطوي 76 · مخفي على الضيق — نفس المكوّن" },
+        { k: "Topbar / Toolbar", v: "72 / 64 ثابتة — لا تتغير بالكثافة" },
+        { k: "NPDataTable", v: "صف 56 · تحوّل إلى بطاقات على الضيق · ترويسة لاصقة" },
+        { k: "الأدراج والنوافذ", v: "عرض أقصى ثابت · تمرير داخلي · تركيز محصور" },
+        { k: "الكثافة", v: "desktop / touch — الهندسة المستقلة عن الكثافة لا تتحرك" },
+        { k: "الفائض", v: "0 فائض أفقي غير مقصود في كل القياسات" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

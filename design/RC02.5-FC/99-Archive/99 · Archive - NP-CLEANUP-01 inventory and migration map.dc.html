@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F6F7FB;font-family:Tajawal,system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+h1,h2,h3{margin:0}
+.wrap{padding:36px 40px 80px;display:flex;flex-direction:column;gap:36px;max-width:1520px}
+.sec{display:flex;flex-direction:column;gap:13px}
+.sh{font:800 21px/1.3 Tajawal,sans-serif;color:#1F2330}
+.sh small{display:block;font:600 12px/18px 'IBM Plex Mono',monospace;color:#90A4AE;letter-spacing:.04em}
+.p{font:400 13.5px/22px Tajawal,sans-serif;color:#455A64;max-width:920px;text-wrap:pretty}
+.panel{display:flex;flex-direction:column;gap:12px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.lbl{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 Tajawal,sans-serif;color:#37474F;white-space:nowrap}
+.lbl.keep{background:#E8F5EC;border-color:#BEDFC9;color:#0B6B3A}
+.lbl.merge{background:#E8F4FD;border-color:#BEDCF2;color:#01579B}
+.lbl.arch{background:#FFF6E8;border-color:#F3D9AE;color:#7A4A00}
+.lbl.del{background:#FDF3F3;border-color:#E9C9C9;color:#9B2222}
+.lbl.rev{background:#F3EAFB;border-color:#DCC9EE;color:#5B2A86}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:start;vertical-align:top;padding:8px 10px;border-bottom:1px solid #EEF1F6;font:500 12px/19px Tajawal,sans-serif;color:#1F2330}
+th{font-weight:700;color:#455A64;background:#F6F7FB;white-space:nowrap}
+td.m{font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;font-size:11px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.mini{display:flex;flex-direction:column;gap:5px;padding:14px 15px;background:#fff;border:1px solid #DDE4EE;border-radius:16px}
+.mini b{font:800 21px/1.2 'IBM Plex Mono',monospace;direction:ltr;color:#1A237E}
+.mini span{font:600 11px/16px Tajawal,sans-serif;color:#455A64}
+.tree{display:flex;flex-direction:column;gap:5px;overflow-x:auto;font:500 12px/19px 'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;color:#1F2330}
+.tree span{white-space:pre}
+.note{padding:13px 15px;border-radius:14px;background:#FFF6E8;border:1px solid #F3D9AE;font:500 12.5px/20px Tajawal,sans-serif;color:#7A4A00}
+.stop{display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:20px;background:linear-gradient(180deg,#0F1A3D 0%,#16204A 100%);color:#F5F7FC}
+.stop h2{font:800 21px/1.3 Tajawal,sans-serif;color:#fff}
+.stop p{margin:0;font:400 13px/21px Tajawal,sans-serif;color:#C5CEE0;max-width:920px}
+.stop .tree{color:#F5F7FC}
+.stop .g{display:inline-flex;align-items:center;align-self:flex-start;height:34px;padding:0 14px;border-radius:10px;background:#F0C478;color:#0F1A3D;font:800 14px/1 Tajawal,sans-serif}
+.mono{font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate}
+</style>
+</helmet>
+
+<div dir="rtl" class="wrap">
+
+<div class="sec">
+<div class="row"><span class="lbl merge">NP-CLEANUP-01 · v2.0</span><span class="lbl">PHASE 1 — INVENTORY</span><span class="lbl">PHASE 2 — MIGRATION MAP</span><span class="lbl arch">لم يُحذف ولم يُدمج شيء بعد</span><span class="lbl">Single-Tenant White-Label Deployment · SaaS-Ready Core</span></div>
+<h1 class="sh">جرد المشروع وخطة الهيكلة القانونية</h1>
+<p class="p">هذه المرحلة تنظيم فقط: لا ميزات، ولا Flutter، ولا Backend، ولا قاعدة عمل تتغير، ولا شاشة معتمدة تُعاد تصميمها. كل صفحة قائمة لها سطر واحد وقرار واحد بسبب واضح. <b>لم تُنفَّذ أي عملية دمج أو أرشفة أو حذف</b> — التنفيذ ينتظر اعتمادك (Phase 3)، ثم تدقيق الحفظ (Phase 4).</p>
+<div class="cards">
+<sc-for list="{{ counts }}" as="c" hint-placeholder-count="8">
+<div class="mini"><b>{{ c.v }}</b><span>{{ c.l }}</span></div>
+</sc-for>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">الشجرة القانونية المقترحة<small>§6 · §57 — 13 صفحة نشطة + أرشيف</small></h2>
+<div class="panel">
+<table>
+<tr><th>الصفحة القانونية</th><th>المصادر التي تُدمج فيها</th><th>المحتوى</th></tr>
+<sc-for list="{{ tree }}" as="r" hint-placeholder-count="14">
+<tr><td class="m" style="white-space:nowrap"><b>{{ r.k }}</b></td><td style="font-size:11.5px">{{ r.src }}</td><td>{{ r.has }}</td></tr>
+</sc-for>
+</table>
+<p class="p">١٣ صفحة نشطة داخل المدى المطلوب (12–14). لا صفحة مستقلة لكل شاشة أو مسار، ولا تنظيم بالمراحل: التنظيم بالنطاق (Domain) والمراحل تصبح تاريخاً في الأرشيف.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">جرد الصفحات — قرار لكل صفحة<small>§4 · §5 · §52 — لا صفحة تختفي بلا سطر</small></h2>
+<div class="panel">
+<div class="row"><span class="lbl keep">KEEP</span><span class="lbl merge">MERGE</span><span class="lbl arch">ARCHIVE</span><span class="lbl del">DELETE</span><span class="lbl rev">REVIEW REQUIRED</span></div>
+<table>
+<tr><th>الصفحة القائمة</th><th>الفئة</th><th>القرار</th><th>الموقع الجديد</th><th>محتوى فريد يُنقل</th><th>السبب</th></tr>
+<sc-for list="{{ inv }}" as="r" hint-placeholder-count="34">
+<tr><td class="m">{{ r.k }}</td><td>{{ r.cat }}</td><td><span class="{{ r.cls }}">{{ r.dec }}</span></td><td class="m">{{ r.to }}</td><td>{{ r.uniq }}</td><td>{{ r.why }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">المكوّنات — 67 صفحة مكوّن<small>§10 · §48 — كلها KEEP</small></h2>
+<div class="panel">
+<table>
+<tr><th>المجموعة</th><th>العدد</th><th>القرار</th><th>الموقع الجديد</th><th>ملاحظة</th></tr>
+<sc-for list="{{ compGroups }}" as="r" hint-placeholder-count="7">
+<tr><td><b>{{ r.k }}</b></td><td class="m">{{ r.n }}</td><td><span class="{{ r.cls }}">{{ r.dec }}</span></td><td class="m">{{ r.to }}</td><td>{{ r.note }}</td></tr>
+</sc-for>
+</table>
+<div class="note"><b>اكتشاف حقيقي — لا يُحذف ولا يُدمج:</b> ١٦ مكوّناً قانونياً لا يُستدعى من أي صفحة حالياً (شاشات الجوال بُنيت كإطارات داخلية بدل تركيب المكوّنات): <span class="mono">NPActionCard · NPBottomNavigation · NPConfirmationSheet · NPConnectivityBanner · NPFuelBadge · NPMeterPhoto · NPMeterReadingField · NPNozzleLabel · NPOTPInput · NPReadingDifference · NPReadingListItem · NPReviewSection · NPShiftProgress · NPShiftStatusCard · NPSuccessState · NPSyncBadge</span>. القرار: <span class="lbl keep">KEEP</span> + <span class="lbl rev">REVIEW REQUIRED</span> — إمّا تُركَّب في شاشات الجوال أو تُعتمد كعقود تسليم لـ Flutter. هذا تداخل تنفيذ لا تكرار مكوّنات.</div>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">تداخل سلوك — REVIEW REQUIRED<small>§11 — لا دمج تلقائي</small></h2>
+<div class="panel">
+<table>
+<tr><th>المجموعة</th><th>احتمال التداخل</th><th>القرار الآن</th></tr>
+<sc-for list="{{ overlap }}" as="r" hint-placeholder-count="5">
+<tr><td class="m">{{ r.k }}</td><td>{{ r.v }}</td><td><span class="{{ r.cls }}">{{ r.dec }}</span></td></tr>
+</sc-for>
+</table>
+<p class="p">لا يُدمج مكوّنان متشابهان بصرياً قبل إثبات تطابق عقد السلوك. لا إعادة تسمية صامتة (<span class="mono">NPStatusChip</span> مقابل <span class="mono">NPStatusBadge</span> في خريطة Flutter = عدم تطابق مسجّل، لا تغيير).</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">مرشّحات الاستخراج + NPSurfaceA / NPSurfaceB<small>§12 · §13</small></h2>
+<div class="panel">
+<table>
+<tr><th>المكوّن</th><th>الحالة الحالية</th><th>التوصية</th><th>السبب</th></tr>
+<sc-for list="{{ promote }}" as="r" hint-placeholder-count="10">
+<tr><td class="m">{{ r.k }}</td><td>{{ r.now }}</td><td><span class="{{ r.cls }}">{{ r.dec }}</span></td><td>{{ r.why }}</td></tr>
+</sc-for>
+</table>
+<p class="p">لا ترقية صامتة ولا إعادة تسمية صامتة في التنظيف: التوصية معروضة والقرار لك.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">تدقيق التكرار<small>§45</small></h2>
+<div class="panel">
+<table>
+<tr><th>النوع</th><th>العدد</th><th>التفصيل</th></tr>
+<sc-for list="{{ dup }}" as="r" hint-placeholder-count="7">
+<tr><td>{{ r.k }}</td><td class="m">{{ r.n }}</td><td>{{ r.v }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">تدقيق الحفظ — قبل / بعد المقترح<small>§46–§50 · §58</small></h2>
+<div class="panel">
+<table>
+<tr><th>البند</th><th>قبل</th><th>بعد (مقترح)</th><th>المفقود</th></tr>
+<sc-for list="{{ preserve }}" as="r" hint-placeholder-count="10">
+<tr><td>{{ r.k }}</td><td class="m">{{ r.b }}</td><td class="m">{{ r.a }}</td><td><span class="{{ r.cls }}">{{ r.lost }}</span></td></tr>
+</sc-for>
+</table>
+<p class="p">قواعد العمل التي يجب أن تبقى حرفياً بعد الدمج مُدرجة في <a href="NP-WO-CD-09 · Final System QA.dc.html">CD-09</a> وتُنقل كما هي إلى صفحتي العامل والمدير: <span class="mono">assignedNozzles.length</span> · <span class="mono">assignmentSnapshot</span> · العامل يرى ويغلق ورديته فقط · قفل مسدس الوردية النشطة · منع تكرار المسدس · <span class="mono">closeStationShift</span> للمدير فقط · <span class="mono">recordVersion</span> · المخزون بسلطة الخادم · <span class="mono">activeStationId</span>.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">SaaS-Ready — ما لا يُمَس في التنظيف<small>§1 · §25 · §26</small></h2>
+<div class="panel">
+<table>
+<tr><th>البند</th><th>الحالة</th></tr>
+<sc-for list="{{ saas }}" as="r" hint-placeholder-count="9">
+<tr><td>{{ r.k }}</td><td><span class="{{ r.cls }}">{{ r.v }}</span></td></tr>
+</sc-for>
+</table>
+<p class="p">حالات تهيئة العميل الثلاث (<span class="mono">loading · loaded · failed</span>) تُوثَّق في <span class="mono">08 · Client Branding</span>؛ الفشل حالة حاجزة للتطبيق ولا يوجد رجوع صامت إلى قيَم Nile Petro.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">OWNER DECISION REQUIRED<small>§54 — لا يُحسم في التنظيف</small></h2>
+<div class="panel">
+<sc-for list="{{ owner }}" as="r" hint-placeholder-count="10">
+<div class="note"><b>{{ r.k }}</b> — {{ r.v }}</div>
+</sc-for>
+</div>
+</div>
+
+<div class="stop">
+<h2>NP-CLEANUP-01 · REPORT</h2>
+<div class="tree">
+<sc-for list="{{ report }}" as="r" hint-placeholder-count="20">
+<span>{{ r }}</span>
+</sc-for>
+</div>
+<p>لم يُحذف ملف ولم يُدمج ملف: هذه نتيجة Phase 1 و Phase 2 فقط. حذف مقترح = 0 — كل ما لا لزوم له يُؤرشف لا يُحذف، لأن كل صفحة قديمة تحمل إما دليلاً تاريخياً أو معرّف أمر عمل. الخطوة التالية عند اعتمادك: تنفيذ الدمج والأرشفة (Phase 3) ثم تدقيق الحفظ (Phase 4).</p>
+<span class="g">CLEANUP READY FOR OWNER APPROVAL</span>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1520,&quot;height&quot;:1000}}">
+class Component extends DCLogic {
+  renderVals() {
+    const K = "lbl keep", M = "lbl merge", A = "lbl arch", D = "lbl del", R = "lbl rev";
+    const P = (k, cat, dec, cls, to, uniq, why) => ({ k, cat, dec, cls, to, uniq, why });
+    return {
+      counts: [
+        { v: "95", l: "صفحة/ملف قائم" },
+        { v: "93", l: "صفحة Claude (.dc.html)" },
+        { v: "13", l: "صفحة قانونية مقترحة" },
+        { v: "27", l: "مقترح أرشفة" },
+        { v: "0", l: "مقترح حذف" },
+        { v: "0", l: "شاشة معتمدة تُفقد" },
+        { v: "0", l: "مسار / Token / أيقونة تُفقد" },
+        { v: "10", l: "قرار مالك مفتوح" }
+      ],
+      tree: [
+        { k: "00 · Project Index", src: "NP Templates (فهرس) · Nile-Petro-App-Canonical-Manifest.md (مصدر النسخ والحالة)", has: "اسم المشروع · نموذج المعمارية · الإصدار · مصادر الحقيقة · حالة الويب/العامل/المدير · العلامة البيضاء · الوضع الداكن · آخر حكم معمارية · روابط + القرارات المفتوحة" },
+        { k: "01 · Foundation", src: "NP Foundation · 01 · Mobile Foundation · NP Dark Mode Redesign (قسم Brand Dark) · np-tokens.css · np-system.css", has: "Tokens · الطباعة · الألوان · Light · Brand Dark · المسافات · الأنصاف · الارتفاع · الشبكة · الاستجابة · RTL/LTR · الإتاحة · الحركة · الكثافة" },
+        { k: "02 · Components", src: "67 صفحة مكوّن · 8 صفحات قوالب (Console Auth · Mobile Auth · Dashboard · Detail · Operational Form/List · Station Gate · Station Task Flow)", has: "Foundation · Shared Mobile · Shared Web · Auth · Worker Domain · Manager Domain · Cross-App + مجموعة القوالب" },
+        { k: "03 · Icons & Assets", src: "np-icons.js · np-mobile-icons-sprite.html · np-logo-master.png · assets/", has: "سجل واحد 54 أيقونة · قواعد الانعكاس · الرسوم · الأنماط · فتحات أصول العميل · قواعد الشعار وأيقونة التطبيق" },
+        { k: "04 · Web Console", src: "NP Web", has: "١٦ مسار + الأدراج والنوافذ + فهرس مسارات (Path · Screen Label · Feature · Permission · Capability · Parent)" },
+        { k: "05 · Worker App", src: "NP Worker App · NP Worker Shift · NP Worker Complete", has: "52 إطار: الرئيسية · وردية · مسدسات · قراءات بداية/نهاية · مصروفات · توريدات · تنبيهات · تصحيحات · مزامنة · حسابي · أمان · تفضيلات · دعم · داكن · مرجع LTR" },
+        { k: "06 · Manager App", src: "NP Manager Station · Approvals · Inventory · Reports Account", has: "98 إطار: الرئيسية · مركز المحطة · تعيين المسدسات · ورديات العاملين · وردية المحطة · الموافقات · المخزون · الخزانات · التوريد · التقارير · الأجهزة · التنبيهات · حسابي · انقطاع · تعارضات · داكن" },
+        { k: "07 · Authentication", src: "NPAuthLogin · NP Auth Login Variants · NPOTPInput · NPAccessCodeInput · NPPasskeyRow", has: "دخول الويب/العامل/المدير · OTP · رمز وصول · بصمة · Passkeys · جلسات · كلمة المرور" },
+        { k: "08 · Client Branding", src: "أقسام العلامة من NP Dark Mode Redesign + عقد tenant.manifest من CD-09", has: "اسم التطبيق · الشركة · الشعار · الشعار الداكن · أيقونة التطبيق · Primary/Deep/Accent · Brand Dark · الدعم · العملة · تسميات الوقود · الميزات · النطاق · البيئة · معاينة فاتح/داكن · قائمة تحقق بناء نسخة العميل" },
+        { k: "09 · States & Responsive", src: "NPEmptyState · NPErrorState · NPLoadingState · NPSuccessState · NPOfflineGuard · NPSyncStatus (لوح الحالات) + أمثلة القياسات", has: "تحميل · فراغ · لا نتائج · خطأ · انقطاع · بانتظار المزامنة · مزامنة · نجاح · غير مخوّل · انتهاء جلسة · تغيّر سجل · منع صلاحية · محجوب + 4 قياسات جوال و5 قياسات ويب" },
+        { k: "10 · Prototype Flows", src: "00 · Nile Petro User Flows · مخططات المسارات من CD-09", has: "13 مساراً من الطرف للطرف بلا تكرار مخططات" },
+        { k: "11 · Flutter Handoff", src: "أقسام التسليم من CD-09", has: "خريطة Tokens · المكوّنات · المسارات · جرد الشاشات · Asset Manifest · سجل الميزات · سجل الصلاحيات · عقد الانقطاع · recordVersion · الثيم · تهيئة العميل · الاتجاه · الأرقام" },
+        { k: "12 · QA & Final Audit", src: "NP-WO-CD-09 · Final System QA · NP Capability Gate", has: "QA الحالي + تدقيق القيَم الثابتة والتكرار والمسارات والمكوّنات والإتاحة والاستجابة والاتجاه والوضعين وتكافؤ التهيئة + PASS/BLOCKED/UNVERIFIED" },
+        { k: "99 · Archive", src: "3 صفحات تقارير عربية · 9 تقارير .md · uploads/ · لوحات الوضع الأسود القديمة · صفحات المراجعة الوسيطة", has: "قابل للقراءة · ليس مصدر حقيقة · كل وثيقة تحمل ARCHIVED · Superseded By · التاريخ · السبب" }
+      ],
+      inv: [
+        P("NP Foundation.dc.html", "Foundation", "KEEP", K, "01 · Foundation", "48 عيّنة مكوّن · قواعد الاستجابة والاتجاه والإتاحة", "مصدر الحقيقة للأساس — لا يُدمج"),
+        P("01 · Mobile Foundation.dc.html", "Foundation (جوال)", "MERGE", M, "01 · Foundation", "قواعد الجوال: الكثافة · مناطق اللمس · Safe Area · الشريط السفلي", "نفس النطاق — الأساس لا يُقسَّم إلى ويب/جوال"),
+        P("NP Dark Mode Redesign.dc.html", "Theme (CC-015)", "MERGE", M, "01 · Foundation + 08 · Client Branding", "سلّم الأسطح المشتق · معاينات Tenant A/B · 21 معيار قبول", "أحدث Brand Dark = مصدر حقيقة؛ المعاينات تخدم دليل العلامة"),
+        P("NP Templates.dc.html", "فهرس قوالب", "MERGE", M, "00 · Project Index + 02 · Components", "فهرس مجموعة القوالب", "فهرس وسيط — يذوب في الفهرس العام"),
+        P("NP Console Auth Template.dc.html", "قالب", "MERGE", M, "02 · Components", "قالب دخول لوحة", "قوالب التخطيط تسكن مع المكوّنات"),
+        P("NP Mobile Auth Template.dc.html", "قالب", "MERGE", M, "02 · Components", "قالب دخول جوال", "نفس المجموعة"),
+        P("NP Dashboard Template.dc.html", "قالب", "MERGE", M, "02 · Components", "قالب لوحة معلومات", "نفس المجموعة"),
+        P("NP Detail Template.dc.html", "قالب", "MERGE", M, "02 · Components", "قالب تفاصيل + درج", "نفس المجموعة"),
+        P("NP Operational Form Template.dc.html", "قالب", "MERGE", M, "02 · Components", "قالب نموذج تشغيلي", "نفس المجموعة"),
+        P("NP Operational List Template.dc.html", "قالب", "MERGE", M, "02 · Components", "قالب قائمة تشغيلية", "نفس المجموعة"),
+        P("NP Station Gate Template.dc.html", "قالب", "MERGE", M, "02 · Components", "قالب بوابة المحطة", "نفس المجموعة"),
+        P("NP Station Task Flow Template.dc.html", "قالب", "MERGE", M, "02 · Components", "قالب مسار مهمة", "نفس المجموعة"),
+        P("NP Web.dc.html", "Web Console", "KEEP", K, "04 · Web Console", "16 مسار · أدراج · نوافذ · جداول", "مصدر الحقيقة للويب — يُضاف له فهرس مسارات فقط"),
+        P("NP Worker App.dc.html", "Worker — المرحلة 1", "MERGE", M, "05 · Worker App", "7 إطارات: الدخول · التحقق · الرئيسية · حالات الاتصال", "نفس التطبيق بمراحل مختلفة — تُوحَّد بالنطاق"),
+        P("NP Worker Shift.dc.html", "Worker — الوردية", "MERGE", M, "05 · Worker App", "19 إطاراً: مسدساتي · قراءات · مراجعة · إغلاق", "نفس التطبيق — أقسام وردية"),
+        P("NP Worker Complete.dc.html", "Worker — المرحلة 3", "MERGE", M, "05 · Worker App", "26 إطاراً: مصروف · توريد · تنبيهات · تصحيح · حسابي · Tenant B · داكن", "الأحدث والأشمل — يصبح العمود الفقري للصفحة الموحّدة"),
+        P("NP Manager Station.dc.html", "Manager — المحطة", "MERGE", M, "06 · Manager App", "24 إطاراً: مركز المحطة · التعيين · وردية المحطة", "نفس التطبيق"),
+        P("NP Manager Approvals.dc.html", "Manager — الموافقات", "MERGE", M, "06 · Manager App", "23 إطاراً: مراجعة · إعادة للتصحيح · تعارضات", "نفس التطبيق"),
+        P("NP Manager Inventory.dc.html", "Manager — المخزون", "MERGE", M, "06 · Manager App", "22 إطاراً: خزانات · توريد · فروقات", "نفس التطبيق"),
+        P("NP Manager Reports Account.dc.html", "Manager — تقارير/حساب", "MERGE", M, "06 · Manager App", "29 إطاراً: تقارير · أجهزة · حسابي · أمان · تفضيلات", "نفس التطبيق"),
+        P("NP Auth Login Variants.dc.html", "Auth", "MERGE", M, "07 · Authentication", "أربع نسخ: عربي/إنجليزي × فاتح/داكن", "سطح مراجعة لمكوّن واحد — يسكن مع المصادقة"),
+        P("NP Capability Gate.dc.html", "QA", "MERGE", M, "12 · QA & Final Audit", "قياسات تباين وقدرات محسوبة حياً", "بوابة قياس — تنتمي إلى صفحة QA الواحدة"),
+        P("NP-WO-CD-09 · Final System QA.dc.html", "QA (حالي)", "KEEP", K, "12 · QA & Final Audit", "جرد · عقود · مصفوفات · بوابة نهائية", "أحدث تدقيق = مصدر الحقيقة"),
+        P("00 · Nile Petro User Flows.dc.html", "Flows", "MERGE", M, "10 · Prototype Flows", "مخططات مسارات المستخدم", "المسارات تُجمع في صفحة واحدة بلا تكرار"),
+        P("NP تقرير تطبيق العامل.dc.html", "تقرير مرحلة", "ARCHIVE", A, "99 · Archive", "سجل قرارات مرحلة العامل", "تقرير تاريخي — استُبدل بـ 05 و CD-09"),
+        P("NP تقرير CC-014 والمرحلة الثانية.dc.html", "تقرير مرحلة", "ARCHIVE", A, "99 · Archive", "سجل CC-014 والمرحلة الثانية", "تقرير تاريخي"),
+        P("NP تقرير التعديلات الأخيرة.dc.html", "تقرير مرحلة", "ARCHIVE", A, "99 · Archive", "سجل تعديلات سابقة", "تقرير تاريخي"),
+        P("Nile-Petro-App-Canonical-Manifest.md", "مانيفست", "KEEP", K, "00 · Project Index (مرجع)", "سجل التغييرات والقرارات المعتمدة", "مصدر حقيقة للحكم والتاريخ معاً"),
+        P("NP-WO-CD-01 … CD-05 (7 تقارير .md)", "أوامر عمل سابقة", "ARCHIVE", A, "99 · Archive", "معرّفات أوامر العمل ونتائجها", "تتبّع تاريخي يُحفَظ ولا يُحذف"),
+        P("NP-Web-Shell-Polish-Record_ARCHIVE.md", "سجل مؤرشف", "ARCHIVE", A, "99 · Archive", "سجل تلميع قشرة الويب", "مؤرشف أصلاً — يُنقل إلى مكانه"),
+        P("np-tokens.css · np-system.css", "مصدر Tokens", "KEEP", K, "01 · Foundation (مصدر)", "356 Token + نظام الأنماط", "ملف مصدر لا صفحة — يبقى كما هو"),
+        P("np-icons.js", "سجل أيقونات", "KEEP", K, "03 · Icons & Assets (مصدر)", "54 أيقونة + قواعد الانعكاس", "سجل واحد وحيد"),
+        P("np-mobile-icons-sprite.html", "شريحة أيقونات قديمة", "ARCHIVE", A, "99 · Archive", "لا شيء فريد — معرّفاتها موجودة في السجل", "استُبدل بسجل np-icons.js؛ الأرشفة أسلم من الحذف"),
+        P("np-format.js · support.js · doc-page.js", "أدوات", "KEEP", K, "مصادر المشروع", "تنسيق الأرقام · وقت التشغيل · الطباعة", "ملفات تشغيل لا صفحات"),
+        P("uploads/ (تقارير ووثائق العميل الأصلية)", "مدخلات المالك", "ARCHIVE", A, "99 · Archive", "الوثائق الأصلية كما وردت", "مدخلات مالك — تُحفَظ دائماً ولا تُحذف")
+      ],
+      compGroups: [
+        { k: "Foundation", n: "46", dec: "KEEP", cls: "lbl keep", to: "02 · Components", note: "الأساس المشترك بين الويب والجوال" },
+        { k: "Shared Mobile", n: "8", dec: "KEEP", cls: "lbl keep", to: "02 · Components", note: "٦ منها غير مُستدعاة حالياً — REVIEW" },
+        { k: "Worker Domain", n: "7", dec: "KEEP", cls: "lbl keep", to: "02 · Components", note: "٥ منها غير مُستدعاة حالياً — REVIEW" },
+        { k: "Shared Web", n: "3", dec: "KEEP", cls: "lbl keep", to: "02 · Components", note: "NPAppShell · NPSidebar · NPTopbar" },
+        { k: "Auth", n: "1", dec: "KEEP", cls: "lbl keep", to: "02 · Components + 07", note: "NPAuthLogin — locale × theme × brand من props" },
+        { k: "Manager Domain", n: "0", dec: "—", cls: "lbl", to: "—", note: "شاشات المدير تُركَّب من المشترك — انظر مرشّحات الاستخراج" },
+        { k: "سطحا مراجعة", n: "2", dec: "REVIEW", cls: "lbl rev", to: "غير محدَّد بعد", note: "NPSurfaceA · NPSurfaceB — تُصنَّف قبل أي نقل أو تسمية" }
+      ],
+      overlap: [
+        { k: "NPSyncBadge · NPSyncStatus · NPConnectivityBanner", v: "ثلاث طبقات لنفس مفهوم الاتصال (شارة · حالة تفصيلية · شريط عام) — العقود قد تكون متمايزة فعلاً", dec: "REVIEW REQUIRED", cls: "lbl rev" },
+        { k: "NPReadingInput · NPMeterReadingField · NPReadingDifference", v: "إدخال قراءة مقابل حقل عدّاد مقابل عرض الفرق — أدوار مختلفة ظاهرياً", dec: "REVIEW REQUIRED", cls: "lbl rev" },
+        { k: "NPPhotoCapture · NPMeterPhoto", v: "التقاط عام مقابل صورة عدّاد بسياق قراءة", dec: "REVIEW REQUIRED", cls: "lbl rev" },
+        { k: "NPStatusChip ↔ NPStatusBadge (خريطة Flutter)", v: "عدم تطابق تسمية بين التصميم والمرشّح", dec: "MISMATCH RECORDED", cls: "lbl arch" },
+        { k: "NPSurfaceA · NPSurfaceB", v: "اسمان غير وصفيين — الطبيعة (منتج/QA/مراجعة) غير مُعلنة", dec: "CLASSIFY FIRST", cls: "lbl rev" }
+      ],
+      promote: [
+        { k: "NPStationCloseReadiness", now: "بطاقة داخل شاشة المحطة", dec: "PROMOTE BEFORE FLUTTER", cls: "lbl merge", why: "تحمل بوابة الجاهزية الرباعية وأسباب المنع — عقد واحد أفضل من تكرار" },
+        { k: "NPBlockingReason", now: "سبب منع داخل البوابة", dec: "PROMOTE BEFORE FLUTTER", cls: "lbl merge", why: "يتكرر في الإغلاق والموافقات والأجهزة" },
+        { k: "NPSessionRow", now: "صف داخل شاشة الجلسات", dec: "PROMOTE BEFORE FLUTTER", cls: "lbl merge", why: "موجود في ثلاثة تطبيقات بسلوك واحد" },
+        { k: "NPPreferenceRow", now: "صف تفضيل", dec: "PROMOTE BEFORE FLUTTER", cls: "lbl merge", why: "لغة · ثيم · تنبيهات — نفس الصف في تطبيقين" },
+        { k: "NPAccountSection", now: "مجموعة صفوف حساب", dec: "PROMOTE BEFORE FLUTTER", cls: "lbl merge", why: "الهيكل نفسه في العامل والمدير والويب" },
+        { k: "NPProfileCard", now: "بطاقة ملف", dec: "KEEP LOCAL", cls: "lbl keep", why: "تختلف حقولها بين المدير والعامل — الترقية تفرض عقداً مبكراً" },
+        { k: "NPStatusTimeline", now: "خط زمني داخل المراجعة", dec: "KEEP LOCAL", cls: "lbl keep", why: "عقد الحالات لم يُثبَّت بعد لكل نطاق" },
+        { k: "NPActionHistory", now: "سجل إجراءات داخل التفاصيل", dec: "KEEP LOCAL", cls: "lbl keep", why: "يعتمد على عقد تدقيق الخادم غير المحسوم" },
+        { k: "NPSurfaceA", now: "سطح مراجعة (غير مُصنَّف)", dec: "OWNER DECISION REQUIRED", cls: "lbl rev", why: "إن كان مراجعة فقط ← 12 QA أو 99 Archive؛ إن كان قانونياً ← قرار إعادة تسمية" },
+        { k: "NPSurfaceB", now: "سطح مراجعة (غير مُصنَّف)", dec: "OWNER DECISION REQUIRED", cls: "lbl rev", why: "نفس السبب — لا إعادة تسمية صامتة" }
+      ],
+      dup: [
+        { k: "صفحة مكرّرة تماماً", n: "0", v: "لا صفحتان متطابقتان داخل المشروع" },
+        { k: "شاشة مكرّرة", n: "0", v: "لكل إطار data-screen-label فريد" },
+        { k: "اسم مكوّن مكرّر", n: "0", v: "67 اسماً فريداً · لا نسخة Worker*/Manager* لنفس السلوك" },
+        { k: "تداخل سلوك (لا تكرار)", n: "4", v: "مجموعات المزامنة · القراءة · الصور + عدم تطابق تسمية Chip/Badge — كلها REVIEW" },
+        { k: "Token مكرّر", n: "0", v: "356 تعريفاً في ملف واحد · تعريفان محليان في صفحة الأساس للعرض فقط" },
+        { k: "معرّف أيقونة مكرّر", n: "0", v: "54 معرّفاً فريداً · لا مرجع مفقود · لا بديل مؤقت بعد تسجيل الخمسة" },
+        { k: "مواصفة مسار مكرّرة", n: "0", v: "مسارات الويب تُعرَّف مرة واحدة في NP Web" }
+      ],
+      preserve: [
+        { k: "شاشات الويب + الأدراج والنوافذ", b: "16 + 4", a: "16 + 4", lost: "0", cls: "lbl keep" },
+        { k: "إطارات العامل", b: "52", a: "52", lost: "0", cls: "lbl keep" },
+        { k: "إطارات المدير", b: "98", a: "98", lost: "0", cls: "lbl keep" },
+        { k: "شاشات المصادقة", b: "4 نسخ + مكوّنات", a: "4 نسخ + مكوّنات", lost: "0", cls: "lbl keep" },
+        { k: "المكوّنات القانونية", b: "67", a: "67", lost: "0", cls: "lbl keep" },
+        { k: "Tokens", b: "356", a: "356", lost: "0", cls: "lbl keep" },
+        { k: "الأيقونات الوظيفية", b: "54", a: "54", lost: "0", cls: "lbl keep" },
+        { k: "المسارات", b: "16 ويب + 4 + 4 تبويبات", a: "مطابق", lost: "0", cls: "lbl keep" },
+        { k: "قواعد العمل المعتمدة", b: "كل قواعد CD-09", a: "منقولة حرفياً", lost: "0", cls: "lbl keep" },
+        { k: "مسارات النماذج", b: "13", a: "13", lost: "0", cls: "lbl keep" }
+      ],
+      saas: [
+        { k: "tenantId في عقود البيانات", v: "محفوظ", cls: "lbl keep" },
+        { k: "activeStationId", v: "محفوظ", cls: "lbl keep" },
+        { k: "عقد تهيئة العميل + schema المانيفست", v: "محفوظ", cls: "lbl keep" },
+        { k: "Feature flags · Permissions · نطاق المحطة", v: "محفوظ", cls: "lbl keep" },
+        { k: "تجريد مُزوِّد التهيئة (إمكانية التحميل من خدمة لاحقاً)", v: "محفوظ", cls: "lbl keep" },
+        { k: "مُبدِّل عملاء / تبديل في وقت التشغيل", v: "لا يُبنى", cls: "lbl arch" },
+        { k: "واجهة multi-tenant · عمليات عبر العملاء · لوحة SaaS", v: "لا تُبنى", cls: "lbl arch" },
+        { k: "قيَم العميل داخل المكوّنات", v: "0 — تبقى صفراً", cls: "lbl keep" },
+        { k: "رجوع صامت إلى قيَم Nile Petro عند فشل التهيئة", v: "ممنوع — حالة حاجزة", cls: "lbl del" }
+      ],
+      owner: [
+        { k: "اعتماد Phase 3", v: "تنفيذ الدمج والأرشفة كما في هذه الخطة (13 صفحة نشطة + أرشيف) — لا شيء يُنفَّذ قبل موافقتك." },
+        { k: "تصنيف NPSurfaceA / NPSurfaceB", v: "منتج · سطح QA · سطح مراجعة فقط؟ التصنيف يحدّد الموقع، وإعادة التسمية تحتاج قراراً منفصلاً." },
+        { k: "المكوّنات الـ16 غير المُستدعاة", v: "تُركَّب في شاشات الجوال أم تُعتمد كعقود تسليم Flutter فقط؟" },
+        { k: "ترقية الخمسة المرشّحة قبل Flutter", v: "StationCloseReadiness · BlockingReason · SessionRow · PreferenceRow · AccountSection." },
+        { k: "تداخل السلوك الثلاثي", v: "المزامنة · القراءة · الصور — هل تُوحَّد عقودها أم تبقى متمايزة؟" },
+        { k: "الطباعة", v: "الملفات الحالية تستخدم Tajawal + IBM Plex Mono؛ إن كان آخر قرار علامة يخالف ذلك فالتوحيد يحتاج قرارك — لا تطبيع بالتخمين." },
+        { k: "canRecordExpense ووردية نشطة", v: "مفتوح من CD-09 — محفوظ ولم يُحسم." },
+        { k: "مسودة مصروف محلية بلا وردية", v: "مفتوح من CD-09." },
+        { k: "منع الخروج مع مزامنة معلّقة", v: "مفتوح من CD-09." },
+        { k: "سياسة الأجهزة الافتراضية revoke_then_wipe", v: "مفتوح من CD-09." }
+      ],
+      report: [
+        "NP-CLEANUP-01 · REPORT            (PHASE 1 + 2 · nothing executed yet)",
+        "Pages before .................... 95   (93 Claude pages + source files)",
+        "Pages proposed ACTIVE ........... 13   canonical (00–12) + 99 Archive",
+        "Pages proposed MERGE ............ 20",
+        "Pages proposed ARCHIVE .......... 27",
+        "Pages proposed DELETE ........... 0    (archive instead — historical value > 0)",
+        "Screens before / after .......... web 16+4 · worker 52 · manager 98  →  identical",
+        "Components before / after ....... 67 / 67        lost 0 · new 0 · renamed 0",
+        "Tokens before / after ........... 356 / 356      lost 0 · duplicates 0",
+        "Icons before / after ............ 54 / 54        lost 0 · duplicate ids 0 · placeholders 0",
+        "Routes before / after ........... unchanged      lost 0 · orphan 0 · duplicate 0",
+        "Lost screens / rules ............ 0 / 0",
+        "Broken references ............... 0",
+        "Duplicate pages / screens ....... 0 / 0",
+        "Duplicate components ............ 0      behaviour overlaps 4 (REVIEW REQUIRED)",
+        "Console errors .................. 0     dead ends 0",
+        "Hard-coded client identity ...... 0     currency 0 · nozzle counts 0",
+        "Hard-coded fuel literals ........ 0     diesel 0",
+        "Sample-value exclusions ......... presentation frames only: بنزين · جاز · ج.س ·",
+        "                                  sample station/branch names · Nile Petro default tenant",
+        "Owner decisions open ............ 10"
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

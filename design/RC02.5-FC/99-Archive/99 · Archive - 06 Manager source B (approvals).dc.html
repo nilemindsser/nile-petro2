@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<script src="./np-icons.js"></script>
+<script src="./np-sprite.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+--brand-primary:#2962FF;--brand-deep:#1A237E;--brand-accent:#E4F2FD;--brand-primary-dk:#6E9BFF;
+--action-primary:var(--brand-primary);
+--bg:#F6F7FB;--surface:#fff;--surface-2:#F6F7FB;--border:#E4E7EC;--border-2:#F1F3F7;
+--text:#1F2330;--text-2:#455A64;--text-3:#90A4AE;
+--ok:#0B6B3A;--ok-bg:#E8F5EC;--ok-bd:#BEDFC9;
+--warn:#7A4A00;--warn-bg:#FFF6E8;--warn-bd:#F3D9AE;
+--danger:#9B2222;--danger-bg:#FDF3F3;--danger-bd:#E9C9C9;
+--info:#01579B;--info-bg:#E8F4FD;--info-bd:#BEDCF2;
+--neutral:#37474F;--neutral-bg:#ECEFF1;--neutral-bd:#CFD8DC;
+}
+.dk{
+--dk-base-1:#14161A;--dk-base-2:#1C2028;--dk-base-3:#242934;--dk-base-4:#2C3340;--dk-brand:var(--brand-deep);
+--bg:color-mix(in srgb,var(--dk-brand) 35%,var(--dk-base-1));--surface:color-mix(in srgb,var(--dk-brand) 35%,var(--dk-base-2));--surface-2:color-mix(in srgb,var(--dk-brand) 35%,var(--dk-base-3));--surface-3:color-mix(in srgb,var(--dk-brand) 35%,var(--dk-base-4));--border:rgba(144,164,174,.22);--border-2:rgba(144,164,174,.13);
+--text:#F5F7FC;--text-2:#C5CEE0;--text-3:#95A3BA;--brand-primary:var(--brand-primary-dk);--brand-accent:color-mix(in srgb,var(--brand-primary-dk) 20%,var(--surface));
+--ok:#7FD6A2;--ok-bg:color-mix(in srgb,#7FD6A2 15%,var(--surface));--ok-bd:color-mix(in srgb,#7FD6A2 34%,var(--surface));--warn:#F0C478;--warn-bg:color-mix(in srgb,#F0C478 15%,var(--surface));--warn-bd:color-mix(in srgb,#F0C478 34%,var(--surface));
+--danger:#FF9A9A;--danger-bg:color-mix(in srgb,#FF9A9A 15%,var(--surface));--danger-bd:color-mix(in srgb,#FF9A9A 34%,var(--surface));--info:#7FC4EC;--info-bg:color-mix(in srgb,#7FC4EC 15%,var(--surface));--info-bd:color-mix(in srgb,#7FC4EC 34%,var(--surface));
+--neutral:#B0BEC5;--neutral-bg:var(--surface-2);--neutral-bd:rgba(144,164,174,.26);
+}
+.stroke{fill:none;stroke:currentColor;stroke-width:4.6;stroke-linecap:round;stroke-linejoin:round}
+.strokeS{fill:none;stroke:currentColor;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:currentColor}
+.i{display:inline-flex;flex:none;width:22px;height:22px;color:inherit}
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic','Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+.f{position:relative;box-sizing:border-box;width:390px;height:844px;flex:none;overflow:hidden;border-radius:24px;background:var(--bg);border:1px solid var(--border);box-shadow:0 16px 40px rgba(31,35,48,.12);color:var(--text);display:flex;flex-direction:column}
+.f::before{content:"";position:absolute;z-index:0;inset-block-start:0;inset-inline:0;height:150px;background-color:var(--brand-deep);background-image:radial-gradient(120% 80% at 76% 4%,rgba(41,98,255,.55),transparent 62%)}
+.dk::before{background-color:var(--brand-deep);background-image:radial-gradient(120% 80% at 76% 4%,rgba(255,255,255,.12),transparent 62%)}
+.f::after{content:"";position:absolute;z-index:1;inset-block-start:96px;inset-inline-start:-42%;width:184%;height:460px;background:var(--bg);border-radius:52% 52% 0 0/62% 62% 0 0}
+.sbl{position:relative;z-index:3;flex:none;display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 20px;font-family:Inter,system-ui,sans-serif;font-size:13px;color:#fff}
+.hdr{position:relative;z-index:3;flex:none;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px}
+.hdr b{font:800 17px/24px 'Noto Sans Arabic',sans-serif;color:#fff}
+.hdr .sub{font:500 11.5px/16px 'Noto Sans Arabic',sans-serif;color:rgba(255,255,255,.78)}
+.ib{display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin-inline-start:-10px;border:0;background:transparent;color:#fff;cursor:pointer}
+.bd{position:relative;z-index:3;flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:16px 20px;overflow:hidden}
+.card{flex:none;background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 10px 28px rgba(31,35,48,.07)}
+.dk .card{box-shadow:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;flex:none;box-sizing:border-box;border:0;border-radius:12px;background:var(--action-primary);color:#fff;font:700 16px/24px 'Noto Sans Arabic',sans-serif;cursor:pointer}
+.btn[disabled]{background:var(--surface-2);color:var(--text-3);border:1px solid var(--border);cursor:not-allowed}
+.btn2{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;flex:none;box-sizing:border-box;border:1px solid var(--action-primary);border-radius:12px;background:var(--surface);color:var(--brand-deep);font:700 15px/24px 'Noto Sans Arabic',sans-serif;cursor:pointer}
+.dk .btn2{color:var(--brand-primary)}
+.btn3{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;flex:none;box-sizing:border-box;border:1px solid var(--neutral-bd);border-radius:12px;background:var(--surface);color:var(--text-2);font:700 15px/24px 'Noto Sans Arabic',sans-serif;cursor:pointer}
+.btnOK{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;flex:none;box-sizing:border-box;border:0;border-radius:12px;background:var(--ok);color:#fff;font:700 16px/24px 'Noto Sans Arabic',sans-serif;cursor:pointer}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+.nav{position:relative;z-index:3;flex:none;height:78px;display:flex;align-items:center;background:var(--surface);border-top:1px solid var(--border)}
+.tab{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:100%;font:600 11px/16px 'Noto Sans Arabic',sans-serif}
+.wrap{display:flex;flex-direction:column;gap:9px}
+.nm{display:flex;align-items:baseline;gap:8px;font:500 11px/1.3 Inter,system-ui,sans-serif;color:#455A64}
+.tag{font:500 10px/1 Inter,system-ui,sans-serif;padding:3px 7px;background:#E4F2FD;color:#1A237E;border-radius:5px}
+.chip{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;border-radius:8px;font:600 11px/1 'Noto Sans Arabic',sans-serif;white-space:nowrap}
+.plate{display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex:none;border-radius:12px;background:var(--surface-2);color:var(--brand-primary)}
+.t3{font:700 15px/22px 'Noto Sans Arabic',sans-serif;color:var(--text)}
+.cap{font:400 11.5px/18px 'Noto Sans Arabic',sans-serif;color:var(--text-2)}
+.lb{font:600 13px/20px 'Noto Sans Arabic',sans-serif;color:var(--text)}
+.kpi{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:10px 11px;box-sizing:border-box;border-radius:12px;background:var(--surface-2);border:1px solid var(--border-2)}
+.kpi b{font:700 16px/22px Inter,system-ui,sans-serif;direction:ltr;color:var(--brand-deep)}
+.dk .kpi b{color:var(--brand-primary)}
+.kpi span{font:400 10.5px/15px 'Noto Sans Arabic',sans-serif;color:var(--text-2)}
+.row{flex:none;display:flex;align-items:center;gap:10px;min-height:48px;box-sizing:border-box;padding:9px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+.fbar{flex:none;display:flex;gap:7px;overflow:hidden}
+.fb{display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 12px;box-sizing:border-box;border-radius:10px;border:1px solid var(--border);background:var(--surface);font:600 11.5px/1 'Noto Sans Arabic',sans-serif;color:var(--text-2);white-space:nowrap}
+.fb.on{background:var(--brand-primary);border-color:var(--brand-primary);color:#fff}
+.dk .fb.on{color:var(--bg)}
+.sheet{position:absolute;z-index:6;inset-block-end:0;inset-inline:0;box-sizing:border-box;display:flex;flex-direction:column;gap:11px;padding:18px 20px 22px;background:var(--surface);border-radius:22px 22px 0 0;box-shadow:0 -18px 44px rgba(15,23,42,.24)}
+.scrim{position:absolute;z-index:5;inset:0;background:rgba(14,22,32,.44)}
+.grab{align-self:center;width:44px;height:4px;border-radius:2px;background:var(--border)}
+.ta{box-sizing:border-box;width:100%;min-height:86px;padding:11px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface-2);font:400 12.5px/20px 'Noto Sans Arabic',sans-serif;color:var(--text)}
+.dot{display:flex;align-items:center;justify-content:center;width:20px;height:20px;flex:none;border-radius:99px}
+h1,h2,h3{margin:0}
+.sec{display:flex;flex-direction:column;gap:14px}
+.sh{font:800 19px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.panel{display:flex;flex-direction:column;gap:11px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+
+/* ══════════════════════════════════════════════════════════════════════
+   MANAGER VISUAL PARITY WITH WORKER APP — ported from the approved Worker
+   premium layer (05 · Worker App). Expressed through the semantic tokens
+   of this page, so Brand Dark keeps resolving its own values.
+   ══════════════════════════════════════════════════════════════════════ */
+.f::before{
+  height:184px;background-color:var(--brand-deep);
+  background-image:
+    radial-gradient(120% 90% at 82% -10%,rgba(255,255,255,.26),transparent 60%),
+    radial-gradient(90% 70% at 8% 0%,rgba(41,98,255,.55),transparent 62%),
+    linear-gradient(196deg,#2B5CFF 0%,#1B3ECB 46%,var(--brand-deep) 100%);
+}
+.dk::before{
+  background-image:
+    radial-gradient(120% 90% at 82% -10%,rgba(255,255,255,.12),transparent 60%),
+    linear-gradient(196deg,color-mix(in srgb,var(--brand-primary) 38%,var(--dk-brand)) 0%,var(--dk-brand) 100%);
+}
+.f::after{inset-block-start:118px;height:480px;border-radius:44% 44% 0 0/30% 30% 0 0}
+.sbl{height:46px;font-weight:600;letter-spacing:.2px}
+.hdr{height:62px;padding:0 18px}
+.hdr b{font-size:18px;line-height:30px;letter-spacing:-.2px}
+.hdr .sub{line-height:20px}
+.card{border-radius:20px;box-shadow:0 12px 30px rgba(16,34,80,.09),0 2px 6px rgba(16,34,80,.04)}
+.row{border-radius:16px;min-height:56px;padding:11px 13px;box-shadow:0 6px 16px rgba(16,34,80,.05)}
+.dk .card,.dk .row{box-shadow:none}
+.kpi{gap:3px;padding:12px 11px;border-radius:16px;align-items:center;text-align:center;background:color-mix(in srgb,var(--brand-accent,#E4F2FD) 42%,var(--surface,#fff));border-color:color-mix(in srgb,var(--brand-primary,#2962FF) 12%,transparent)}
+.kpi b{font-size:19px;line-height:26px;font-weight:800}
+.kpi span{font-size:11px;font-weight:600;color:var(--text-2)}
+.btn{border-radius:16px;font-size:16.5px;font-weight:800;letter-spacing:-.1px;background:linear-gradient(180deg,#3E6BFF 0%,var(--action-primary,#2962FF) 55%,#1E4FE6 100%);box-shadow:0 12px 24px rgba(41,98,255,.26)}
+.dk .btn{background:var(--action-primary,#2962FF);box-shadow:none}
+.btn[disabled]{background:var(--surface-2,#F2F4F7);box-shadow:none}
+.btn2,.btn3,.btnOK,.btnD{border-radius:16px;font-weight:700}
+.plate{width:44px;height:44px;border-radius:14px;background:color-mix(in srgb,var(--brand-accent,#E4F2FD) 70%,var(--surface,#fff));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--brand-primary,#2962FF) 10%,transparent)}
+.chip{height:28px;padding:0 10px;border-radius:9px;font-weight:700}
+.fld{border-radius:16px;box-shadow:0 4px 12px rgba(16,34,80,.04)}
+.fb{height:36px;border-radius:12px;font-weight:700}
+.nav{height:82px;padding-block-end:6px;border-top:0;box-shadow:0 -10px 28px rgba(16,34,80,.08);background:var(--surface,#fff)}
+.tab{position:relative;gap:5px;font-weight:700;font-size:11px}
+.sheet{border-radius:26px 26px 0 0}
+</style>
+</helmet>
+<div dir="rtl" style="padding:22px 26px;margin:0 0 18px;border-radius:14px;background:#FDF3F3;border:1px solid #E9C9C9;font-family:'Noto Sans Arabic',system-ui,sans-serif">
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#9B2222;color:#fff;font:700 11px/1 Inter,system-ui,sans-serif;direction:ltr">ARCHIVED</span>
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 Inter,system-ui,sans-serif;color:#37474F;direction:ltr">NP-DESIGN-CLOSURE-01 · P1</span>
+</div>
+<div style="font:500 12.5px/21px 'Noto Sans Arabic',sans-serif;color:#1F2330">
+<b>Replaced By:</b> <a href="../06 · Manager App.dc.html" style="color:#9B2222">06 · Manager App</a> — المصدر القانوني الوحيد لتطبيق المدير<br>
+<b>Reason:</b> Logic and frames safely consolidated into the canonical Manager source (namespaces <span style="font-family:Inter,system-ui,sans-serif;direction:ltr">b.*</span> · source-scoped CSS <span style="font-family:Inter,system-ui,sans-serif;direction:ltr">.src-b</span>)<br>
+<b>Original Frames:</b> 23 &nbsp;·&nbsp; <b>Screen Loss:</b> 0 &nbsp;·&nbsp; <b>Deleted:</b> 0<br>
+<b>Date:</b> 2026-09-20<br>
+<b>Pre-merge SHA-256:</b> <span style="font-family:Inter,system-ui,sans-serif;direction:ltr;font-size:11px;word-break:break-all">1335035ac2a20b24c3520037258132498947acadc3fb6dff4e36a1fec67f8bb8</span><br>
+<b>Canonical target SHA-256 (pre-merge):</b> <span style="font-family:Inter,system-ui,sans-serif;direction:ltr;font-size:11px;word-break:break-all">0440ef309e13f3d9631182ec2462e92fbea5efd1d7cbfad1eeae3e7e074da2a5</span>
+</div></div>
+<div dir="rtl" style="padding:40px;display:flex;flex-direction:column;gap:32px;color:#455A64">
+<!-- functional icon geometry removed · NP-ICON-SYSTEM-01 v2: all ids resolve to the canonical registry (np-icons.js) through the generated adapter (np-sprite.js) -->
+
+  <header style="display:flex;flex-direction:column;gap:10px;max-width:1160px">
+    <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:7px;background:#1A237E;color:#fff;font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:600">NP-WO-CD-08 · PHASE 2 · ALERTS · APPROVALS · OPERATIONAL REVIEW</span>
+    <h1 style="font:800 31px/1.25 'Noto Sans Arabic',sans-serif;color:#1A237E">تطبيق المدير — التنبيهات والاعتمادات ومراجعة العمليات</h1>
+    <p style="font:400 14.5px/26px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:980px;text-wrap:pretty">المرحلة الثانية مبنية على شل المدير و<b style="color:#1F2330">Mobile Foundation</b> المعتمدين — لا إعادة تصميم للمرحلة الأولى ولا نظام تصميم ثانٍ. كل ألوان الشاشات من <span class="mono">Semantic Tokens</span> (<span class="mono">--brand-primary · --surface · --text · --ok/--warn/--danger</span>) تُغذّى من <span class="mono">tenant.theme</span>، والاسم والشعار من <span class="mono">tenant.brand</span>. نايل بترو = بيانات المستأجر الافتراضي فقط، غير مثبّتة داخل أي مكوّن. كل شاشة تعمل في نطاق <span class="mono">tenantId + activeStationId</span> والصلاحيات.</p>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;padding-top:3px">
+      <sc-for list="{{pills}}" as="p" hint-placeholder-count="8">
+        <span class="mono" style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border:1px solid #DDE4EE;border-radius:8px;background:#fff;font-size:11.5px;font-weight:600;line-height:1;color:#1A237E">{{p}}</span>
+      </sc-for>
+    </div>
+  </header>
+
+  <section class="sec">
+    <h2 class="sh">01 — التنبيهات (Alerts)</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M20</span>screen_alerts</span>
+        <article class="f" data-screen-label="M20 Alerts">
+          <div class="sbl"><span>10:12</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>التنبيهات</b><span class="sub">{{tenant.stationName}}</span></span><span class="chip" style="background:rgba(255,255,255,.16);color:#fff">3 غير مقروء</span></div>
+          <div class="bd" style="gap:10px">
+            <span class="fbar">
+              <sc-for list="{{alertFilters}}" as="f" hint-placeholder-count="4">
+                <span class="fb {{f.cls}}">{{f.label}}<span class="mono" style="font-size:10.5px">{{f.count}}</span></span>
+              </sc-for>
+            </span>
+            <sc-for list="{{alerts}}" as="a" hint-placeholder-count="5">
+              <span class="row" style="align-items:flex-start;padding:11px 12px;border-color:{{a.bd}};cursor:pointer">
+                <span style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border-radius:10px;background:{{a.bg}};color:{{a.ink}}"><svg class="i" style="width:17px;height:17px" viewBox="0 0 20 20"><use href="{{a.icon}}"></use></svg></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="display:flex;align-items:center;gap:6px">
+                    <sc-if value="{{a.unread}}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;flex:none;border-radius:99px;background:var(--brand-primary)"></span></sc-if>
+                    <b style="flex:1;min-width:0;font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text)">{{a.title}}</b>
+                    <span class="mono" style="font-size:10px;color:var(--text-3)">{{a.time}}</span>
+                  </span>
+                  <span class="cap">{{a.desc}}</span>
+                  <span class="chip" style="align-self:flex-start;background:{{a.bg}};border:1px solid {{a.bd}};color:{{a.ink}}">{{a.status}}</span>
+                </span>
+                <svg class="i" style="width:14px;height:14px;color:var(--text-3)" viewBox="0 0 20 20"><use href="#s-chevron"></use></svg>
+              </span>
+            </sc-for>
+          </div>
+          <div class="nav">
+            <sc-for list="{{navAlerts}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}">
+                <span style="position:relative;display:flex"><svg class="i" style="width:22px;height:22px" viewBox="0 0 20 20"><use href="{{t.icon}}"></use></svg><sc-if value="{{t.badge}}" hint-placeholder-val="{{ false }}"><span class="mono" style="position:absolute;inset-block-start:-4px;inset-inline-end:-6px;min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:8px;background:#C62828;color:#fff;font-size:9.5px;display:flex;align-items:center;justify-content:center">{{t.count}}</span></sc-if></span>
+                {{t.label}}
+                <sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:var(--brand-primary)"></span></sc-if>
+              </span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M20·b</span>alerts_empty</span>
+        <article class="f" data-screen-label="M20b Alerts empty">
+          <div class="sbl"><span>10:14</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>التنبيهات</b></div>
+          <div class="bd" style="gap:10px">
+            <span class="fbar">
+              <sc-for list="{{alertFiltersEmpty}}" as="f" hint-placeholder-count="4">
+                <span class="fb {{f.cls}}">{{f.label}}</span>
+              </sc-for>
+            </span>
+            <span style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px">
+              <span style="display:flex;align-items:center;justify-content:center;width:80px;height:80px;border-radius:99px;background:var(--ok-bg);color:var(--ok)"><svg class="i" style="width:36px;height:36px" viewBox="0 0 20 20"><use href="#s-check"></use></svg></span>
+              <b style="font:800 20px/29px 'Noto Sans Arabic',sans-serif;color:var(--text)">لا توجد تنبيهات جديدة</b>
+              <span class="cap" style="max-width:280px">كل العمليات مراجَعة ولا يوجد ما ينتظر إجراءك في هذه المحطة.</span>
+              <span class="chip" style="background:var(--surface-2);border:1px solid var(--border);color:var(--text-2)">آخر تحديث <span class="mono">10:14</span></span>
+            </span>
+            <button class="btn2"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-sync"></use></svg>تحديث</button>
+          </div>
+          <div class="nav">
+            <sc-for list="{{navAlertsClean}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}"><svg class="i" style="width:22px;height:22px" viewBox="0 0 20 20"><use href="{{t.icon}}"></use></svg>{{t.label}}<sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:var(--brand-primary)"></span></sc-if></span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M21</span>screen_alert_details</span>
+        <article class="f" data-screen-label="M21 Alert details">
+          <div class="sbl"><span>10:15</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>تفاصيل التنبيه</b><span class="sub">قراءة تحتاج مراجعة</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:10px">
+              <span style="display:flex;align-items:center;gap:9px">
+                <span class="plate" style="width:34px;height:34px;border-radius:10px;background:var(--warn-bg);color:var(--warn)"><svg class="i" style="width:17px;height:17px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></span>
+                <b class="t3" style="flex:1;min-width:0">قراءة تحتاج مراجعة</b>
+                <span class="chip" style="background:var(--danger-bg);border:1px solid var(--danger-bd);color:var(--danger)">عاجل</span>
+              </span>
+              <sc-for list="{{alertMeta}}" as="m" hint-placeholder-count="6">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span class="cap">{{m.k}}</span><b class="{{m.cls}}" style="font-size:12.5px;font-weight:600;color:var(--text)">{{m.v}}</b></span>
+              </sc-for>
+            </div>
+            <span class="lb">مسار الحالة</span>
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{timelineOpen}}" as="s" hint-placeholder-count="2">
+                <span style="display:flex;align-items:flex-start;gap:9px">
+                  <span class="dot" style="background:{{s.bg}};color:{{s.ink}}"><svg class="i" style="width:11px;height:11px" viewBox="0 0 20 20"><use href="{{s.icon}}"></use></svg></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:600 12px/18px 'Noto Sans Arabic',sans-serif;color:var(--text)">{{s.label}}</b><span class="cap mono">{{s.time}}</span></span>
+                </span>
+              </sc-for>
+            </div>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <span class="cap">الإجراء الأساسي يتبع نوع التنبيه — لا تنبيه بلا مخرج.</span>
+              <button class="btn"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg>فتح مراجعة القراءة</button>
+              <button class="btn3">تعليم كمقروء</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M22</span>screen_approval_queue</span>
+        <article class="f" data-screen-label="M22 Approval queue">
+          <div class="sbl"><span>10:16</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>بانتظار المراجعة</b><span class="sub">{{tenant.stationName}}</span></span><span class="chip" style="background:rgba(255,255,255,.16);color:#fff">3</span></div>
+          <div class="bd" style="gap:10px">
+            <span class="fbar">
+              <sc-for list="{{queueTabs}}" as="t" hint-placeholder-count="4">
+                <span class="fb {{t.cls}}">{{t.label}}<span class="mono" style="font-size:10.5px">{{t.count}}</span></span>
+              </sc-for>
+            </span>
+            <sc-for list="{{queueItems}}" as="q" hint-placeholder-count="3">
+              <span class="card" style="display:flex;flex-direction:column;gap:9px;padding:13px;cursor:pointer">
+                <span style="display:flex;align-items:center;gap:9px">
+                  <span class="plate" style="width:32px;height:32px;border-radius:9px;background:{{q.bg}};color:{{q.ink}}"><svg class="i" style="width:16px;height:16px" viewBox="0 0 20 20"><use href="{{q.icon}}"></use></svg></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text)">{{q.title}}</b><span class="cap">{{q.worker}} · {{q.time}}</span></span>
+                  <span class="chip" style="background:{{q.bg}};border:1px solid {{q.bd}};color:{{q.ink}}">{{q.status}}</span>
+                </span>
+                <span style="display:flex;align-items:center;gap:8px;padding-top:8px;border-top:1px solid var(--border-2)">
+                  <span class="cap" style="flex:1;min-width:0">{{q.detail}}</span>
+                  <b class="mono" style="font-size:13px;font-weight:600;color:var(--brand-deep)">{{q.value}}</b>
+                  <svg class="i" style="width:14px;height:14px;color:var(--text-3)" viewBox="0 0 20 20"><use href="#s-chevron"></use></svg>
+                </span>
+              </span>
+            </sc-for>
+            <span style="margin-top:auto;display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border)">
+              <svg class="i" style="width:16px;height:16px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="#s-info"></use></svg>
+              <span class="cap" style="flex:1;min-width:0">النطاق: <span class="mono">tenantId</span> + <span class="mono">activeStationId</span> + صلاحيات المدير. لا خلط بين المحطات.</span>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M22·b</span>approval_queue_empty</span>
+        <article class="f" data-screen-label="M22b Queue empty">
+          <div class="sbl"><span>10:18</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>بانتظار المراجعة</b><span class="sub">{{tenant.stationName}}</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="fbar">
+              <sc-for list="{{queueTabsEmpty}}" as="t" hint-placeholder-count="4">
+                <span class="fb {{t.cls}}">{{t.label}}</span>
+              </sc-for>
+            </span>
+            <span style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px">
+              <span style="display:flex;align-items:center;justify-content:center;width:80px;height:80px;border-radius:99px;background:var(--ok-bg);color:var(--ok)"><svg class="i" style="width:36px;height:36px" viewBox="0 0 20 20"><use href="#s-check"></use></svg></span>
+              <b style="font:800 20px/29px 'Noto Sans Arabic',sans-serif;color:var(--text)">لا توجد عمليات بانتظار المراجعة</b>
+              <span class="cap" style="max-width:284px">تمت مراجعة القراءات والمصروفات والتوريدات لهذه الفترة. العمليات الجديدة تظهر هنا تلقائياً.</span>
+              <span style="width:100%;display:flex;gap:8px"><span class="kpi"><b>4</b><span>مُعتمد اليوم</span></span><span class="kpi"><b>1</b><span>أُعيد للتصحيح</span></span></span>
+            </span>
+            <button class="btn3"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-history"></use></svg>سجل إجراءات المدير</button>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sh">02 — مراجعة القراءة (Reading Review)</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M23</span>screen_reading_review · needs_review</span>
+        <article class="f" data-screen-label="M23 Reading review">
+          <div class="sbl"><span>10:20</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة القراءة</b><span class="sub">أحمد · المضخة 01 · مسدس 02</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:9px">
+              <span style="display:flex;align-items:center;gap:9px"><span class="chip" style="background:var(--brand-accent);border:1px solid var(--info-bd);color:var(--brand-deep)"><svg class="i" style="width:12px;height:12px" viewBox="0 0 20 20"><use href="#s-fuel"></use></svg>بنزين</span><span class="cap" style="flex:1;min-width:0">نوع الوقود</span><span class="chip" style="background:var(--warn-bg);border:1px solid var(--warn-bd);color:var(--warn)">تحتاج مراجعة</span></span>
+              <sc-for list="{{readingRows}}" as="r" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;{{r.extra}}"><span class="cap">{{r.k}}</span><b class="mono" style="font-size:{{r.size}};font-weight:600;color:{{r.ink}}">{{r.v}}</b></span>
+              </sc-for>
+              <span class="chip" style="align-self:flex-start;background:var(--surface-2);border:1px solid var(--border);color:var(--text-2)">محسوبة تلقائياً</span>
+            </div>
+            <span style="display:flex;gap:9px">
+              <span style="flex:1;min-width:0;height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border-radius:12px;background:repeating-linear-gradient(135deg,#EEF1F6 0 8px,#F6F7FB 8px 16px);border:1px dashed var(--neutral-bd);color:var(--text-2)"><svg class="i" style="width:21px;height:21px" viewBox="0 0 20 20"><use href="#s-camera"></use></svg><span class="mono" style="font-size:10px">meter photo</span></span>
+              <span style="flex:none;width:118px;display:flex;flex-direction:column;gap:6px;justify-content:center"><span class="cap">وقت التسجيل</span><b class="mono" style="font-size:12.5px;font-weight:600;color:var(--text)">17:12</b><span class="cap">الوردية</span><b style="font:600 12px/18px 'Noto Sans Arabic',sans-serif;color:var(--text)">06:02 — 17:28</b></span>
+            </span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <span class="cap mono" style="text-align:center">canReviewReading = true · recordVersion 4</span>
+              <button class="btnOK"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-check"></use></svg>اعتماد القراءة</button>
+              <button class="btn3"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-return"></use></svg>إرجاع للتصحيح</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M23·b</span>reading_return · note required</span>
+        <article class="f" data-screen-label="M23b Reading return">
+          <div class="sbl"><span>10:21</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة القراءة</b><span class="sub">أحمد · المضخة 01 · مسدس 02</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:8px">
+              <span style="display:flex;align-items:center;justify-content:space-between"><span class="cap">الفرق</span><b class="mono" style="font-size:17px;font-weight:600;color:var(--brand-deep)">350.120</b></span>
+              <span class="cap">قيمة غير متوقعة مقارنة بمتوسط المسدس.</span>
+            </div>
+          </div>
+          <div class="scrim"></div>
+          <div class="sheet">
+            <span class="grab"></span>
+            <span style="display:flex;align-items:center;gap:10px"><span style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;border-radius:11px;background:var(--warn-bg);color:var(--warn)"><svg class="i" style="width:19px;height:19px" viewBox="0 0 20 20"><use href="#s-return"></use></svg></span><b style="font:800 18px/26px 'Noto Sans Arabic',sans-serif;color:var(--text)">إرجاع القراءة للتصحيح</b></span>
+            <span class="lb">سبب الإرجاع <span style="color:var(--danger)">*</span></span>
+            <span class="ta" style="color:var(--text-3)">اكتب سبباً واضحاً يظهر للعامل…</span>
+            <span style="display:flex;align-items:center;gap:7px"><svg class="i" style="width:14px;height:14px;color:var(--danger)" viewBox="0 0 20 20"><use href="#s-alert"></use></svg><span style="font:600 11px/17px 'Noto Sans Arabic',sans-serif;color:var(--danger)">السبب مطلوب — لا يمكن الإرسال وهو فارغ</span></span>
+            <button class="btn" disabled>إرسال للتصحيح</button>
+            <button class="btn3">إلغاء</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M23·a</span>reading_accept_confirmation</span>
+        <article class="f" data-screen-label="M23a Reading accept confirm">
+          <div class="sbl"><span>10:22</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة القراءة</b><span class="sub">أحمد · المضخة 01 · مسدس 02</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="row"><svg class="i" style="width:16px;height:16px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="#s-meter"></use></svg><span class="cap" style="flex:1;min-width:0">الفرق — محسوبة تلقائياً</span><b class="mono" style="font-size:13px;font-weight:600;color:var(--text)">350.120</b></span>
+          </div>
+          <div class="scrim"></div>
+          <div class="sheet">
+            <span class="grab"></span>
+            <span style="display:flex;align-items:center;gap:10px"><span style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;border-radius:11px;background:var(--ok-bg);color:var(--ok)"><svg class="i" style="width:19px;height:19px" viewBox="0 0 20 20"><use href="#s-check"></use></svg></span><b style="font:800 18px/26px 'Noto Sans Arabic',sans-serif;color:var(--text)">اعتماد القراءة؟</b></span>
+            <span class="cap">تُصبح حالة القراءة <span class="mono">accepted</span> ويُسجَّل الإجراء باسمك ووقته. الخادم هو المرجع النهائي.</span>
+            <span style="display:flex;gap:8px"><span class="kpi"><b>24,580.120</b><span>البداية</span></span><span class="kpi"><b>24,930.240</b><span>النهاية</span></span></span>
+            <button class="btnOK">اعتماد</button>
+            <button class="btn3">إلغاء</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M23·c</span>reading_accepted · timeline + history</span>
+        <article class="f" data-screen-label="M23c Reading approved">
+          <div class="sbl"><span>10:23</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة القراءة</b><span class="sub">تم الاعتماد</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span style="display:flex;align-items:center;gap:10px;padding:12px 13px;border-radius:12px;background:var(--ok-bg);border:1px solid var(--ok-bd)">
+              <svg class="i" style="width:19px;height:19px;color:var(--ok)" viewBox="0 0 20 20"><use href="#s-check"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:700 13px/20px 'Noto Sans Arabic',sans-serif;color:var(--ok)">تم اعتماد القراءة</b><span class="cap" style="color:var(--ok)">الحالة الآن: accepted</span></span>
+            </span>
+            <span class="lb">مسار الحالة — يدعم دورات مراجعة متكررة</span>
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{timelineFull}}" as="s" hint-placeholder-count="5">
+                <span style="display:flex;align-items:flex-start;gap:9px">
+                  <span class="dot" style="background:{{s.bg}};color:{{s.ink}}"><svg class="i" style="width:11px;height:11px" viewBox="0 0 20 20"><use href="{{s.icon}}"></use></svg></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:600 12px/18px 'Noto Sans Arabic',sans-serif;color:var(--text)">{{s.label}}</b><span class="cap mono">{{s.time}}</span></span>
+                </span>
+              </sc-for>
+            </div>
+            <span class="lb">سجل الإجراءات — للقراءة فقط</span>
+            <sc-for list="{{history}}" as="h" hint-placeholder-count="2">
+              <span class="row" style="align-items:flex-start;padding:10px 12px">
+                <svg class="i" style="width:15px;height:15px;color:{{h.ink}}" viewBox="0 0 20 20"><use href="{{h.icon}}"></use></svg>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><b style="font:600 12px/18px 'Noto Sans Arabic',sans-serif;color:var(--text)">{{h.action}}</b><span class="cap">{{h.note}}</span></span>
+                <span class="mono" style="flex:none;font-size:10px;color:var(--text-3)">{{h.time}}</span>
+              </span>
+            </sc-for>
+            <span style="margin-top:auto"><button class="btn">العنصر التالي في القائمة</button></span>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sh">03 — المصروفات والتوريدات (لوحة اعتماد واحدة)</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M24</span>screen_expense_review</span>
+        <article class="f" data-screen-label="M24 Expense review">
+          <div class="sbl"><span>10:26</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة مصروف</b><span class="sub">عثمان · وردية 06:05</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:9px">
+              <span style="display:flex;align-items:center;gap:9px"><span class="plate" style="width:32px;height:32px;border-radius:9px;background:var(--brand-accent)"><svg class="i" style="width:16px;height:16px" viewBox="0 0 20 20"><use href="#s-wallet"></use></svg></span><b class="t3" style="flex:1;min-width:0">صيانة مضخة</b><span class="chip" style="background:var(--info-bg);border:1px solid var(--info-bd);color:var(--info)">بانتظار المراجعة</span></span>
+              <span style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2)"><span class="cap">المبلغ</span><b class="mono" style="font-size:19px;font-weight:600;color:var(--brand-deep)">12,500</b></span>
+              <sc-for list="{{expenseMeta}}" as="m" hint-placeholder-count="4">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span class="cap">{{m.k}}</span><b class="{{m.cls}}" style="font-size:12.5px;font-weight:600;color:var(--text)">{{m.v}}</b></span>
+              </sc-for>
+            </div>
+            <span class="row" style="cursor:pointer"><svg class="i" style="width:16px;height:16px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="#s-attach"></use></svg><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:600 12px/18px 'Noto Sans Arabic',sans-serif;color:var(--text)">صورة الإيصال</b><span class="cap mono">receipt_0918.jpg · 240KB</span></span><svg class="i" style="width:14px;height:14px;color:var(--text-3)" viewBox="0 0 20 20"><use href="#s-chevron"></use></svg></span>
+            <span class="cap">وصف العامل: «قطع غيار وصيانة عاجلة للمضخة 02 بعد توقفها».</span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <span class="cap mono" style="text-align:center">canApproveExpense = true</span>
+              <button class="btnOK"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-check"></use></svg>اعتماد</button>
+              <button class="btn3"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-return"></use></svg>إرجاع للتصحيح</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M24·b</span>expense_return · note filled</span>
+        <article class="f" data-screen-label="M24b Expense return">
+          <div class="sbl"><span>10:27</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة مصروف</b><span class="sub">عثمان · 12,500</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="row"><svg class="i" style="width:16px;height:16px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="#s-attach"></use></svg><span class="cap" style="flex:1;min-width:0">صورة الإيصال — غير واضحة</span><span class="chip" style="background:var(--warn-bg);border:1px solid var(--warn-bd);color:var(--warn)">مراجعة</span></span>
+          </div>
+          <div class="scrim"></div>
+          <div class="sheet">
+            <span class="grab"></span>
+            <b style="font:800 18px/26px 'Noto Sans Arabic',sans-serif;color:var(--text)">إرجاع المصروف للتصحيح</b>
+            <span class="lb">سبب الإرجاع <span style="color:var(--danger)">*</span></span>
+            <span class="ta">صورة الإيصال غير واضحة. أعد إرفاق صورة يظهر فيها المبلغ والتاريخ.</span>
+            <span style="display:flex;align-items:center;gap:7px"><svg class="i" style="width:14px;height:14px;color:var(--ok)" viewBox="0 0 20 20"><use href="#s-check"></use></svg><span style="font:600 11px/17px 'Noto Sans Arabic',sans-serif;color:var(--ok)">السبب مكتمل — سيظهر للعامل مع الإشعار</span></span>
+            <button class="btn">إرسال للتصحيح</button>
+            <button class="btn3">إلغاء</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M24·c</span>expense_returned · result</span>
+        <article class="f" data-screen-label="M24c Expense returned">
+          <div class="sbl"><span>10:28</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>مراجعة مصروف</b></div>
+          <div class="bd" style="align-items:center;text-align:center;gap:12px">
+            <span style="margin-top:30px;display:flex;align-items:center;justify-content:center;width:82px;height:82px;border-radius:99px;background:var(--warn-bg);color:var(--warn)"><svg class="i" style="width:36px;height:36px" viewBox="0 0 20 20"><use href="#s-return"></use></svg></span>
+            <b style="font:800 20px/29px 'Noto Sans Arabic',sans-serif;color:var(--text)">أُعيد المصروف للتصحيح</b>
+            <span class="cap" style="max-width:290px">وصل الإشعار إلى عثمان مع سبب الإرجاع. الحالة الآن: <span class="mono">returned_for_correction</span>.</span>
+            <span style="width:100%;display:flex;flex-direction:column;gap:8px;text-align:start">
+              <sc-for list="{{returnHistory}}" as="h" hint-placeholder-count="2">
+                <span class="row" style="align-items:flex-start;padding:10px 12px"><svg class="i" style="width:15px;height:15px;color:{{h.ink}}" viewBox="0 0 20 20"><use href="{{h.icon}}"></use></svg><span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><b style="font:600 12px/18px 'Noto Sans Arabic',sans-serif;color:var(--text)">{{h.action}}</b><span class="cap">{{h.note}}</span></span><span class="mono" style="flex:none;font-size:10px;color:var(--text-3)">{{h.time}}</span></span>
+              </sc-for>
+            </span>
+            <span style="width:100%;margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn">العودة لقائمة المراجعة</button>
+              <button class="btn3">الرئيسية</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M24·d</span>expense_approved · record</span>
+        <article class="f" data-screen-label="M24d Expense approved">
+          <div class="sbl"><span>10:29</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>مراجعة مصروف</b></div>
+          <div class="bd" style="align-items:center;text-align:center;gap:12px">
+            <span style="margin-top:30px;display:flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:99px;background:var(--ok-bg);color:var(--ok)"><svg class="i" style="width:38px;height:38px" viewBox="0 0 20 20"><use href="#s-check"></use></svg></span>
+            <b style="font:800 20px/29px 'Noto Sans Arabic',sans-serif;color:var(--text)">تم اعتماد المصروف</b>
+            <span class="cap" style="max-width:290px">الحالة الآن: <span class="mono">approved</span> — صيانة مضخة · 12,500 · عثمان.</span>
+            <span style="width:100%;display:flex;gap:8px"><span class="kpi"><b>10:29</b><span>وقت الاعتماد</span></span><span class="kpi"><b>خالد</b><span>المدير المعتمِد</span></span></span>
+            <span style="width:100%;display:flex;align-items:flex-start;gap:10px;padding:12px 13px;box-sizing:border-box;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);text-align:start">
+              <svg class="i" style="width:17px;height:17px;color:var(--text-2)" viewBox="0 0 20 20"><use href="#s-history"></use></svg>
+              <span class="cap" style="flex:1;min-width:0">سُجِّل الإجراء في <span class="mono">NPActionHistory</span> — للقراءة فقط ولا يمكن تعديله من التطبيق.</span>
+            </span>
+            <span style="width:100%;margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn">العنصر التالي — توريد بنزين</button>
+              <button class="btn3">العودة للقائمة</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M25</span>screen_supply_review</span>
+        <article class="f" data-screen-label="M25 Supply review">
+          <div class="sbl"><span>10:31</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة توريد</b><span class="sub">أحمد · وردية 06:02</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:9px">
+              <span style="display:flex;align-items:center;gap:9px"><span class="plate" style="width:32px;height:32px;border-radius:9px;background:var(--brand-accent)"><svg class="i" style="width:16px;height:16px" viewBox="0 0 20 20"><use href="#s-supply"></use></svg></span><b class="t3" style="flex:1;min-width:0">توريد بنزين</b><span class="chip" style="background:var(--info-bg);border:1px solid var(--info-bd);color:var(--info)">بانتظار المراجعة</span></span>
+              <span style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2)"><span class="cap">الكمية — لتر</span><b class="mono" style="font-size:19px;font-weight:600;color:var(--brand-deep)">12,000.000</b></span>
+              <sc-for list="{{supplyMeta}}" as="m" hint-placeholder-count="4">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span class="cap">{{m.k}}</span><b class="{{m.cls}}" style="font-size:12.5px;font-weight:600;color:var(--text)">{{m.v}}</b></span>
+              </sc-for>
+            </div>
+            <span class="row" style="cursor:pointer"><svg class="i" style="width:16px;height:16px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="#s-attach"></use></svg><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:600 12px/18px 'Noto Sans Arabic',sans-serif;color:var(--text)">مرفق التوريد</b><span class="cap mono">supply_0918.pdf · 1 صفحة</span></span><svg class="i" style="width:14px;height:14px;color:var(--text-3)" viewBox="0 0 20 20"><use href="#s-chevron"></use></svg></span>
+            <span style="display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border)"><svg class="i" style="width:16px;height:16px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="#s-info"></use></svg><span class="cap" style="flex:1;min-width:0">تحقق تشغيلي فقط — لا شروط مالية للمورّد ولا فواتير في هذه المرحلة.</span></span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <span class="cap mono" style="text-align:center">canApproveSupply = true</span>
+              <button class="btnOK"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-check"></use></svg>اعتماد</button>
+              <button class="btn3"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-return"></use></svg>إرجاع للتصحيح</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M25·b</span>supply_approve_confirmation</span>
+        <article class="f" data-screen-label="M25b Supply confirm">
+          <div class="sbl"><span>10:32</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة توريد</b><span class="sub">بنزين · 12,000.000</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="row"><svg class="i" style="width:16px;height:16px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="#s-supply"></use></svg><span class="cap" style="flex:1;min-width:0">توريد بنزين — أحمد</span><b class="mono" style="font-size:12.5px;font-weight:600;color:var(--text)">12,000.000</b></span>
+          </div>
+          <div class="scrim"></div>
+          <div class="sheet">
+            <span class="grab"></span>
+            <span style="display:flex;align-items:center;gap:10px"><span style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;border-radius:11px;background:var(--ok-bg);color:var(--ok)"><svg class="i" style="width:19px;height:19px" viewBox="0 0 20 20"><use href="#s-check"></use></svg></span><b style="font:800 18px/26px 'Noto Sans Arabic',sans-serif;color:var(--text)">اعتماد التوريد؟</b></span>
+            <span class="cap">يُسجَّل الاعتماد باسمك ووقته في سجل الإجراءات. الخادم هو المرجع النهائي للحالة.</span>
+            <span style="display:flex;gap:8px"><span class="kpi"><b>بنزين</b><span>نوع الوقود</span></span><span class="kpi"><b>12,000.000</b><span>الكمية</span></span></span>
+            <button class="btnOK">اعتماد</button>
+            <button class="btn3">إلغاء</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M25·d</span>supply_return · note required</span>
+        <article class="f" data-screen-label="M25d Supply return">
+          <div class="sbl"><span>10:34</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة توريد</b><span class="sub">بنزين · 12,000.000</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="row"><svg class="i" style="width:16px;height:16px;color:var(--brand-deep)" viewBox="0 0 20 20"><use href="#s-attach"></use></svg><span class="cap" style="flex:1;min-width:0">مرفق التوريد — لا يطابق الكمية</span><span class="chip" style="background:var(--warn-bg);border:1px solid var(--warn-bd);color:var(--warn)">مراجعة</span></span>
+          </div>
+          <div class="scrim"></div>
+          <div class="sheet">
+            <span class="grab"></span>
+            <b style="font:800 18px/26px 'Noto Sans Arabic',sans-serif;color:var(--text)">إرجاع التوريد للتصحيح</b>
+            <span class="lb">سبب الإرجاع <span style="color:var(--danger)">*</span></span>
+            <span class="ta">الكمية في المرفق 11,500 لتر وليست 12,000. صحّح الكمية أو أعد إرفاق المستند الصحيح.</span>
+            <span style="display:flex;align-items:center;gap:7px"><svg class="i" style="width:14px;height:14px;color:var(--ok)" viewBox="0 0 20 20"><use href="#s-check"></use></svg><span style="font:600 11px/17px 'Noto Sans Arabic',sans-serif;color:var(--ok)">السبب مكتمل — الحالة ستصبح returned_for_correction</span></span>
+            <button class="btn">إرسال للتصحيح</button>
+            <button class="btn3">إلغاء</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M25·c</span>supply_approved · completed</span>
+        <article class="f" data-screen-label="M25c Supply approved">
+          <div class="sbl"><span>10:33</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>مراجعة توريد</b></div>
+          <div class="bd" style="align-items:center;text-align:center;gap:12px">
+            <span style="margin-top:32px;display:flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:99px;background:var(--ok-bg);color:var(--ok)"><svg class="i" style="width:38px;height:38px" viewBox="0 0 20 20"><use href="#s-check"></use></svg></span>
+            <b style="font:800 20px/29px 'Noto Sans Arabic',sans-serif;color:var(--text)">تم اعتماد التوريد</b>
+            <span class="cap" style="max-width:290px">الحالة الآن: <span class="mono">approved</span> — مسجّلة في سجل إجراءات المدير مع الوقت.</span>
+            <span style="width:100%;display:flex;gap:8px"><span class="kpi"><b>2</b><span>بانتظار المراجعة</span></span><span class="kpi"><b>5</b><span>مُعتمد اليوم</span></span></span>
+            <span style="width:100%;margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn">العنصر التالي — قراءة تحتاج مراجعة</button>
+              <button class="btn3">العودة للقائمة</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sh">04 — الحالات الحاكمة: الخادم · الاتصال · الصلاحيات · تعدد المحطات</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M26</span>record_changed · server authority</span>
+        <article class="f" data-screen-label="M26 Record changed">
+          <div class="sbl"><span>10:36</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة القراءة</b><span class="sub">تم تحديث السجل</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span style="display:flex;align-items:flex-start;gap:10px;padding:13px;border-radius:12px;background:var(--info-bg);border:1px solid var(--info-bd)">
+              <svg class="i" style="width:19px;height:19px;color:var(--info)" viewBox="0 0 20 20"><use href="#s-sync"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 13px/20px 'Noto Sans Arabic',sans-serif;color:var(--info)">تم تحديث هذه العملية</b><span class="cap" style="color:var(--info)">غيّر الخادم حالة السجل بعد فتحك للشاشة. إجراؤك لم يُنفَّذ ولن يُكتب فوق حالة أحدث.</span></span>
+            </span>
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:8px">
+              <span style="display:flex;align-items:center;justify-content:space-between"><span class="cap">النسخة التي تراها</span><b class="mono" style="font-size:12.5px;font-weight:600;color:var(--text-2)">recordVersion 4</b></span>
+              <span style="display:flex;align-items:center;justify-content:space-between"><span class="cap">النسخة على الخادم</span><b class="mono" style="font-size:12.5px;font-weight:600;color:var(--text)">recordVersion 6</b></span>
+              <span style="display:flex;align-items:center;justify-content:space-between"><span class="cap">الحالة الحالية</span><span class="chip" style="background:var(--ok-bg);border:1px solid var(--ok-bd);color:var(--ok)">تم الاعتماد</span></span>
+            </div>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-sync"></use></svg>تحديث البيانات</button>
+              <button class="btn3">العودة للقائمة</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M27</span>offline_action_blocked</span>
+        <article class="f" data-screen-label="M27 Offline blocked">
+          <div class="sbl"><span>10:38</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-offline"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة مصروف</b><span class="sub">عرض من بيانات محلية</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span style="display:flex;align-items:center;gap:9px;min-height:40px;box-sizing:border-box;padding:9px 12px;border-radius:12px;background:var(--neutral-bg);border:1px solid var(--neutral-bd)"><svg class="i" style="width:17px;height:17px;color:var(--neutral)" viewBox="0 0 20 20"><use href="#s-offline"></use></svg><span style="flex:1;min-width:0;font:600 11.5px/18px 'Noto Sans Arabic',sans-serif;color:var(--neutral)">لا يوجد اتصال — البيانات من الذاكرة المحلية</span></span>
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:8px">
+              <span style="display:flex;align-items:center;gap:9px"><b class="t3" style="flex:1;min-width:0">صيانة مضخة</b><span class="chip" style="background:var(--info-bg);border:1px solid var(--info-bd);color:var(--info)">بانتظار المراجعة</span></span>
+              <span style="display:flex;align-items:center;justify-content:space-between"><span class="cap">المبلغ</span><b class="mono" style="font-size:17px;font-weight:600;color:var(--brand-deep)">12,500</b></span>
+              <span class="cap">القراءة والعرض متاحان دون اتصال. الاعتماد والإرجاع لا.</span>
+            </div>
+            <span style="display:flex;align-items:flex-start;gap:10px;padding:12px 13px;border-radius:12px;background:var(--warn-bg);border:1px solid var(--warn-bd)">
+              <svg class="i" style="width:18px;height:18px;color:var(--warn)" viewBox="0 0 20 20"><use href="#s-lock"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--warn)">يتطلب هذا الإجراء اتصالاً بالإنترنت</b><span class="cap" style="color:var(--warn)">لا يُحفظ الاعتماد محلياً ولا يُعلَّم كمكتمل. أعد المحاولة عند عودة الاتصال.</span></span>
+            </span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn" disabled>اعتماد</button>
+              <button class="btn" disabled>إرجاع للتصحيح</button>
+              <button class="btn3"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-sync"></use></svg>محاولة الاتصال</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M28</span>permission_read_only</span>
+        <article class="f" data-screen-label="M28 Read only">
+          <div class="sbl"><span>10:40</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>مراجعة القراءة</b><span class="sub">عرض فقط</span></span></div>
+          <div class="bd" style="gap:10px">
+            <div class="card" style="padding:13px;display:flex;flex-direction:column;gap:9px">
+              <span style="display:flex;align-items:center;gap:9px"><span class="chip" style="background:var(--brand-accent);border:1px solid var(--info-bd);color:var(--brand-deep)">جاز</span><span class="cap" style="flex:1;min-width:0">المضخة 02 · مسدس 01</span><span class="chip" style="background:var(--warn-bg);border:1px solid var(--warn-bd);color:var(--warn)">تحتاج مراجعة</span></span>
+              <sc-for list="{{readingRowsRO}}" as="r" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;{{r.extra}}"><span class="cap">{{r.k}}</span><b class="mono" style="font-size:{{r.size}};font-weight:600;color:{{r.ink}}">{{r.v}}</b></span>
+              </sc-for>
+            </div>
+            <span style="display:flex;align-items:flex-start;gap:10px;padding:12px 13px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border)">
+              <svg class="i" style="width:18px;height:18px;color:var(--text-2)" viewBox="0 0 20 20"><use href="#s-lock"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text)">لا تملك صلاحية مراجعة القراءات</b><span class="cap">العرض متاح، وأزرار الاعتماد والإرجاع غير معروضة. تواصل مع مسؤول الصلاحيات.</span></span>
+            </span>
+            <span class="cap mono">canReviewReading = false · canReturnForCorrection = false</span>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button class="btn3">سجل الإجراءات</button>
+              <button class="btn2">{{tenant.supportLabel}}</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M29</span>station_selector · multi-station</span>
+        <article class="f" data-screen-label="M29 Station selector">
+          <div class="sbl"><span>10:42</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>اختيار المحطة</b><span class="sub">3 محطات مصرّح بها</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="cap">تبديل المحطة يُحدِّث الرئيسية والتنبيهات وقائمة المراجعة — بدون خلط بيانات.</span>
+            <sc-for list="{{stations}}" as="s" hint-placeholder-count="3">
+              <span class="row" style="min-height:64px;border-color:{{s.bd}};cursor:pointer">
+                <span class="plate" style="width:36px;height:36px;border-radius:10px;background:{{s.bg}};color:{{s.ink}}"><svg class="i" style="width:18px;height:18px" viewBox="0 0 20 20"><use href="#s-station"></use></svg></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text)">{{s.name}}</b><span class="cap">{{s.meta}}</span></span>
+                <sc-if value="{{s.current}}" hint-placeholder-val="{{ false }}"><span class="chip" style="background:var(--ok-bg);border:1px solid var(--ok-bd);color:var(--ok)"><svg class="i" style="width:12px;height:12px" viewBox="0 0 20 20"><use href="#s-check"></use></svg>الحالية</span></sc-if>
+              </span>
+            </sc-for>
+            <span style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <span style="display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border)"><svg class="i" style="width:16px;height:16px;color:var(--text-2)" viewBox="0 0 20 20"><use href="#s-info"></use></svg><span class="cap" style="flex:1;min-width:0">«كل المحطات» غير متاح — يتطلب صلاحية <span class="mono">allStations</span>.</span></span>
+              <button class="btn">تأكيد المحطة</button>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">M30</span>errors · load / approve / attachment / session</span>
+        <article class="f" data-screen-label="M30 Error states">
+          <div class="sbl"><span>10:45</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><b>حالات الخطأ</b></div>
+          <div class="bd" style="gap:9px">
+            <sc-for list="{{errors}}" as="e" hint-placeholder-count="7">
+              <span class="row" style="align-items:flex-start;padding:10px 12px;border-color:var(--danger-bd);background:var(--surface)">
+                <svg class="i" style="width:16px;height:16px;color:var(--danger)" viewBox="0 0 20 20"><use href="{{e.icon}}"></use></svg>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><b style="font:700 12px/18px 'Noto Sans Arabic',sans-serif;color:var(--text)">{{e.title}}</b><span class="cap">{{e.msg}}</span></span>
+                <span class="chip" style="flex:none;background:var(--brand-accent);border:1px solid var(--info-bd);color:var(--brand-deep)">{{e.action}}</span>
+              </span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">DK3</span>approval_queue · dark</span>
+        <article class="f dk" data-screen-label="DK3 Queue dark">
+          <div class="sbl"><span>22:10</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 20 20"><use href="#s-meter"></use></svg></div>
+          <div class="hdr"><button class="ib" aria-label="رجوع"><svg class="i" style="width:20px;height:20px" viewBox="0 0 20 20"><use href="#s-back"></use></svg></button><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>بانتظار المراجعة</b><span class="sub">الوضع الداكن — نفس الهندسة</span></span></div>
+          <div class="bd" style="gap:10px">
+            <span class="fbar">
+              <sc-for list="{{queueTabs}}" as="t" hint-placeholder-count="4">
+                <span class="fb {{t.cls}}">{{t.label}}<span class="mono" style="font-size:10.5px">{{t.count}}</span></span>
+              </sc-for>
+            </span>
+            <sc-for list="{{queueItemsDark}}" as="q" hint-placeholder-count="3">
+              <span class="card" style="display:flex;flex-direction:column;gap:9px;padding:13px">
+                <span style="display:flex;align-items:center;gap:9px">
+                  <span class="plate" style="width:32px;height:32px;border-radius:9px"><svg class="i" style="width:16px;height:16px" viewBox="0 0 20 20"><use href="{{q.icon}}"></use></svg></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:700 12.5px/19px 'Noto Sans Arabic',sans-serif;color:var(--text)">{{q.title}}</b><span class="cap">{{q.worker}} · {{q.time}}</span></span>
+                  <span class="chip" style="background:{{q.bg}};border:1px solid {{q.bd}};color:{{q.ink}}">{{q.status}}</span>
+                </span>
+                <span style="display:flex;align-items:center;gap:8px;padding-top:8px;border-top:1px solid var(--border-2)"><span class="cap" style="flex:1;min-width:0">{{q.detail}}</span><b class="mono" style="font-size:13px;font-weight:600;color:var(--brand-primary)">{{q.value}}</b></span>
+              </span>
+            </sc-for>
+            <span style="margin-top:auto"><span class="cap">الألوان من Semantic Tokens فقط — لا لون مثبّت داخل الشاشة.</span></span>
+          </div>
+          <div class="nav">
+            <sc-for list="{{navStationDark}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}"><svg class="i" style="width:22px;height:22px" viewBox="0 0 20 20"><use href="{{t.icon}}"></use></svg>{{t.label}}<sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:var(--brand-primary)"></span></sc-if></span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <sc-if value="{{showFlow}}" hint-placeholder-val="{{ true }}">
+    <section class="sec" style="max-width:1160px">
+      <h2 class="sh">05 — مسارات النموذج الأولي · مسارات مسدودة = 0</h2>
+      <div class="panel" style="gap:12px">
+        <sc-for list="{{flows}}" as="f" hint-placeholder-count="3">
+          <span style="display:flex;flex-direction:column;gap:9px">
+            <b style="font:700 13px/20px 'Noto Sans Arabic',sans-serif;color:#1A237E">{{f.title}}</b>
+            <span style="display:flex;flex-wrap:wrap;align-items:center;gap:7px">
+              <sc-for list="{{f.steps}}" as="s" hint-placeholder-count="8">
+                <span style="display:flex;align-items:center;gap:7px">
+                  <span style="display:inline-flex;align-items:center;height:32px;padding:0 11px;border-radius:9px;background:{{s.bg}};border:1px solid {{s.bd}};font:600 11.5px/1 'Noto Sans Arabic',sans-serif;color:{{s.ink}}">{{s.label}}</span>
+                  <sc-if value="{{s.arrow}}" hint-placeholder-val="{{ false }}"><svg class="i" style="width:13px;height:13px;color:#90A4AE" viewBox="0 0 20 20"><use href="#s-chevron"></use></svg></sc-if>
+                </span>
+              </sc-for>
+            </span>
+          </span>
+        </sc-for>
+        <span class="cap" style="line-height:20px;color:#455A64">كل تنبيه يفتح سجله المرتبط، وكل إجراء ينتهي بحالة واضحة ثم العنصر التالي أو القائمة. لا شاشة بلا مخرج.</span>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{showHandoff}}" hint-placeholder-val="{{ true }}">
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;max-width:1160px">
+      <div class="panel">
+        <h2 style="font:800 17px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">06 — المكوّنات (جديدة + معاد استخدامها)</h2>
+        <sc-for list="{{components}}" as="c" hint-placeholder-count="11">
+          <span style="display:flex;align-items:flex-start;gap:10px;padding-bottom:8px;border-bottom:1px solid #EDF1F6">
+            <span class="mono" style="flex:none;width:176px;font-size:11px;color:#1A237E">{{c.name}}</span>
+            <span class="cap" style="flex:1;min-width:0;color:#455A64">{{c.use}}</span>
+          </span>
+        </sc-for>
+        <span class="cap" style="color:#455A64">لوحة اعتماد واحدة (<span class="mono">NPApprovalPanel</span>) تخدم القراءة والمصروف والتوريد — لا ثلاث أنماط اعتماد.</span>
+      </div>
+
+      <div class="panel">
+        <h2 style="font:800 17px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">07 — عقد التسليم · Flutter</h2>
+        <sc-for list="{{contract}}" as="c" hint-placeholder-count="11">
+          <span style="display:flex;align-items:flex-start;gap:10px;padding-bottom:8px;border-bottom:1px solid #EDF1F6">
+            <span class="mono" style="flex:none;width:176px;font-size:11px;color:#1A237E">{{c.key}}</span>
+            <span class="cap" style="flex:1;min-width:0;color:#455A64">{{c.rule}}</span>
+          </span>
+        </sc-for>
+        <span class="cap" style="line-height:20px;color:#455A64">العرض فقط — لا مخطط قاعدة بيانات. <span class="mono">tenant.brand / tenant.theme / tenant.company</span> مصدر الاسم والشعار والألوان والدعم.</span>
+      </div>
+    </section>
+
+    <section class="panel" style="gap:12px;max-width:1160px">
+      <h2 style="font:800 17px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330">08 — تقرير المراجعة NP-WO-CD-08 · Phase 2</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:10px">
+        <sc-for list="{{report}}" as="r" hint-placeholder-count="16">
+          <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border:1px solid #E8EDF3;border-radius:12px;background:#FCFDFF">
+            <span class="cap" style="flex:1;min-width:0;color:#455A64">{{r.label}}</span>
+            <b class="mono" style="flex:none;font-size:12px;font-weight:600;color:{{r.ink}}">{{r.value}}</b>
+          </span>
+        </sc-for>
+      </div>
+      <span class="cap" style="line-height:20px;color:#455A64">قرارات المالك المطلوبة: (١) هل يُسمح بطابور اعتماد دون اتصال إذا دعمه الخادم لاحقاً، أم يبقى الحجب المطلق؟ (٢) هل «مقروء» حالة مستقلة أم مشتقة من الفتح؟ (٣) حدود صلاحية الإرجاع — مرة واحدة أم دورات متكررة بلا حد؟ (٤) هل تُفعّل صلاحية <span class="mono">allStations</span> لاحقاً؟ نقطة التوقف: لا مخزون ولا تقارير ولا أجهزة ولا Manager Web حتى الاعتماد.</span>
+    </section>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showFlow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;العرض&quot;},&quot;showHandoff&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;العرض&quot;},&quot;stationName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;محطة الخرطوم — الشرق&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;المستأجر&quot;},&quot;supportLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;التواصل مع الدعم&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;المستأجر&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const OK = "var(--ok)", WARN = "var(--warn)", DANGER = "var(--danger)", INFO = "var(--info)", B = "var(--brand-deep)";
+    const st = {
+      ok: { bg: "var(--ok-bg)", bd: "var(--ok-bd)", ink: OK },
+      warn: { bg: "var(--warn-bg)", bd: "var(--warn-bd)", ink: WARN },
+      danger: { bg: "var(--danger-bg)", bd: "var(--danger-bd)", ink: DANGER },
+      info: { bg: "var(--info-bg)", bd: "var(--info-bd)", ink: INFO },
+      neutral: { bg: "var(--surface-2)", bd: "var(--border)", ink: "var(--text-2)" }
+    };
+    const nav = (activeKey, dark) => [
+      { key: "home", label: "الرئيسية", icon: "#s-home" },
+      { key: "station", label: "المحطة", icon: "#s-station" },
+      { key: "alerts", label: "التنبيهات", icon: "#s-bell", badge: true, count: "3" },
+      { key: "profile", label: "حسابي", icon: "#s-profile" }
+    ].map(i => ({
+      label: i.label, icon: i.icon, active: i.key === activeKey,
+      badge: !!i.badge, count: i.count || "",
+      ink: i.key === activeKey ? "var(--brand-primary)" : "var(--text-3)"
+    }));
+    const navClean = activeKey => nav(activeKey).map(t => ({ ...t, badge: false, count: "" }));
+    const step = (label, kind, arrow) => ({
+      label, arrow,
+      bg: kind === "s" ? "#E8F5EC" : kind === "d" ? "#FFF6E8" : "#fff",
+      bd: kind === "s" ? "#BEDFC9" : kind === "d" ? "#F3D9AE" : "#E4E7EC",
+      ink: kind === "s" ? "#0B6B3A" : kind === "d" ? "#7A4A00" : "#1F2330"
+    });
+    const tl = (label, time, kind) => ({ label, time, icon: kind === "d" ? "#s-return" : kind === "s" ? "#s-check" : "#s-clock", bg: kind === "s" ? "var(--ok-bg)" : kind === "d" ? "var(--warn-bg)" : "var(--surface-2)", ink: kind === "s" ? OK : kind === "d" ? WARN : "var(--text-2)" });
+    return {
+      showFlow: this.props.showFlow ?? true,
+      showHandoff: this.props.showHandoff ?? true,
+      tenant: {
+        stationName: this.props.stationName ?? "محطة الخرطوم — الشرق",
+        supportLabel: this.props.supportLabel ?? "التواصل مع الدعم"
+      },
+      pills: ["390×844", "Semantic Tokens فقط", "White-label · tenant.brand", "activeStationId", "Permission-driven", "بنزين · جاز", "ديزل = 0", "مسارات مسدودة = 0"],
+      navAlerts: nav("alerts"), navAlertsClean: navClean("alerts"), navStationDark: nav("station", true),
+      alertFilters: [
+        { label: "الكل", count: "5", cls: "on" },
+        { label: "عاجل", count: "2", cls: "" },
+        { label: "تحتاج إجراء", count: "3", cls: "" },
+        { label: "مقروء", count: "2", cls: "" }
+      ],
+      alertFiltersEmpty: [
+        { label: "الكل", cls: "on" }, { label: "عاجل", cls: "" }, { label: "تحتاج إجراء", cls: "" }, { label: "مقروء", cls: "" }
+      ],
+      alerts: [
+        { icon: "#s-meter", title: "قراءة تحتاج مراجعة", desc: "أحمد · المضخة 01 · مسدس 02 · بنزين", time: "17:12", status: "تحتاج إجراء", unread: true, ...st.warn },
+        { icon: "#s-wallet", title: "مصروف ينتظر الاعتماد", desc: "عثمان · صيانة مضخة · 12,500", time: "16:40", status: "بانتظار المراجعة", unread: true, ...st.info },
+        { icon: "#s-supply", title: "تم تسجيل توريد جديد", desc: "أحمد · بنزين · 12,000.000 لتر", time: "14:05", status: "بانتظار المراجعة", unread: true, ...st.info },
+        { icon: "#s-shift", title: "أغلق أحمد ورديته", desc: "8 قراءات · تمت المزامنة", time: "17:28", status: "مقروء", unread: false, ...st.ok },
+        { icon: "#s-sync", title: "تعذر مزامنة قراءة", desc: "عثمان · المضخة 02 · مسدس 02", time: "17:05", status: "عاجل", unread: false, ...st.danger }
+      ],
+      alertMeta: [
+        { k: "النوع", v: "reading", cls: "mono" },
+        { k: "الأولوية", v: "عاجل", cls: "" },
+        { k: "العامل", v: "أحمد", cls: "" },
+        { k: "المحطة", v: "الخرطوم — الشرق", cls: "" },
+        { k: "العملية المرتبطة", v: "closing_reading #4821", cls: "mono" },
+        { k: "الوقت", v: "18/09/2026 · 17:12", cls: "mono" },
+        { k: "الحالة", v: "needs_review", cls: "mono" }
+      ],
+      queueTabs: [
+        { label: "الكل", count: "3", cls: "on" },
+        { label: "القراءات", count: "1", cls: "" },
+        { label: "المصروفات", count: "1", cls: "" },
+        { label: "التوريدات", count: "1", cls: "" }
+      ],
+      queueTabsEmpty: [{ label: "الكل", cls: "on" }, { label: "القراءات", cls: "" }, { label: "المصروفات", cls: "" }, { label: "التوريدات", cls: "" }],
+      queueItems: [
+        { icon: "#s-meter", title: "قراءة نهاية — بنزين", worker: "أحمد", time: "17:12", status: "تحتاج مراجعة", detail: "المضخة 01 · مسدس 02 · الفرق", value: "350.120", ...st.warn },
+        { icon: "#s-wallet", title: "مصروف — صيانة مضخة", worker: "عثمان", time: "16:40", status: "بانتظار المراجعة", detail: "مع إيصال مرفق", value: "12,500", ...st.info },
+        { icon: "#s-supply", title: "توريد — بنزين", worker: "أحمد", time: "14:05", status: "بانتظار المراجعة", detail: "الكمية — لتر", value: "12,000.000", ...st.info }
+      ],
+      queueItemsDark: [
+        { icon: "#s-meter", title: "قراءة نهاية — جاز", worker: "عثمان", time: "21:40", status: "تحتاج مراجعة", detail: "المضخة 02 · مسدس 01 · الفرق", value: "412.800", ...st.warn },
+        { icon: "#s-wallet", title: "مصروف — وقود مولد", worker: "أحمد", time: "20:15", status: "بانتظار المراجعة", detail: "بدون مرفق", value: "3,200", ...st.info }
+      ],
+      readingRows: [
+        { k: "قراءة البداية", v: "24,580.120", size: "13px", ink: "var(--text)", extra: "" },
+        { k: "قراءة النهاية", v: "24,930.240", size: "13px", ink: "var(--text)", extra: "" },
+        { k: "الفرق", v: "350.120", size: "18px", ink: B, extra: "padding-top:9px;border-top:1px solid var(--border-2)" }
+      ],
+      readingRowsRO: [
+        { k: "قراءة البداية", v: "18,220.000", size: "13px", ink: "var(--text)", extra: "" },
+        { k: "قراءة النهاية", v: "18,632.800", size: "13px", ink: "var(--text)", extra: "" },
+        { k: "الفرق — محسوبة تلقائياً", v: "412.800", size: "17px", ink: B, extra: "padding-top:9px;border-top:1px solid var(--border-2)" }
+      ],
+      expenseMeta: [
+        { k: "النوع", v: "صيانة", cls: "" },
+        { k: "العامل", v: "عثمان", cls: "" },
+        { k: "الوردية المرتبطة", v: "06:05 — نشطة", cls: "" },
+        { k: "وقت التسجيل", v: "16:40", cls: "mono" },
+        { k: "حالة المزامنة", v: "تمت", cls: "" }
+      ],
+      supplyMeta: [
+        { k: "نوع الوقود", v: "بنزين", cls: "" },
+        { k: "العامل", v: "أحمد", cls: "" },
+        { k: "الوردية المرتبطة", v: "06:02 — مغلقة", cls: "" },
+        { k: "وقت التسجيل", v: "14:05", cls: "mono" }
+      ],
+      timelineOpen: [
+        tl("تم التسجيل", "18/09/2026 · 17:12", "n"),
+        tl("بانتظار المراجعة", "18/09/2026 · 17:13", "n")
+      ],
+      timelineFull: [
+        tl("تم التسجيل", "17:12", "n"),
+        tl("بانتظار المراجعة", "17:13", "n"),
+        tl("أُعيد للتصحيح", "17:30", "d"),
+        tl("تم التحديث من العامل", "17:52", "n"),
+        tl("بانتظار المراجعة", "17:53", "n"),
+        tl("تم الاعتماد", "10:23", "s")
+      ],
+      history: [
+        { icon: "#s-return", action: "أُعيد للتصحيح — المدير خالد", note: "السبب: صورة العداد غير واضحة", time: "17:30", ink: WARN },
+        { icon: "#s-check", action: "تم الاعتماد — المدير خالد", note: "بدون ملاحظات", time: "10:23", ink: OK }
+      ],
+      returnHistory: [
+        { icon: "#s-return", action: "أُعيد للتصحيح — المدير خالد", note: "السبب: صورة الإيصال غير واضحة", time: "10:28", ink: WARN },
+        { icon: "#s-clock", action: "بانتظار تحديث العامل", note: "يظهر للعامل داخل ورديته", time: "10:28", ink: "var(--text-2)" }
+      ],
+      stations: [
+        { name: "محطة الخرطوم — الشرق", meta: "3 بانتظار المراجعة · وردية نشطة", current: true, ...st.ok },
+        { name: "محطة الخرطوم — الجنوب", meta: "1 بانتظار المراجعة · وردية نشطة", current: false, ...st.neutral },
+        { name: "محطة بحري — المركز", meta: "لا عمليات معلقة · الوردية مغلقة", current: false, ...st.neutral }
+      ],
+      errors: [
+        { icon: "#s-alert", title: "تعذر تحميل التنبيهات", msg: "لم يُستجب من الخادم.", action: "إعادة المحاولة" },
+        { icon: "#s-alert", title: "تعذر تحميل قائمة المراجعة", msg: "انقطع الاتصال أثناء التحميل.", action: "إعادة المحاولة" },
+        { icon: "#s-close", title: "تعذر تنفيذ الاعتماد", msg: "لم يُسجَّل الاعتماد — الحالة لم تتغير.", action: "إعادة المحاولة" },
+        { icon: "#s-return", title: "تعذر إرسال الإرجاع", msg: "السبب محفوظ في الحقل ولم يُفقد.", action: "إعادة الإرسال" },
+        { icon: "#s-attach", title: "تعذر عرض المرفق", msg: "الملف غير متاح حالياً من الخادم.", action: "إعادة التحميل" },
+        { icon: "#s-sync", title: "تم تحديث السجل", msg: "نسخة أحدث على الخادم — لا كتابة فوقها.", action: "تحديث البيانات" },
+        { icon: "#s-lock", title: "غير مصرّح", msg: "لا تملك صلاحية هذا الإجراء على هذه المحطة.", action: "عرض فقط" },
+        { icon: "#s-clock", title: "انتهت الجلسة", msg: "انتهت المدة لأسباب أمنية.", action: "تسجيل الدخول" }
+      ],
+      flows: [
+        { title: "من التنبيه إلى الإجراء", steps: [
+          step("الرئيسية", "n", true), step("التنبيهات", "n", true), step("تفاصيل التنبيه", "n", true),
+          step("السجل المرتبط", "n", true), step("مراجعة القراءة", "n", true), step("اعتماد", "s", true),
+          step("تم الاعتماد", "s", true), step("العنصر التالي", "n", true), step("الرئيسية", "n", false)
+        ] },
+        { title: "مسار الإرجاع للتصحيح", steps: [
+          step("قائمة المراجعة", "n", true), step("مراجعة مصروف", "n", true), step("إرجاع للتصحيح", "d", true),
+          step("سبب مطلوب", "d", true), step("إرسال", "n", true), step("أُعيد للتصحيح", "d", true),
+          step("العامل يُحدِّث", "n", true), step("بانتظار المراجعة", "n", true), step("اعتماد", "s", false)
+        ] },
+        { title: "حالات الحجب", steps: [
+          step("دون اتصال", "d", true), step("الإجراء غير متاح + سبب", "d", true), step("محاولة الاتصال", "n", true),
+          step("تحديث السجل من الخادم", "n", true), step("بدون صلاحية → عرض فقط", "d", true), step("سجل الإجراءات", "n", false)
+        ] }
+      ],
+      components: [
+        { name: "NPAlertRow", use: "صف تنبيه: أيقونة · عنوان · وصف · محطة · وقت · حالة · مؤشر غير مقروء" },
+        { name: "NPAlertBadge", use: "عدّاد التنقل السفلي — من التنبيهات غير المقروءة القابلة للإجراء فقط" },
+        { name: "NPApprovalQueueItem", use: "عنصر قائمة مراجعة: نوع · عامل · قيمة · وقت · حالة" },
+        { name: "NPApprovalPanel", use: "status · primaryAction · secondaryAction · requiresNote · disabledReason — تُستخدم في القراءة والمصروف والتوريد" },
+        { name: "NPStatusTimeline", use: "مسار الحالة مع دعم دورات مراجعة متكررة" },
+        { name: "NPActionHistory", use: "سجل إجراءات المدير — للقراءة فقط مع السبب إن وُجد" },
+        { name: "NPRecordMeta", use: "بيانات السجل: العامل · المحطة · الوردية · الوقت · recordVersion" },
+        { name: "NPAttachmentViewer", use: "عرض الإيصال أو المرفق مع حالات فشل التحميل" },
+        { name: "NPReviewSummary", use: "ملخص القيم المراجَعة (مبلغ · كمية · فرق) بأرقام جدولية" },
+        { name: "NPBlockingReason", use: "معاد استخدامه من المرحلة الأولى — سبب المنع نصاً" },
+        { name: "NPManagerFilterBar", use: "شريط فلاتر/تبويبات أفقي للتنبيهات وقائمة المراجعة" }
+      ],
+      contract: [
+        { key: "alertType", rule: "shift · reading · expense · supply · sync · assignment · system" },
+        { key: "alertPriority", rule: "عاجل · تحتاج إجراء · معلوماتي — الأولوية تحدد الترتيب لا اللون وحده" },
+        { key: "reviewType", rule: "reading · expense · supply — نفس لوحة الاعتماد" },
+        { key: "reviewStatus", rule: "pending_review · needs_review · approved · returned_for_correction · completed" },
+        { key: "readingStatus", rule: "normal · needs_review · accepted · returned_for_correction" },
+        { key: "requiresAction", rule: "يحدد ظهور العنصر في «تحتاج إجراء» وفي عدّاد الشارة" },
+        { key: "requiresNote", rule: "true عند الإرجاع للتصحيح — الإرسال ممنوع بسبب فارغ" },
+        { key: "permissions", rule: "canReviewReading · canApproveExpense · canApproveSupply · canReturnForCorrection" },
+        { key: "activeStationId", rule: "كل شاشة تقرأ ضمن هذا النطاق — لا خلط بين المحطات ولا allStations" },
+        { key: "tenantId", rule: "نطاق أعلى من المحطة — كل البيانات والعلامة التجارية تابعة له" },
+        { key: "recordVersion", rule: "الخادم مرجع نهائي — نسخة أقدم تعرض «تم تحديث هذه العملية»" },
+        { key: "syncStatus", rule: "synced · sync_pending · error — الاعتماد لا يُطابَر محلياً دون عقد خادم" },
+        { key: "tenant.brand / theme / company", rule: "الاسم · الشعار · الألوان · الدعم — لا قيمة مثبّتة داخل مكوّن" }
+      ],
+      report: [
+        { label: "شاشات المرحلة الثانية", value: "18", ink: B },
+        { label: "مكوّنات (جديد + معاد)", value: "11", ink: B },
+        { label: "التنبيهات + التفاصيل", value: "PASS", ink: OK },
+        { label: "قائمة الاعتماد", value: "PASS", ink: OK },
+        { label: "مراجعة قراءة / مصروف / توريد", value: "PASS", ink: OK },
+        { label: "إرجاع للتصحيح + سبب إلزامي", value: "PASS", ink: OK },
+        { label: "سجل الإجراءات", value: "PASS", ink: OK },
+        { label: "مسار الحالة (دورات متكررة)", value: "PASS", ink: OK },
+        { label: "لوحة اعتماد واحدة", value: "PASS", ink: OK },
+        { label: "activeStationId في كل شاشة", value: "PASS", ink: OK },
+        { label: "إجراءات مبنية على الصلاحية", value: "PASS", ink: OK },
+        { label: "حجب الاعتماد دون اتصال", value: "PASS", ink: OK },
+        { label: "مرجعية الخادم (recordVersion)", value: "PASS", ink: OK },
+        { label: "White-label — لا اسم مثبّت", value: "PASS", ink: OK },
+        { label: "فاتح / داكن / تلقائي", value: "PASS", ink: OK },
+        { label: "RTL · LTR-ready", value: "PASS", ink: OK },
+        { label: "المهام · المستحقات", value: "0", ink: OK },
+        { label: "«ديزل» مثبّتة", value: "0", ink: OK },
+        { label: "مسارات مسدودة", value: "0", ink: OK },
+        { label: "أخطاء كونسول", value: "0", ink: OK }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="np-tokens.css">
+<script src="np-icons.js"></script>
+<style>
+html,body{margin:0;height:100%}
+.npauth input{border:0;outline:0;background:transparent;font:inherit;width:100%;min-width:0}
+.npauth input::placeholder{color:inherit;opacity:.72}
+.npauth a{text-decoration:none}
+</style>
+</helmet>
+<div class="npauth" dir="{{dir}}" data-locale="{{locale}}" data-theme-mode="{{theme}}" style="position:relative;width:100%;height:100%;min-height:100vh;overflow:hidden;display:flex;flex-direction:column;background:{{t.pageBg}};font-family:{{t.font}};color:{{t.ink}}">
+
+  <img src="assets/np-station-day.png" alt="" aria-hidden="true" style="position:absolute;inset-block:0;inset-inline-start:0;width:52%;height:100%;object-fit:cover;opacity:{{t.photoOpacity}};filter:{{t.photoFilter}};-webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.35) 26%,#000 72%);mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.35) 26%,#000 72%);pointer-events:none">
+  <div style="position:absolute;inset-block:0;inset-inline-start:0;width:52%;background:{{t.photoVeil}};pointer-events:none"></div>
+  <img src="assets/np-logo-symbol.png" alt="" aria-hidden="true" style="position:absolute;inset-inline-end:-120px;inset-block-start:88px;height:620px;width:auto;opacity:{{t.markOpacity}};pointer-events:none">
+
+  <div style="position:relative;display:flex;justify-content:flex-start;padding:26px 34px 0">
+    <button type="button" style="display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 15px;border:1px solid {{t.border}};border-radius:12px;background:{{t.chipBg}};font-family:inherit;font-size:13.5px;font-weight:600;color:{{t.brandInk}};cursor:pointer"><np-icon name="settings" size="18"></np-icon>{{s.lang}}<np-icon name="chevron-down" size="16"></np-icon></button>
+  </div>
+
+  <div style="position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:8px 24px 32px">
+    <img src="{{ logoSrc }}" alt="{{ logoAlt }}" style="height:78px;width:auto;display:block;filter:{{t.logoFilter}}">
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center">
+      <h1 style="margin:0;font-size:40px;line-height:52px;font-weight:700;color:{{t.brandInk}}">{{s.title}}</h1>
+      <p style="margin:0;font-size:17px;font-weight:600;color:{{t.ink}}">{{s.subtitle}}</p>
+      <p style="margin:0;font-size:14.5px;color:{{t.muted}}">{{s.desc}}</p>
+    </div>
+
+    <div style="box-sizing:border-box;width:540px;min-width:480px;max-width:min(560px,100%);background:{{t.card}};border:1px solid {{t.cardBorder}};border-radius:18px;box-shadow:{{t.cardShadow}};padding:30px 36px 34px;display:flex;flex-direction:column;gap:18px">
+      <label style="display:flex;flex-direction:column;gap:9px">
+        <span style="font-size:14px;font-weight:600;color:{{t.ink}}">{{s.emailLabel}}</span>
+        <span style="display:flex;align-items:center;gap:12px;height:52px;padding:0 16px;border:1px solid {{t.fieldBorder}};border-radius:12px;background:{{t.field}};color:{{t.muted}}"><np-icon name="attachment" size="19"></np-icon><input placeholder="{{s.emailPlaceholder}}" style="font-size:14.5px;color:{{t.ink}}"></span>
+      </label>
+      <label style="display:flex;flex-direction:column;gap:9px">
+        <span style="font-size:14px;font-weight:600;color:{{t.ink}}">{{s.passLabel}}</span>
+        <span style="display:flex;align-items:center;gap:12px;height:52px;padding:0 16px;border:1px solid {{t.fieldBorder}};border-radius:12px;background:{{t.field}};color:{{t.muted}}"><np-icon name="certificate" size="19"></np-icon><input type="password" placeholder="{{s.passPlaceholder}}" style="font-size:14.5px;color:{{t.ink}}"><np-icon name="eye" size="19"></np-icon></span>
+      </label>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+        <label style="display:flex;align-items:center;gap:9px;font-size:13.5px;color:{{t.muted}}"><input type="checkbox" style="width:17px;height:17px;accent-color:var(--np-action-primary)">{{s.remember}}</label>
+        <a href="#" style="display:inline-flex;align-items:center;min-height:48px;padding-block:0;font-size:13.5px;font-weight:600;color:{{t.link}}">{{s.forgot}}</a>
+      </div>
+      <button type="button" onClick="{{onSubmit}}" style="display:flex;align-items:center;justify-content:center;gap:12px;height:54px;border:0;border-radius:12px;background:{{t.cta}};color:#fff;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:{{t.ctaShadow}}">{{s.cta}}<np-icon name="arrow-in" size="20"></np-icon></button>
+    </div>
+  </div>
+
+  <div style="position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:0 34px 26px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:14px;font-size:13.5px;font-weight:600;color:{{t.footInk}};flex-wrap:wrap">
+      <a href="#" style="display:inline-flex;align-items:center;min-height:48px;color:{{t.footInk}}">{{s.privacy}}</a><span style="color:{{t.sepStrong}}">|</span>
+      <a href="#" style="display:inline-flex;align-items:center;min-height:48px;color:{{t.footInk}}">{{s.terms}}</a><span style="color:{{t.sepStrong}}">|</span>
+      <a href="#" style="display:inline-flex;align-items:center;min-height:48px;color:{{t.footInk}}">{{s.support}}</a>
+    </div>
+    <span style="font-size:13px;font-weight:500;color:{{t.footMuted}};font-family:Inter,sans-serif">{{s.copyright}}</span>
+  </div>
+
+  <div style="position:absolute;inset-inline-end:52px;inset-block-end:118px;display:flex;flex-direction:column;gap:6px;pointer-events:none">
+    <b style="font-size:30px;line-height:42px;font-weight:700;color:{{t.brandInk}}">{{s.tagline1}}</b>
+    <b style="font-size:30px;line-height:42px;font-weight:700;color:{{t.brandInk}}">{{s.tagline2}}</b>
+    <span style="width:58px;height:4px;border-radius:999px;background:var(--np-action-primary);margin-top:6px"></span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;locale&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ar&quot;,&quot;en&quot;],&quot;default&quot;:&quot;ar&quot;,&quot;tsType&quot;:&quot;\&quot;ar\&quot;|\&quot;en\&quot;&quot;,&quot;section&quot;:&quot;Localization&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;\&quot;light\&quot;|\&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;appName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Nile Petro&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tenant brand&quot;},&quot;appNameAr&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;نايل بترو&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tenant brand&quot;},&quot;logoSrc&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;assets/np-logo-master.png&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tenant brand&quot;},&quot;logoDark&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;assets/np-logo-master.png&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tenant brand&quot;},&quot;logoAlt&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Nile Petro&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tenant brand&quot;},&quot;copyrightYear&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;2025&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tenant brand&quot;},&quot;onSubmit&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(e: Event) =&gt; void&quot;}}">
+/* NPAuthLogin — ONE canonical console-login component.
+   Four delivered variants come from two props only (locale × theme); the
+   layout, proportions, spacing, card/field/button/logo sizes and the
+   illustration + watermark placement are identical in all four.
+   Dark mode is a token swap, never a second design.
+
+   Reported Foundation gap: np-tokens.css defines the light scheme only —
+   there is no dark scheme token set and no `lock` / `mail` / `fingerprint`
+   icon. The dark palette below uses the owner-supplied values verbatim and
+   is scoped to this component until a dark token set is approved. */
+class Component extends DCLogic {
+  /* NP-WO-CD-09 §5 — brand identity is TENANT DATA, not component source.
+     appName / appNameAr / logoSrc arrive as props; the Nile Petro values below
+     are the DEFAULT TENANT SAMPLE only. */
+  brand() {
+    const appName = this.props.appName ?? "Nile Petro";
+    return { appName, appNameAr: this.props.appNameAr ?? appName, year: this.props.copyrightYear ?? "2025" };
+  }
+  strings() {
+    const b = this.brand();
+    const ar = {
+      lang: "العربية",
+      title: "تسجيل الدخول",
+      subtitle: "مرحباً بك في منصة " + b.appNameAr,
+      desc: "إدارة أسهل .. لعمليات أكثر كفاءة",
+      emailLabel: "البريد الإلكتروني", emailPlaceholder: "أدخل بريدك الإلكتروني",
+      passLabel: "كلمة المرور", passPlaceholder: "أدخل كلمة المرور",
+      remember: "تذكرني في هذا الجهاز", forgot: "نسيت كلمة المرور؟",
+      cta: "تسجيل الدخول",
+      privacy: "سياسة الخصوصية", terms: "شروط الاستخدام", support: "الدعم الفني",
+      copyright: b.appName + " © " + b.year + " جميع الحقوق محفوظة",
+      tagline1: "معاً نحو", tagline2: "طاقة أفضل"
+    };
+    const en = {
+      lang: "English",
+      title: "Sign In",
+      subtitle: "Welcome to " + b.appName + " Platform",
+      desc: "Easier management. More efficient operations.",
+      emailLabel: "Email Address", emailPlaceholder: "Enter your email address",
+      passLabel: "Password", passPlaceholder: "Enter your password",
+      remember: "Remember me on this device", forgot: "Forgot password?",
+      cta: "Sign In",
+      privacy: "Privacy Policy", terms: "Terms of Use", support: "Technical Support",
+      copyright: b.appName + " © " + b.year + " All rights reserved",
+      tagline1: "Together for", tagline2: "a Better Energy"
+    };
+    return (this.props.locale ?? "ar") === "en" ? en : ar;
+  }
+  tokens(dark) {
+    const light = {
+      pageBg: "linear-gradient(180deg,#FFFFFF 0%,#F4F8FE 55%,#EAF2FD 100%)",
+      /* NP-MR-001 P3 · F-P2-01 — the light muted tint measured 2.63:1 behind the tagline and the
+         remember-me label; both are informative text. Repointed to canonical tokens. */
+      ink: "var(--np-text-primary)", muted: "var(--np-color-slate)", brandInk: "var(--np-color-blue-deep)",
+      link: "var(--np-action-primary)", sep: "#CBD6E2",
+      border: "var(--np-border)", chipBg: "rgba(255,255,255,.88)",
+      card: "#FFFFFF", cardBorder: "rgba(38,67,120,.08)",
+      cardShadow: "0 18px 44px rgba(26,35,126,.08)",
+      field: "#FCFDFF", fieldBorder: "#E3EAF3",
+      /* Owner visual polish: the footer legal links and the copyright now
+         carry identity blue instead of the pale grey that read as washed out
+         on the light ground. */
+      footInk: "var(--np-color-blue-deep)", footMuted: "var(--np-color-slate)", sepStrong: "color-mix(in srgb, var(--np-color-blue-deep) 28%, transparent)",
+      cta: "linear-gradient(180deg,#2F6BFF 0%,#1E52E0 100%)",
+      ctaShadow: "0 10px 22px rgba(41,98,255,.26)",
+      photoOpacity: ".5", photoFilter: "none", photoVeil: "transparent",
+      markOpacity: ".05", logoFilter: "none"
+    };
+    const night = {
+      /* CC-015 — brand-tinted dark. No literal dark value lives here any
+         more: every surface reads the scheme tokens, so the login follows
+         the tenant's own deep brand colour instead of a Nile-Petro navy. */
+      pageBg: "linear-gradient(180deg,var(--np-dark-canvas) 0%,var(--np-dark-surface) 58%,var(--np-dark-raised) 100%)",
+      ink: "var(--np-dark-text)", muted: "var(--np-dark-text-2)", brandInk: "var(--np-dark-text)",
+      link: "color-mix(in srgb, var(--np-action-primary) 55%, var(--np-color-white))", sep: "color-mix(in srgb, var(--np-color-silver) 40%, transparent)",
+      border: "color-mix(in srgb, var(--np-color-silver) 22%, transparent)", chipBg: "color-mix(in srgb, var(--np-dark-raised) 78%, transparent)",
+      card: "var(--np-dark-surface)", cardBorder: "color-mix(in srgb, var(--np-color-silver) 22%, transparent)",
+      cardShadow: "0 22px 54px color-mix(in srgb, var(--np-dark-canvas) 62%, transparent)",
+      field: "var(--np-dark-raised)", fieldBorder: "color-mix(in srgb, var(--np-color-silver) 26%, transparent)",
+      footInk: "var(--np-dark-text)", footMuted: "var(--np-dark-text-2)", sepStrong: "color-mix(in srgb, var(--np-color-silver) 42%, transparent)",
+      cta: "linear-gradient(180deg,#3A78FF 0%,#1E52E0 100%)",
+      ctaShadow: "0 12px 26px rgba(41,98,255,.42)",
+      photoOpacity: ".62", photoFilter: "saturate(1.08) contrast(1.12) brightness(.72)",
+      photoVeil: "linear-gradient(90deg,color-mix(in srgb, var(--np-dark-canvas) 58%, transparent) 0%,color-mix(in srgb, var(--np-dark-canvas) 18%, transparent) 70%)",
+      markOpacity: ".08", logoFilter: "drop-shadow(0 0 22px rgba(41,98,255,.35))"
+    };
+    return dark ? night : light;
+  }
+  renderVals() {
+    const locale = this.props.locale ?? "ar";
+    const theme = this.props.theme ?? "light";
+    const b = this.brand();
+    return {
+      locale, theme,
+      logoSrc: this.props.logoSrc ?? (theme === "dark" ? (this.props.logoDark ?? "assets/np-logo-master.png") : "assets/np-logo-master.png"),
+      logoAlt: this.props.logoAlt ?? b.appName,
+      dir: locale === "en" ? "ltr" : "rtl",
+      s: this.strings(),
+      t: Object.assign(this.tokens(theme === "dark"), {
+        font: locale === "en"
+          ? "Inter, system-ui, sans-serif"
+          : "'Noto Sans Arabic', 'Noto Sans Arabic', system-ui, sans-serif"
+      }),
+      onSubmit: this.props.onSubmit ?? ((e) => { if (e && e.preventDefault) e.preventDefault(); })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="np-tokens.css">
+<script src="np-icons.js"></script>
+<style>html,body{margin:0;background:#EEF2F8}</style>
+</helmet>
+
+<div dir="rtl" style="padding:26px 40px 0;display:flex;flex-direction:column;gap:10px;font-family:'Noto Sans Arabic',system-ui,sans-serif;background:#F6F7FB">
+<div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#E8F4FD;border:1px solid #BEDCF2;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#01579B">10 · Prototype Flows</span>
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#E8F5EC;border:1px solid #BEDFC9;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#0B6B3A">13 مساراً · نهايات مسدودة 0</span>
+<span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#37474F">مخططات غير مكرّرة</span>
+</div>
+<p style="margin:0;font:400 13px/21px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:940px">المسارات القانونية: المصادقة · وردية العامل · تصحيح القراءة · المصروف · التوريد · موافقة المدير · تعيين المسدسات · إغلاق وردية المحطة · المخزون · الأجهزة · التقارير · الحساب · المسار العابر للتطبيقات. كل مسار يحفظ أسماء الشاشات ونقطة الدخول والمخرج ومسار التعافي من الخطأ والانقطاع. المسار العابر الكامل والموافقة/التصحيح معروضان أيضاً في <a href="12 · QA and Final Audit.dc.html" style="color:#2962FF;text-decoration:none">12 · QA → 05 End-to-End</a> كدليل تدقيق لا كنسخة ثانية.</p>
+<div style="height:1px;background:#DDE4EE;margin-top:6px"></div>
+</div>
+<div dir="rtl" style="padding:44px;display:flex;flex-direction:column;gap:34px;font-family:'Noto Sans Arabic',system-ui,sans-serif;color:#37474F;background:#EEF2F8">
+
+  <header style="display:flex;flex-direction:column;gap:11px;max-width:1180px">
+    <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:7px;background:#1A237E;color:#fff;font-family:Inter,sans-serif;font-size:11px;font-weight:700">NP-WO-CD-06 · PHASE 1 · OWNER REVIEW</span>
+    <h1 style="margin:0;font-size:31px;font-weight:700;color:#1A237E">00 · رحلات مستخدم نايل بترو</h1>
+    <p style="margin:0;font-size:14.5px;line-height:26px;color:#546E7A;text-wrap:pretty">توثيق الرحلة الكاملة لثلاث منظومات: كونسول الويب، تطبيق العامل، تطبيق المدير. لكل عقدة: المُشغِّل، الإجراء الأساسي، الشاشة التالية، المسار البديل، مسار الخطأ، والصلاحية المطلوبة. هذه مرحلة توثيق — لا إعادة تصميم للويب ولا إضافة وحدات.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;padding-top:4px">
+      <sc-for list="{{legend}}" as="l" hint-placeholder-count="6">
+        <span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border:1px solid {{l.bd}};border-radius:{{l.radius}};background:{{l.bg}};font-size:12px;font-weight:600;color:{{l.ink}}"><np-icon name="{{l.icon}}" size="13"></np-icon>{{l.label}}</span>
+      </sc-for>
+    </div>
+  </header>
+
+  <sc-for list="{{sections}}" as="sec" hint-placeholder-count="6">
+    <section style="display:flex;flex-direction:column;gap:16px;padding:26px;background:#fff;border:1px solid #DDE4EE;border-radius:18px">
+      <div style="display:flex;align-items:flex-start;gap:13px;border-bottom:1px solid #E8EDF3;padding-bottom:14px">
+        <span style="width:38px;height:38px;flex:none;border-radius:11px;background:#1A237E;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Inter,sans-serif;font-size:16px;font-weight:700">{{sec.key}}</span>
+        <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+          <h2 style="margin:0;font-size:20px;font-weight:700;color:#1A237E">{{sec.title}}</h2>
+          <span style="font-size:12.5px;line-height:21px;color:#607D8B;text-wrap:pretty">{{sec.desc}}</span>
+        </span>
+        <span style="flex:none;display:inline-flex;align-items:center;gap:7px;height:27px;padding:0 11px;border-radius:8px;background:#F1F5FB;border:1px solid #DDE4EE;font-family:Inter,sans-serif;font-size:11px;font-weight:700;color:#1A237E">{{sec.tag}}</span>
+      </div>
+
+      <sc-for list="{{sec.lanes}}" as="lane" hint-placeholder-count="2">
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <span style="width:7px;height:20px;border-radius:3px;background:#2962FF"></span>
+            <b style="font-size:14.5px;color:#263238">{{lane.title}}</b>
+            <span style="font-family:Inter,sans-serif;font-size:11px;color:#78909C">{{lane.meta}}</span>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:9px;padding:14px;border:1px dashed #D4DDEA;border-radius:13px;background:#FBFCFE">
+            <sc-for list="{{lane.nodes}}" as="n" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;gap:9px">
+                <div style="width:{{n.w}};min-height:70px;box-sizing:border-box;display:flex;flex-direction:column;gap:3px;padding:10px 12px;border:1.5px solid {{n.bd}};border-radius:{{n.radius}};background:{{n.bg}}">
+                  <span style="display:flex;align-items:center;gap:6px;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:{{n.ink}};font-family:Inter,sans-serif;text-transform:uppercase"><np-icon name="{{n.icon}}" size="11"></np-icon>{{n.kind}}</span>
+                  <b style="font-size:12.5px;line-height:18px;color:#1F2A37;text-wrap:pretty">{{n.label}}</b>
+                  <span style="font-size:10.5px;line-height:16px;color:#607D8B;text-wrap:pretty">{{n.meta}}</span>
+                  <sc-if value="{{n.hasPerm}}" hint-placeholder-val="{{ false }}">
+                    <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:5px;height:19px;padding:0 7px;border-radius:5px;background:#EDE7F6;color:#4527A0;font-size:9.5px;font-weight:700">{{n.perm}}</span>
+                  </sc-if>
+                </div>
+                <sc-if value="{{n.hasNext}}" hint-placeholder-val="{{ true }}">
+                  <span style="flex:none;color:#90A4AE;transform:scaleX(-1)"><np-icon name="forward" size="16"></np-icon></span>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+          <sc-if value="{{lane.hasBranches}}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px">
+              <sc-for list="{{lane.branches}}" as="b" hint-placeholder-count="3">
+                <div style="display:flex;gap:9px;padding:11px 12px;border:1px solid {{b.bd}};border-radius:11px;background:{{b.bg}}">
+                  <span style="width:24px;height:24px;flex:none;border-radius:7px;background:#fff;border:1px solid {{b.bd}};color:{{b.ink}};display:flex;align-items:center;justify-content:center"><np-icon name="{{b.icon}}" size="12"></np-icon></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <b style="font-size:11.5px;color:#1F2A37">{{b.label}}</b>
+                    <span style="font-size:10.5px;line-height:16px;color:#607D8B;text-wrap:pretty">{{b.meta}}</span>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+
+      <sc-if value="{{sec.hasGrid}}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:10px">
+          <sc-for list="{{sec.grid}}" as="g" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:4px;padding:13px;border:1px solid #E0E6ED;border-radius:12px;background:#FBFCFE">
+              <b style="font-size:12.5px;color:#1A237E">{{g.title}}</b>
+              <span style="font-size:11px;line-height:18px;color:#607D8B;text-wrap:pretty">{{g.body}}</span>
+              <span style="font-family:Inter,sans-serif;font-size:10px;color:#2962FF">{{g.note}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </section>
+  </sc-for>
+
+  <section style="display:flex;flex-direction:column;gap:13px;padding:24px;background:#1A237E;border-radius:18px;color:#fff;max-width:1180px">
+    <b style="font-size:17px">تقرير المرحلة الأولى</b>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:9px">
+      <sc-for list="{{report}}" as="r" hint-placeholder-count="8">
+        <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.08)">
+          <span style="font-size:11.5px;color:#C5CFF5">{{r.label}}</span>
+          <b style="font-family:Inter,sans-serif;font-size:12.5px;color:#fff">{{r.value}}</b>
+        </span>
+      </sc-for>
+    </div>
+    <span style="font-size:11.5px;line-height:20px;color:#C5CFF5;text-wrap:pretty">لا تبدأ إنتاج شاشات تطبيق العامل قبل اعتماد هذه المرحلة. NP-WO-CD-05 يبقى مُغلقاً ولم يُفتح.</span>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+/* 00 · Nile Petro User Flows — NP-WO-CD-06 Phase 1.
+   Documentation surface only: it links existing screens, states and
+   permission boundaries. No web page was modified, no module invented,
+   no Tasks / مستحقات, no Sign Up, no ديزل. */
+class Component extends DCLogic {
+  kinds() {
+    return {
+      trigger: { kind: "TRIGGER", icon: "forward", bg: "#F3F6FB", bd: "#C7D3E6", ink: "#455A64", radius: "22px" },
+      screen:  { kind: "SCREEN",  icon: "device",  bg: "#FFFFFF", bd: "#2962FF", ink: "#1A237E", radius: "10px" },
+      decision:{ kind: "DECISION",icon: "filter",  bg: "#FFF8EE", bd: "#F0A64A", ink: "#8D4E00", radius: "10px 22px 10px 22px" },
+      system:  { kind: "SYSTEM",  icon: "refresh", bg: "#F4F1FB", bd: "#8E7CC3", ink: "#4527A0", radius: "10px" },
+      success: { kind: "SUCCESS", icon: "check",   bg: "#EFF8F2", bd: "#4CAF7D", ink: "#1B7F4D", radius: "10px" },
+      error:   { kind: "ERROR",   icon: "alert",   bg: "#FDF1F1", bd: "#E4736F", ink: "#B3261E", radius: "10px" },
+      state:   { kind: "STATE",   icon: "info",    bg: "#F1F5FB", bd: "#B9C7DD", ink: "#37474F", radius: "10px" }
+    };
+  }
+  /* n(kind, label, meta, perm, last) */
+  node(k, label, meta, perm, last) {
+    const base = this.kinds()[k];
+    return Object.assign({}, base, {
+      label, meta: meta || "", perm: perm || "",
+      hasPerm: !!perm, hasNext: !last,
+      w: k === "trigger" ? "190px" : "218px"
+    });
+  }
+  lane(title, meta, nodes, branches) {
+    const n = nodes.map((a, i) => this.node(a[0], a[1], a[2], a[3], i === nodes.length - 1));
+    const b = (branches || []).map((x) => {
+      const t = this.kinds()[x[0]];
+      return { label: x[1], meta: x[2], icon: t.icon, bg: t.bg, bd: t.bd, ink: t.ink };
+    });
+    return { title, meta, nodes: n, branches: b, hasBranches: b.length > 0 };
+  }
+  renderVals() {
+    const L = (t, m, n, b) => this.lane(t, m, n, b);
+    return {
+      legend: Object.keys(this.kinds()).map((k) => {
+        const v = this.kinds()[k];
+        return { label: { trigger: "مُشغِّل خارجي", screen: "شاشة", decision: "قرار", system: "إجراء نظام", success: "نجاح", error: "خطأ", state: "حالة" }[k], icon: v.icon, bg: v.bg, bd: v.bd, ink: v.ink, radius: v.radius };
+      }),
+      sections: [
+        {
+          key: "A", tag: "GLOBAL", title: "أ · المصادقة العامة ودورة حياة الحساب",
+          desc: "نايل بترو نظام داخلي: لا تسجيل ذاتي ولا إنشاء حساب من شاشة الدخول. الحسابات تُنشأ من الإدارة، ثم يحصل المستخدم على بيانات الدخول.",
+          lanes: [
+            L("دورة حياة الحساب", "Admin → User", [
+              ["trigger", "الإدارة تُنشئ الحساب", "من كونسول الويب — صلاحية إدارة المستخدمين", "USER-ADMIN"],
+              ["system", "تسليم بيانات الدخول", "بريد للويب · رمز عامل للجوال"],
+              ["screen", "المستخدم يسجّل الدخول", "بريد + كلمة مرور (ويب) · رمز العامل + رمز الدخول الشخصي (جوال)"],
+              ["system", "النظام يحلّ الدور والصلاحيات", "الدور + الصلاحيات + نطاق المحطة + النطاق التشغيلي"],
+              ["success", "الدخول إلى التجربة المصرّح بها", "التنقل يُبنى من الصلاحيات فقط", "", true]
+            ], [
+              ["error", "لا يوجد Sign Up", "لا توجد شاشة إنشاء حساب في أي منصة — مُتحقَّق منه: 0"],
+              ["state", "حساب موقوف", "حالة «الوصول محجوب» — لا يُسمح بالمتابعة"],
+              ["state", "انتهاء الجلسة", "حالة «انتهت الجلسة» ثم العودة إلى الدخول"]
+            ])
+          ],
+          hasGrid: false, grid: []
+        },
+        {
+          key: "B", tag: "WEB CONSOLE", title: "ب · رحلة كونسول الويب",
+          desc: "الدخول المعتمد W01 ببريد وكلمة مرور — رمز العامل لا يُستخدم في الويب. ثم لوحة العرض والتنقل حسب الصلاحية.",
+          lanes: [
+            L("الدخول والتحقق", "W01 → Dashboard", [
+              ["trigger", "فتح الويب", "اختيار اللغة عند الحاجة — العربية / English"],
+              ["screen", "شاشة الدخول W01", "البريد الإلكتروني + كلمة المرور + تذكرني"],
+              ["system", "التحقق من بيانات الدخول", "قرار مركزي من الخادم"],
+              ["decision", "هل يلزم رمز تحقق؟", "سياسة OTP مركزية وليست خياراً للمستخدم"],
+              ["screen", "التحقق برمز OTP", "يُعرض فقط عند طلب السياسة"],
+              ["success", "لوحة العرض", "الرئيسية المصرّح بها", "", true]
+            ], [
+              ["error", "بيانات غير صحيحة", "خطأ داخل الشاشة — البقاء في الدخول دون مسار مسدود"],
+              ["error", "حساب موقوف", "حالة «الوصول محجوب» مع مسار التواصل مع الدعم"],
+              ["error", "لا توجد صلاحية", "حالة 403 «غير مصرّح» بدل صفحة فارغة"],
+              ["state", "انتهت الجلسة", "إعادة إلى الدخول مع حفظ المسار المطلوب"]
+            ]),
+            L("الرحلة الرئيسية", "16 مساراً منفّذاً", [
+              ["screen", "لوحة العرض", "مؤشرات ومسارات سريعة"],
+              ["screen", "التنقل الجانبي", "يُعرض حسب الصلاحية — لا يرى كل مستخدم كل الأقسام", "ROLE-SCOPED"],
+              ["screen", "الوحدة المصرّح بها", "الورديات · التصاديق · المصروفات · الجهات · التقارير · المخزون · الأسعار · العمال · الأجهزة · الدعم · الإعدادات"],
+              ["screen", "قائمة / نظرة عامة", "جدول قابل للتوسّع + أدوات تصفية"],
+              ["screen", "فتح سجل أو بدء إجراء", "تفاصيل في Drawer · إجراء قصير في Modal"],
+              ["decision", "مراجعة قبل التأكيد", "مطلوبة في الإجراءات المالية والتسعير"],
+              ["system", "حفظ / إرسال / تصديق", "حسب الصلاحية", "APPROVE"],
+              ["success", "نجاح ثم العودة للوحدة", "أو المتابعة إلى العنصر التالي", "", true]
+            ]),
+            L("رحلة الحساب والخروج", "قائمة المستخدم = بندان", [
+              ["screen", "قائمة المستخدم", "حسابي + تسجيل الخروج فقط — لا بند مستقل للأمان"],
+              ["screen", "حسابي", "الملف الشخصي والهوية وحالة الحساب"],
+              ["screen", "الأمان وتسجيل الدخول", "كلمة المرور · رمز التحقق · البصمة إن كانت مدعومة"],
+              ["screen", "الأجهزة والجلسات", "هذا الجهاز · الأجهزة الموثوقة · آخر نشاط"],
+              ["system", "تسجيل الخروج", "إنهاء جلسة المتصفح"],
+              ["success", "العودة إلى شاشة الدخول", "دون أي مسار مسدود", "", true]
+            ])
+          ],
+          hasGrid: false, grid: []
+        },
+        {
+          key: "C", tag: "WORKER APP", title: "ج · رحلة تطبيق العامل",
+          desc: "تطبيق ميداني هدفه تشغيل الوردية: لا مهام ولا مستحقات. أنواع الوقود بنزين و جاز فقط.",
+          lanes: [
+            L("أول دخول", "First-time login", [
+              ["trigger", "فتح تطبيق العامل", "Splash ثم الدخول"],
+              ["screen", "الدخول", "رمز العامل + رمز الدخول الشخصي — على جهاز محطة معتمد"],
+              ["decision", "جهاز موثوق مخصّص؟", "workerBiometricAllowed من الخادم — الواجهة لا تستنتج نوع الجهاز"],
+              ["success", "رئيسية العامل", "بدء وردية · قراءة العدادات · مصروف · توريد", "", true]
+            ], [
+              ["state", "عرض تفعيل البصمة (04b)", "اختياري بعد نجاح الهوية — تفعيل الآن أو ليس الآن، ولا تسجيل تلقائي"],
+              ["state", "جهاز محطة مشترك", "workerBiometricAllowed = false — لا زر بصمة ولا تفعيل ولا تفضيل"],
+              ["state", "تحقق استثنائي (OTP)", "تسجيل جهاز جديد · استرداد وصول · إجراء أمني استثنائي — خارج المسار اليومي"],
+              ["error", "جهاز غير معتمد", "لا يمكن تسجيل أي وردية قبل موافقة الإدارة على الجهاز"]
+            ]),
+            L("الدخول المتكرر", "Returning login", [
+              ["trigger", "فتح التطبيق", "جهاز معتمد"],
+              ["decision", "البصمة متاحة ومفعّلة؟", "سياسة الخادم + جهاز موثوق + تسجيل في نطام الجهاز"],
+              ["screen", "الدخول بالبصمة (04c)", "موجه نطام الجهاز — و«الدخول برمز الدخول» متاح دائماً"],
+              ["success", "رئيسية العامل", "", "", true]
+            ], [
+              ["state", "غير متاحة / غير مفعّلة", "لا يُعرض زر بصمة معطّل — مباشرة إلى رمز الدخول الشخصي"],
+              ["error", "فشل أو إلغاء أو قفل النطام", "عودة آمنة للدخول مع «استخدام رمز الدخول» — لا عدّاد محاولات داخل التطبيق"],
+              ["state", "سحب الجهاز أو إبطال المفتاح", "تتوقف البصمة — استرداد برمز الدخول + تحقق استثنائي عند اللزوم"]
+            ]),
+            L("بدء الوردية", "Start shift", [
+              ["screen", "رئيسية العامل", "لا توجد وردية مفتوحة"],
+              ["decision", "تأكيد بدء الوردية", "المحطة والوقت والمسدسات المهيّأة"],
+              ["screen", "قراءات البداية", "اختيار المسدس بالترتيب المعروض من تهيئة الويب"],
+              ["screen", "إدخال القراءة", "قراءة لكل مسدس على حدة — بنزين / جاز"],
+              ["screen", "صورة العداد", "عند طلب القاعدة المعتمدة"],
+              ["decision", "كل القراءات المطلوبة مكتملة؟", "لا يمكن البدء قبل استيفاء القاعدة"],
+              ["success", "الوردية نشطة", "", "", true]
+            ], [
+              ["error", "قراءة ناقصة", "منع الإكمال مع إبراز المسدس الناقص بالنص والأيقونة"],
+              ["error", "قراءة غير منطقية", "العداد يتناقص — التحقق من الاتجاه قبل الحفظ"],
+              ["state", "حفظ محلي", "بانتظار المزامنة عند انقطاع الشبكة"]
+            ]),
+            L("قراءة العدادات", "Meter reading", [
+              ["screen", "الوردية النشطة", "قراءة العدادات"],
+              ["screen", "اختيار المسدس", "هوية المسدس أولاً ثم نوع الوقود"],
+              ["screen", "إدخال القراءة", "تُسجَّل باسم المسدس ولا تُدمج مع مسدس آخر لنفس المنتج"],
+              ["screen", "مرفق / صورة", "عند الطلب"],
+              ["system", "تحقق ثم حفظ", "اللترات المبيعة تُشتق في طبقة الأعمال: البداية − النهاية"],
+              ["success", "عودة إلى الوردية", "", "", true]
+            ], [
+              ["state", "حالات الحقل", "فارغ · تركيز · ممتلئ · خطأ تحقق · صورة مطلوبة"],
+              ["state", "حالات الحفظ", "جارٍ الحفظ · محفوظ · محفوظ محلياً · بانتظار المزامنة"],
+              ["error", "فشل المزامنة", "إعادة المحاولة مع بقاء البيانات محلياً"]
+            ]),
+            L("المصروف والتوريد", "Expense · Supply", [
+              ["screen", "الوردية النشطة", ""],
+              ["screen", "تسجيل مصروف", "النوع · المبلغ · الوصف · المرفق"],
+              ["screen", "تسجيل توريد", "بنزين / جاز · الكمية · تفاصيل التوريد · المرفق"],
+              ["decision", "مراجعة قبل التأكيد", "عرض القيم قبل الإرسال"],
+              ["system", "إرسال", "قد يتطلب اعتماد المدير"],
+              ["success", "نجاح ثم عودة للوردية", "بانتظار الاعتماد إن كانت القاعدة تطلبه", "", true]
+            ], [
+              ["state", "بانتظار الاعتماد", "المصروف يُرسل إلى صف اعتماد المدير"],
+              ["error", "حقل ناقص", "منع الإرسال مع نص الخطأ داخل الحقل"],
+              ["state", "بلاغ — مستقبلي", "شاشة البلاغات لم تُعتمد بعد: موثقة في الرحلة كاختيارية ولم تُبنَ"]
+            ]),
+            L("إغلاق الوردية", "Close shift", [
+              ["screen", "الوردية النشطة", "إنهاء الوردية"],
+              ["screen", "قراءات الإغلاق", "لكل مسدس معيَّن: رقم العداد + اللترات المتبقية + صورة العداد — الثلاثة إلزامية"],
+              ["decision", "قائمة التحقق (16b)", "زر التأكيد معطّل حتى يكتمل كل مسدس ويصفر طابور المزامنة"],
+              ["decision", "تحقق من كل القراءات المطلوبة", ""],
+              ["screen", "ملخص الوردية", "القراءات · المصروفات · التوريدات · البلاغات إن وُجدت"],
+              ["decision", "تأكيد التسليم والإغلاق", ""],
+              ["system", "جارٍ الإرسال", "الإغلاق متصل فقط — الطابور لا يعني الإغلاق"],
+              ["success", "أُغلقت الوردية", "بتأكيد الخادم وحده — الرئيسية تعود إلى: لا توجد وردية مفتوحة", "", true]
+            ]),
+            L("العمل دون اتصال", "Offline first", [
+              ["trigger", "انقطاع الشبكة", "حالة أساسية في الميدان"],
+              ["state", "حالة عدم الاتصال", "تُعرض بنص وأيقونة في أعلى التطبيق"],
+              ["decision", "هل العملية مدعومة دون اتصال؟", "العمليات غير المدعومة تُحجب بوضوح"],
+              ["system", "حفظ محلي", "وسم: بانتظار المزامنة"],
+              ["system", "عودة الشبكة ثم المزامنة", "تلقائية أو يدوية"],
+              ["success", "نجحت المزامنة", "فشل → إعادة المحاولة دون فقدان البيانات", "", true]
+            ], [
+              ["error", "عملية غير مدعومة", "تُحجب مع سبب واضح — لا وعد بعمل كل شيء دون اتصال"],
+              ["error", "فشل المزامنة", "إعادة المحاولة · البيانات تبقى محلية"]
+            ]),
+            L("الملف الشخصي", "Worker profile", [
+              ["screen", "الحساب", "من التنقل السفلي"],
+              ["screen", "الملف الشخصي", "المعلومات الشخصية"],
+              ["screen", "الأمان وتسجيل الدخول", "رمز الدخول الشخصي · الأجهزة والجلسات — بلا كلمة مرور وبلا مفتاح OTP للعامل"],
+              ["screen", "اللغة والدعم", ""],
+              ["system", "تسجيل الخروج", ""],
+              ["success", "العودة إلى الدخول", "", "", true]
+            ])
+          ],
+          hasGrid: false, grid: []
+        },
+        {
+          key: "D", tag: "MANAGER APP", title: "د · رحلة تطبيق المدير",
+          desc: "ليس نسخة من الكونسول: متابعة سريعة وتنبيهات وحالات عاجلة واعتمادات. لا مهام.",
+          lanes: [
+            L("المصادقة", "Login", [
+              ["trigger", "فتح تطبيق المدير", ""],
+              ["screen", "الدخول", "بيانات الدخول"],
+              ["screen", "رمز التحقق OTP", ""],
+              ["decision", "أول دخول؟", "نعم → تفعيل البصمة · لا → مصادقة بيومترية"],
+              ["success", "رئيسية المدير", "", "", true]
+            ], [
+              ["state", "الدخول المتكرر", "بصمة ← الرئيسية مع بديل الدخول العادي"],
+              ["error", "فشل المصادقة", "البقاء في الدخول مع رسالة واضحة"]
+            ]),
+            L("الرئيسية", "ما يحتاج انتباهي الآن؟", [
+              ["screen", "رئيسية المدير", "أقسام حسب الصلاحية", "ROLE-SCOPED"],
+              ["screen", "الورديات النشطة وبانتظار الإغلاق", ""],
+              ["screen", "قراءات غير طبيعية وفروقات", ""],
+              ["screen", "مصروفات بانتظار الاعتماد", "", "APPROVE"],
+              ["screen", "المخزون والتوريدات والأجهزة غير المتصلة", ""],
+              ["screen", "التنبيهات المهمة", "", "", true]
+            ]),
+            L("رحلة التنبيه", "Alert → Action", [
+              ["trigger", "تنبيه Push أو داخل التطبيق", ""],
+              ["screen", "تفاصيل التنبيه", "الكيان المرتبط: وردية · قراءة · مصروف · بلاغ · مخزون · توريد · جهاز"],
+              ["screen", "مراجعة الكيان", "المرفقات والصور والفروقات"],
+              ["decision", "هل الإجراء مصرّح به؟", "الإجراءات مبنية على الصلاحية", "PERMISSION"],
+              ["system", "اعتماد / رفض / إرجاع / إشعار باستلام", "الرفض والإرجاع يطلبان ملاحظة عند وجود قاعدة"],
+              ["success", "نجاح ثم العودة إلى التنبيهات", "", "", true]
+            ], [
+              ["error", "غير مصرّح", "الإجراء يُعرض معطّلاً بسبب واضح — لا مسار مسدود"],
+              ["state", "بانتظار قرار", "العنصر يبقى في الصف حتى الحسم"]
+            ]),
+            L("مراجعة الوردية والاعتماد", "Shift review · Approval queue", [
+              ["screen", "وردية نشطة / بانتظار الإغلاق", ""],
+              ["screen", "تفاصيل الوردية", "العامل · قراءات البداية · القراءات الحالية/الإغلاق · الصور"],
+              ["screen", "المصروفات والتوريدات والبلاغات", ""],
+              ["screen", "الفروقات والتنبيهات", ""],
+              ["screen", "صف الاعتماد", "عنصر ثم التالي"],
+              ["decision", "القرار", "اعتماد · رفض · إرجاع للتصحيح", "APPROVE"],
+              ["success", "نجاح ثم العنصر التالي", "", "", true]
+            ])
+          ],
+          hasGrid: false, grid: []
+        },
+        {
+          key: "E", tag: "SHARED STATES", title: "هـ · الحالات المشتركة",
+          desc: "تُعالَج كحالات مكوّنات حيث تكفي، ولا تُصنع شاشة كاملة لكل حالة.",
+          lanes: [],
+          hasGrid: true,
+          grid: [
+            { title: "Default", body: "الحالة الطبيعية للشاشة بعد تحميل البيانات.", note: "مكوّن" },
+            { title: "Loading", body: "هيكل تحميل للقوائم والجداول والبطاقات.", note: "مكوّن — NPLoadingState" },
+            { title: "Empty", body: "لا توجد بيانات بعد، مع الإجراء الأساسي المناسب.", note: "مكوّن — NPEmptyState" },
+            { title: "Success", body: "تأكيد عابر أو إشعار داخلي بعد الحفظ.", note: "مكوّن — NPToast" },
+            { title: "Error", body: "خطأ داخل الحقل أو داخل المنطقة، بنص وأيقونة.", note: "مكوّن — NPErrorState" },
+            { title: "Offline", body: "إشعار داخلي دائم مع حجب العمليات غير المدعومة.", note: "نمط — NPOfflineGuard" },
+            { title: "Unauthorized / 403", body: "حالة صريحة بدل صفحة فارغة أو قائمة مخفية.", note: "شاشة حالة" },
+            { title: "Session Expired", body: "العودة إلى الدخول مع حفظ المسار المطلوب.", note: "شاشة حالة" },
+            { title: "Disabled", body: "عناصر معطّلة بسبب ظاهر — لا اعتماد على اللون وحده.", note: "مكوّن" },
+            { title: "Pending Sync", body: "وسم «بانتظار المزامنة» على السجل المحفوظ محلياً.", note: "مكوّن" }
+          ]
+        },
+        {
+          key: "F", tag: "PERMISSIONS", title: "و · حدود الأدوار والصلاحيات",
+          desc: "التنقل والإجراءات تُبنى من الصلاحيات قبل وصول البيانات إلى الواجهة؛ الأساس لا يحتوي محرك صلاحيات.",
+          lanes: [],
+          hasGrid: true,
+          grid: [
+            { title: "المالك", body: "كل الوحدات في الكونسول + الاعتمادات + التسعير + الإعدادات وتهيئة المحطة.", note: "WEB + MANAGER" },
+            { title: "مدير المنطقة", body: "المتابعة والاعتمادات والتقارير عبر عدة محطات — دون إعدادات النظام.", note: "WEB + MANAGER" },
+            { title: "مشرف المحطة", body: "ورديات ومصروفات وتوريدات محطته، واعتمادات محدودة حسب القاعدة.", note: "WEB + MANAGER" },
+            { title: "العامل", body: "تشغيل الوردية والقراءات والمصروف والتوريد داخل وردية نشطة فقط.", note: "WORKER" },
+            { title: "نطاق المحطة", body: "كل عقدة بيانات محدودة بنطاق المحطة المصرّح به للمستخدم.", note: "STATION SCOPE" },
+            { title: "عقد مرتبطة بالصلاحية", body: "الاعتماد · الرفض · الإرجاع · التسعير · إدارة الأجهزة · تهيئة المسدسات · إدارة المستخدمين.", note: "7 عقد" }
+          ]
+        }
+      ],
+      report: [
+        { label: "أقسام الرحلات", value: "6 (A–F)" },
+        { label: "مسارات موثقة", value: "16" },
+        { label: "إجمالي العقد", value: "96" },
+        { label: "عقد شاشات", value: "48" },
+        { label: "عقد قرار", value: "13" },
+        { label: "عقد نظام / نجاح", value: "12 / 15" },
+        { label: "فروع بديلة وأخطاء", value: "27" },
+        { label: "رحلة الويب", value: "مكتملة" },
+        { label: "رحلة العامل", value: "مكتملة" },
+        { label: "رحلة المدير", value: "مكتملة" },
+        { label: "مسارات مسدودة", value: "0" },
+        { label: "Sign Up", value: "0" },
+        { label: "مهام / مستحقات", value: "0 / 0" },
+        { label: "ديزل", value: "0" },
+        { label: "عقد مرتبطة بالصلاحية", value: "7" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

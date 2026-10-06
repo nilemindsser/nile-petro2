@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+h1,h2,h3{margin:0}
+.wrap{padding:36px 40px 80px;display:flex;flex-direction:column;gap:32px;max-width:1440px}
+.sec{display:flex;flex-direction:column;gap:12px}
+.sh{font:800 20px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.sh small{display:block;font:600 11.5px/17px Inter,system-ui,sans-serif;color:#90A4AE;letter-spacing:.04em}
+.p{font:400 13.5px/22px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:900px;text-wrap:pretty}
+.panel{display:flex;flex-direction:column;gap:11px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.lbl{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#37474F;white-space:nowrap}
+.lbl.ok{background:#E8F5EC;border-color:#BEDFC9;color:#0B6B3A}
+.lbl.wn{background:#FFF6E8;border-color:#F3D9AE;color:#7A4A00}
+.lbl.bad{background:#FDF3F3;border-color:#E9C9C9;color:#9B2222}
+.lbl.info{background:#E8F4FD;border-color:#BEDCF2;color:#01579B}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:start;vertical-align:top;padding:8px 10px;border-bottom:1px solid #EEF1F6;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+th{font-weight:700;color:#455A64;background:#F6F7FB;white-space:nowrap}
+td.m{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;font-size:11px}
+pre{margin:0;padding:16px;border-radius:14px;background:#0F1A3D;color:#F5F7FC;font:500 11.5px/19px Inter,system-ui,sans-serif;direction:ltr;overflow:auto}
+.note{padding:13px 15px;border-radius:14px;background:#FFF6E8;border:1px solid #F3D9AE;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#7A4A00}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate}
+</style>
+</helmet>
+
+<div dir="rtl" class="wrap">
+
+<div class="sec">
+<div class="row"><span class="lbl info">11 · Flutter Handoff</span><span class="lbl bad">تعيين فقط — لا كود Flutter</span><span class="lbl wn">اكتمال التنظيف ليس اعتماد Flutter</span></div>
+<h1 class="sh">حزمة التسليم إلى Flutter<small>MAPPING ONLY · AUTHORITY STAYS WITH FOUNDATION + BACKEND</small></h1>
+<p class="p">كل ما يحتاجه المنفِّذ في مكان واحد: خرائط Tokens والمكوّنات والمسارات، سجلات الميزات والصلاحيات، وعقود الانقطاع والإصدار والثيم والتهيئة والاتجاه والأرقام — مع فجوات التعيين المفتوحة معلنة لا مطموسة.</p>
+</div>
+
+<div class="sec">
+<h2 class="sh">خريطة Tokens<small>DESIGN TOKEN → FLUTTER TARGET</small></h2>
+<div class="panel">
+<table>
+<tr><th>Token</th><th>هدف Flutter</th><th>ملاحظة</th></tr>
+<sc-for list="{{ tokens }}" as="r" hint-placeholder-count="14">
+<tr><td class="m">{{ r.k }}</td><td class="m">{{ r.f }}</td><td>{{ r.n }}</td></tr>
+</sc-for>
+</table>
+<p class="p">القيَم نفسها تُقرأ من <a href="01 · Foundation.dc.html">01 · Foundation</a> (356 token)؛ لا قيمة تُكتب يدوياً في كود Flutter.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">خريطة المكوّنات<small>DESIGN COMPONENT → WIDGET CANDIDATE</small></h2>
+<div class="panel">
+<table>
+<tr><th>المكوّن</th><th>المرشّح</th><th>النطاق</th></tr>
+<sc-for list="{{ comps }}" as="r" hint-placeholder-count="12">
+<tr><td class="m">{{ r.k }}</td><td class="m">{{ r.w }}</td><td>{{ r.s }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">فجوات التسمية والتعيين<small>NAMING / MAPPING GAPS — لا إعادة تسمية صامتة</small></h2>
+<div class="panel">
+<table>
+<tr><th>اسم التصميم</th><th>المرشّح الحالي</th><th>الاسم القانوني الموصى به</th><th>يحتاج قراراً؟</th></tr>
+<sc-for list="{{ gaps }}" as="r" hint-placeholder-count="6">
+<tr><td class="m">{{ r.d }}</td><td class="m">{{ r.f }}</td><td class="m">{{ r.rec }}</td><td><span class="{{ r.cls }}">{{ r.dec }}</span></td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">خريطة المسارات وجرد الشاشات<small>ROUTE MAP · SCREEN INVENTORY</small></h2>
+<div class="panel">
+<table>
+<tr><th>التطبيق</th><th>المسارات</th><th>الشاشات</th><th>المصدر البصري</th></tr>
+<sc-for list="{{ routes }}" as="r" hint-placeholder-count="3">
+<tr><td><b>{{ r.k }}</b></td><td>{{ r.routes }}</td><td class="m">{{ r.screens }}</td><td><a href="{{ r.href }}">{{ r.src }}</a></td></tr>
+</sc-for>
+</table>
+<p class="p">فهرس المسارات التفصيلي (Path · Screen Label · Parent · Feature · Permission · Capability) داخل <a href="04 · Web Console.dc.html">04 · Web Console</a> وصفحتي التطبيقين.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">السجلات والعقود<small>REGISTRIES &amp; CONTRACTS</small></h2>
+<div class="panel">
+<table>
+<tr><th>العقد</th><th>الجوهر</th><th>سلطة القرار</th></tr>
+<sc-for list="{{ contracts }}" as="r" hint-placeholder-count="9">
+<tr><td><b>{{ r.k }}</b></td><td>{{ r.v }}</td><td>{{ r.a }}</td></tr>
+</sc-for>
+</table>
+</div>
+<div class="panel">
+<pre>{{ snippet }}</pre>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">فجوات مفتوحة قبل التنفيذ<small>UNRESOLVED — لا تُحَل في التسليم</small></h2>
+<div class="panel">
+<sc-for list="{{ open }}" as="r" hint-placeholder-count="6">
+<div class="note"><b>{{ r.k }}</b> — {{ r.v }}</div>
+</sc-for>
+<p class="p">نصوص القرارات الكاملة في <a href="00 · Project Index.dc.html">00 · Project Index → Open Decisions</a>.</p>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      tokens: [
+        { k: "brand.primary", f: "ColorScheme.primary", n: "من تهيئة العميل — لا ثابت في الكود" },
+        { k: "brand.deep", f: "NPTheme.brandDeep (ThemeExtension)", n: "مصدر اشتقاق الوضع الداكن" },
+        { k: "dark.brandMix", f: "NPTheme.brandMix · double 0.35", n: "نفس المعامل في التصميم والتنفيذ" },
+        { k: "surface.canvas", f: "scaffoldBackgroundColor / ColorScheme.surface", n: "مشتق" },
+        { k: "surface.card", f: "NPTheme.surfaceCard", n: "مشتق" },
+        { k: "surface.raised · elevated · selected · hover", f: "NPTheme.surface*", n: "أربع رُقيّ — لا ظل بديل عن الرُقيّ" },
+        { k: "border.default · strong", f: "NPTheme.border*", n: "شفافية رمادية لا لون صلب" },
+        { k: "text.primary · secondary · muted", f: "TextTheme + onSurface variants", n: "ثلاث درجات · لا أبيض صريح في كل النصوص" },
+        { k: "status.success · warning · danger · info", f: "NPTheme.status*", n: "مستقلة عن العلامة — لا تُستبدل بلونها" },
+        { k: "focus.ring · width · offset", f: "FocusTheme / NPTheme.focus*", n: "حلقة داكنة مخصّصة على الأسطح الداكنة" },
+        { k: "spacing.1 … 8", f: "NPSpacing const doubles", n: "سلّم واحد" },
+        { k: "radius.8 · 12 · 16 · full", f: "NPRadius", n: "أربع قيَم فقط — 10 و 14 ممنوعة" },
+        { k: "type.h1 … caption · mono", f: "TextTheme", n: "'Noto Sans Arabic' / Inter / Inter — الخط يتبع الاتجاه" },
+        { k: "density.desktop · touch", f: "VisualDensity + NPTheme.density", n: "الهندسة المستقلة عن الكثافة لا تتحرك" }
+      ],
+      comps: [
+        { k: "NPButton", w: "NPButton", s: "web + mobile" },
+        { k: "NPIconButton", w: "NPIconButton", s: "web + mobile" },
+        { k: "NPStatusChip", w: "NPStatusBadge", s: "عدم تطابق تسمية — مسجَّل أدناه" },
+        { k: "NPBottomNavigation", w: "NPBottomNav", s: "shared mobile" },
+        { k: "NPBottomSheet · NPConfirmationSheet", w: "NPSheet · NPConfirmSheet", s: "shared mobile" },
+        { k: "NPTaskShell", w: "NPTaskScaffold", s: "shared mobile" },
+        { k: "NPActionCard", w: "NPActionCard", s: "shared mobile" },
+        { k: "NPDataTable", w: "NPDataTable", s: "web / desktop فقط" },
+        { k: "NPTankGauge · NPTrendChart", w: "NPTankGauge · NPTrendChart", s: "web + manager" },
+        { k: "NPReadingInput · NPMeterReadingField", w: "NPReadingField (مرشّح موحّد)", s: "worker — بانتظار مراجعة العقد" },
+        { k: "NPEmptyState · NPErrorState · NPLoadingState · NPSuccessState", w: "NPStateView(variant)", s: "shared — أربع حالات بعقد واحد" },
+        { k: "NPAuthLogin", w: "NPLoginScreen(locale, theme, tenant)", s: "web + mobile" }
+      ],
+      gaps: [
+        { d: "NPStatusChip", f: "NPStatusBadge", rec: "NPStatusBadge", dec: "OWNER DECISION", cls: "lbl bad" },
+        { d: "NPReadingInput / NPMeterReadingField / NPReadingDifference", f: "NPReadingField (مقترح)", rec: "بعد مراجعة العقد", dec: "REVIEW REQUIRED", cls: "lbl wn" },
+        { d: "NPSyncBadge / NPSyncStatus / NPConnectivityBanner", f: "NPSyncIndicator + NPConnectivityBanner", rec: "بعد مراجعة العقد", dec: "REVIEW REQUIRED", cls: "lbl wn" },
+        { d: "NPPhotoCapture / NPMeterPhoto", f: "NPPhotoField (مقترح)", rec: "بعد مراجعة العقد", dec: "REVIEW REQUIRED", cls: "lbl wn" },
+        { d: "مرشّحات الاستخراج الثمانية", f: "غير موجودة كمكوّنات", rec: "أمر عمل توحيد مكوّنات قبل Flutter", dec: "DEFERRED", cls: "lbl wn" },
+        { d: "أسطح المراجعة A / B", f: "لا مرشّح — سقالة QA", rec: "تبقى خارج عدّ الإنتاج", dec: "CLOSED", cls: "lbl ok" }
+      ],
+      routes: [
+        { k: "Web Console", routes: "16 مسار + 4 أدراج/نوافذ", screens: "16 + 4", src: "04 · Web Console", href: "04 · Web Console.dc.html" },
+        { k: "Worker App", routes: "4 تبويبات + مسارات داخلية", screens: "52 إطار", src: "05 · Worker App", href: "05 · Worker App.dc.html" },
+        { k: "Manager App", routes: "4 تبويبات + 6 داخل المحطة", screens: "98 إطار", src: "06 · Manager App", href: "06 · Manager App.dc.html" }
+      ],
+      contracts: [
+        { k: "Feature Registry", v: "expenses · supplies · reports · devices · inventory · biometrics · reportPdfExport", a: "Tenant configuration" },
+        { k: "Permission Registry", v: "16 قدرة UX (canRecordExpense … closeStationShift)", a: "Role bundle + user overrides" },
+        { k: "Offline Contract", v: "online · offline · local_draft · pending_sync · syncing · confirmed · sync_failed", a: "Client queue + Server confirmation" },
+        { k: "recordVersion", v: "كل سجل قابل للتعديل — عند القِدَم: «تم تحديث هذه العملية» + تحديث قبل الإجراء", a: "Backend" },
+        { k: "Theme Contract", v: "theme.light · theme.dark (brandMix · primary · surfaces · text)", a: "Tenant configuration" },
+        { k: "Client Configuration Contract", v: "identity · brand · company · theme · localization · features · operationalConfig · securityCapabilities · support", a: "Tenant manifest" },
+        { k: "Direction Contract", v: "RTL/LTR منطقي · الأرقام والمعرّفات بعزل LTR · لا انعكاس أرقام", a: "Foundation" },
+        { k: "Numeric Contract", v: "دقة التخزين ≠ دقة العرض · quantityDisplayPrecision = 3 افتراضياً", a: "Backend + configuration" },
+        { k: "Asset Manifest", v: "brand · icons · illustrations · patterns · tenants/{tenantId}", a: "03 · Icons & Assets" }
+      ],
+      snippet: `// حدود التسليم — مرجع نصّي لا كود إنتاج
+tenant.manifest → NPTenantConfig            (identity.tenantId resolved by deployment)
+theme.dark.brandMix 0.35                     → NPTheme.brandMix
+surface ladder                               → canvas · card · raised · elevated · selected · hover
+offline states (7)                           → single enum shared by all three apps
+recordVersion                                → required on every mutable operational record
+permissions (16 capability ids)              → gate UI entry, not just actions
+features (7 flags)                           → disabled feature = no UI entry at all
+numerals                                     → latin digits, LTR isolated inside Arabic text`,
+      open: [
+        { k: "تعارضات سياسة المصادقة", v: "عقدان معتمدان متعارضان — لم يُحَل في التنظيف." },
+        { k: "سياسة إعادة المحاولة / Idempotency", v: "مغلقة (P3): idempotencyKey يُولَّد مرة لكل نيّة مستخدم ويُعاد استخدامه في كل محاولة · قابل لإعادة المحاولة: شبكة · مهلة · 5xx · 429 بتراجع أسي مع jitter (أساس 1s · ×2 · سقف 60s · 8 محاولات) · نهائي: تحقق · صلاحية · مصادقة · 409." },
+        { k: "عقد تنفيذ Flutter (F-04)", v: "مغلق: نظام الترقيم latn دائماً ولا يتحول للأرقام العربية-الهندية · مقاييس النص 1.0/1.3/2.0 · 1 design px = 1 logical px · معادلة Brand Dark بـ OKLCH كاملة · كثافات البصمة 44/88/132 من نفس الأصل (darkVariantPolicy = SAME_AS_LIGHT_WITH_MEDALLION) · نفس معرّفات الأيقونات وأعلام الانعكاس · SafeArea و viewInsets و 48×48 و 44×26. فجوتان مسجَّلتان: قيم الحركة، والعقد التقني لصورة العداد." },
+        { k: "canRecordExpense ووردية نشطة · مسودة بلا وردية · منع الخروج مع مزامنة معلّقة", v: "قواعد عمل مفتوحة تؤثر على عقد الانقطاع." },
+        { k: "revoke_then_wipe الافتراضية", v: "قابلة للتهيئة؛ القيمة الافتراضية قرار أمني." },
+        { k: "الطباعة", v: "لا تطبيع للخطوط قبل قرار العلامة." },
+        { k: "ترقية المكوّنات وتوحيد التسميات", v: "أمر عمل مخصّص قبل بدء التنفيذ." }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

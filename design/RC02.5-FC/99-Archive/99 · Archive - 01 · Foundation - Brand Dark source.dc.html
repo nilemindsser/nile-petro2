@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+h1,h2,h3{margin:0}
+.stroke{fill:none;stroke:currentColor;stroke-width:4.6;stroke-linecap:round;stroke-linejoin:round}
+/* palette scopes — light + brand-tinted dark only; القيَم السوداء القديمة محذوفة نهائيًا */
+.L{--sc:#F6F7FB;--sf:#FFFFFF;--sr:#F1F3F7;--se:#E9EDF4;--bd:#E4E7EC;--bd2:#F1F3F7;
+--t1:#1F2330;--t2:#455A64;--t3:#90A4AE;--pri:#2962FF;--deep:#1A237E;--onPri:#FFFFFF;
+--ok:#0B6B3A;--okbg:#E8F5EC;--okbd:#BEDFC9;--warn:#7A4A00;--warnbg:#FFF6E8;--warnbd:#F3D9AE}
+.BD{--b1:#14161A;--b2:#1C2028;--b3:#242934;--b4:#2C3340;
+--sc:color-mix(in srgb,var(--deepsrc) 35%,var(--b1));
+--sf:color-mix(in srgb,var(--deepsrc) 35%,var(--b2));
+--sr:color-mix(in srgb,var(--deepsrc) 35%,var(--b3));
+--se:color-mix(in srgb,var(--deepsrc) 35%,var(--b4));
+--bd:rgba(144,164,174,.22);--bd2:rgba(144,164,174,.13);
+--t1:#F5F7FC;--t2:#C5CEE0;--t3:#95A3BA;--deep:var(--deepsrc);--onPri:var(--sc);
+--ok:#7FD6A2;--okbg:color-mix(in srgb,#7FD6A2 15%,var(--sf));--okbd:color-mix(in srgb,#7FD6A2 34%,var(--sf));
+--warn:#F0C478;--warnbg:color-mix(in srgb,#F0C478 15%,var(--sf));--warnbd:color-mix(in srgb,#F0C478 34%,var(--sf))}
+.tA{--deepsrc:#1A237E;--pri:#6E9BFF}
+.tB{--deepsrc:#00453C;--pri:#4DB6AC}
+/* mini screen */
+.mini{position:relative;box-sizing:border-box;width:268px;flex:none;overflow:hidden;border-radius:18px;background:var(--sc);border:1px solid var(--bd);color:var(--t1);display:flex;flex-direction:column}
+.mh{flex:none;box-sizing:border-box;display:flex;align-items:center;gap:9px;min-height:60px;padding:11px 13px;background:var(--deep);color:#fff}
+.mh b{font:800 13.5px/20px 'Noto Sans Arabic',sans-serif;color:#fff}
+.mh span{font:500 10.5px/15px 'Noto Sans Arabic',sans-serif;color:rgba(255,255,255,.8)}
+.mlogo{display:flex;align-items:center;justify-content:center;width:32px;height:32px;flex:none;border-radius:10px;background:rgba(255,255,255,.16);color:#fff;font:800 12px/1 Inter,system-ui,sans-serif}
+.mb{flex:1;display:flex;flex-direction:column;gap:8px;padding:11px 13px}
+.mcard{box-sizing:border-box;display:flex;flex-direction:column;gap:7px;padding:10px;border-radius:13px;background:var(--sf);border:1px solid var(--bd)}
+.mrow{box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:11px;background:var(--sf);border:1px solid var(--bd)}
+.mk{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;padding:7px 9px;box-sizing:border-box;border-radius:11px;background:var(--sr);border:1px solid var(--bd2)}
+.mk b{font:700 13px/18px Inter,system-ui,sans-serif;direction:ltr;color:var(--pri)}
+.mk span{font:400 9.5px/14px 'Noto Sans Arabic',sans-serif;color:var(--t2)}
+.mt{font:700 12.5px/18px 'Noto Sans Arabic',sans-serif;color:var(--t1)}
+.mc{font:400 10.5px/16px 'Noto Sans Arabic',sans-serif;color:var(--t2)}
+.mfield{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;height:40px;padding:0 11px;border-radius:11px;background:var(--sr);border:1px solid var(--bd);font:500 11px/1 'Noto Sans Arabic',sans-serif;color:var(--t3)}
+.mbtn{display:flex;align-items:center;justify-content:center;height:40px;border-radius:11px;background:var(--pri);color:var(--onPri);border:0;font:700 12.5px/1 'Noto Sans Arabic',sans-serif}
+.mbtn2{display:flex;align-items:center;justify-content:center;height:40px;border-radius:11px;background:var(--sf);color:var(--pri);border:1px solid var(--pri);font:700 12.5px/1 'Noto Sans Arabic',sans-serif}
+.mchip{display:inline-flex;align-items:center;gap:4px;height:23px;padding:0 8px;border-radius:7px;font:600 10px/1 'Noto Sans Arabic',sans-serif}
+.mchip.ok{background:var(--okbg);border:1px solid var(--okbd);color:var(--ok)}
+.mchip.wn{background:var(--warnbg);border:1px solid var(--warnbd);color:var(--warn)}
+.mnav{flex:none;display:flex;align-items:center;height:52px;background:var(--se);border-top:1px solid var(--bd)}
+.mnav i{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:600 9px/13px 'Noto Sans Arabic',sans-serif;font-style:normal;color:var(--t3)}
+.mnav i.on{color:var(--pri)}
+.mdot{width:16px;height:16px;border-radius:5px;background:currentColor;opacity:.85}
+/* table */
+.mtb{overflow:hidden;border-radius:13px;border:1px solid var(--bd);background:var(--sf)}
+.mtb .th{display:flex;align-items:center;gap:8px;height:34px;padding:0 10px;background:var(--sr);font:700 10.5px/1 'Noto Sans Arabic',sans-serif;color:var(--t2);border-bottom:1px solid var(--bd2)}
+.mtb .tr{display:flex;align-items:center;gap:8px;height:36px;padding:0 10px;font:500 10.5px/1 'Noto Sans Arabic',sans-serif;color:var(--t1);border-bottom:1px solid var(--bd2)}
+.mtb .tr.sel{background:color-mix(in srgb,var(--pri) 16%,var(--sf))}
+.mtb .tr span:first-child{flex:1;min-width:0}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+/* page chrome */
+.sec{display:flex;flex-direction:column;gap:16px}
+.sh{font:800 20px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.sc2{font:400 13px/21px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:860px;text-wrap:pretty}
+.panel{display:flex;flex-direction:column;gap:12px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+.lbl{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#37474F}
+.lbl.bad{background:#FDF3F3;border-color:#E9C9C9;color:#9B2222}
+.lbl.good{background:#E8F5EC;border-color:#BEDFC9;color:#0B6B3A}
+.cols{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:8px}
+.rung{display:flex;gap:8px;flex-wrap:wrap}
+.rung div{width:118px;box-sizing:border-box;border-radius:11px;border:1px solid #DDE4EE;overflow:hidden}
+.rung div i{display:block;height:46px}
+.rung div p{margin:0;padding:6px 8px;background:#fff;font:600 9.5px/14px Inter,system-ui,sans-serif;color:#37474F}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:start;padding:8px 10px;border-bottom:1px solid #EEF1F6;font:500 12px/19px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+th{font-weight:700;color:#455A64;background:#F6F7FB}
+</style>
+</helmet>
+
+<div dir="rtl" style="padding:36px 40px 72px;display:flex;flex-direction:column;gap:40px;background:#F6F7FB">
+
+<div class="sec">
+<span class="lbl">NP-DARK-01 · CC-015 · مراجعة المالك</span>
+<h1 class="sh">الوضع الليلي: هوية العميل في الليل</h1>
+<p class="sc2">لوح داكن واحد مشتق من اللون العميق للعميل نفسه: كل درجة سطح = <b>brand.deep 35% + قاعدة رمادية داكنة</b>. لا يوجد <b>#000000</b> ولا سطح قريب من الأسود، ولا قيمة داكنة خاصة بـ Nile Petro داخل أي مكوّن قابل لإعادة الاستخدام — العميل الأزرق يحصل على Navy عميق، والعميل الأخضر على Deep Green، من القاعدة نفسها. الهندسة والمكوّنات والوضع النهاري لم تتغير.</p>
+</div>
+
+<div class="sec">
+<h2 class="sh">١ · سلّم الأسطح — Tenant A (أزرق) مقابل Tenant B (أخضر مزرق)</h2>
+<div class="cols">
+<div class="col"><span class="lbl">Tenant A · deep #1A237E</span>
+<div class="rung BD tA">
+<div><i style="background:var(--sc)"></i><p>canvas</p></div>
+<div><i style="background:var(--sf)"></i><p>surface / card</p></div>
+<div><i style="background:var(--sr)"></i><p>raised</p></div>
+<div><i style="background:var(--se)"></i><p>elevated / nav</p></div>
+<div><i style="background:var(--pri)"></i><p>primary on dark</p></div>
+</div>
+</div>
+<div class="col"><span class="lbl">Tenant B · deep #00453C</span>
+<div class="rung BD tB">
+<div><i style="background:var(--sc)"></i><p>canvas</p></div>
+<div><i style="background:var(--sf)"></i><p>surface / card</p></div>
+<div><i style="background:var(--sr)"></i><p>raised</p></div>
+<div><i style="background:var(--se)"></i><p>elevated / nav</p></div>
+<div><i style="background:var(--pri)"></i><p>primary on dark</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<sc-for list="{{ screens }}" as="s" hint-placeholder-count="8">
+<div class="sec">
+<h2 class="sh">{{ s.n }} · {{ s.title }}</h2>
+<p class="sc2">{{ s.note }}</p>
+<div class="cols">
+<sc-for list="{{ s.cells }}" as="c" hint-placeholder-count="3">
+<div class="col">
+<span class="{{ c.lbl }}">{{ c.name }}</span>
+<div class="mini {{ c.cls }}" style="{{ c.h }}">
+<div class="mh"><span class="mlogo">{{ s.mark }}</span><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b>{{ s.hdr }}</b><span>{{ s.sub }}</span></span></div>
+<div class="mb">
+<sc-if value="{{ s.kpis }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:7px">
+<sc-for list="{{ s.kpis }}" as="k" hint-placeholder-count="3">
+<div class="mk"><b class="mono">{{ k.v }}</b><span>{{ k.l }}</span></div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ s.card }}" hint-placeholder-val="{{ true }}">
+<div class="mcard">
+<span class="mt">{{ s.card.t }}</span>
+<span class="mc">{{ s.card.c }}</span>
+<span style="display:flex;gap:6px"><span class="mchip ok">{{ s.card.ok }}</span><span class="mchip wn">{{ s.card.wn }}</span></span>
+</div>
+</sc-if>
+<sc-if value="{{ s.field }}" hint-placeholder-val="{{ true }}">
+<div class="mfield"><span>{{ s.field }}</span><span class="mono">—</span></div>
+</sc-if>
+<sc-if value="{{ s.rows }}" hint-placeholder-val="{{ true }}">
+<sc-for list="{{ s.rows }}" as="r" hint-placeholder-count="2">
+<div class="mrow"><span class="mt" style="flex:1;min-width:0">{{ r.t }}</span><span class="mono mc">{{ r.v }}</span></div>
+</sc-for>
+</sc-if>
+<sc-if value="{{ s.table }}" hint-placeholder-val="{{ true }}">
+<div class="mtb">
+<div class="th"><span style="flex:1">المحطة</span><span class="mono">اللتر</span><span class="mono">الحالة</span></div>
+<div class="tr"><span>فرع المعادي</span><span class="mono">12,400</span><span class="mono">نشط</span></div>
+<div class="tr sel"><span>فرع التجمع</span><span class="mono">9,120</span><span class="mono">نشط</span></div>
+<div class="tr" style="border-bottom:0"><span>فرع أكتوبر</span><span class="mono">6,830</span><span class="mono">متوقف</span></div>
+</div>
+</sc-if>
+<sc-if value="{{ s.cta }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:7px;margin-top:auto">
+<button class="mbtn">{{ s.cta }}</button>
+<button class="mbtn2">{{ s.cta2 }}</button>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{ s.nav }}" hint-placeholder-val="{{ true }}">
+<div class="mnav">
+<sc-for list="{{ s.nav }}" as="t" hint-placeholder-count="4">
+<i class="{{ t.c }}"><span class="mdot"></span>{{ t.l }}</i>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+
+<div class="sec">
+<h2 class="sh">٣ · معايير القبول</h2>
+<div class="panel">
+<table>
+<tr><th>المعيار</th><th>النتيجة</th><th>الدليل</th></tr>
+<sc-for list="{{ criteria }}" as="r" hint-placeholder-count="21">
+<tr><td>{{ r.k }}</td><td><span class="lbl good">{{ r.v }}</span></td><td style="color:#455A64">{{ r.e }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">٤ · ما تغيّر في الملفات</h2>
+<div class="panel">
+<table>
+<tr><th>الملف</th><th>التغيير</th></tr>
+<sc-for list="{{ files }}" as="r" hint-placeholder-count="6">
+<tr><td class="mono" style="font-size:11px">{{ r.f }}</td><td style="color:#455A64">{{ r.c }}</td></tr>
+</sc-for>
+</table>
+<p class="sc2">اللوح الأسود القديم محذوف تمامًا: لا وجود له في أي ملف تطبيق ولا في صفحة المراجعة هذه. المقارنة الآن بين Light والوضع الليلي المشتق من الهوية فقط.</p>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    const cells = [
+      { name: "Light — لم يتغير", cls: "L", lbl: "lbl" },
+      { name: "الجديد — Brand Dark (Tenant A)", cls: "BD tA", lbl: "lbl good" },
+      { name: "الجديد — Brand Dark (Tenant B)", cls: "BD tB", lbl: "lbl good" }
+    ];
+    const S = (o) => Object.assign({ mark: "NP", cells, h: "" }, o);
+    const screens = [
+      S({ n: "٢‑١", title: "Login", note: "خلفية زرقاء عميقة من الهوية وكرت أفتح بدرجة — لا نصف أسود ولا كرت أسود؛ الشعار واسم المحطة والعلامة المائية كما هي.",
+        hdr: "Nile Petro", sub: "تسجيل الدخول — لوحة المحطة",
+        field: "اسم المستخدم", rows: [{ t: "كلمة المرور", v: "••••••" }], cta: "دخول", cta2: "استخدم البصمة" }),
+      S({ n: "٢‑٢", title: "Worker Home", note: "Canvas = Brand Dark · البطاقات = Raised · الشريط السفلي = Elevated وليس شريطًا أسود مستقلاً.",
+        hdr: "وردية الصباح", sub: "محطة المعادي — مسدس ٣",
+        kpis: [{ v: "3/6", l: "قراءات" }, { v: "2", l: "مصروفات" }, { v: "1", l: "توريد" }],
+        card: { t: "الوردية نشطة", c: "بدأت 06:00 — تنتهي 14:00", ok: "متصل", wn: "بانتظار المزامنة" },
+        nav: [{ l: "الرئيسية", c: "on" }, { l: "الوردية", c: "" }, { l: "التنبيهات", c: "" }, { l: "حسابي", c: "" }] }),
+      S({ n: "٢‑٣", title: "Worker Shift", note: "حقول القراءة بخلفية أفتح قليلًا من الـ Canvas — لا حقول سوداء، والتركيز بلون الهوية.",
+        hdr: "قراءة العدادات", sub: "مسدس ٣ — بنزين ٩٢",
+        field: "القراءة الحالية", rows: [{ t: "قراءة البداية", v: "24,580.120" }, { t: "الفرق", v: "312.400" }],
+        cta: "مراجعة وإرسال", cta2: "حفظ كمسودة" }),
+      S({ n: "٢‑٤", title: "Manager Home", note: "نفس السلّم على شاشة المدير: Canvas ← Card ← Raised مع حدود خفيفة جدًا بدل حدود بيضاء.",
+        hdr: "لوحة المحطة", sub: "٣ فروع — اليوم",
+        kpis: [{ v: "28.3K", l: "لتر" }, { v: "4", l: "موافقات" }, { v: "2", l: "تنبيهات" }],
+        card: { t: "وردية نشطة — فرع التجمع", c: "٤ عمال · ٦ مسدسات", ok: "مكتملة", wn: "تحتاج مراجعة" },
+        nav: [{ l: "اللوحة", c: "on" }, { l: "المخزون", c: "" }, { l: "التقارير", c: "" }, { l: "حسابي", c: "" }] }),
+      S({ n: "٢‑٥", title: "Inventory", note: "المقاييس والخزانات على سطح مرتفع واضح عن الخلفية — بلا ظل ثقيل وبلا بطاقة سوداء على خلفية سوداء.",
+        hdr: "المخزون", sub: "خزانات المحطة",
+        kpis: [{ v: "62%", l: "بنزين ٩٢" }, { v: "41%", l: "ديزل" }, { v: "88%", l: "جاز" }],
+        rows: [{ t: "خزان ١ — بنزين ٩٢", v: "18,600 L" }, { t: "خزان ٢ — ديزل", v: "9,400 L" }],
+        card: { t: "توريد قادم", c: "اليوم 16:00 — 12,000 لتر", ok: "مؤكد", wn: "قرب السعة" } }),
+      S({ n: "٢‑٦", title: "Reports", note: "سلاسل البيانات تبقى دلالية ومقروءة على السطح الداكن؛ لون الهوية للمؤشر النشط فقط.",
+        hdr: "التقارير", sub: "أسبوعي — الفروع",
+        kpis: [{ v: "+8.4%", l: "مقابل الأسبوع" }, { v: "196K", l: "لتر" }, { v: "12", l: "ورديات" }],
+        table: true, cta: "تصدير", cta2: "تغيير المدى" }),
+      S({ n: "٢‑٧", title: "Account", note: "الصفوف والمفاتيح على سطح البطاقة، والنص الثانوي أهدأ من الأساسي بدل أبيض صريح في كل مكان.",
+        hdr: "حسابي", sub: "مدير المحطة",
+        rows: [{ t: "الملف الشخصي", v: "›" }, { t: "الأمان", v: "›" }, { t: "التفضيلات — الثيم", v: "ليلي" }],
+        card: { t: "الجلسات النشطة", c: "هذا الجهاز + جهاز واحد", ok: "محمي", wn: "مزامنة معلقة" },
+        nav: [{ l: "اللوحة", c: "" }, { l: "المخزون", c: "" }, { l: "التقارير", c: "" }, { l: "حسابي", c: "on" }] }),
+      S({ n: "٢‑٨", title: "NPDataTable", note: "ترويسة أفتح بدرجة بسيطة · صفوف على سطح البطاقة · فواصل منخفضة التباين · الصف المحدَّد بلمسة من لون الهوية — بلا جدول أسود وبلا شبكة بيضاء.",
+        hdr: "جدول البيانات", sub: "الفروع — الحالة",
+        table: true, field: "بحث في الفروع" })
+    ];
+    const criteria = [
+      { k: "أسطح سوداء صريحة", v: "0", e: "لا #000000 ولا #050505 ولا #080808 في أي سطح" },
+      { k: "Canvas مشتق من الهوية", v: "PASS", e: "brand.deep 35% + قاعدة رمادية داكنة" },
+      { k: "البطاقات واضحة عن Canvas", v: "PASS", e: "رُقيّ منفصلة: canvas / surface / raised / elevated" },
+      { k: "الأسطح المرتفعة واضحة", v: "PASS", e: "raised و elevated مسجّلتان كـ tokens" },
+      { k: "الشريط السفلي ليس أسود", v: "PASS", e: "nav = surface.dark.elevated" },
+      { k: "الحقول ليست سوداء", v: "PASS", e: "input = raised + حدود خفيفة + تركيز بلون الهوية" },
+      { k: "النوافذ والأوراق ليست سوداء", v: "PASS", e: "modal/sheet = surface أعلى + overlay شفاف داكن" },
+      { k: "هوية العميل مرئية", v: "PASS", e: "الترويسة والعمق واللون الأساسي كلها من الهوية" },
+      { k: "ألوان الحالات دلالية", v: "PASS", e: "نص الحالة + خلفية ممزوجة بالسطح، لا استبدال بلون الهوية" },
+      { k: "تباين النص", v: "PASS", e: "#F5F7FC / #C5CEE0 / #95A3BA على الرُقيّ الداكنة" },
+      { k: "Worker Dark", v: "PASS", e: "NP Worker Complete · Shift · Home" },
+      { k: "Manager Dark", v: "PASS", e: "Approvals · Inventory · Reports/Account · Station" },
+      { k: "Web Dark", v: "PASS", e: "np-tokens.css — نفس أسماء الـ tokens" },
+      { k: "Login Dark", v: "PASS", e: "NPAuthLogin يقرأ tokens المخطط بدل قيَم ثابتة" },
+      { k: "NPDataTable Dark", v: "PASS", e: "ترويسة raised · hover و selected بلمسة الهوية" },
+      { k: "Tenant A", v: "PASS", e: "Navy عميق من #1A237E" },
+      { k: "Tenant B", v: "PASS", e: "Deep Green من #00453C — لا Navy مستعار" },
+      { k: "قيَم داكنة ثابتة داخل مكوّنات مُعاد استخدامها", v: "0", e: "كلها مشتقة عبر color-mix من brand.deep" },
+      { k: "الهندسة", v: "UNCHANGED", e: "لا تغيير أبعاد أو حشو أو أنصاف أقطار" },
+      { k: "المكوّنات", v: "UNCHANGED", e: "لا مكوّن جديد ولا تفريع" },
+      { k: "الوضع النهاري", v: "UNCHANGED", e: "لم تُلمس قيَم light" }
+    ];
+    const files = [
+      { f: "np-tokens.css", c: "الطبقة ١: رُقيّ داكنة مشتقة من --np-dark-brand (يكفي تجاوزه لكل عميل) + نص ٣ مستويات · الطبقة ٤: elevated / selected / hover / input-bg / table-row-hover · nav و topbar صعدا درجة · حدود أخف" },
+      { f: "NPAuthLogin.dc.html", c: "لوح الليل صار قراءة tokens بالكامل — صفر قيمة داكنة ثابتة" },
+      { f: "NP Worker Complete.dc.html", c: ".dk مشتق من brand.deep + خلفيات الحالات ممزوجة بسطح البطاقة" },
+      { f: "NP Manager Inventory.dc.html · NP Manager Reports Account.dc.html", c: "نفس اشتقاق .dk ونفس أسماء المتغيّرات" },
+      { f: "NP Manager Approvals.dc.html", c: ".dk مشتق + ترويسة داكنة بلون العمق بدل رمادي مزرق" },
+      { f: "NP Manager Station.dc.html", c: "قواعد .dk المباشرة صارت تقرأ سلّم أسطح واحد" }
+    ];
+    return { screens, criteria, files };
+  }
+}
+</script>
+</body>
+</html>

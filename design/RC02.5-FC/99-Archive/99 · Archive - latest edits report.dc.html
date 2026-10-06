@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../np-tokens.css">
+<script src="../np-icons.js"></script>
+<script src="../doc-page.js"></script>
+<style>
+doc-page:not(:defined){visibility:hidden}
+h1,h2,h3{margin:0}
+p{margin:0}
+table{border-collapse:collapse;width:100%}
+</style>
+</helmet>
+<doc-page margin="0.7in">
+
+<header slot="header" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:9px;border-bottom:2px solid #1A237E;font-family:Tajawal,system-ui,sans-serif" dir="rtl">
+  <span style="display:flex;align-items:center;gap:9px">
+    <img src="assets/np-logo-symbol.png" alt="" style="height:24px;width:auto">
+    <b style="font-size:12px;color:#1A237E">نايل بترو — تقرير التعديلات</b>
+  </span>
+  <span style="font-family:Inter,sans-serif;font-size:10.5px;color:#607D8B">17/09/2026 · Foundation 1.5.4</span>
+</header>
+
+<footer slot="footer" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:8px;border-top:1px solid #CFD8DC;font-family:Tajawal,system-ui,sans-serif;font-size:10px;color:#607D8B" dir="rtl">
+  <span>وثيقة حكومة تصميم — للمراجعة المالك</span>
+  <span style="font-family:Inter,sans-serif">Nile Petro © 2025</span>
+</footer>
+
+<div dir="rtl" style="font-family:Tajawal,system-ui,sans-serif;color:#37474F;line-height:1.7">
+
+  <div style="display:flex;flex-direction:column;gap:9px;padding-bottom:16px;border-bottom:1px solid #E0E6ED">
+    <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;height:24px;padding:0 10px;border-radius:6px;background:#E8EEFF;color:#1A237E;font-family:Inter,sans-serif;font-size:10.5px;font-weight:700">NP-WO-CD-06 · OWNER REVIEW</span>
+    <h1 style="font-size:25px;font-weight:700;color:#1A237E">تقرير آخر التعديلات</h1>
+    <p style="font-size:13px;color:#546E7A">دورة العمل من إغلاق تعديل الشِل المعتمد إلى تسليم شاشة الدخول بأربع نسخ — CC-009 حتى CC-012، مع تصحيحات بصرية طلبها المالك مباشرة من المعاينة الحيّة.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;padding-top:5px">
+      <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+        <span style="display:flex;flex-direction:column;gap:2px;padding:10px 11px;border:1px solid #E0E6ED;border-radius:9px;background:#F7F9FC">
+          <b style="font-family:Inter,sans-serif;font-size:17px;color:#1A237E">{{k.value}}</b>
+          <span style="font-size:10.5px;color:#607D8B">{{k.label}}</span>
+        </span>
+      </sc-for>
+    </div>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:700;color:#1A237E;padding:18px 0 9px">١ · تغييرات الأساس المُغلقة</h2>
+  <table style="font-size:11px">
+    <thead>
+      <tr style="background:#1A237E;color:#fff">
+        <th style="text-align:start;padding:8px 9px;font-size:10.5px;font-weight:600">التغيير</th>
+        <th style="text-align:start;padding:8px 9px;font-size:10.5px;font-weight:600">الموضوع</th>
+        <th style="text-align:start;padding:8px 9px;font-size:10.5px;font-weight:600">النتيجة</th>
+        <th style="text-align:center;padding:8px 9px;font-size:10.5px;font-weight:600">الإصدار</th>
+      </tr>
+    </thead>
+    <tbody>
+      <sc-for list="{{changes}}" as="c" hint-placeholder-count="4">
+        <tr style="break-inside:avoid">
+          <td style="padding:9px;border-bottom:1px solid #E8EDF3;font-family:Inter,sans-serif;font-size:10.5px;font-weight:700;color:#1A237E;white-space:nowrap">{{c.id}}</td>
+          <td style="padding:9px;border-bottom:1px solid #E8EDF3;font-weight:600;color:#263238">{{c.title}}</td>
+          <td style="padding:9px;border-bottom:1px solid #E8EDF3;color:#546E7A">{{c.result}}</td>
+          <td style="padding:9px;border-bottom:1px solid #E8EDF3;text-align:center;font-family:Inter,sans-serif;font-size:10.5px;color:#1A237E">{{c.ver}}</td>
+        </tr>
+      </sc-for>
+    </tbody>
+  </table>
+
+  <h2 style="font-size:17px;font-weight:700;color:#1A237E;padding:20px 0 9px">٢ · تصحيحات القائمة الجانبية</h2>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <sc-for list="{{sidebar}}" as="s" hint-placeholder-count="5">
+      <div style="display:flex;gap:10px;padding:11px 12px;border:1px solid #E0E6ED;border-radius:10px;background:#FBFCFE;break-inside:avoid">
+        <span style="width:24px;height:24px;flex:none;border-radius:7px;background:#E8EEFF;color:#1A237E;display:flex;align-items:center;justify-content:center"><np-icon name="{{s.icon}}" size="13"></np-icon></span>
+        <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+          <b style="font-size:12px;color:#263238">{{s.title}}</b>
+          <span style="font-size:11px;color:#546E7A">{{s.body}}</span>
+          <span style="font-family:Inter,sans-serif;font-size:10px;color:#1A237E">{{s.proof}}</span>
+        </span>
+      </div>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:700;color:#1A237E;padding:20px 0 9px">٣ · شاشة الدخول — أربع نسخ من مكوّن واحد</h2>
+  <p style="font-size:11.5px;color:#546E7A;padding-bottom:10px">مكوّن <b style="font-family:Inter,sans-serif">NPAuthLogin</b> واحد يولّد النسخ الأربع من خاصيتين فقط: <b>locale</b> و<b>theme</b>. الهندسة متطابقة في الأربع؛ الاختلاف لغة واتجاه وTokens فقط.</p>
+  <table style="font-size:11px">
+    <thead>
+      <tr style="background:#F1F5FB;color:#1A237E">
+        <th style="text-align:start;padding:8px 9px;font-size:10.5px">النسخة</th>
+        <th style="text-align:center;padding:8px 9px;font-size:10.5px">الاتجاه</th>
+        <th style="text-align:center;padding:8px 9px;font-size:10.5px">الخط</th>
+        <th style="text-align:center;padding:8px 9px;font-size:10.5px">عرض الكرت</th>
+        <th style="text-align:center;padding:8px 9px;font-size:10.5px">الارتفاع</th>
+      </tr>
+    </thead>
+    <tbody>
+      <sc-for list="{{variants}}" as="v" hint-placeholder-count="4">
+        <tr>
+          <td style="padding:8px 9px;border-bottom:1px solid #E8EDF3;font-family:Inter,sans-serif;font-size:10.5px;color:#263238">{{v.name}}</td>
+          <td style="padding:8px 9px;border-bottom:1px solid #E8EDF3;text-align:center;font-family:Inter,sans-serif;font-size:10.5px">{{v.dir}}</td>
+          <td style="padding:8px 9px;border-bottom:1px solid #E8EDF3;text-align:center;font-family:Inter,sans-serif;font-size:10.5px">{{v.font}}</td>
+          <td style="padding:8px 9px;border-bottom:1px solid #E8EDF3;text-align:center;font-family:Inter,sans-serif;font-size:10.5px;font-weight:700;color:#1A237E">{{v.w}}</td>
+          <td style="padding:8px 9px;border-bottom:1px solid #E8EDF3;text-align:center;font-family:Inter,sans-serif;font-size:10.5px">{{v.h}}</td>
+        </tr>
+      </sc-for>
+    </tbody>
+  </table>
+
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding-top:12px">
+    <sc-for list="{{polish}}" as="p" hint-placeholder-count="4">
+      <div style="padding:11px 12px;border:1px solid #E0E6ED;border-radius:10px;break-inside:avoid">
+        <b style="display:block;font-size:11.5px;color:#1A237E;padding-bottom:3px">{{p.title}}</b>
+        <span style="font-size:10.5px;line-height:1.65;color:#546E7A">{{p.body}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:700;color:#1A237E;padding:20px 0 9px">٤ · حالة المشروع</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;font-size:11.5px">
+    <sc-for list="{{state}}" as="r" hint-placeholder-count="8">
+      <span style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid #EDF1F6">
+        <span style="flex:1;min-width:0;color:#546E7A">{{r.label}}</span>
+        <b style="flex:none;font-family:Inter,sans-serif;font-size:11px;color:{{r.ink}}">{{r.value}}</b>
+      </span>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:700;color:#1A237E;padding:20px 0 9px">٥ · فجوات مُبلَّغ عنها — لم تُنفَّذ</h2>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <sc-for list="{{gaps}}" as="g" hint-placeholder-count="3">
+      <div style="display:flex;gap:10px;padding:11px 12px;border:1px solid #FFE0B2;border-radius:10px;background:#FFF8EE;break-inside:avoid">
+        <span style="width:22px;height:22px;flex:none;border-radius:6px;background:#F57C00;color:#fff;display:flex;align-items:center;justify-content:center"><np-icon name="alert" size="12"></np-icon></span>
+        <span style="flex:1;min-width:0"><b style="font-size:11.5px;color:#8D4E00">{{g.title}}</b><span style="display:block;font-size:10.5px;line-height:1.6;color:#6D5228">{{g.body}}</span></span>
+      </div>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:700;color:#1A237E;padding:20px 0 9px">٦ · مطلوب قرار المالك</h2>
+  <ol style="margin:0;padding-inline-start:19px;font-size:11.5px;color:#546E7A;display:flex;flex-direction:column;gap:6px">
+    <sc-for list="{{decisions}}" as="d" hint-placeholder-count="4">
+      <li style="break-inside:avoid"><b style="color:#263238">{{d.title}}</b> — {{d.body}}</li>
+    </sc-for>
+  </ol>
+
+  <div style="margin-top:18px;padding:13px 15px;border-radius:11px;background:#1A237E;color:#fff;display:flex;align-items:center;gap:12px;break-inside:avoid">
+    <np-icon name="check" size="18"></np-icon>
+    <span style="flex:1;min-width:0"><b style="font-size:12.5px">الخلاصة</b><span style="display:block;font-size:11px;color:#C5CFF5">الأساس مُجمَّد على 1.5.4 · الاستيرادات المكسورة صفر · أخطاء الكونسول صفر · تهيئة الوقود والمسدسات محفوظة · شاشة الدخول جاهزة للتسليم إلى Flutter/Web. متوقف لمراجعة المالك.</span></span>
+  </div>
+</div>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() {
+    const OK = "#1B7F4D", B = "#1A237E";
+    return {
+      kpis: [
+        { value: "4", label: "تغييرات أساس مُغلقة" },
+        { value: "1.5.4", label: "إصدار الأساس (مُجمَّد)" },
+        { value: "17", label: "مسار ويب منفّذ" },
+        { value: "0", label: "أخطاء كونسول" }
+      ],
+      changes: [
+        { id: "CC-009", title: "إكمال تمرير الشِل المُجمَّد", result: "AppShell يمرّر عقد التنقل إلى Sidebar · حُلّت ملكية زر المتابعة في المصادقة (زر واحد فقط)", ver: "1.5.1" },
+        { id: "CC-010", title: "احتواء تمرير القائمة + زر الطي", result: "القائمة تُمرَّر رأسياً دون شريط مرئي · زر طي مستطيل 18×54 على الحد الداخلي، مخفي حتى المرور · Peek يُظهر الأسماء عند الطي", ver: "1.5.2" },
+        { id: "CC-011", title: "توحيد صفحة الحساب", result: "«الأمان والبصمة» نُقلت داخل «حسابي» · قائمة المستخدم بندان فقط: حسابي + تسجيل الخروج", ver: "1.5.3" },
+        { id: "CC-012", title: "NPAuthLogin — شاشة الدخول W01", result: "مكوّن واحد + أربع نسخ (عربي/إنجليزي × فاتح/داكن) · مسار الدخول في التطبيق يستهلك المكوّن نفسه", ver: "1.5.4" }
+      ],
+      sidebar: [
+        { icon: "list", title: "التمرير الرأسي لم يكن يعمل", body: "الحد الأدنى التلقائي لعنصر Flex كان يجعل القائمة تنمو خارج ارتفاع الشِل، فلا تصل منطقة التنقل إلى حد التمرير أصلاً.", proof: "قياس: 764px داخل شِل 540px → أصبح 540/540 ومحتوى 490 في نافذة 266", icon: "list" },
+        { icon: "collapse", title: "زر الطي كان غائباً", body: "المكوّن المعتمد لم يكن يملك زر طي؛ أُضيف كقدرة اختيارية (collapsible) لا تظهر لأي مثيل لم يطلبها.", proof: "18×54 · تعبئة الهوية · اختفاء كامل حتى مرور المؤشر على القائمة" },
+        { icon: "alert", title: "الزر لم يكن يستجيب للنقر", body: "كان صف التنقل يتلقّى النقر بدلاً من الزر؛ أصبح الزر هو هدف النقر دائماً مع Gutter بعرض 24px فلا يقع أي محتوى تحته.", proof: "elementFromPoint → np-sidebar__collapse · 256 ⇄ 76" },
+        { icon: "inventory", title: "ترتيب الأيقونات عند الطي", body: "شارات العدد (٨ و١٢) كانت تدفع الأيقونات عن المحور؛ أصبحت علامة زاوية على البلاطة مع بقاء الرقم ظاهراً وفي الاسم المقروء آلياً.", proof: "كل صف 60px والأيقونة في المنتصف 30/60" },
+        { icon: "user", title: "بطاقة المستخدم عند الـPeek", body: "كان السطران يتراكبان بسبب قاعدة display:block؛ عادا إلى عمود مرن مع قص نصي نظيف.", proof: "السطران 470 / 498 داخل بطاقة 240px" }
+      ],
+      variants: [
+        { name: "NPAuthLogin / AR / Light", dir: "RTL", font: "Tajawal", w: "540px", h: "365px" },
+        { name: "NPAuthLogin / AR / Dark", dir: "RTL", font: "Tajawal", w: "540px", h: "365px" },
+        { name: "NPAuthLogin / EN / Light", dir: "LTR", font: "Inter", w: "540px", h: "357px" },
+        { name: "NPAuthLogin / EN / Dark", dir: "LTR", font: "Inter", w: "540px", h: "357px" }
+      ],
+      polish: [
+        { title: "عرض الكرت", body: "صُحِّح إلى 540px بحد أدنى 480 وأقصى 560، وحشوة داخلية 36px، مع بقاء الحقول (52px) والزر (54px) بعرض كامل والارتفاع كما هو." },
+        { title: "روابط الفوتر", body: "أصبحت #1A237E بوزن 600 بدل الرمادي الفاتح — مقروءة بوضوح فوق الخلفية الفاتحة، ومع تباين مناسب في الوضع الداكن (#DCE8F8)." },
+        { title: "نص الحقوق", body: "#455A64 في الفاتح و#B8C5D6 في الداكن — واضح دون أن يسحب الانتباه." },
+        { title: "معالجة صورة المحطة", body: "نفس الأصل في الوضعين: تدرّج داكن وتباين أعلى قليلاً مع الحفاظ على إضاءة المظلة الزرقاء — بدون استبدال أو تغيير للصورة." }
+      ],
+      state: [
+        { label: "صفحات التصميم النشطة", value: "64", ink: B },
+        { label: "صفحات مجهولة التصنيف", value: "0", ink: OK },
+        { label: "تعريفات معتمدة مكرّرة", value: "0", ink: OK },
+        { label: "استيرادات مكسورة", value: "0", ink: OK },
+        { label: "شِل مكرّر داخل NP Web", value: "0", ink: OK },
+        { label: "«ديزل» مثبّتة في الكود", value: "0", ink: OK },
+        { label: "صفحات منتج الويب", value: "1", ink: B },
+        { label: "شاشات الجوال المنفّذة", value: "0", ink: B }
+      ],
+      gaps: [
+        { title: "لا يوجد مخطط Tokens داكن", body: "np-tokens.css يحتوي المخطط الفاتح فقط؛ لوحة الوضع الداكن محصورة داخل NPAuthLogin حتى إقرار مجموعة Tokens داكنة معتمدة." },
+        { title: "أيقونات ناقصة في السجل", body: "لا توجد lock / mail / fingerprint؛ استُخدمت certificate و attachment و worker-id بدلاً منها دون تعديل سجل الأيقونات." },
+        { title: "NPDataTable بلا عقد أنواع خلايا", body: "جداول المنتج تستخدم خمس معالجات (منتج · فرق · ترتيب · مسدس · إجراء) لا يعبّر عنها عقد الأعمدة الحالي، فبقيت محتوى شاشة وليست جدولاً معتمداً." }
+      ],
+      decisions: [
+        { title: "الفروقات البصرية للشِل", body: "قبول التركيب المعتمد للشريط العلوي (محطة · قطاع · مزامنة) أو فتح إضافة اختيارية لفتحات البحث والسياق." },
+        { title: "العناصر الفرعية في التنقل", body: "قبول الصفوف المسطّحة مع مجموعة «تهيئة المحطة»، أو إضافة مستوى ثانٍ للتنقل في المكوّن المعتمد." },
+        { title: "Tokens الوضع الداكن", body: "إقرار مجموعة داكنة رسمية لنقل لوحة شاشة الدخول من المكوّن إلى الأساس." },
+        { title: "عقد أنواع الخلايا", body: "الموافقة على توسيع NPDataTable بخمسة أنواع خلايا لنقل جداول المنتج إلى الجدول المعتمد." }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

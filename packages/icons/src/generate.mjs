@@ -7,7 +7,7 @@ import { createHash } from 'node:crypto';
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadAliasTable, loadIconRegistry } from './load-registry.mjs';
 
 export const GENERATOR_VERSION = '1.0.0';
@@ -141,4 +141,4 @@ async function main() {
   console.log(`written     ${geometry.length} svg · icons.json · icons.dart · icons.ts · ${FINGERPRINT_DENSITIES.length} fingerprint assets`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) await main();
+if (import.meta.url === pathToFileURL(process.argv[1]).href) await main();

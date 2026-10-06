@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../np-tokens.css">
+<script src="../np-icons.js"></script>
+<style>html,body{margin:0;background:#EEF2F8}</style>
+</helmet>
+<div dir="rtl" style="padding:44px;display:flex;flex-direction:column;gap:30px;font-family:'Noto Sans Arabic',system-ui,sans-serif;color:#37474F;background:#EEF2F8">
+
+  <header style="display:flex;flex-direction:column;gap:10px;max-width:1120px">
+    <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:7px;background:#1A237E;color:#fff;font-family:Inter,sans-serif;font-size:11px;font-weight:700">NP-WO-CD-06 · MOBILE FOUNDATION</span>
+    <h1 style="margin:0;font-size:31px;font-weight:700;color:#1A237E">01 · أساس الجوال</h1>
+    <p style="margin:0;font-size:14.5px;line-height:26px;color:#546E7A;text-wrap:pretty">قيَم جاهزة للتسليم المباشر إلى Flutter: ألوان، خطوط، مسافات، أنصاف أقطار، ظلال، حقول، أزرار، بطاقات، تنقل سفلي، وحالات. مبنية على هوية نايل بترو المعتمدة — لا لون جديد ولا شعار بديل. RTL أصلي مع خصائص منطقية.</p>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;padding-top:3px">
+      <sc-for list="{{rules}}" as="r" hint-placeholder-count="5">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border:1px solid #DDE4EE;border-radius:8px;background:#fff;font-family:Inter,sans-serif;font-size:11.5px;font-weight:600;color:#1A237E">{{r}}</span>
+      </sc-for>
+    </div>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:14px;padding:24px;background:#fff;border:1px solid #DDE4EE;border-radius:18px">
+    <h2 style="margin:0;font-size:19px;font-weight:700;color:#1A237E">١ · الألوان</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:11px">
+      <sc-for list="{{colors}}" as="c" hint-placeholder-count="8">
+        <div style="display:flex;flex-direction:column;border:1px solid #E0E6ED;border-radius:12px;overflow:hidden">
+          <span style="height:62px;background:{{c.hex}};border-bottom:1px solid #E0E6ED"></span>
+          <span style="display:flex;flex-direction:column;gap:2px;padding:10px 11px">
+            <b style="font-size:12px;color:#263238">{{c.name}}</b>
+            <span style="font-family:Inter,sans-serif;font-size:11px;color:#1A237E">{{c.hex}}</span>
+            <span style="font-family:Inter,sans-serif;font-size:9.5px;color:#78909C">{{c.token}}</span>
+          </span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px">
+    <div style="display:flex;flex-direction:column;gap:13px;padding:24px;background:#fff;border:1px solid #DDE4EE;border-radius:18px">
+      <h2 style="margin:0;font-size:19px;font-weight:700;color:#1A237E">٢ · الخطوط</h2>
+      <sc-for list="{{type}}" as="t" hint-placeholder-count="7">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid #EDF1F6">
+          <span style="font-size:{{t.size}};line-height:{{t.line}};font-weight:{{t.weight}};color:#1F2A37">{{t.sample}}</span>
+          <span style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:1px;font-family:Inter,sans-serif">
+            <b style="font-size:11px;color:#1A237E">{{t.name}}</b>
+            <span style="font-size:10px;color:#78909C">{{t.spec}}</span>
+          </span>
+        </div>
+      </sc-for>
+      <span style="font-size:11px;color:#607D8B">العربية: 'Noto Sans Arabic' · اللاتينية والأرقام: Inter بأرقام جدولية.</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:13px;padding:24px;background:#fff;border:1px solid #DDE4EE;border-radius:18px">
+      <h2 style="margin:0;font-size:19px;font-weight:700;color:#1A237E">٣ · المسافات وأنصاف الأقطار والظلال</h2>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{space}}" as="s" hint-placeholder-count="7">
+          <span style="display:flex;align-items:center;gap:11px">
+            <span style="height:12px;border-radius:3px;background:#2962FF;width:{{s.w}}"></span>
+            <b style="font-family:Inter,sans-serif;font-size:11px;color:#1A237E">{{s.name}}</b>
+            <span style="font-family:Inter,sans-serif;font-size:11px;color:#78909C">{{s.px}}</span>
+          </span>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;padding-top:4px">
+        <sc-for list="{{radii}}" as="r" hint-placeholder-count="4">
+          <span style="display:flex;flex-direction:column;align-items:center;gap:5px">
+            <span style="width:56px;height:44px;background:#EAF0FB;border:1.5px solid #2962FF;border-radius:{{r.px}}"></span>
+            <span style="font-family:Inter,sans-serif;font-size:10px;color:#546E7A">{{r.name}}</span>
+          </span>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;padding-top:6px">
+        <sc-for list="{{shadows}}" as="sh" hint-placeholder-count="3">
+          <span style="display:flex;flex-direction:column;align-items:center;gap:6px">
+            <span style="width:76px;height:48px;background:#fff;border-radius:12px;box-shadow:{{sh.css}}"></span>
+            <span style="font-family:Inter,sans-serif;font-size:10px;color:#546E7A">{{sh.name}}</span>
+          </span>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;padding:24px;background:#fff;border:1px solid #DDE4EE;border-radius:18px">
+    <h2 style="margin:0;font-size:19px;font-weight:700;color:#1A237E">٤ · المكوّنات</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px">
+
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <b style="font-size:13px;color:#455A64">الحقول — 58px</b>
+        <sc-for list="{{fields}}" as="f" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:12px;font-weight:600;color:#37474F">{{f.label}}</span>
+            <span style="display:flex;align-items:center;gap:11px;height:58px;box-sizing:border-box;padding:0 16px;border:1.5px solid {{f.bd}};border-radius:14px;background:{{f.bg}};color:{{f.ink}}">
+              <np-icon name="{{f.icon}}" size="19"></np-icon>
+              <span style="flex:1;min-width:0;font-size:14.5px;color:{{f.textInk}}">{{f.value}}</span>
+              <sc-if value="{{f.hasTrail}}" hint-placeholder-val="{{ false }}"><np-icon name="{{f.trail}}" size="19"></np-icon></sc-if>
+            </span>
+            <sc-if value="{{f.hasHint}}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;color:{{f.hintInk}}">{{f.hint}}</span></sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <b style="font-size:13px;color:#455A64">الأزرار — 56px</b>
+        <sc-for list="{{buttons}}" as="b" hint-placeholder-count="5">
+          <span style="display:flex;align-items:center;justify-content:center;gap:10px;height:56px;box-sizing:border-box;border:{{b.border}};border-radius:14px;background:{{b.bg}};color:{{b.ink}};font-size:15.5px;font-weight:700;opacity:{{b.opacity}}"><np-icon name="{{b.icon}}" size="19"></np-icon>{{b.label}}</span>
+        </sc-for>
+        <b style="font-size:13px;color:#455A64;padding-top:6px">البطاقات — 18px</b>
+        <div style="display:flex;flex-direction:column;gap:5px;padding:16px;border:1px solid #E3EAF3;border-radius:18px;background:#fff;box-shadow:0 6px 18px rgba(26,35,126,.06)">
+          <span style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <b style="font-size:14px;color:#1F2A37">مسدس 03 · بنزين</b>
+            <span style="display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:7px;background:#EFF8F2;color:#1B7F4D;border:1px solid #BFE3CE;font-size:11px;font-weight:700"><np-icon name="check" size="12"></np-icon>مُفعّل</span>
+          </span>
+          <span style="font-family:Inter,sans-serif;direction:ltr;font-size:20px;font-weight:700;color:#1A237E">15,420.350</span>
+          <span style="font-size:11.5px;color:#607D8B">قراءة البداية — لتر</span>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <b style="font-size:13px;color:#455A64">التنقل السفلي — 64px · هدف لمس 48px</b>
+        <div style="display:flex;align-items:stretch;height:64px;border:1px solid #E3EAF3;border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 -4px 16px rgba(26,35,126,.05)">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:{{t.ink}};background:{{t.bg}}">
+              <np-icon name="{{t.icon}}" size="21"></np-icon>
+              <span style="font-size:10.5px;font-weight:{{t.weight}}">{{t.label}}</span>
+            </span>
+          </sc-for>
+        </div>
+
+        <b style="font-size:13px;color:#455A64;padding-top:6px">الحالات</b>
+        <sc-for list="{{states}}" as="s" hint-placeholder-count="5">
+          <span style="display:flex;align-items:flex-start;gap:10px;padding:12px 13px;border:1px solid {{s.bd}};border-radius:14px;background:{{s.bg}}">
+            <np-icon name="{{s.icon}}" size="17"></np-icon>
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+              <b style="font-size:12.5px;color:{{s.ink}}">{{s.title}}</b>
+              <span style="font-size:11px;line-height:17px;color:#607D8B;text-wrap:pretty">{{s.body}}</span>
+            </span>
+          </span>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:11px;padding:24px;background:#fff;border:1px solid #DDE4EE;border-radius:18px;max-width:1120px">
+    <h2 style="margin:0;font-size:19px;font-weight:700;color:#1A237E">٥ · جدول تسليم Flutter</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid #E8EDF3;border-radius:12px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:210px 160px minmax(0,1fr);gap:10px;padding:9px 12px;background:#F1F5FB;font-size:11px;font-weight:700;color:#1A237E">
+        <span>المتغيّر</span><span>القيمة</span><span>الاستخدام</span>
+      </div>
+      <sc-for list="{{handoff}}" as="row" hint-placeholder-count="10">
+        <div style="display:grid;grid-template-columns:210px 160px minmax(0,1fr);gap:10px;padding:8px 12px;border-top:1px solid #EDF1F6;font-size:11.5px">
+          <span style="font-family:Inter,sans-serif;font-size:10.5px;color:#1A237E">{{row.key}}</span>
+          <span style="font-family:Inter,sans-serif;font-size:10.5px;color:#263238">{{row.value}}</span>
+          <span style="color:#607D8B">{{row.use}}</span>
+        </div>
+      </sc-for>
+    </div>
+    <span style="font-size:11px;line-height:19px;color:#607D8B;text-wrap:pretty">فجوة مُبلَّغ عنها: لا يوجد مخطط Tokens داكن في np-tokens.css، وسجل الأيقونات لا يحتوي lock / mail / fingerprint. لم يُعدَّل الأساس المُجمَّد.</span>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+/* 01 · Mobile Foundation — NP-WO-CD-06.
+   Values only; no Foundation file was modified. Colours are the approved
+   Nile Petro identity, geometry follows the owner's mobile rules
+   (touch ≥48, base spacing 4, primary ≥56, inputs 56–60, cards 16–20). */
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      rules: ["هدف اللمس ≥ 48", "وحدة المسافة 4", "الزر الأساسي 56", "الحقول 58", "البطاقات 18", "RTL أصلي — خصائص منطقية"],
+      colors: [
+        { name: "الأزرق الأساسي", hex: "#2962FF", token: "color.primary" },
+        { name: "الأزرق العميق", hex: "#1A237E", token: "color.primary.deep" },
+        { name: "أزرق سماوي", hex: "#EAF0FB", token: "color.primary.surface" },
+        { name: "الخلفية", hex: "#F5F8FC", token: "color.background.light" },
+        { name: "السطح", hex: "#FFFFFF", token: "color.surface.light" },
+        { name: "النص الأساسي", hex: "#1F2A37", token: "color.text.primary.light" },
+        { name: "النص الثانوي", hex: "#607D8B", token: "color.text.secondary.light" },
+        { name: "الحدود", hex: "#E3EAF3", token: "color.border.light" },
+        { name: "نجاح", hex: "#1B7F4D", token: "color.success" },
+        { name: "تحذير", hex: "#F57C00", token: "color.warning" },
+        { name: "خطر", hex: "#B3261E", token: "color.danger" },
+        { name: "دون اتصال", hex: "#455A64", token: "color.offline" }
+      ],
+      type: [
+        { name: "Display", spec: "28 / 38 · 700", size: "28px", line: "38px", weight: "700", sample: "وردية نشطة" },
+        { name: "H1", spec: "22 / 32 · 700", size: "22px", line: "32px", weight: "700", sample: "قراءة العدادات" },
+        { name: "H2", spec: "18 / 26 · 700", size: "18px", line: "26px", weight: "700", sample: "ملخص الوردية" },
+        { name: "Body", spec: "15 / 24 · 400", size: "15px", line: "24px", weight: "400", sample: "أدخل قراءة المسدس الحالية" },
+        { name: "Body Small", spec: "13 / 20 · 400", size: "13px", line: "20px", weight: "400", sample: "بانتظار المزامنة" },
+        { name: "Label", spec: "13 / 18 · 600", size: "13px", line: "18px", weight: "600", sample: "نوع الوقود" },
+        { name: "Caption", spec: "11 / 16 · 500", size: "11px", line: "16px", weight: "500", sample: "آخر تحديث 06:12 ص" }
+      ],
+      space: [
+        { name: "space.1", px: "4px", w: "4px" },
+        { name: "space.2", px: "8px", w: "8px" },
+        { name: "space.3", px: "12px", w: "12px" },
+        { name: "space.4", px: "16px", w: "16px" },
+        { name: "space.5", px: "20px", w: "20px" },
+        { name: "space.6", px: "24px", w: "24px" },
+        { name: "space.8", px: "32px", w: "32px" }
+      ],
+      radii: [
+        { name: "radius.sm 8", px: "8px" },
+        { name: "radius.md 14", px: "14px" },
+        { name: "radius.lg 18", px: "18px" },
+        { name: "radius.full", px: "999px" }
+      ],
+      shadows: [
+        { name: "elevation.1", css: "0 4px 12px rgba(26,35,126,.08)" },
+        { name: "elevation.2", css: "0 8px 20px rgba(26,35,126,.12)" },
+        { name: "elevation.3", css: "0 16px 34px rgba(26,35,126,.18)" }
+      ],
+      fields: [
+        { label: "افتراضي", icon: "worker-id", value: "رمز العامل", bd: "#E3EAF3", bg: "#FCFDFF", ink: "#90A4AE", textInk: "#90A4AE", hasTrail: false, hasHint: false },
+        { label: "تركيز", icon: "certificate", value: "••••••••", bd: "#2962FF", bg: "#FFFFFF", ink: "#2962FF", textInk: "#1F2A37", hasTrail: true, trail: "eye", hasHint: false },
+        { label: "ممتلئ", icon: "fuel-pump", value: "مسدس 03 · بنزين", bd: "#E3EAF3", bg: "#FFFFFF", ink: "#1A237E", textInk: "#1F2A37", hasTrail: true, trail: "chevron-down", hasHint: false },
+        { label: "خطأ تحقق", icon: "gauge", value: "12,400.000", bd: "#E4736F", bg: "#FDF1F1", ink: "#B3261E", textInk: "#1F2A37", hasTrail: true, trail: "alert", hasHint: true, hint: "القراءة أقل من قراءة البداية — العداد يتناقص", hintInk: "#B3261E" },
+        { label: "معطّل", icon: "camera", value: "صورة العداد غير متاحة", bd: "#ECEFF3", bg: "#F5F7FA", ink: "#B0BEC5", textInk: "#B0BEC5", hasTrail: false, hasHint: true, hint: "غير متاح دون اتصال", hintInk: "#78909C" }
+      ],
+      buttons: [
+        { label: "بدء وردية", icon: "check", bg: "#2962FF", ink: "#fff", border: "0", opacity: "1" },
+        { label: "جارٍ الحفظ…", icon: "refresh", bg: "#1E52E0", ink: "#fff", border: "0", opacity: "1" },
+        { label: "حفظ محلي", icon: "download", bg: "#FFFFFF", ink: "#1A237E", border: "1.5px solid #2962FF", opacity: "1" },
+        { label: "إلغاء الوردية", icon: "alert", bg: "#FFFFFF", ink: "#B3261E", border: "1.5px solid #E4736F", opacity: "1" },
+        { label: "غير متاح", icon: "close", bg: "#ECEFF3", ink: "#78909C", border: "0", opacity: ".8" }
+      ],
+      tabs: [
+        { label: "الرئيسية", icon: "home", ink: "#1A237E", bg: "#EAF0FB", weight: "700" },
+        { label: "الوردية", icon: "shift-log", ink: "#78909C", bg: "transparent", weight: "500" },
+        { label: "التنبيهات", icon: "bell", ink: "#78909C", bg: "transparent", weight: "500" },
+        { label: "الحساب", icon: "user", ink: "#78909C", bg: "transparent", weight: "500" }
+      ],
+      states: [
+        { title: "لا توجد وردية مفتوحة", body: "حالة فراغ مع الإجراء الأساسي: بدء وردية.", icon: "empty", bg: "#F7F9FC", bd: "#E3EAF3", ink: "#37474F" },
+        { title: "جارٍ التحميل", body: "هيكل تحميل للبطاقات والقوائم — لا شاشة منفصلة.", icon: "refresh", bg: "#F4F1FB", bd: "#D6CEEA", ink: "#4527A0" },
+        { title: "بانتظار المزامنة", body: "حُفظ محلياً وسيُرسل تلقائياً عند عودة الشبكة.", icon: "wifi-off", bg: "#F3F6FB", bd: "#C7D3E6", ink: "#455A64" },
+        { title: "تم الحفظ", body: "تأكيد عابر ثم العودة إلى الوردية.", icon: "check", bg: "#EFF8F2", bd: "#BFE3CE", ink: "#1B7F4D" },
+        { title: "فشلت المزامنة", body: "إعادة المحاولة — البيانات تبقى محفوظة محلياً.", icon: "alert", bg: "#FDF1F1", bd: "#F0BFBD", ink: "#B3261E" },
+        { title: "غير مصرّح", body: "الإجراء معطّل بسبب ظاهر — لا مسار مسدود.", icon: "info", bg: "#FFF8EE", bd: "#F5D9AE", ink: "#8D4E00" }
+      ],
+      handoff: [
+        { key: "spacing.base", value: "4", use: "وحدة كل المسافات" },
+        { key: "touch.min", value: "48", use: "أصغر هدف لمس مسموح" },
+        { key: "button.primary.height", value: "56", use: "الزر الأساسي" },
+        { key: "input.height", value: "58", use: "الحقول (المدى المعتمد 56–60)" },
+        { key: "card.radius", value: "18", use: "البطاقات (المدى 16–20)" },
+        { key: "input.radius", value: "14", use: "الحقول والأزرار" },
+        { key: "bottomnav.height", value: "64", use: "التنقل السفلي" },
+        { key: "icon.size", value: "19 / 21", use: "داخل الحقول / التنقل السفلي" },
+        { key: "font.arabic", value: "'Noto Sans Arabic'", use: "كل النصوص العربية" },
+        { key: "font.latin", value: "Inter (tabular)", use: "الأرقام والقراءات والمبالغ" },
+        { key: "screen.padding", value: "16", use: "حشوة الشاشة الأفقية" },
+        { key: "breakpoint.compact", value: "< 768", use: "هاتف — التصميم الأساسي 390" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

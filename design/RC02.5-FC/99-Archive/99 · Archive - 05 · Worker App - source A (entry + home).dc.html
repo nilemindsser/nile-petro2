@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="../np-icons.js"></script>
+<style>
+.stroke{fill:none;stroke:currentColor;stroke-width:4.6;stroke-linecap:round;stroke-linejoin:round}
+.strokeS{fill:none;stroke:currentColor;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:currentColor}
+.i{display:inline-flex;flex:none;width:22px;height:22px;color:inherit}
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic','Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+.f{position:relative;box-sizing:border-box;width:390px;height:844px;flex:none;overflow:hidden;border-radius:24px;background:#F6F7FB;border:1px solid #E4E7EC;box-shadow:0 16px 40px rgba(31,35,48,.12);color:#1F2330}
+.hero{position:absolute;inset-block-start:0;inset-inline:0;height:318px;background:#1A237E;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 70% at 76% 6%,rgba(41,98,255,.55),transparent 62%)}
+.sweep{position:absolute;z-index:1;inset-block-start:150px;inset-inline-start:-42%;width:184%;height:520px;background:#F6F7FB;border-radius:52% 52% 0 0/62% 62% 0 0}
+.noz{position:absolute;z-index:2;inset-block-start:30px;inset-inline-start:-30px;width:240px;pointer-events:none;filter:drop-shadow(0 14px 20px rgba(10,18,50,.4))}
+.sta{position:absolute;z-index:1;inset-block-end:0;inset-inline:0;width:100%;opacity:.45;pointer-events:none}
+.sb{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:14px 20px 0;font-family:Inter,system-ui,sans-serif;font-size:13px;color:#fff}
+.body{position:absolute;z-index:3;inset-block-start:0;inset-inline:0;inset-block-end:0;display:flex;flex-direction:column;padding:0 20px}
+.card{background:#fff;border:1px solid #E4E7EC;border-radius:16px;box-shadow:0 10px 28px rgba(31,35,48,.07)}
+.lbl{display:block;font:600 13px/20px 'Noto Sans Arabic','Noto Sans Arabic',sans-serif;color:#1F2330;padding-bottom:6px}
+.fld{display:flex;align-items:center;gap:10px;height:56px;box-sizing:border-box;padding:0 14px;border:1px solid #E4E7EC;border-radius:12px;background:#fff;color:#90A4AE}
+.fld input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:400 14px/22px 'Noto Sans Arabic','Noto Sans Arabic',sans-serif;color:#1F2330}
+.fld input::placeholder{color:#90A4AE}
+.btn{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;box-sizing:border-box;border:0;border-radius:12px;background:#2962FF;color:#fff;font:700 16px/24px 'Noto Sans Arabic','Noto Sans Arabic',sans-serif;cursor:pointer}
+.btn2{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;box-sizing:border-box;border:1px solid #2962FF;border-radius:12px;background:#fff;color:#1A237E;font:700 15px/24px 'Noto Sans Arabic','Noto Sans Arabic',sans-serif;cursor:pointer}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate}
+.nav{position:absolute;z-index:4;inset-block-end:0;inset-inline:0;height:78px;display:flex;align-items:center;background:#fff;border-top:1px solid #E4E7EC}
+.tab{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:100%;font:600 11px/16px 'Noto Sans Arabic','Noto Sans Arabic',sans-serif}
+.wrap{display:flex;flex-direction:column;gap:9px}
+.nm{display:flex;align-items:baseline;gap:8px;font:500 11px/1.3 Inter,system-ui,sans-serif;color:#455A64}
+.tag{font:500 10px/1 Inter,system-ui,sans-serif;padding:3px 7px;background:#E4F2FD;color:#1A237E;border-radius:5px}
+h1,h2,h3{margin:0}
+</style>
+</helmet>
+<div dir="rtl" style="padding:40px;display:flex;flex-direction:column;gap:30px;color:#455A64;{{vars}}">
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
+<symbol id="nav-home" viewBox="0 0 64 64">
+  <path class="stroke" d="M10 28 32 12 54 28"></path>
+  <path class="stroke" d="M18 26v24h28V26"></path>
+  <path class="stroke" d="M27 50V36h10v14"></path>
+</symbol>
+<symbol id="nav-shift" viewBox="0 0 64 64">
+  <rect x="15" y="10" width="34" height="44" rx="6" class="stroke"></rect>
+  <path class="stroke" d="M23 20h18M23 30h18M23 40h14"></path>
+  <path class="stroke" d="M24 8v8M40 8v8"></path>
+</symbol>
+<symbol id="nav-bell" viewBox="0 0 64 64">
+  <path class="stroke" d="M20 26c0-7 5-12 12-12s12 5 12 12v11l5 7H5l5-7V26"></path>
+  <path class="stroke" d="M26 49c1.5 4 10.5 4 12 0"></path>
+  <circle cx="48" cy="16" r="5" fill="#E5262C"></circle>
+</symbol>
+<symbol id="nav-profile" viewBox="0 0 64 64">
+  <circle cx="32" cy="22" r="9" class="stroke"></circle>
+  <path class="stroke" d="M15 50c3-8 12-12 17-12s14 4 17 12"></path>
+</symbol>
+<symbol id="icon-pump" viewBox="0 0 64 64">
+  <rect x="12" y="12" width="24" height="40" rx="4" class="stroke"></rect>
+  <path class="stroke" d="M19 21h10M19 29h10"></path>
+  <path class="stroke" d="M36 18c4 0 6 2 6 6v15c0 4 2 6 6 6h3"></path>
+  <path class="stroke" d="M42 19l8 7v16"></path>
+</symbol>
+<symbol id="icon-camera" viewBox="0 0 64 64">
+  <path class="stroke" d="M13 20h11l4-5h8l4 5h11v29H13z"></path>
+  <circle cx="32" cy="35" r="10" class="stroke"></circle>
+  <circle cx="47" cy="26" r="2.4" class="fill"></circle>
+</symbol>
+<symbol id="icon-wallet" viewBox="0 0 64 64">
+  <rect x="10" y="18" width="44" height="30" rx="6" class="stroke"></rect>
+  <path class="stroke" d="M16 18v-4h22l9 4"></path>
+  <path class="stroke" d="M39 30h15v12H39a5 5 0 0 1 0-12z"></path>
+  <circle cx="44" cy="36" r="1.8" class="fill"></circle>
+</symbol>
+<symbol id="icon-meter" viewBox="0 0 64 64">
+  <path class="stroke" d="M14 40a18 18 0 1 1 36 0"></path>
+  <path class="stroke" d="M32 40l10-12"></path>
+  <circle cx="32" cy="40" r="3.5" class="fill"></circle>
+</symbol>
+<symbol id="icon-warning" viewBox="0 0 64 64">
+  <path d="M32 12 54 50H10L32 12z" fill="none" stroke="#B86600" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"></path>
+  <path d="M32 24v13" fill="none" stroke="#B86600" stroke-width="4.6" stroke-linecap="round"></path>
+  <circle cx="32" cy="43.5" r="2.6" fill="#B86600"></circle>
+</symbol>
+<symbol id="icon-support" viewBox="0 0 64 64">
+  <path class="stroke" d="M14 32a18 18 0 1 1 36 0"></path>
+  <rect x="12" y="32" width="10" height="16" rx="4" class="stroke"></rect>
+  <rect x="42" y="32" width="10" height="16" rx="4" class="stroke"></rect>
+  <path class="stroke" d="M42 48c0 5-4 8-9 8h-5"></path>
+</symbol>
+<symbol id="icon-globe" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="22" class="stroke"></circle>
+  <path class="strokeS" d="M10 32h44M32 10v44"></path>
+  <path class="strokeS" d="M20 14c4 5 6 11 6 18s-2 13-6 18M44 14c-4 5-6 11-6 18s2 13 6 18"></path>
+</symbol>
+<symbol id="np-fp" viewBox="0 0 64 64">
+  <path d="M16.5 26.5C19.8 19.9 25.4 16 32 16s12.2 3.9 15.5 10.5" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"></path>
+  <path d="M22 31.5c0-5.5 4.5-10 10-10s10 4.5 10 10" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"></path>
+  <path d="M28 34c0-2.2 1.8-4 4-4s4 1.8 4 4" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"></path>
+  <path d="M18.5 33.5c0 6.4-1.2 11.8-3.5 16.5" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"></path>
+  <path d="M45.5 33.5c0 6.4 1.2 11.8 3.5 16.5" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"></path>
+  <path d="M32 37v13" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"></path>
+</symbol>
+<symbol id="icon-fingerprint" viewBox="0 0 64 64">
+  <path class="strokeS" d="M23 25c0-5 4-9 9-9s9 4 9 9M20 30c0-7 5-13 12-13s12 6 12 13M17 34c0-10 7-17 15-17s15 7 15 17M24 34c0 10-1 14-4 20M32 33v16M40 34c0 10 1 14 4 20"></path>
+</symbol>
+<symbol id="icon-settings" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="8" class="stroke"></circle>
+  <path class="strokeS" d="M32 13v7M32 44v7M13 32h7M44 32h7M19 19l5 5M40 40l5 5M45 19l-5 5M24 40l-5 5"></path>
+</symbol>
+<symbol id="icon-sync" viewBox="0 0 64 64">
+  <path class="stroke" d="M49 24A18 18 0 0 0 19 18"></path>
+  <path class="stroke" d="M15 18h7v7"></path>
+  <path class="stroke" d="M15 40A18 18 0 0 0 45 46"></path>
+  <path class="stroke" d="M49 46h-7v-7"></path>
+</symbol>
+<symbol id="icon-offline" viewBox="0 0 64 64">
+  <path d="M13 25c11-10 27-10 38 0M20 32c8-7 16-7 24 0M28 39c3-3 5-3 8 0" fill="none" stroke="#90A4AE" stroke-width="4.6" stroke-linecap="round"></path>
+  <path d="M16 16 48 48" fill="none" stroke="#E5262C" stroke-width="4.6" stroke-linecap="round"></path>
+</symbol>
+<symbol id="icon-check" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="20" fill="#138A53" opacity="0.12"></circle>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#138A53" stroke-width="4.4"></circle>
+  <path d="M22 33l7 7 14-14" fill="none" stroke="#138A53" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"></path>
+</symbol>
+<symbol id="icon-error" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="20" fill="#E5262C" opacity="0.12"></circle>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#E5262C" stroke-width="4.4"></circle>
+  <path d="M24 24l16 16M40 24 24 40" fill="none" stroke="#E5262C" stroke-width="4.6" stroke-linecap="round"></path>
+</symbol>
+<symbol id="icon-info" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="20" fill="#2962FF" opacity="0.12"></circle>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#2962FF" stroke-width="4.4"></circle>
+  <path d="M32 29v12" fill="none" stroke="#2962FF" stroke-width="4.6" stroke-linecap="round"></path>
+  <circle cx="32" cy="21" r="2.6" fill="#2962FF"></circle>
+</symbol>
+<symbol id="icon-logout" viewBox="0 0 64 64">
+  <path class="stroke" d="M26 14H15v36h11"></path>
+  <path class="stroke" d="M34 22l12 10-12 10"></path>
+  <path class="stroke" d="M21 32h24"></path>
+</symbol>
+<symbol id="icon-droplet" viewBox="0 0 64 64">
+  <path d="M32 10C27 18 18 27 18 38a14 14 0 0 0 28 0c0-11-9-20-14-28z" fill="#2962FF"></path>
+</symbol>
+</defs>
+</svg>
+
+  <header style="display:flex;flex-direction:column;gap:9px;max-width:1080px">
+    <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;height:25px;padding:0 10px;border-radius:6px;background:#1A237E;color:#fff;font:500 10.5px/1 Inter,system-ui,sans-serif">NP-WO-CD-07 · PHASE 1 · OWNER REVIEW</span>
+    <h1 style="font:800 28px/1.25 'Noto Sans Arabic','Noto Sans Arabic',sans-serif;color:#1F2330">Nile Petro Worker App — أساس الجوال والمصادقة وهيكل التطبيق</h1>
+    <p style="font:400 13.5px/24px 'Noto Sans Arabic','Noto Sans Arabic',sans-serif;color:#455A64;max-width:900px;text-wrap:pretty">مبني على Foundation المعتمد: <b style="color:#1F2330">'Noto Sans Arabic'</b> للعربية و<b style="color:#1F2330">Inter</b> للأرقام والقيَم، ألوان الهوية <span class="mono">#1A237E</span> · <span class="mono">#2962FF</span>، أسطح <span class="mono">#F6F7FB</span> وحدود <span class="mono">#E4E7EC</span>. إطار <span class="mono">390×844</span> · RTL أصلي · هدف لمس <span class="mono">≥48</span> · الإجراء الأساسي <span class="mono">56</span>. لا صور شاشة ولا هاتف مجسّم. أنواع الوقود: بنزين و جاز.</p>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2 style="font:800 19px/1.3 'Noto Sans Arabic','Noto Sans Arabic',sans-serif;color:#1F2330">02 — المصادقة</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">01</span>screen_splash · animation-ready</span>
+        <article class="f" data-screen-label="01 Splash" style="background:#1A237E">
+          <span style="position:absolute;inset:0;background:radial-gradient(120% 60% at 72% 10%,rgba(41,98,255,.6),transparent 62%)"></span>
+          <div class="sb"><span>9:41</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#icon-meter"></use></svg></div>
+          <div style="position:absolute;z-index:3;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
+            <img src="../assets/np-logo-symbol.png" alt="Nile Petro" style="width:116px;height:116px;border-radius:28px;background:#fff;padding:14px;box-sizing:border-box;box-shadow:0 18px 38px rgba(10,18,50,.4)">
+            <b style="font:700 30px/1.2 'Noto Sans Arabic',sans-serif;color:#fff">Nile Petro</b>
+            <span style="font:400 15px/24px 'Noto Sans Arabic',sans-serif;color:#CFE0FD">معاً نحو طاقة أفضل</span>
+          </div>
+          <div style="position:absolute;z-index:3;inset-block-end:40px;inset-inline:0;display:flex;flex-direction:column;align-items:center;gap:8px">
+            <span style="width:32px;height:32px;border-radius:50%;border:2.5px solid rgba(255,255,255,.26);border-top-color:#fff"></span>
+            <span style="font:400 11px/16px Inter,system-ui,sans-serif;color:#CFE0FD">Powered by Nile Minds</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">02</span>screen_worker_login</span>
+        <article class="f" data-screen-label="02 Login">
+          <div class="hero"><span class="sweep"></span></div>
+          <img class="noz" src="../assets/np-nozzle-3d.png" alt="">
+          <div class="sb"><span>9:41</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#icon-meter"></use></svg></div>
+          <div class="body" style="padding-top:176px;padding-bottom:30px">
+            <img src="../assets/np-logo-wordmark.png" alt="Nile Petro" style="height:48px;width:auto;align-self:center;margin-bottom:4px">
+            <h3 style="align-self:center;font:800 26px/1.3 'Noto Sans Arabic',sans-serif;color:#1A237E;padding-top:12px">تسجيل الدخول</h3>
+            <span style="align-self:center;font:400 13px/22px 'Noto Sans Arabic',sans-serif;color:#455A64">أدخل رمز العامل وكلمة المرور للمتابعة</span>
+            <div class="card" style="margin-top:16px;padding:18px;display:flex;flex-direction:column;gap:13px">
+              <label><span class="lbl">رمز العامل</span><span class="fld"><svg class="i" style="width:19px;height:19px" viewBox="0 0 64 64"><use href="#nav-profile"></use></svg><input placeholder="أدخل رمز العامل"></span></label>
+              <label><span class="lbl">كلمة المرور</span><span class="fld"><svg class="i" style="width:19px;height:19px" viewBox="0 0 64 64"><use href="#np-fp"></use></svg><input type="password" placeholder="أدخل كلمة المرور"><svg class="i" style="width:19px;height:19px" viewBox="0 0 64 64"><use href="#icon-globe"></use></svg></span></label>
+              <button class="btn">متابعة</button>
+              <span style="font:400 12px/20px 'Noto Sans Arabic',sans-serif;color:#455A64;text-align:center">سيتم إرسال رمز التحقق بعد المتابعة</span>
+              <span style="display:flex;align-items:center;gap:10px"><span style="flex:1;height:1px;background:#E4E7EC"></span><span style="font:400 12px/1 'Noto Sans Arabic',sans-serif;color:#90A4AE">أو</span><span style="flex:1;height:1px;background:#E4E7EC"></span></span>
+              <button class="btn2"><img src="../assets/np-fingerprint-icon.png" alt="" style="width:24px;height:24px;object-fit:contain">استخدم البصمة</button>
+              <a href="#" style="font:700 13px/20px 'Noto Sans Arabic',sans-serif;text-align:center">نسيت كلمة المرور؟</a>
+            </div>
+          </div>
+          <img class="sta" src="../assets/np-station-illus.png" alt="">
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">03</span>screen_worker_otp</span>
+        <article class="f" data-screen-label="03 OTP">
+          <div class="hero"><span class="sweep"></span></div>
+          <img class="noz" src="../assets/np-nozzle-3d.png" alt="">
+          <div class="sb"><span>9:41</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#icon-meter"></use></svg></div>
+          <div class="body" style="padding-top:206px;padding-bottom:34px">
+            <img src="../assets/np-logo-wordmark.png" alt="Nile Petro" style="height:46px;width:auto;align-self:center;margin-bottom:4px">
+            <h3 style="align-self:center;font:800 25px/1.3 'Noto Sans Arabic',sans-serif;color:#1A237E;padding-top:14px">رمز التحقق</h3>
+            <span style="align-self:center;font:400 13px/22px 'Noto Sans Arabic',sans-serif;color:#455A64">أدخل رمز التحقق المرسل إلى هاتفك</span>
+            <div class="card" style="margin-top:18px;padding:18px 14px;display:flex;flex-direction:column;gap:14px">
+              <div dir="ltr" style="display:flex;gap:8px;justify-content:center">
+                <sc-for list="{{otp}}" as="o" hint-placeholder-count="6">
+                  <span style="width:46px;height:56px;display:flex;align-items:center;justify-content:center;border:1.5px solid {{o.bd}};border-radius:12px;background:#fff;font-family:Inter,system-ui,sans-serif;font-size:20px;color:#1A237E">{{o.v}}</span>
+                </sc-for>
+              </div>
+              <span style="font:400 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#455A64;text-align:center">لم تستلم الرمز؟ <b style="color:#2962FF" class="mono">إعادة الإرسال 00:59</b></span>
+            </div>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:11px">
+              <button class="btn">تحقق</button>
+              <button class="btn2">رجوع</button>
+            </div>
+          </div>
+          <img class="sta" src="../assets/np-station-illus.png" alt="">
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">04</span>screen_verification_success</span>
+        <article class="f" data-screen-label="04 Success">
+          <div class="hero"><span class="sweep"></span></div>
+          <img class="noz" src="../assets/np-nozzle-3d.png" alt="">
+          <div class="sb"><span>9:41</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#icon-meter"></use></svg></div>
+          <div class="body" style="padding-top:184px;padding-bottom:34px">
+            <img src="../assets/np-logo-wordmark.png" alt="Nile Petro" style="height:48px;width:auto;align-self:center;margin-bottom:4px">
+            <h3 style="align-self:center;font:800 24px/1.3 'Noto Sans Arabic',sans-serif;color:#1A237E;padding-top:14px">محطة النيل — السوق</h3>
+            <span style="align-self:center;display:flex;align-items:center;gap:10px;padding-top:8px"><span style="width:22px;height:2px;border-radius:2px;background:#2962FF"></span><span style="font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#455A64">إدارة قراءات العدادات بكل دقة وسهولة</span><span style="width:22px;height:2px;border-radius:2px;background:#2962FF"></span></span>
+
+            <div class="card" style="margin-top:20px;padding:30px 20px 24px;display:flex;flex-direction:column;align-items:center;gap:0">
+              <span style="position:relative;width:132px;height:132px;display:flex;align-items:center;justify-content:center">
+                <span style="position:absolute;inset:0;border-radius:50%;background:#ECFDF3"></span>
+                <span style="position:absolute;inset:14px;border-radius:50%;background:#ECFDF3"></span>
+                <span style="position:relative;width:76px;height:76px;border-radius:50%;background:#138A53;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px rgba(19,138,83,.32)"><svg class="i" style="width:38px;height:38px" viewBox="0 0 64 64"><path d="M22 33l7 7 14-14" fill="none" stroke="currentColor" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                <span style="position:absolute;inset-block-start:10px;inset-inline-end:16px;width:6px;height:6px;border-radius:50%;background:#138A53;opacity:.5"></span>
+                <span style="position:absolute;inset-block-end:18px;inset-inline-start:12px;width:5px;height:5px;border-radius:50%;background:#138A53;opacity:.4"></span>
+                <span style="position:absolute;inset-block-start:34px;inset-inline-start:4px;width:4px;height:4px;border-radius:50%;background:#138A53;opacity:.35"></span>
+              </span>
+              <h3 style="font:800 24px/1.35 'Noto Sans Arabic',sans-serif;color:#1A237E;padding-top:18px">تم التحقق بنجاح</h3>
+              <span style="font:400 13.5px/22px 'Noto Sans Arabic',sans-serif;color:#455A64;text-align:center;padding-top:6px">مرحبًا بك في تطبيق Nile Petro</span>
+              <span style="margin-top:16px;display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;border-radius:10px;background:#ECFDF3;border:1px solid #CDEFDC;color:#0B6B3A;font:500 12px/1 'Noto Sans Arabic',sans-serif"><svg class="i" style="width:14px;height:14px" viewBox="0 0 64 64"><use href="#icon-check"></use></svg>تم ربط الجهاز بحسابك</span>
+            </div>
+
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+              <button class="btn">المتابعة</button>
+              <span style="display:flex;align-items:center;justify-content:center;gap:7px;font:400 11.5px/18px 'Noto Sans Arabic',sans-serif;color:#90A4AE"><svg class="i" style="width:14px;height:14px" viewBox="0 0 64 64"><use href="#icon-info"></use></svg>الخطوة التالية: تفعيل البصمة (اختياري)</span>
+            </div>
+          </div>
+          <img class="sta" src="../assets/np-station-illus.png" alt="">
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">05</span>screen_enable_biometrics</span>
+        <article class="f" data-screen-label="05 Biometrics">
+          <div class="hero"><span class="sweep"></span></div>
+          <img class="noz" src="../assets/np-nozzle-3d.png" alt="" style="width:240px;inset-block-start:38px;inset-inline-start:-30px">
+          <div class="sb"><span>9:41</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#icon-meter"></use></svg></div>
+          <div class="body" style="padding-top:232px">
+            <img src="../assets/np-logo-wordmark.png" alt="Nile Petro" style="height:46px;width:auto;align-self:center;margin-bottom:4px">
+            <span style="align-self:center;display:flex;align-items:center;gap:9px;padding-top:6px"><span style="width:18px;height:1.5px;background:#E4E7EC"></span><b style="font:600 13px/20px 'Noto Sans Arabic',sans-serif;color:#90A4AE">Worker</b><span style="width:18px;height:1.5px;background:#E4E7EC"></span></span>
+            <h3 style="align-self:center;font:800 25px/1.35 'Noto Sans Arabic',sans-serif;color:#1A237E;padding-top:10px">تفعيل البصمة</h3>
+            <span style="align-self:center;max-width:300px;text-align:center;font:400 13.5px/23px 'Noto Sans Arabic',sans-serif;color:#455A64;padding-top:6px">استخدم بصمتك للدخول السريع والآمن</span>
+
+            <span style="align-self:center;margin-top:12px;position:relative;width:104px;height:104px;display:flex;align-items:center;justify-content:center">
+              <span style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#FFFFFF 40%,#E4F2FD)"></span>
+              <span style="position:absolute;inset:8px;border-radius:50%;border:1px solid #E4E7EC"></span>
+              <img src="../assets/np-fingerprint.png" alt="" style="position:relative;width:62px;height:62px;object-fit:contain">
+              <span style="position:absolute;inset-block-start:2px;inset-inline-start:2px;width:30px;height:30px;border-inline-start:3px solid #2962FF;border-block-start:3px solid #2962FF;border-start-start-radius:10px"></span>
+              <span style="position:absolute;inset-block-start:2px;inset-inline-end:2px;width:30px;height:30px;border-inline-end:3px solid #2962FF;border-block-start:3px solid #2962FF;border-start-end-radius:10px"></span>
+              <span style="position:absolute;inset-block-end:2px;inset-inline-start:2px;width:30px;height:30px;border-inline-start:3px solid #2962FF;border-block-end:3px solid #2962FF;border-end-start-radius:10px"></span>
+              <span style="position:absolute;inset-block-end:2px;inset-inline-end:2px;width:30px;height:30px;border-inline-end:3px solid #2962FF;border-block-end:3px solid #2962FF;border-end-end-radius:10px"></span>
+            </span>
+
+
+            <div style="margin-top:auto;padding-bottom:20px;display:flex;flex-direction:column;gap:9px">
+              <button class="btn">تفعيل البصمة</button>
+              <button class="btn2">لاحقاً</button>
+              <span style="display:flex;align-items:flex-start;gap:8px;padding:11px 12px;border-radius:10px;background:#F6F7FB;border:1px solid #E4E7EC;font:400 11px/18px 'Noto Sans Arabic',sans-serif;color:#455A64"><svg class="i" style="width:14px;height:14px" viewBox="0 0 64 64"><use href="#icon-info"></use></svg>لا نخزّن أي بيانات بصمة داخل Nile Petro — التحقق يعتمد على نظام الجهاز ويعمل على هذا الجهاز فقط.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2 style="font:800 19px/1.3 'Noto Sans Arabic','Noto Sans Arabic',sans-serif;color:#1F2330">03 — هيكل التطبيق والرئيسية</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">06</span>screen_worker_home · لا توجد وردية</span>
+        <article class="f" data-screen-label="06 Home">
+          <div class="hero" style="height:276px"><span class="sweep" style="inset-block-start:176px"></span></div>
+          <img class="noz" src="../assets/np-nozzle-3d.png" alt="" style="width:200px;inset-block-start:64px">
+          <div class="sb"><span>9:41</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#icon-meter"></use></svg></div>
+          <div class="body" style="padding-top:20px">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+              <span style="display:flex;flex-direction:column;gap:2px"><b style="font:700 18px/26px 'Noto Sans Arabic',sans-serif;color:#fff">مرحباً بك</b><span style="font:400 12px/20px 'Noto Sans Arabic',sans-serif;color:#CFE0FD">نتمنى لك وردية ناجحة اليوم</span></span>
+              <img src="../assets/np-logo-symbol.png" alt="Nile Petro" style="width:52px;height:52px;border-radius:15px;background:#fff;padding:7px;box-sizing:border-box;box-shadow:0 6px 16px rgba(10,18,50,.18)">
+            </div>
+            <div class="card" style="margin-top:112px;padding:16px;display:flex;flex-direction:column;gap:12px">
+              <span style="display:flex;align-items:center;gap:10px">
+                <span style="width:40px;height:40px;flex:none;border-radius:12px;background:#F2F4F7;color:#2962FF;display:flex;align-items:center;justify-content:center"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#nav-shift"></use></svg></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:700 15px/22px 'Noto Sans Arabic',sans-serif;color:#1F2330">لا توجد وردية مفتوحة</b><span style="font:400 11.5px/18px 'Noto Sans Arabic',sans-serif;color:#455A64">ابدأ ورديتك لتسجيل القراءات والعمليات</span></span>
+                <span style="flex:none;display:inline-flex;align-items:center;height:26px;padding:0 9px;border-radius:8px;background:#F2F4F7;border:1px solid #E4E7EC;font:500 11px/1 'Noto Sans Arabic',sans-serif;color:#455A64">لم تبدأ</span>
+              </span>
+              <button class="btn">بدء وردية</button>
+            </div>
+            <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:11px">
+              <sc-for list="{{actions}}" as="a" hint-placeholder-count="4">
+                <span class="card" style="padding:14px;display:flex;flex-direction:column;gap:8px;box-shadow:none">
+                  <span style="width:40px;height:40px;border-radius:12px;background:{{a.bg}};border:1px solid {{a.bd}};color:{{a.ink}};display:flex;align-items:center;justify-content:center"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="{{a.icon}}"></use></svg></span>
+                  <b style="font:700 13.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330">{{a.title}}</b>
+                  <span style="font:400 11px/18px 'Noto Sans Arabic',sans-serif;color:#455A64">{{a.meta}}</span>
+                </span>
+              </sc-for>
+            </div>
+            <span style="margin-top:auto;margin-bottom:92px;display:flex;align-items:flex-start;gap:10px;padding:13px 14px;border-radius:12px;background:#E4F2FD;border:1px solid #CFE0FD">
+              <svg class="i" style="width:17px;height:17px" viewBox="0 0 64 64"><use href="#icon-info"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#1A237E">معلومة سريعة</b><span style="font:400 11px/18px 'Noto Sans Arabic',sans-serif;color:#455A64">التسجيل الدقيق للقراءات يساهم في دقة التقارير.</span></span>
+            </span>
+          </div>
+          <div class="nav">
+            <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}">
+                <span style="position:relative;display:flex"><svg class="i" style="width:22px;height:22px" viewBox="0 0 64 64"><use href="{{t.icon}}"></use></svg><sc-if value="{{t.badge}}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset-block-start:-4px;inset-inline-end:-6px;min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:8px;background:#E5262C;color:#fff;font-family:Inter,system-ui,sans-serif;font-size:9.5px;display:flex;align-items:center;justify-content:center">{{t.count}}</span></sc-if></span>
+                {{t.label}}
+                <sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:#2962FF"></span></sc-if>
+              </span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap">
+        <span class="nm"><span class="tag">06b</span>screen_worker_home__active_shift · دون اتصال</span>
+        <article class="f" data-screen-label="06b Home active">
+          <div class="hero" style="height:276px"><span class="sweep" style="inset-block-start:176px"></span></div>
+          <img class="noz" src="../assets/np-nozzle-3d.png" alt="" style="width:170px;inset-block-start:104px;inset-inline-start:-22px">
+          <div class="sb"><span>9:41</span><svg class="i" style="width:15px;height:15px" viewBox="0 0 64 64"><use href="#icon-offline"></use></svg></div>
+          <div class="body" style="padding-top:20px;padding-bottom:92px">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+              <span style="display:flex;flex-direction:column;gap:2px"><b style="font:700 18px/26px 'Noto Sans Arabic',sans-serif;color:#fff">مرحباً بك</b><span style="font:400 12px/20px 'Noto Sans Arabic',sans-serif;color:#CFE0FD">وردية اليوم قيد التشغيل</span></span>
+              <img src="../assets/np-logo-symbol.png" alt="Nile Petro" style="width:52px;height:52px;border-radius:15px;background:#fff;padding:7px;box-sizing:border-box;box-shadow:0 6px 16px rgba(10,18,50,.18)">
+            </div>
+            <span style="margin-top:10px;display:flex;align-items:center;gap:9px;height:40px;padding:0 12px;border-radius:10px;background:#F2F4F7;border:1px solid #E4E7EC;color:#455A64">
+              <svg class="i" style="width:16px;height:16px" viewBox="0 0 64 64"><use href="#icon-offline"></use></svg>
+              <span style="flex:1;min-width:0;font:500 12px/18px 'Noto Sans Arabic',sans-serif">لا يوجد اتصال — يتم الحفظ محلياً</span>
+              <span class="mono" style="flex:none;display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:6px;background:#FFF6E8;border:1px solid #F6E0BE;color:#8A4B00;font-size:10.5px">3 pending</span>
+            </span>
+            <div class="card" style="margin-top:64px;padding:16px;display:flex;flex-direction:column;gap:12px">
+              <span style="display:flex;align-items:center;gap:10px">
+                <span style="width:40px;height:40px;flex:none;border-radius:12px;background:#ECFDF3;border:1px solid #CDEFDC;color:#0B6B3A;display:flex;align-items:center;justify-content:center"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="#nav-shift"></use></svg></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font:700 15px/22px 'Noto Sans Arabic',sans-serif;color:#1F2330">الوردية نشطة</b><span class="mono" style="font-size:11.5px;color:#455A64">06:12 — 03:24</span></span>
+                <span style="flex:none;display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;border-radius:8px;background:#ECFDF3;border:1px solid #CDEFDC;font:500 11px/1 'Noto Sans Arabic',sans-serif;color:#0B6B3A"><svg class="i" style="width:12px;height:12px" viewBox="0 0 64 64"><use href="#icon-check"></use></svg>نشطة</span>
+              </span>
+              <span style="display:flex;gap:8px">
+                <sc-for list="{{stats}}" as="s" hint-placeholder-count="3">
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:10px;border-radius:10px;background:#F6F7FB;border:1px solid #E4E7EC">
+                    <b class="mono" style="font-size:15px;color:#1A237E">{{s.v}}</b>
+                    <span style="font:400 10.5px/16px 'Noto Sans Arabic',sans-serif;color:#455A64">{{s.l}}</span>
+                  </span>
+                </sc-for>
+              </span>
+              <button class="btn">متابعة الوردية</button>
+            </div>
+            <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:11px">
+              <sc-for list="{{actions2}}" as="a" hint-placeholder-count="4">
+                <span class="card" style="padding:14px;display:flex;flex-direction:column;gap:8px;box-shadow:none">
+                  <span style="width:40px;height:40px;border-radius:12px;background:{{a.bg}};border:1px solid {{a.bd}};color:{{a.ink}};display:flex;align-items:center;justify-content:center"><svg class="i" style="width:20px;height:20px" viewBox="0 0 64 64"><use href="{{a.icon}}"></use></svg></span>
+                  <b style="font:700 13.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330">{{a.title}}</b>
+                  <span style="font:400 11px/18px 'Noto Sans Arabic',sans-serif;color:#455A64">{{a.meta}}</span>
+                </span>
+              </sc-for>
+            </div>
+          </div>
+          <div class="nav">
+            <sc-for list="{{tabs2}}" as="t" hint-placeholder-count="4">
+              <span class="tab" style="color:{{t.ink}}">
+                <span style="position:relative;display:flex"><svg class="i" style="width:22px;height:22px" viewBox="0 0 64 64"><use href="{{t.icon}}"></use></svg><sc-if value="{{t.badge}}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset-block-start:-4px;inset-inline-end:-6px;min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:8px;background:#E5262C;color:#fff;font-family:Inter,system-ui,sans-serif;font-size:9.5px;display:flex;align-items:center;justify-content:center">{{t.count}}</span></sc-if></span>
+                {{t.label}}
+                <sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span style="width:20px;height:3px;border-radius:2px;background:#2962FF"></span></sc-if>
+              </span>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap" style="flex:1 1 360px;min-width:340px">
+        <span class="nm"><span class="tag">01</span>component_states · أزرار وحقول واتصال</span>
+        <div style="display:flex;flex-direction:column;gap:12px;padding:18px;background:#fff;border:1px solid #E4E7EC;border-radius:16px">
+          <b style="font:600 13px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330">NPPrimaryButton · 56</b>
+          <sc-for list="{{btns}}" as="b" hint-placeholder-count="4">
+            <span style="display:flex;align-items:center;justify-content:center;gap:9px;height:56px;box-sizing:border-box;border:{{b.border}};border-radius:12px;background:{{b.bg}};color:{{b.ink}};font:700 15.5px/24px 'Noto Sans Arabic',sans-serif"><sc-if value="{{b.isImg}}" hint-placeholder-val="{{ false }}"><img src="../assets/np-fingerprint-icon.png" alt="" style="width:20px;height:20px;object-fit:contain"></sc-if><sc-if value="{{b.isSvg}}" hint-placeholder-val="{{ true }}"><svg class="i" style="width:18px;height:18px" viewBox="0 0 64 64"><use href="{{b.icon}}"></use></svg></sc-if>{{b.label}}</span>
+          </sc-for>
+          <b style="font:600 13px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330;padding-top:4px">NPTextField · 56</b>
+          <sc-for list="{{flds}}" as="f" hint-placeholder-count="5">
+            <span style="display:flex;flex-direction:column;gap:5px">
+              <span style="display:flex;align-items:center;gap:10px;height:56px;box-sizing:border-box;padding:0 14px;border:1.5px solid {{f.bd}};border-radius:12px;background:{{f.bg}};color:{{f.ink}}"><svg class="i" style="width:18px;height:18px" viewBox="0 0 64 64"><use href="{{f.icon}}"></use></svg><span style="flex:1;min-width:0;font:400 14px/22px 'Noto Sans Arabic',sans-serif;color:{{f.txt}}">{{f.value}}</span><span class="mono" style="font-size:10px;color:{{f.ink}}">{{f.state}}</span></span>
+              <sc-if value="{{f.hasHint}}" hint-placeholder-val="{{ false }}"><span style="font:400 11px/18px 'Noto Sans Arabic',sans-serif;color:{{f.ink}}">{{f.hint}}</span></sc-if>
+            </span>
+          </sc-for>
+          <b style="font:600 13px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330;padding-top:4px">SyncStatus — نص + لون + شكل</b>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{conn}}" as="c" hint-placeholder-count="6">
+              <span style="display:flex;align-items:center;gap:6px;height:32px;padding:0 10px;border-radius:8px;background:{{c.bg}};border:1px solid {{c.bd}};color:{{c.ink}};font:500 12.5px/20px 'Noto Sans Arabic',sans-serif"><svg class="i" style="width:14px;height:14px" viewBox="0 0 64 64"><use href="{{c.icon}}"></use></svg>{{c.label}}</span>
+            </sc-for>
+          </div>
+          <b style="font:600 13px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330;padding-top:4px">Shared states</b>
+          <sc-for list="{{shared}}" as="s" hint-placeholder-count="4">
+            <span style="display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid {{s.bd}};border-radius:12px;background:{{s.bg}}">
+              <svg class="i" style="width:17px;height:17px" viewBox="0 0 64 64"><use href="{{s.icon}}"></use></svg>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><b style="font:700 12.5px/20px 'Noto Sans Arabic',sans-serif;color:{{s.ink}}">{{s.title}}</b><span style="font:400 11px/18px 'Noto Sans Arabic',sans-serif;color:#455A64">{{s.body}}</span></span>
+            </span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:11px;padding:20px 22px;background:#fff;border:1px solid #E4E7EC;border-radius:16px;max-width:1080px">
+    <h2 style="font:800 18px/1.3 'Noto Sans Arabic','Noto Sans Arabic',sans-serif;color:#1F2330">تسليم Flutter — قياسات ورموز</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid #E4E7EC;border-radius:12px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:220px 170px minmax(0,1fr);gap:10px;padding:9px 12px;background:#F6F7FB;font:600 11px/18px Inter,system-ui,sans-serif;color:#1A237E"><span>token / layer</span><span>value</span><span style="font-family:'Noto Sans Arabic',sans-serif">الاستخدام</span></div>
+      <sc-for list="{{handoff}}" as="row" hint-placeholder-count="12">
+        <div style="display:grid;grid-template-columns:220px 170px minmax(0,1fr);gap:10px;padding:8px 12px;border-top:1px solid #F2F4F7">
+          <span class="mono" style="font-size:10.5px;color:#1A237E">{{row.key}}</span>
+          <span class="mono" style="font-size:10.5px;color:#1F2330">{{row.value}}</span>
+          <span style="font:400 11.5px/19px 'Noto Sans Arabic',sans-serif;color:#455A64">{{row.use}}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;padding-top:2px">
+      <sc-for list="{{report}}" as="r" hint-placeholder-count="10">
+        <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:10px;background:#F6F7FB;border:1px solid #E4E7EC">
+          <span style="font:400 11.5px/18px 'Noto Sans Arabic',sans-serif;color:#455A64">{{r.label}}</span>
+          <b class="mono" style="font-size:11.5px;color:{{r.ink}}">{{r.value}}</b>
+        </span>
+      </sc-for>
+    </div>
+    <span style="font:400 11.5px/20px 'Noto Sans Arabic',sans-serif;color:#455A64;text-wrap:pretty">متوقف لمراجعة المالك. فجوات مُبلَّغ عنها: سجل الأيقونات لا يحتوي lock / mail / fingerprint (استُخدمت certificate و parties و worker-id)، ولا يوجد مخطط Tokens داكن في الأساس — لم يُعدَّل أي ملف مُجمَّد.</span>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+/* NP Worker App — NP-WO-CD-07 Phase 1, built on the approved
+   Foundation & App Shell: 'Noto Sans Arabic' + Noto Sans Arabic for Arabic text,
+   Inter for numerals and technical values, #1A237E / #2962FF
+   identity, #F6F7FB surfaces, #E4E7EC borders, mobile target ≥48,
+   worker primary action 56. Real production frames — no mockups. */
+class Component extends DCLogic {
+  renderVals() {
+    const I = (n) => "#" + n;
+    return {
+      vars: "",
+      otp: [
+        { v: "4", bd: "#2962FF" }, { v: "7", bd: "#E4E7EC" }, { v: "2", bd: "#E4E7EC" },
+        { v: "|", bd: "#2962FF" }, { v: "", bd: "#E4E7EC" }, { v: "", bd: "#E4E7EC" }
+      ],
+      benefits: [
+        { icon: "#icon-check", title: "دخول سريع وآمن", meta: "بلمسة واحدة دون كتابة الرمز" },
+        { icon: "#np-fp", title: "يعمل على هذا الجهاز فقط", meta: "البصمة لا تُرسل ولا تُخزَّن في المنصة" },
+        { icon: "#icon-settings", title: "يمكنك إيقافه لاحقاً", meta: "من حسابي ← الأمان وتسجيل الدخول" }
+      ],
+      actions: [
+        { icon: "#icon-meter", title: "قراءة العدادات", meta: "إدخال قراءات المسدسات", bg: "#E4F2FD", bd: "#CFE0FD", ink: "#2962FF" },
+        { icon: "#icon-wallet", title: "تسجيل مصروف", meta: "مصروف جديد", bg: "#ECFDF3", bd: "#CDEFDC", ink: "#0B6B3A" },
+        { icon: "#icon-pump", title: "تسجيل توريد", meta: "بنزين أو جاز", bg: "#FFF6E8", bd: "#F6E0BE", ink: "#8A4B00" },
+        { icon: "#icon-support", title: "الدعم الفني", meta: "تواصل مع الفريق", bg: "#F2F4F7", bd: "#E4E7EC", ink: "#455A64" }
+      ],
+      actions2: [
+        { icon: "#icon-meter", title: "قراءة العدادات", meta: "3 من 6 مكتملة", bg: "#E4F2FD", bd: "#CFE0FD", ink: "#2962FF" },
+        { icon: "#icon-wallet", title: "تسجيل مصروف", meta: "2 اليوم", bg: "#ECFDF3", bd: "#CDEFDC", ink: "#0B6B3A" },
+        { icon: "#icon-pump", title: "تسجيل توريد", meta: "آخر توريد 06:40", bg: "#FFF6E8", bd: "#F6E0BE", ink: "#8A4B00" },
+        { icon: "#nav-shift", title: "إنهاء الوردية", meta: "بعد اكتمال القراءات", bg: "#F2F4F7", bd: "#E4E7EC", ink: "#455A64" }
+      ],
+      stats: [{ v: "3/6", l: "قراءات" }, { v: "2", l: "مصروفات" }, { v: "1", l: "توريد" }],
+      tabs: [
+        { label: "الرئيسية", icon: "#nav-home", ink: "#1A237E", active: true, badge: false, count: "" },
+        { label: "الوردية", icon: "#nav-shift", ink: "#90A4AE", active: false, badge: false, count: "" },
+        { label: "التنبيهات", icon: "#nav-bell", ink: "#90A4AE", active: false, badge: true, count: "3" },
+        { label: "حسابي", icon: "#nav-profile", ink: "#90A4AE", active: false, badge: false, count: "" }
+      ],
+      tabs2: [
+        { label: "الرئيسية", icon: "#nav-home", ink: "#90A4AE", active: false, badge: false, count: "" },
+        { label: "الوردية", icon: "#nav-shift", ink: "#1A237E", active: true, badge: false, count: "" },
+        { label: "التنبيهات", icon: "#nav-bell", ink: "#90A4AE", active: false, badge: true, count: "5" },
+        { label: "حسابي", icon: "#nav-profile", ink: "#90A4AE", active: false, badge: false, count: "" }
+      ],
+      btns: [
+        { label: "متابعة", icon: "#icon-check", isSvg: true, bg: "#2962FF", ink: "#fff", border: "0" },
+        { label: "جارٍ التحقق…", icon: "#icon-sync", isSvg: true, bg: "#1A237E", ink: "#fff", border: "0" },
+        { label: "استخدم البصمة", isImg: true, bg: "#fff", ink: "#1A237E", border: "1px solid #2962FF" },
+        { label: "غير متاح", icon: "#icon-error", isSvg: true, bg: "#F2F4F7", ink: "#90A4AE", border: "1px solid #E4E7EC" }
+      ],
+      flds: [
+        { state: "empty", icon: "#nav-profile", value: "أدخل رمز العامل", bd: "#E4E7EC", bg: "#fff", ink: "#90A4AE", txt: "#90A4AE", hasHint: false },
+        { state: "focus", icon: "#np-fp", value: "••••••••", bd: "#2962FF", bg: "#fff", ink: "#2962FF", txt: "#1F2330", hasHint: false },
+        { state: "filled", icon: "#icon-pump", value: "مسدس 03 · بنزين", bd: "#E4E7EC", bg: "#fff", ink: "#1A237E", txt: "#1F2330", hasHint: false },
+        { state: "error", icon: "#icon-meter", value: "12,400.000", bd: "#E5262C", bg: "#FEF0F0", ink: "#B0141A", txt: "#1F2330", hasHint: true, hint: "القراءة أقل من قراءة البداية" },
+        { state: "disabled", icon: "#icon-camera", value: "صورة العداد", bd: "#E4E7EC", bg: "#F2F4F7", ink: "#90A4AE", txt: "#90A4AE", hasHint: true, hint: "غير متاح دون اتصال" }
+      ],
+      conn: [
+        { label: "متصل", icon: "#icon-check", bg: "#ECFDF3", bd: "#CDEFDC", ink: "#0B6B3A" },
+        { label: "جارٍ المزامنة", icon: "#icon-sync", bg: "#EFF6FF", bd: "#CFE0FD", ink: "#2563EB" },
+        { label: "بانتظار المزامنة", icon: "#icon-info", bg: "#FFF6E8", bd: "#F6E0BE", ink: "#8A4B00" },
+        { label: "غير متصل", icon: "#icon-offline", bg: "#F2F4F7", bd: "#E4E7EC", ink: "#455A64" },
+        { label: "تمت المزامنة", icon: "#icon-check", bg: "#ECFDF3", bd: "#CDEFDC", ink: "#0B6B3A" },
+        { label: "فشل المزامنة", icon: "#icon-warning", bg: "#FEF0F0", bd: "#F9D2D3", ink: "#B0141A" }
+      ],
+      shared: [
+        { title: "لا توجد وردية مفتوحة", body: "حالة فراغ مع الإجراء الأساسي: بدء وردية.", icon: "#icon-info", bg: "#F6F7FB", bd: "#E4E7EC", ink: "#1F2330" },
+        { title: "جارٍ التحميل", body: "هيكل تحميل للبطاقات — لا شاشة منفصلة.", icon: "#icon-sync", bg: "#EFF6FF", bd: "#CFE0FD", ink: "#2563EB" },
+        { title: "انتهت الجلسة", body: "العودة إلى الدخول مع حفظ المقصد.", icon: "#icon-info", bg: "#FFF6E8", bd: "#F6E0BE", ink: "#8A4B00" },
+        { title: "غير مصرّح", body: "الإجراء معطّل بسبب ظاهر — لا مسار مسدود.", icon: "#icon-warning", bg: "#FEF0F0", bd: "#F9D2D3", ink: "#B0141A" }
+      ],
+      handoff: [
+        { key: "frame.primary", value: "390 × 844", use: "الإطار الأساسي · مُختبر 360×800 · 393×852 · 430×932" },
+        { key: "screen.padding", value: "20", use: "حشوة الشاشة الأفقية" },
+        { key: "spacing.base", value: "4", use: "وحدة كل المسافات" },
+        { key: "touch.min", value: "48 × 48", use: "أصغر هدف لمس" },
+        { key: "action.worker.primary", value: "56 · radius 12", use: "الإجراء الأساسي للعامل" },
+        { key: "input.height", value: "56 · radius 12", use: "الحقول وكلمة المرور" },
+        { key: "otp.box", value: "46 × 56 · radius 12", use: "ستة صناديق رمز التحقق" },
+        { key: "card.radius", value: "16", use: "بطاقات الإجراءات والوردية" },
+        { key: "bottomnav.height", value: "78", use: "أربع تبويبات فقط" },
+        { key: "color.deep", value: "#1A237E", use: "الترويسة والعناوين والتبويب النشط" },
+        { key: "color.primary", value: "#2962FF", use: "الإجراء الأساسي وعلامة النشاط والتركيز" },
+        { key: "color.canvas", value: "#F6F7FB", use: "خلفية الشاشة" },
+        { key: "color.border", value: "#E4E7EC", use: "حدود البطاقات والفواصل" },
+        { key: "color.text", value: "#1F2330 / #455A64 / #90A4AE", use: "أساسي / ثانوي / خفيف" },
+        { key: "font.arabic", value: "'Noto Sans Arabic' 400·500·700·800", use: "كل النصوص العربية — قابلة للتحرير" },
+        { key: "font.fallback", value: "Noto Sans Arabic", use: "الاحتياطي التقني" },
+        { key: "font.values", value: "Inter", use: "الأرقام والقراءات والتوقيت — LTR معزول" },
+        { key: "asset.logo", value: "np-logo-wordmark.png", use: "الشعار المعتمد — دون تعديل" },
+        { key: "asset.icon", value: "np-logo-symbol.png", use: "أيقونة التطبيق المعتمدة" },
+        { key: "asset.nozzle", value: "np-nozzle-3d.png", use: "أصل تزييني — المصادقة والرئيسية فقط" },
+        { key: "asset.station", value: "np-station-illus.png", use: "أصل تزييني أسفل شاشات المصادقة" }
+      ],
+      report: [
+        { label: "شاشات منفّذة", value: "6", ink: "#1A237E" },
+        { label: "تبويبات التنقل", value: "4", ink: "#1A237E" },
+        { label: "حالات الأزرار / الحقول", value: "4 / 5", ink: "#1A237E" },
+        { label: "حالات الاتصال", value: "6", ink: "#1A237E" },
+        { label: "مهام / مستحقات", value: "0 / 0", ink: "#0B6B3A" },
+        { label: "ديزل", value: "0", ink: "#0B6B3A" },
+        { label: "Sign Up", value: "0", ink: "#0B6B3A" },
+        { label: "الأمان داخل حسابي", value: "PASS", ink: "#0B6B3A" },
+        { label: "هاتف مجسّم / صور شاشة", value: "0", ink: "#0B6B3A" },
+        { label: "مسارات مسدودة", value: "0", ink: "#0B6B3A" },
+        { label: "أخطاء كونسول", value: "0", ink: "#0B6B3A" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

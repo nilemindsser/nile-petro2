@@ -7,7 +7,7 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseTokens, resolveScope, scopesOf } from './parse-tokens.mjs';
 import { parseHex } from './color.mjs';
 
@@ -131,4 +131,4 @@ async function main() {
   console.log('written      dist/tokens.css · dist/np_tokens.dart · dist/tokens.ts');
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) await main();
+if (import.meta.url === pathToFileURL(process.argv[1]).href) await main();

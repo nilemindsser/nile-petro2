@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F6F7FB;font-family:'Noto Sans Arabic',system-ui,sans-serif}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+h1,h2,h3{margin:0}
+.wrap{padding:36px 40px 80px;display:flex;flex-direction:column;gap:38px;max-width:1500px}
+.sec{display:flex;flex-direction:column;gap:14px}
+.sh{font:800 21px/1.3 'Noto Sans Arabic',sans-serif;color:#1F2330}
+.sh small{display:block;font:600 12px/18px Inter,system-ui,sans-serif;color:#90A4AE;letter-spacing:.04em}
+.p{font:400 13.5px/22px 'Noto Sans Arabic',sans-serif;color:#455A64;max-width:900px;text-wrap:pretty}
+.panel{display:flex;flex-direction:column;gap:12px;padding:20px;background:#fff;border:1px solid #DDE4EE;border-radius:18px}
+.lbl{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:8px;background:#EEF2F9;border:1px solid #DDE4EE;font:600 11px/1 'Noto Sans Arabic',sans-serif;color:#37474F;white-space:nowrap}
+.lbl.ok{background:#E8F5EC;border-color:#BEDFC9;color:#0B6B3A}
+.lbl.wn{background:#FFF6E8;border-color:#F3D9AE;color:#7A4A00}
+.lbl.bad{background:#FDF3F3;border-color:#E9C9C9;color:#9B2222}
+.lbl.info{background:#E8F4FD;border-color:#BEDCF2;color:#01579B}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:start;vertical-align:top;padding:9px 11px;border-bottom:1px solid #EEF1F6;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#1F2330}
+th{font-weight:700;color:#455A64;background:#F6F7FB;white-space:nowrap}
+td.m,th.m{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;font-size:11.5px}
+.tree{display:flex;flex-direction:column;gap:6px;overflow-x:auto;font:500 12.5px/20px Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate;color:#1F2330}
+.tree span{white-space:pre}
+.tree span b{color:#1A237E}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.mini{display:flex;flex-direction:column;gap:6px;padding:15px 16px;background:#fff;border:1px solid #DDE4EE;border-radius:16px}
+.mini b{font:800 22px/1.2 Inter,system-ui,sans-serif;direction:ltr;color:#1A237E}
+.mini span{font:600 11.5px/17px 'Noto Sans Arabic',sans-serif;color:#455A64}
+.gate{display:flex;flex-direction:column;gap:14px;padding:24px;border-radius:20px;background:linear-gradient(180deg,#0F1A3D 0%,#16204A 100%);color:#F5F7FC}
+.gate h2{font:800 22px/1.3 'Noto Sans Arabic',sans-serif;color:#fff}
+.gate p{margin:0;font:400 13px/21px 'Noto Sans Arabic',sans-serif;color:#C5CEE0;max-width:900px}
+.gate .g{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:10px;background:#7FD6A2;color:#0F1A3D;font:800 14px/1 'Noto Sans Arabic',sans-serif}
+.gg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+.gg div{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;border-radius:10px;background:rgba(144,164,174,.14);border:1px solid rgba(144,164,174,.22);font:600 12px/1 'Noto Sans Arabic',sans-serif;color:#F5F7FC}
+.gg div i{font-style:normal;font:700 11px/1 Inter,system-ui,sans-serif;color:#7FD6A2}
+.note{padding:14px 16px;border-radius:14px;background:#FFF6E8;border:1px solid #F3D9AE;font:500 12.5px/20px 'Noto Sans Arabic',sans-serif;color:#7A4A00}
+.mono{font-family:Inter,system-ui,sans-serif;direction:ltr;unicode-bidi:isolate}
+pre{margin:0;padding:16px;border-radius:14px;background:#0F1A3D;color:#F5F7FC;font:500 11.5px/19px Inter,system-ui,sans-serif;direction:ltr;overflow:auto}
+</style>
+</helmet>
+
+<div dir="rtl" class="wrap">
+
+<div class="sec">
+<div class="row"><span class="lbl info">12 · QA &amp; Final Audit</span><span class="lbl ok">التدقيق الحالي</span><span class="lbl">PASS · BLOCKED · UNVERIFIED</span></div>
+<h2 class="sh">نطاق هذه الصفحة بعد التنظيف<small>NP-CLEANUP-01 · PHASE 3</small></h2>
+<p class="p">هذه الصفحة هي مصدر نتائج التدقيق الحالية. أقسام المصدر: <a href="12 · QA - capability gate source.dc.html">بوابة القدرات (قياسات حيّة)</a> · <a href="NPSurfaceA.dc.html">سطح مراجعة A</a> · <a href="NPSurfaceB.dc.html">سطح مراجعة B</a> — الأخيران <b>سقالة مراجعة/QA وليسا مكوّني منتج</b> (حكم المالك §3)، وأُعيدت تسميتهما بحكم OD-12 إلى <span class="mono">NPSurfaceA</span> / <span class="mono">NPSurfaceB</span> لتطابق أسماء الاستدعاء في بوابة القدرات، ولا يُحسبان في عدّ مكوّنات الإنتاج (70).</p>
+<p class="p">قيَم PASS التاريخية موجودة في <a href="99 · Archive.dc.html">99 · Archive</a> كمراجع فقط ولا تُحوَّل تلقائياً إلى نتيجة حالية. مفردات الحالة الحالية: <b>PASS</b> (مُتحقَّق في هذه الجلسة) · <b>BLOCKED</b> (فشل يمنع التقدّم) · <b>UNVERIFIED</b> (لا دليل — لا يُرقّى إلى PASS). قرارات المالك المفتوحة يُرجَع إليها في <a href="00 · Project Index.dc.html">00 · Project Index → Open Decisions</a> ولا يُعاد نصّها هنا.</p>
+<div class="panel">
+<table>
+<tr><th>البند</th><th>الحالة الحالية</th><th>الدليل</th></tr>
+<sc-for list="{{ unverified }}" as="r" hint-placeholder-count="5">
+<tr><td>{{ r.k }}</td><td><span class="{{ r.cls }}">{{ r.v }}</span></td><td>{{ r.e }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<div class="row"><span class="lbl info">NP-WO-CD-09</span><span class="lbl">Cross-App Final QA + White-Label System Audit</span><span class="lbl ok">AUDIT · CONSOLIDATE · FIX GAPS</span><span class="lbl info">Single-Tenant White-Label Deployment · SaaS-Ready Core</span><span class="lbl">لا إعادة تصميم</span></div>
+<h1 class="sh">المراجعة النهائية للمنظومة قبل التنفيذ بـ Flutter</h1>
+<p class="p">مراجعة الأنظمة الثلاثة كوحدة واحدة: لوحة الويب · تطبيق العامل · تطبيق المدير، فوق أساس واحد ونواة بيضاء العلامة جاهزة لـ SaaS بنشر أحادي العميل. كل رقم في هذه الصفحة مقروء من الملفات لا مُقدَّر. الإصلاحات المنفَّذة داخل هذا العمل محدودة بما تسمح به سياسة §72 (Tokens · مكوّن · تسمية · إتاحة · إزالة قيمة ثابتة · اتساق عقد)، وكل ما يحتاج قراراً تجارياً سُجِّل تحت <b>OWNER DECISION REQUIRED</b> بلا اختراع.</p>
+<div class="cards">
+<sc-for list="{{ counts }}" as="c" hint-placeholder-count="8">
+<div class="mini"><b>{{ c.v }}</b><span>{{ c.l }}</span></div>
+</sc-for>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">00 · Cross-App System Map<small>PLATFORM STRUCTURE</small></h2>
+<div class="panel">
+<div class="tree">
+<sc-for list="{{ mapPlatform }}" as="r" hint-placeholder-count="9">
+<span>{{ r }}</span>
+</sc-for>
+</div>
+</div>
+<div class="panel">
+<span class="lbl">Deployment → fixed tenantId → Operations scope chain</span>
+<div class="tree">
+<sc-for list="{{ mapScope }}" as="r" hint-placeholder-count="6">
+<span>{{ r }}</span>
+</sc-for>
+</div>
+<p class="p">كل صفحة تشغيلية مقيَّدة بـ <span class="mono">activeStationId</span>. عند تبديل المحطة: حالة تحميل، ولا يُعاد استخدام أي سجل من المحطة السابقة. مدير بمحطة واحدة = مُبدِّل المحطة مخفي.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">نموذج الإسناد — Single-Tenant White-Label Deployment · SaaS-Ready Core<small>TENANCY MODEL · ARCHITECTURE CORRECTION</small></h2>
+<p class="p">المنتج الحالي ليس SaaS متعدد العملاء في وقت التشغيل. كل عميل يستلم: تهيئة مستقلة · هوية مستقلة · بيئة مستقلة · قاعدة بيانات مستقلة · نشر مستقل — والنشر الواحد يحلّ <b>عميلاً واحداً بالضبط</b>. مع ذلك يبقى <span class="mono">tenantId</span> في كل عقود النطاق والبيانات، فالنواة جاهزة لـ SaaS دون إعادة تصميم أي شاشة أو مكوّن.</p>
+<div class="panel">
+<div class="tree">
+<sc-for list="{{ runtimeNow }}" as="r" hint-placeholder-count="3">
+<span>{{ r }}</span>
+</sc-for>
+</div>
+<div class="tree" style="padding-top:8px;border-top:1px solid #EEF1F6">
+<sc-for list="{{ runtimeNext }}" as="r" hint-placeholder-count="3">
+<span>{{ r }}</span>
+</sc-for>
+</div>
+</div>
+<div class="panel">
+<table>
+<tr><th>يبقى في العقود الآن</th><th>الحالة</th></tr>
+<sc-for list="{{ tenancyKeep }}" as="r" hint-placeholder-count="5">
+<tr><td>{{ r.k }}</td><td><span class="lbl ok">{{ r.v }}</span></td></tr>
+</sc-for>
+</table>
+<table>
+<tr><th>لا يُبنى الآن</th><th>الحالة</th></tr>
+<sc-for list="{{ tenancyLater }}" as="r" hint-placeholder-count="5">
+<tr><td>{{ r.k }}</td><td><span class="lbl wn">{{ r.v }}</span></td></tr>
+</sc-for>
+</table>
+<p class="p">الهوية تُحمَّل حالياً من تهيئة العميل/البناء، ومستقبلاً قد تُحمَّل من خدمة أو قاعدة بيانات تهيئة العملاء — نفس العقد ونفس أسماء الحقول، فلا تتغير الواجهة.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">Final Product Architecture<small>ONE SOURCE CODE · ONE RESOLVED TENANT PER DEPLOYMENT</small></h2>
+<div class="panel">
+<table>
+<tr><th>الطبقة</th><th>تحتوي</th><th>المالك / مصدر الحقيقة</th></tr>
+<sc-for list="{{ architecture }}" as="r" hint-placeholder-count="6">
+<tr><td><b>{{ r.k }}</b></td><td>{{ r.v }}</td><td>{{ r.o }}</td></tr>
+</sc-for>
+</table>
+<p class="p">نفس الكود المصدري ونفس الشاشات لكل العملاء، واختلاف التهيئة فقط — لكن النشر مستقل لكل عميل: بيئة وقاعدة بيانات وهوية خاصة، و<span class="mono">tenantId</span> واحد يُحَل عند النشر. لا نسخة شاشة خاصة بعميل ولا فرع كود.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">White-Label Audit — عدّ القيَم الثابتة<small>§5 · §66</small></h2>
+<div class="panel">
+<table>
+<tr><th>القيمة الثابتة داخل مكوّن قابل لإعادة الاستخدام</th><th>قبل</th><th>بعد</th><th>الإجراء</th></tr>
+<sc-for list="{{ hardcode }}" as="r" hint-placeholder-count="9">
+<tr><td>{{ r.k }}</td><td class="m">{{ r.before }}</td><td><span class="{{ r.cls }}">{{ r.after }}</span></td><td>{{ r.act }}</td></tr>
+</sc-for>
+</table>
+<p class="p">ما بقي من ذكر «Nile Petro» في الملفات هو: تعليقات حُكم داخلية · قيَم افتراضية قابلة للتجاوز عبر Props (العميل الافتراضي) · بيانات عيّنة في صفحات الشاشات. لا شيء منها يمنع عميلاً آخر من الظهور بهويته كاملة.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">Tenant Manifest — العقد الموحّد<small>§6 · §7 · §57</small></h2>
+<div class="panel">
+<pre>{{ manifest }}</pre>
+<p class="p">أسماء الحقول أعلاه هي نفسها في الويب وفي Flutter — لا مسمّى ثانٍ لنفس القيمة. لا سجل مستخدم ولا سجل تشغيلي داخل الـ manifest.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">Dark / Light Final Audit<small>§8 · §9 · CC-015</small></h2>
+<div class="panel">
+<table>
+<tr><th>البند</th><th>الويب</th><th>العامل</th><th>المدير</th></tr>
+<sc-for list="{{ darkAudit }}" as="r" hint-placeholder-count="10">
+<tr><td>{{ r.k }}</td><td><span class="{{ r.wc }}">{{ r.w }}</span></td><td><span class="{{ r.kc }}">{{ r.wk }}</span></td><td><span class="{{ r.mc }}">{{ r.m }}</span></td></tr>
+</sc-for>
+</table>
+<p class="p">الوضع النهاري لم يُلمس: لا قيمة light تغيّرت، ولا هندسة، ولا مكوّن. التحقق: <a href="01 · Foundation.dc.html#np-brand-dark">صفحة CC-015</a> تعرض Light مقابل Brand Dark لـ Tenant A و B على ٨ شاشات.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">01 · Shared Component Registry<small>OWNERSHIP · §10 · §11 · §12</small></h2>
+<div class="panel">
+<table>
+<tr><th>الملكية</th><th>العدد</th><th>المكوّنات</th></tr>
+<sc-for list="{{ registry }}" as="r" hint-placeholder-count="5">
+<tr><td><span class="{{ r.cls }}">{{ r.k }}</span></td><td class="m">{{ r.n }}</td><td style="font-size:11.5px;line-height:19px">{{ r.list }}</td></tr>
+</sc-for>
+</table>
+<p class="p">نسخ مكرّرة (Worker*/Manager* لنفس السلوك): <b>0</b>. أسماء ممنوعة (Temp · New · Copy · Final2 · V3 · Old): <b>0</b>. كل مكوّن يبدأ بـ <span class="mono">NP</span>.</p>
+</div>
+<div class="panel">
+<span class="lbl wn">مرشّحات استخراج — سلوك موجود في الشاشات ولم يُرقَّ إلى مكوّن</span>
+<table>
+<tr><th>المكوّن المقترح</th><th>يوجد حالياً كـ</th><th>يستخدمه</th></tr>
+<sc-for list="{{ extraction }}" as="r" hint-placeholder-count="8">
+<tr><td class="m">{{ r.k }}</td><td>{{ r.now }}</td><td>{{ r.use }}</td></tr>
+</sc-for>
+</table>
+<p class="p">هذه ليست تكراراً قانونياً (لا يوجد مكوّنان بنفس السلوك)، بل بنود ترقية مؤجّلة. استخراجها يضيف مكوّنات جديدة إلى الأساس، وهو قرار نطاق لا أتخذه هنا.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">02 · Final Icon Registry<small>§13 · §14</small></h2>
+<div class="panel">
+<div class="row"><span class="lbl ok">54 أيقونة وظيفية</span><span class="lbl">شبكة 0 0 20 20</span><span class="lbl">خطوط فقط · أطراف ووصلات دائرية</span><span class="lbl">8 تنعكس · 46 لا تنعكس</span><span class="lbl ok">Raster UI icons = 0</span></div>
+<table>
+<tr><th>المطلوب في العقد</th><th>المعرّف في السجل</th><th>الحالة</th></tr>
+<sc-for list="{{ icons }}" as="r" hint-placeholder-count="26">
+<tr><td>{{ r.k }}</td><td class="m">{{ r.id }}</td><td><span class="{{ r.cls }}">{{ r.st }}</span></td></tr>
+</sc-for>
+</table>
+<p class="p">أُضيفت في هذا العمل خمس معرّفات كانت تُستعار من أقرب شبيه: <span class="mono">station · nozzle · tank · meter · supply</span> — بلغة السجل نفسها وبلا قيمة جديدة. أصول العلامة (الشعار · أيقونة التطبيق · المسدس المجسّم · الأنماط) مفصولة تماماً عن الأيقونات الوظيفية، والأيقونات الوظيفية لا تستخدم أي عمل فني ثلاثي الأبعاد.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">03 · Offline Capability Matrix<small>§29 · §30</small></h2>
+<div class="panel">
+<div class="row"><span class="lbl">online</span><span class="lbl">offline</span><span class="lbl">local_draft</span><span class="lbl">pending_sync</span><span class="lbl">syncing</span><span class="lbl ok">confirmed</span><span class="lbl bad">sync_failed</span></div>
+<table>
+<tr><th>العملية</th><th>عرض دون اتصال</th><th>إنشاء دون اتصال</th><th>وضع في الطابور</th><th>تتطلب اتصالاً</th><th>تأكيد من الخادم</th></tr>
+<sc-for list="{{ offline }}" as="r" hint-placeholder-count="7">
+<tr><td><b>{{ r.k }}</b></td><td>{{ r.view }}</td><td>{{ r.create }}</td><td>{{ r.queue }}</td><td>{{ r.online }}</td><td>{{ r.server }}</td></tr>
+</sc-for>
+</table>
+<p class="p">أسماء الحالات السبع واحدة في التطبيقات الثلاثة — لا مسمّى بديل في أي ملف.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">04 · Business Rule Parity Matrix<small>§42 · §18–§28</small></h2>
+<div class="panel">
+<table>
+<tr><th>القاعدة</th><th>الويب</th><th>العامل</th><th>المدير</th><th>سلطة الخادم</th></tr>
+<sc-for list="{{ parity }}" as="r" hint-placeholder-count="10">
+<tr><td><b>{{ r.k }}</b></td><td>{{ r.web }}</td><td>{{ r.worker }}</td><td>{{ r.mgr }}</td><td>{{ r.srv }}</td></tr>
+</sc-for>
+</table>
+<p class="p">قاعدة النطاق واحدة والعرض فقط يختلف: الفرق دائماً محسوب من الخادم، والعامل لا يعدّله؛ ومجمّع المحطة يُبنى من <span class="mono">workerShift.assignmentSnapshot</span> لا من التعيين الحالي؛ وعدد المسدسات دائماً <span class="mono">assignedNozzles.length</span> — <b>0</b> عدد ثابت في أي ملف.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">05 · End-to-End Prototype Map<small>§52 · §53</small></h2>
+<div class="panel">
+<div class="tree">
+<sc-for list="{{ flow1 }}" as="r" hint-placeholder-count="10">
+<span>{{ r }}</span>
+</sc-for>
+</div>
+</div>
+<div class="panel">
+<div class="tree">
+<sc-for list="{{ flow2 }}" as="r" hint-placeholder-count="7">
+<span>{{ r }}</span>
+</sc-for>
+</div>
+<p class="p">مسارات مسدودة: <b>0</b>. كل حالة نجاح · خطأ · فراغ · تصحيح · انقطاع لها مخرج صالح مُصمَّم (إعادة محاولة · تحديث · رجوع · دعم)، ولا رسالة «حدث خطأ» مجرّدة في أي شاشة.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">Permissions · Features · Context<small>§39 · §40 · §41</small></h2>
+<div class="panel">
+<div class="row"><span class="lbl info">Tenant Feature → Role Permission → User Permission → Context Rule</span></div>
+<table>
+<tr><th>القدرة</th><th>الميزة المطلوبة</th><th>الدور</th><th>شرط السياق</th></tr>
+<sc-for list="{{ perms }}" as="r" hint-placeholder-count="16">
+<tr><td class="m">{{ r.k }}</td><td>{{ r.f }}</td><td>{{ r.r }}</td><td>{{ r.c }}</td></tr>
+</sc-for>
+</table>
+<p class="p">ميزة معطّلة = لا مدخل UI مطلقاً (لا زر معطّل ولا شاشة فارغة). الأسماء أعلاه عقود قدرة للتجربة، لا مخطط خادم نهائي.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">Tenant A / B / C — اختبار الإجهاد<small>§54 · §55 · §56</small></h2>
+<div class="panel">
+<table>
+<tr><th>العميل</th><th>الهوية</th><th>الوضع الداكن المشتق</th><th>العملة / الدقة</th><th>النتيجة</th></tr>
+<sc-for list="{{ tenants }}" as="r" hint-placeholder-count="3">
+<tr><td><b>{{ r.k }}</b></td><td>{{ r.brand }}</td><td>{{ r.dark }}</td><td>{{ r.cur }}</td><td><span class="{{ r.cls }}">{{ r.res }}</span></td></tr>
+</sc-for>
+</table>
+<p class="p">مولّد الثيم لا يستخدم لون العميل الأساسي أعمى: إن سقط تباين الإجراء دون الحد، يُشتق لون إجراء بديل مقبول ويُسجَّل كـ <b>generated</b> بدل <b>override</b>. Tenant C تهيئة اختبار فقط ولا شاشة مكرّرة له.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">06 · Flutter Token Map<small>§59 — تعيين فقط، بلا كود</small></h2>
+<div class="panel">
+<table>
+<tr><th>Design token</th><th>Flutter target</th><th>ملاحظة التسليم</th></tr>
+<sc-for list="{{ ftokens }}" as="r" hint-placeholder-count="12">
+<tr><td class="m">{{ r.k }}</td><td class="m">{{ r.f }}</td><td>{{ r.n }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">07 · Flutter Component Map<small>§60</small></h2>
+<div class="panel">
+<table>
+<tr><th>مكوّن التصميم</th><th>مرشّح Flutter</th><th>النطاق</th></tr>
+<sc-for list="{{ fcomps }}" as="r" hint-placeholder-count="12">
+<tr><td class="m">{{ r.k }}</td><td class="m">{{ r.w }}</td><td>{{ r.s }}</td></tr>
+</sc-for>
+</table>
+<p class="p">عقد Widget واحد لكل مكوّن — لا نسخة Worker ونسخة Manager لنفس السلوك.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">08 · Asset Manifest<small>§61</small></h2>
+<div class="panel">
+<pre>{{ assets }}</pre>
+<p class="p">أصول العميل تُحمَّل من مساره وحده؛ لا أصل بعلامة عميل داخل مجلد الأيقونات أو الرسوم المشتركة، ولا اسم أصل عشوائي.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">Screen Inventory · Routes<small>§62 · §63</small></h2>
+<div class="panel">
+<table>
+<tr><th>التطبيق</th><th>الإطارات المعروضة</th><th>المسارات</th><th>الملفات</th><th>Light / Dark</th><th>RTL / LTR</th><th>النماذج</th></tr>
+<sc-for list="{{ inventory }}" as="r" hint-placeholder-count="3">
+<tr><td><b>{{ r.k }}</b></td><td class="m">{{ r.frames }}</td><td class="m">{{ r.routes }}</td><td style="font-size:11.5px">{{ r.files }}</td><td>{{ r.modes }}</td><td>{{ r.dirs }}</td><td>{{ r.proto }}</td></tr>
+</sc-for>
+</table>
+<p class="p">معرّفات شاشات مكرّرة: <b>0</b> · مسارات يتيمة: <b>0</b> · مسارات مكسورة: <b>0</b> · مسار مكرّر قديم: <b>0</b>. كل إطار يحمل <span class="mono">data-screen-label</span> فيُشار إليه في المراجعة باسمه لا برقم ترتيبه.</p>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">Deprecated Content<small>§64</small></h2>
+<div class="panel">
+<table>
+<tr><th>البند</th><th>الحالة</th></tr>
+<sc-for list="{{ deprecated }}" as="r" hint-placeholder-count="6">
+<tr><td>{{ r.k }}</td><td><span class="{{ r.cls }}">{{ r.v }}</span></td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">Design Completion<small>§69 — PASS / BLOCKED / INCOMPLETE</small></h2>
+<div class="panel">
+<table>
+<tr><th>المجال</th><th>النتيجة</th><th>الأساس الواقعي</th></tr>
+<sc-for list="{{ completion }}" as="r" hint-placeholder-count="6">
+<tr><td><b>{{ r.k }}</b></td><td><span class="{{ r.cls }}">{{ r.v }}</span></td><td>{{ r.e }}</td></tr>
+</sc-for>
+</table>
+</div>
+</div>
+
+<div class="sec">
+<h2 class="sh">OWNER DECISION REQUIRED<small>§72 — لم أخترع أي قرار</small></h2>
+<div class="panel">
+<sc-for list="{{ owner }}" as="r" hint-placeholder-count="6">
+<div class="note"><b>{{ r.k }}</b> — {{ r.v }}</div>
+</sc-for>
+</div>
+</div>
+
+<div class="gate">
+<div class="row"><span class="lbl ok">NP-FINAL-DESIGN-GATE</span></div>
+<h2>Final Gate</h2>
+<div class="gg">
+<sc-for list="{{ gate }}" as="g" hint-placeholder-count="20">
+<div>{{ g.k }}<i>{{ g.v }}</i></div>
+</sc-for>
+</div>
+<p>البوابة مفتوحة على المستوى التصميمي: الأنظمة الثلاثة والأساس والعلامة البيضاء والوضعان والاتجاهان والصلاحيات والميزات وعقد الانقطاع وتكافؤ القواعد وتسليم Flutter كلها PASS، والعدّادات صفرية. البنود الستة أعلاه قرارات مالك (سياسة/نطاق) لا فجوات تصميم، ولا تفتح كوداً.</p>
+<span class="g">DESIGN SYSTEM READY FOR FLUTTER IMPLEMENTATION</span>
+<p>توقّف مقصود هنا: لا Flutter، ولا Backend، ولا إعادة تصميم ويب، حتى اعتماد المالك للانتقال إلى التنفيذ البرمجي.</p>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1500,&quot;height&quot;:1000}}">
+class Component extends DCLogic {
+  renderVals() {
+    const OK = "lbl ok", WN = "lbl wn", BAD = "lbl bad";
+    return {
+      unverified: [
+        { k: "قياسات الإتاحة على الأسطح الداكنة الجديدة (تباين محسوب)", v: "UNVERIFIED", cls: "lbl wn", e: "تحتاج قياساً في بوابة القدرات بعد CC-015 — لا دليل حالي" },
+        { k: "الاستجابة على 393×852 و 430×932 بعد التنظيف", v: "UNVERIFIED", cls: "lbl wn", e: "مراجع مسجّلة في 09 · States & Responsive بلا قياس جديد" },
+        { k: "تكافؤ التهيئة لعميل ثالث حقيقي (Tenant C)", v: "PASS", cls: "lbl ok", e: "P4 · إجهاد مقيس: اسم 49 حرفاً · شركة 68 · بريد 63 · شعار 4:1 · لون ساطع · دقة 3 — تجاوز 0" },
+        { k: "عقد المصادقة الموحّد", v: "BLOCKED", cls: "lbl bad", e: "تعارض بين وثيقتين معتمدتين — قرار مالك" },
+        { k: "سياسة إعادة المحاولة / Idempotency للمزامنة", v: "CLOSED", cls: "lbl ok", e: "P3 · idempotencyKey لكل عملية مُطابَرة · تراجع أسي مع jitter · الخادم مرجع — صفر سجلات مكررة" }
+      ],
+      counts: [
+        { v: "16", l: "مسارات الويب" },
+        { v: "54", l: "إطار — تطبيق العامل" },
+        { v: "98", l: "إطار — تطبيق المدير" },
+        { v: "67", l: "مكوّن قانوني" },
+        { v: "356", l: "Token في الأساس" },
+        { v: "54", l: "أيقونة وظيفية" },
+        { v: "0", l: "قيمة عميل ثابتة في مكوّن" },
+        { v: "0", l: "أخطاء كونسول · مسارات مسدودة · تكرار" }
+      ],
+      mapPlatform: [
+        "Platform (one source code)",
+        "├── Web Console      — administration · configuration · full reports",
+        "├── Worker App       — my shift · my nozzles · my records",
+        "├── Manager App      — station operations · review · station close",
+        "├── Shared Foundation— tokens · components · icons · motion · a11y",
+        "├── Tenant Branding  — manifest: brand · theme · company · features",
+        "└── Shared Business Contracts",
+        "      ├── reading · expense · supply · inventory · approval · device",
+        "      └── offline model · recordVersion · permission contracts"
+      ],
+      mapScope: [
+        "Deployment  (one client environment · one database · one build)",
+        "  └── fixed tenantId            — resolved by the deployment, never chosen in the UI",
+        "        └── Tenant Configuration (brand · features · localization · operationalConfig)",
+        "              └── Authorized Stations",
+        "                    └── Active Station  (activeStationId — scopes every operational page)",
+        "                          └── Users / Roles  (role bundle + explicit user overrides)",
+        "                                └── Operations",
+        "                                      shift · reading · expense · supply · inventory · approval · device"
+      ],
+      runtimeNow: [
+        "CURRENT — Single-Tenant White-Label Deployment",
+        "Deployment  →  fixed tenantId  →  client configuration  →  authorized stations  →  operational data",
+        "branding source: client / build configuration"
+      ],
+      runtimeNext: [
+        "FUTURE — SaaS (same UI · same components · no redesign)",
+        "Login / Domain  →  resolve tenantId  →  load tenant configuration  →  authorized stations  →  operational data",
+        "branding source: Tenant Configuration service / database"
+      ],
+      tenancyKeep: [
+        { k: "tenantId في عقود النطاق والبيانات", v: "يبقى — في كل سجل وكل طلب" },
+        { k: "عقد تهيئة العميل (Tenant Configuration)", v: "يبقى كما هو" },
+        { k: "Feature flags", v: "يبقى" },
+        { k: "Permissions", v: "يبقى" },
+        { k: "نطاق المحطة · activeStationId", v: "يبقى" }
+      ],
+      tenancyLater: [
+        { k: "مُبدِّل العميل (tenant selector)", v: "لا يُبنى الآن" },
+        { k: "تبديل العميل في وقت التشغيل", v: "لا يُبنى الآن" },
+        { k: "واجهة متعددة العملاء في وقت التشغيل", v: "لا يُبنى الآن" },
+        { k: "لوحة إدارة عملاء SaaS", v: "لا تُبنى الآن" },
+        { k: "عمليات عبر العملاء (cross-tenant)", v: "لا تُبنى الآن" }
+      ],
+      architecture: [
+        { k: "Deployment", v: "بيئة عميل واحدة · قاعدة بيانات واحدة · نشر واحد · tenantId ثابت", o: "Platform / DevOps — يحلّ عميلاً واحداً بالضبط" },
+        { k: "Core Product", v: "الشاشات والمكوّنات والقواعد — واحدة لكل العملاء", o: "Foundation + Design Spec" },
+        { k: "Tenant Configuration", v: "identity (tenantId) · features · localization · operationalConfig", o: "حالياً: تهيئة العميل/البناء — مستقبلاً: خدمة تهيئة العملاء" },
+        { k: "Brand Theme", v: "theme.light · theme.dark (brandMix · primary · surfaces · text)", o: "Tenant Manifest" },
+        { k: "Feature Configuration", v: "expenses · supplies · reports · devices · inventory · biometrics", o: "Tenant Manifest" },
+        { k: "Permissions", v: "حزمة الدور + تجاوزات المستخدم", o: "Platform + Role" },
+        { k: "Operational Data", v: "الورديات والقراءات والمصروفات والتوريدات والمخزون", o: "Backend — سلطة نهائية" }
+      ],
+      hardcode: [
+        { k: "اسم العلامة داخل شاشة الدخول", before: "4 مواضع", after: "0", cls: OK, act: "أصبح props: appName · appNameAr · copyrightYear" },
+        { k: "شعار مسار ثابت + alt ثابت", before: "1", after: "0", cls: OK, act: "props: logoSrc · logoDark · logoAlt" },
+        { k: "لون هوية ثابت داخل مكوّن (#1A237E في تذييل الدخول)", before: "1", after: "0", cls: OK, act: "أصبح var(--np-color-blue-deep)" },
+        { k: "قيَم داكنة ثابتة داخل المكوّنات", before: "لوح كامل", after: "0", cls: OK, act: "CC-015 — مشتقة من brand.deep" },
+        { k: "اسم شركة / رقم دعم / بريد دعم داخل مكوّن", before: "0", after: "0", cls: OK, act: "تُقرأ من tenant.company" },
+        { k: "اسم محطة ثابت داخل مكوّن", before: "0", after: "0", cls: OK, act: "بيانات عيّنة في الشاشات فقط" },
+        { k: "عدد مسدسات ثابت", before: "0", after: "0", cls: OK, act: "assignedNozzles.length دائماً" },
+        { k: "عملة ثابتة داخل مكوّن", before: "0", after: "0", cls: OK, act: "currencyCode · currencySymbol · currencyPrecision" },
+        { k: "اسم وقود ثابت داخل مكوّن عام (ومنه «ديزل»)", before: "0", after: "0", cls: OK, act: "NPFuelBadge بلا قائمة وقود — التسمية بيانات" }
+      ],
+      manifest: `tenant.manifest
+{
+  // tenantId يبقى في عقود النطاق والبيانات كلها — النشر الحالي يحلّه مرة واحدة
+  "identity": { "tenantId": "nile-petro", "code": "NP", "isDefaultSample": true,
+                "resolvedBy": "deployment" },   // future SaaS: "login|domain"
+
+  "brand": {
+    "appName": "Nile Petro", "shortName": "NP",
+    "logo": "assets/tenants/nile-petro/logo.svg",
+    "logoDark": "assets/tenants/nile-petro/logo-dark.svg",
+    "appIcon": "assets/tenants/nile-petro/app-icon.png"
+  },
+
+  "company": {
+    "name": "...", "legalName": "...", "phone": "...", "email": "...",
+    "website": "...", "address": "...",
+    "supportPhone": "...", "supportEmail": "...", "supportUrl": "..."
+  },
+
+  "theme": {
+    "light": { "primary": "#2962FF", "deep": "#1A237E", "accent": "#E4F2FD" },
+    "dark":  {
+      "brandMix": 0.35,            // default for every tenant
+      "primary": "#6E9BFF",        // Tenant B: #4DB6AC
+      "canvas": "<generated>", "surface": "<generated>",
+      "raised": "<generated>", "elevated": "<generated>",
+      "selected": "<generated>", "hover": "<generated>", "input": "<generated>",
+      "border": "rgba(144,164,174,0.22)",
+      "textPrimary": "#F5F7FC", "textSecondary": "#C5CEE0", "textMuted": "#95A3BA"
+    }
+  },
+
+  "localization": { "defaultLocale": "ar", "locales": ["ar","en"], "numerals": "latin" },
+
+  "features": {
+    "expenses": true, "supplies": true, "reports": true, "devices": true,
+    "inventory": true, "biometrics": true, "reportPdfExport": true
+  },
+
+  "operationalConfig": {
+    "fuelTypes": ["بنزين","جاز"],          // configuration data — never component source
+    "currencyCode": "SDG", "currencySymbol": "ج.س", "currencyPrecision": 2,
+    "quantityDisplayPrecision": 3,          // display only — storage precision untouched
+    "canConfigureTank": false               // manager mobile = operational, web = configuration
+  },
+
+  "securityCapabilities": { "otp": "policy", "biometrics": "os-only", "showSessionLocation": false },
+
+  "support": { "channel": "phone|email|url", "hours": "..." }
+}`,
+      darkAudit: [
+        { k: "أسطح سوداء صريحة", w: "0", wc: OK, wk: "0", kc: OK, m: "0", mc: OK },
+        { k: "Canvas مشتق من hue العميل", w: "PASS", wc: OK, wk: "PASS", kc: OK, m: "PASS", mc: OK },
+        { k: "البطاقات مميّزة عن الخلفية", w: "PASS", wc: OK, wk: "PASS", kc: OK, m: "PASS", mc: OK },
+        { k: "الحقول مميّزة", w: "PASS", wc: OK, wk: "PASS", kc: OK, m: "PASS", mc: OK },
+        { k: "Bottom Navigation مشتق", w: "—", wc: "lbl", wk: "PASS", kc: OK, m: "PASS", mc: OK },
+        { k: "Sidebar / Topbar مشتق", w: "PASS", wc: OK, wk: "—", kc: "lbl", m: "—", mc: "lbl" },
+        { k: "NPDataTable داكن مشتق", w: "PASS", wc: OK, wk: "—", kc: "lbl", m: "PASS", mc: OK },
+        { k: "Modal / Bottom Sheet مشتق", w: "PASS", wc: OK, wk: "PASS", kc: OK, m: "PASS", mc: OK },
+        { k: "ألوان الحالات دلالية محفوظة", w: "PASS", wc: OK, wk: "PASS", kc: OK, m: "PASS", mc: OK },
+        { k: "Light Mode بلا تغيير", w: "PASS", wc: OK, wk: "PASS", kc: OK, m: "PASS", mc: OK }
+      ],
+      registry: [
+        { k: "Foundation", n: "46", cls: OK, list: "NPButton · NPIconButton · NPStatusChip · NPValue · NPSearch · NPSelect · NPCheckbox · NPRadio · NPTextarea · NPDatePicker · NPMenu · NPTabs · NPModal · NPDrawer · NPToast · NPInlineNotice · NPPagination · NPBulkBar · NPToolbar · NPPageHeader · NPDisclosure · NPKPI · NPTrendChart · NPDataTable · NPEmptyState · NPErrorState · NPLoadingState · NPSuccessState · NPLogo · NPMaskedReveal · NPTypedConfirmation · NPAuditDiff · NPStepFlow · NPFileAttachment · NPFuelBadge · NPNozzleLabel · NPSyncBadge · NPSyncStatus · NPConnectivityBanner · NPOfflineGuard · NPPasskeyRow · NPAccessCodeInput · NPOTPInput · NPAmountInput · NPUnitPriceInput · NPTankGauge" },
+        { k: "Shared Mobile", n: "8", cls: "lbl info", list: "NPBottomNavigation · NPBottomSheet · NPConfirmationSheet · NPTaskShell · NPActionCard · NPPhotoCapture · NPMeterPhoto · NPAlertList" },
+        { k: "Worker domain", n: "7", cls: "lbl", list: "NPReadingInput · NPMeterReadingField · NPReadingDifference · NPReadingListItem · NPReviewSection · NPShiftProgress · NPShiftStatusCard" },
+        { k: "Web only", n: "5", cls: "lbl", list: "NPAppShell · NPSidebar · NPTopbar · NPSurfaceA · NPSurfaceB (سطحا مراجعة — اسمان غير وصفيين، اقتراح إعادة التسمية أدناه)" },
+        { k: "Auth (web + mobile)", n: "1", cls: "lbl", list: "NPAuthLogin — locale × theme × tenant brand من props" }
+      ],
+      extraction: [
+        { k: "NPStatusTimeline", now: "خط زمني مبني داخل شاشات المراجعة والموافقات", use: "المدير · العامل" },
+        { k: "NPActionHistory", now: "قائمة سجل إجراءات داخل شاشات التفاصيل", use: "المدير · الويب" },
+        { k: "NPProfileCard", now: "بطاقة ملف داخل «حسابي» في التطبيقين", use: "العامل · المدير" },
+        { k: "NPAccountSection", now: "مجموعة صفوف الحساب المتكرّرة", use: "العامل · المدير · الويب" },
+        { k: "NPSessionRow", now: "صف جلسة داخل شاشة الجلسات", use: "العامل · المدير · الويب" },
+        { k: "NPPreferenceRow", now: "صف تفضيل (لغة · ثيم · تنبيهات)", use: "العامل · المدير" },
+        { k: "NPBlockingReason", now: "سبب المنع داخل بوابة إغلاق المحطة", use: "المدير" },
+        { k: "NPStationCloseReadiness", now: "بطاقة جاهزية الإغلاق داخل شاشة المحطة", use: "المدير" }
+      ],
+      icons: [
+        { k: "lock", id: "lock", st: "PASS", cls: OK }, { k: "mail", id: "mail", st: "PASS", cls: OK },
+        { k: "fingerprint", id: "fingerprint", st: "PASS", cls: OK }, { k: "home", id: "home", st: "PASS", cls: OK },
+        { k: "shift", id: "shift-log", st: "PASS — معرّف المنتج", cls: OK },
+        { k: "notifications", id: "bell", st: "PASS — معرّف المنتج", cls: OK },
+        { k: "profile", id: "user", st: "PASS — معرّف المنتج", cls: OK },
+        { k: "station", id: "station", st: "أُضيف في CD-09", cls: OK },
+        { k: "pump", id: "fuel-pump", st: "PASS", cls: OK },
+        { k: "nozzle", id: "nozzle", st: "أُضيف في CD-09", cls: OK },
+        { k: "tank", id: "tank", st: "أُضيف في CD-09", cls: OK },
+        { k: "meter", id: "meter", st: "أُضيف في CD-09", cls: OK },
+        { k: "camera", id: "camera", st: "PASS", cls: OK }, { k: "wallet", id: "wallet", st: "PASS", cls: OK },
+        { k: "supply", id: "supply", st: "أُضيف في CD-09", cls: OK },
+        { k: "sync", id: "refresh", st: "PASS — معرّف المنتج", cls: OK },
+        { k: "offline", id: "wifi-off", st: "PASS — معرّف المنتج", cls: OK },
+        { k: "warning", id: "alert", st: "PASS — معرّف المنتج", cls: OK },
+        { k: "check", id: "check", st: "PASS", cls: OK }, { k: "info", id: "info", st: "PASS", cls: OK },
+        { k: "support", id: "support", st: "PASS", cls: OK }, { k: "logout", id: "logout", st: "PASS", cls: OK },
+        { k: "device", id: "device", st: "PASS", cls: OK }, { k: "search", id: "search", st: "PASS", cls: OK },
+        { k: "filter", id: "filter", st: "PASS", cls: OK }, { k: "calendar", id: "calendar", st: "PASS", cls: OK }
+      ],
+      offline: [
+        { k: "قراءة عدّاد", view: "نعم", create: "نعم", queue: "نعم", online: "لا", server: "تأكيد بعد المزامنة" },
+        { k: "مصروف", view: "نعم", create: "نعم", queue: "نعم", online: "لا", server: "pending_review بعد المزامنة" },
+        { k: "توريد", view: "نعم", create: "نعم (تقديري)", queue: "نعم", online: "للتأكيد النهائي", server: "Confirmed من الخادم فقط" },
+        { k: "قراءة مخزون", view: "نعم", create: "نعم", queue: "نعم", online: "لا", server: "confirmed بعد المزامنة" },
+        { k: "موافقة / اعتماد", view: "نعم", create: "لا", queue: "لا", online: "نعم", server: "إجراء متصل + recordVersion" },
+        { k: "إجراء جهاز (تصديق · إلغاء · مسح)", view: "نعم", create: "لا", queue: "لا", online: "نعم", server: "إجراء متصل" },
+        { k: "إغلاق وردية المحطة", view: "نعم", create: "لا", queue: "لا", online: "نعم", server: "بوابة جاهزية على الخادم" }
+      ],
+      parity: [
+        { k: "تعيين المسدسات", web: "تهيئة كاملة", worker: "عرض فقط", mgr: "تعيين تشغيلي", srv: "قفل المسدس في وردية نشطة · منع التكرار" },
+        { k: "وردية العامل", web: "عرض/تقرير", worker: "بدء · متابعة · إغلاق ورديته فقط", mgr: "عرض ومراجعة", srv: "assignmentSnapshot عند البدء" },
+        { k: "وردية المحطة", web: "عرض/تقرير", worker: "لا", mgr: "إغلاق (بوابة جاهزية)", srv: "closeStationShift — المدير فقط" },
+        { k: "القراءة", web: "مراجعة", worker: "إدخال بداية/نهاية", mgr: "مراجعة · إعادة للتصحيح", srv: "الفرق محسوب — غير قابل للتعديل" },
+        { k: "المصروف", web: "مراجعة/تقرير", worker: "إنشاء · تصحيح", mgr: "اعتماد · إعادة", srv: "الحالة النهائية من الخادم" },
+        { k: "التوريد", web: "مراجعة/تقرير", worker: "إنشاء (تقديري)", mgr: "استلام · اعتماد", srv: "الرصيد النهائي من الخادم" },
+        { k: "المخزون", web: "تهيئة + تقارير", worker: "لا", mgr: "قراءة تشغيلية", srv: "currentBalance · capacity · variance" },
+        { k: "الموافقات", web: "كامل", worker: "نتيجة فقط", mgr: "قرار", srv: "recordVersion — لا كتابة فوق صامتة" },
+        { k: "الأجهزة", web: "تصديق · إلغاء · مسح", worker: "لا", mgr: "تصديق (بصلاحية)", srv: "PENDING · ACTIVE · REVOKED نهائي" },
+        { k: "التقارير", web: "بيئة تقارير وتصدير", worker: "لا", mgr: "عرض تشغيلي", srv: "نفس عقد بيانات التقرير" }
+      ],
+      flow1: [
+        "Manager assigns nozzles",
+        "  ↓  Worker starts shift          → assignmentSnapshot created",
+        "  ↓  Worker opening readings      → offline allowed · queued",
+        "  ↓  Worker operations            → expense · supply · alerts",
+        "  ↓  Worker closing readings      → difference computed server-side",
+        "  ↓  Worker closes OWN shift      → pendingSync must be 0",
+        "  ↓  Manager sees closed worker shift",
+        "  ↓  Station aggregate            → from workerShift.assignmentSnapshot",
+        "  ↓  Manager closes station shift → readiness gate (4 conditions)",
+        "      fail → blocking reason shown · close disabled · no auto-resolve"
+      ],
+      flow2: [
+        "Worker expense",
+        "  ↓  Manager review",
+        "  ↓  returned_for_correction      → correction task (no silent reopen)",
+        "  ↓  Worker correction            → allowed fields only + manager note",
+        "  ↓  Manager approval             → approved / completed",
+        "      stale recordVersion → «تم تحديث هذه العملية» + refresh before action",
+        "      offline at any step → local_draft → pending_sync → syncing → confirmed"
+      ],
+      perms: [
+        { k: "canRecordExpense", f: "expenses", r: "worker", c: "وردية نشطة (قرار مالك)" },
+        { k: "canRecordSupply", f: "supplies", r: "worker", c: "وردية نشطة" },
+        { k: "canViewAlerts", f: "—", r: "worker · manager", c: "نطاق المحطة" },
+        { k: "canReviewReading", f: "—", r: "manager", c: "وردية غير مغلقة" },
+        { k: "canApproveExpense", f: "expenses", r: "manager", c: "pending_review" },
+        { k: "canApproveSupply", f: "supplies", r: "manager", c: "pending_review" },
+        { k: "canViewInventory", f: "inventory", r: "manager · web", c: "نطاق المحطة" },
+        { k: "canReceiveSupply", f: "supplies", r: "manager", c: "توريد مؤكَّد" },
+        { k: "canViewReports", f: "reports", r: "manager · web", c: "—" },
+        { k: "canExportReports", f: "reportPdfExport", r: "web · manager", c: "التقرير مكتمل" },
+        { k: "canViewDevices", f: "devices", r: "manager · web", c: "—" },
+        { k: "canApproveDevice", f: "devices", r: "web · manager", c: "PENDING" },
+        { k: "canRevokeDevice", f: "devices", r: "web", c: "ACTIVE" },
+        { k: "canRequestDeviceWipe", f: "devices", r: "web", c: "سياسة revoke_then_wipe (قابلة للتهيئة)" },
+        { k: "canEditOwnProfile", f: "—", r: "الجميع", c: "الحقول المسموح بها فقط" },
+        { k: "closeStationShift", f: "—", r: "manager", c: "بوابة الجاهزية الرباعية" }
+      ],
+      tenants: [
+        { k: "Tenant A", brand: "Nile Petro — أزرق #2962FF / عميق #1A237E", dark: "Deep Navy مشتق · primary #6E9BFF", cur: "ج.س · كمية 3 خانات", res: "PASS", cls: OK },
+        { k: "Tenant B", brand: "هوية بديلة — أخضر مزرق #00796B / عميق #00453C", dark: "Deep Green مشتق · primary #4DB6AC", cur: "عملة مختلفة · دقة مختلفة", res: "PASS — لا Navy مستعار", cls: OK },
+        { k: "Tenant C (QA)", brand: "اسم تطبيق طويل جداً · لون فاتح عالي السطوع · شعار عريض", dark: "يُرفَع luminance قبل الاستخدام كـ canvas", cur: "رمز عملة طويل + بريد دعم طويل", res: "PASS — بلا انكسار تخطيط", cls: OK }
+      ],
+      ftokens: [
+        { k: "brand.primary", f: "ColorScheme.primary", n: "من tenant.theme — لا ثابت في الكود" },
+        { k: "brand.deep", f: "NPThemeExtension.brandDeep", n: "مصدر اشتقاق الوضع الداكن" },
+        { k: "dark.brandMix", f: "NPThemeExtension.brandMix (double 0.35)", n: "نفس المعامل في التصميم والتنفيذ" },
+        { k: "surface.canvas", f: "ColorScheme.surface / scaffoldBackgroundColor", n: "مشتق" },
+        { k: "surface.card", f: "NPThemeExtension.surfaceCard", n: "مشتق" },
+        { k: "surface.raised / elevated / selected / hover", f: "NPThemeExtension.*", n: "أربع رُقيّ — لا ظل بديل عنها" },
+        { k: "border.default / strong", f: "NPThemeExtension.borderDefault / borderStrong", n: "شفافية رمادية لا لون صلب" },
+        { k: "text.primary / secondary / muted", f: "TextTheme + onSurface variants", n: "ثلاث درجات" },
+        { k: "status.success / warning / danger / info", f: "NPThemeExtension.status*", n: "مستقلة عن العلامة" },
+        { k: "spacing.1–8", f: "NPSpacing (const doubles)", n: "سلّم واحد" },
+        { k: "radius.8 / 12 / 16 / full", f: "NPRadius", n: "أربع قيَم فقط" },
+        { k: "type.h1…caption + mono", f: "TextTheme ('Noto Sans Arabic' / Inter / Inter)", n: "الخط يتبع الاتجاه" }
+      ],
+      fcomps: [
+        { k: "NPButton", w: "NPButton (shared widget)", s: "web + mobile" },
+        { k: "NPStatusChip", w: "NPStatusBadge", s: "web + mobile — عقد واحد" },
+        { k: "NPBottomNavigation", w: "NPBottomNav (shared mobile)", s: "worker + manager" },
+        { k: "NPBottomSheet · NPConfirmationSheet", w: "NPSheet + NPConfirmSheet", s: "shared mobile" },
+        { k: "NPTaskShell", w: "NPTaskScaffold", s: "shared mobile" },
+        { k: "NPActionCard", w: "NPActionCard", s: "shared mobile" },
+        { k: "NPDataTable", w: "NPDataTable (web/desktop)", s: "web — غير مطلوب على الجوال" },
+        { k: "NPTankGauge · NPTrendChart", w: "NPTankGauge · NPTrendChart", s: "web + manager" },
+        { k: "NPReadingInput · NPMeterReadingField", w: "NPReadingField", s: "worker" },
+        { k: "NPSyncStatus · NPConnectivityBanner", w: "NPSyncIndicator · NPConnectivityBanner", s: "shared mobile" },
+        { k: "NPEmptyState · NPErrorState · NPLoadingState · NPSuccessState", w: "NPStateView(variant)", s: "shared — أربع حالات بعقد واحد" },
+        { k: "NPAuthLogin", w: "NPLoginScreen(locale, theme, tenant)", s: "web + mobile" }
+      ],
+      assets: `assets/
+  brand/                         # المنتج نفسه — ليست ملك عميل
+    app-icon.png
+    illustrations/station-hero.svg
+    patterns/grid-soft.svg
+    decor/nozzle-3d.png           # زخرفة ترويسة فقط — ليست أيقونة وظيفية
+  icons/                          # 54 أيقونة وظيفية — سجل واحد
+    np-icons.js                   # 0 0 20 20 · stroke-only · mirror flag
+  tenants/{tenantId}/
+    logo.svg
+    logo-dark.svg
+    app-icon.png
+    manifest.json
+  fonts/
+    tajawal/*  inter/*  ibm-plex-mono/*
+
+قواعد التسمية: kebab-case · بلا لاحقة إصدار في اسم الملف ·
+أصل العميل لا يوضع أبداً خارج assets/tenants/{tenantId}/.`,
+      inventory: [
+        { k: "Web Console", frames: "16 صفحة + 4 أدراج/نوافذ", routes: "16", files: "NP Web · NPAppShell · NPAuthLogin + قوالب", modes: "من Tokens — واحد لكل شاشة", dirs: "RTL + LTR", proto: "مسار hash لكل شاشة" },
+        { k: "Worker App", frames: "54", routes: "4 تبويبات + مسارات داخلية", files: "NP Worker App · NP Worker Shift · NP Worker Complete", modes: "Light + Brand Dark", dirs: "RTL (LTR للأرقام)", proto: "كامل — بلا نهايات مسدودة" },
+        { k: "Manager App", frames: "98", routes: "4 تبويبات + 6 داخل المحطة", files: "NP Manager Station · Approvals · Inventory · Reports Account", modes: "Light + Brand Dark", dirs: "RTL (LTR للأرقام)", proto: "كامل — بلا نهايات مسدودة" }
+      ],
+      deprecated: [
+        { k: "لوح الوضع الداكن القديم (#0E1620 / #161F2E / #101A27)", v: "محذوف من كل الملفات", cls: OK },
+        { k: "قيَم داكنة مثبّتة داخل NPAuthLogin", v: "محذوفة — أصبحت Tokens", cls: OK },
+        { k: "أيقونات بديلة مؤقتة (station · nozzle · tank · meter · supply)", v: "استُبدلت بمعرّفات رسمية", cls: OK },
+        { k: "مكوّنات جوّال مكرّرة", v: "غير موجودة — 0", cls: OK },
+        { k: "أعداد مسدسات ثابتة", v: "غير موجودة — 0", cls: OK },
+        { k: "تقارير المراحل السابقة (CD-01…CD-08)", v: "محفوظة كمرجع تاريخي — Archived", cls: "lbl info" }
+      ],
+      completion: [
+        { k: "Web Design", v: "PASS", cls: OK, e: "16 مسار · بلا فائض · Sidebar/Topbar/Table من الأساس" },
+        { k: "Worker Design", v: "PASS", cls: OK, e: "54 إطار · 4 تبويبات · كل حالة لها مخرج" },
+        { k: "Manager Design", v: "PASS", cls: OK, e: "98 إطار · بوابة إغلاق المحطة مكتملة" },
+        { k: "Shared Foundation", v: "PASS", cls: OK, e: "67 مكوّن · 356 Token · 54 أيقونة · 0 تكرار قانوني · 8 مرشّح استخراج مسجّل" },
+        { k: "White-Label", v: "PASS", cls: OK, e: "0 قيمة عميل ثابتة في مكوّن · 3 عملاء مختبَرون" },
+        { k: "Flutter Handoff Readiness", v: "PASS", cls: OK, e: "خريطة Tokens + خريطة مكوّنات + Asset Manifest + عقود الحالات" }
+      ],
+      owner: [
+        { k: "canRecordExpense يتطلب وردية نشطة؟", v: "التصميم الحالي يفترض «نعم» (لا مصروف بلا وردية). قاعدة عمل، لا أقرّرها." },
+        { k: "حفظ مصروف محلياً دون وردية نشطة", v: "هل يُسمح بمسودة محلية تُربط لاحقاً بالوردية؟ يؤثر على عقد offline." },
+        { k: "منع تسجيل الخروج مع مزامنة معلّقة", v: "التصميم يعرض تحذيراً؛ هل يكون منعاً صلباً؟ سياسة بيانات." },
+        { k: "استخراج المكوّنات الثمانية المقترحة", v: "يضيف مكوّنات إلى الأساس — قرار نطاق قبل Flutter أو بعده." },
+        { k: "إعادة تسمية NPSurfaceA / NPSurfaceB", v: "اسمان غير وصفيين؛ إعادة التسمية تمسّ استيرادات قائمة." },
+        { k: "سياسة الأجهزة الافتراضية revoke_then_wipe", v: "العقد قابل للتهيئة؛ القيمة الافتراضية قرار أمني." }
+      ],
+      gate: [
+        { k: "Web", v: "PASS" }, { k: "Worker", v: "PASS" }, { k: "Manager", v: "PASS" },
+        { k: "Foundation", v: "PASS" }, { k: "White-label", v: "PASS" }, { k: "Dark Mode", v: "PASS" },
+        { k: "RTL", v: "PASS" }, { k: "LTR", v: "PASS" }, { k: "Feature Flags", v: "PASS" },
+        { k: "Permissions", v: "PASS" }, { k: "Offline Contract", v: "PASS" }, { k: "Business Parity", v: "PASS" },
+        { k: "Flutter Handoff", v: "PASS" }, { k: "Responsive Mobile", v: "PASS" }, { k: "Responsive Web", v: "PASS" },
+        { k: "Accessibility", v: "PASS" }, { k: "Dead Ends", v: "0" }, { k: "Broken Imports", v: "0" },
+        { k: "Console Errors", v: "0" }, { k: "Canonical Duplicates", v: "0" }, { k: "Hard-coded diesel", v: "0" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

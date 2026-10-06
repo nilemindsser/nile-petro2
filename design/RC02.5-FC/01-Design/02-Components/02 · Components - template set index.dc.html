@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="np-tokens.css">
+<link rel="stylesheet" href="np-system.css">
+<script src="np-icons.js"></script>
+<style>body{margin:0;background:var(--np-canvas);font-family:var(--np-font-ui);color:var(--np-text-primary)}
+a{color:var(--np-text-link);text-decoration:none}a:hover{color:var(--np-action-primary-hover)}</style>
+</helmet>
+
+<div class="np-root" dir="rtl" data-theme="nile-petro" data-scheme="light" data-density="desktop" style="padding:40px 44px 72px;display:flex;flex-direction:column;gap:40px">
+
+<div style="display:flex;flex-direction:column;gap:10px;max-width:980px">
+<h1 class="np-display">Nile Petro App — Template Set</h1>
+<div class="np-body" style="color:var(--np-text-secondary)">ثمانية قوالب قانونية فقط: أربعة للكونسول (ويب)، اثنان للمحطة (تطبيق جوال)، ودخول مقسوم حسب سطح التسليم — جوال وويب. القوالب تملك تركيب الصفحة والمناطق والاستجابة — ولا تملك بيانات منتج ولا قواعد عمل ولا تنقّلًا حقيقيًا.</div>
+<div class="np-row">
+<span class="np-badge">TEMPLATE SET 0.2.0-rc.2</span><span class="np-badge">OWNER REVIEW</span><span class="np-badge">FOUNDATION 1.5.0 FROZEN</span><span class="np-badge">canonical templates 8</span><span class="np-badge">product screens 0</span>
+</div>
+<div class="np-row" style="gap:var(--np-space-2)">
+<span class="np-chip np-chip--info">CONSOLE / WEB</span><span class="np-chip np-chip--success">STATION / MOBILE</span><span class="np-chip np-chip--warning">AUTH / MOBILE</span><span class="np-chip np-chip--neutral">AUTH / WEB</span>
+</div>
+<span class="np-caption" style="max-width:980px">كل عيّنة تحمل سطحها المقصود صراحةً، وإطار المعاينة الافتراضي يطابق سطح التسليم: الكونسول عند 1280/1440، والمحطة والدخول الجوال داخل إطار هاتف 390×844 و 360×800 قابل للتمرير كالجهاز.</span>
+</div>
+
+<section style="display:flex;flex-direction:column;gap:var(--np-space-5)">
+<sc-if value="{{g1}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<div class="np-row"><span class="np-chip np-chip--info">CONSOLE / WEB</span><h2 class="np-h1">قوالب الكونسول — NPAppShell</h2></div>
+<div class="np-notice np-notice--warning" role="status" style="max-width:980px"><np-icon name="alert"></np-icon><div class="np-notice__body"><span class="np-notice__title">تعذّر تركيب تنقّل المالك المعتمد في عيّنة المراجعة — فجوة أساس مُبلّغة</span><span class="np-notice__msg">NPSidebar صار مدفوعًا بالبيانات في CC-008، لكن NPAppShell لا يمرّر عقد العناصر إليه، فلا يستطيع أي مستهلك — ولا هذه العيّنة — تزويد تنقّل الكونسول عبر الصدفة القانونية. الإصلاح الأدنى تمرير إضافي بسطر واحد في NPAppShell، وهو تعديل على أساس مجمّد فتوقّفنا عنه وأبلغناه بدل فتحه صامتًا. التنقّل الظاهر أدناه عيّنة محايدة من الشريط نفسه، وليس هوية معلومات المنتج.</span></div></div>
+
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">T04 · NP Dashboard Template — 1280</span>
+<div style="width:860px;max-width:100%;height:420px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div style="width:1720px;height:840px;transform:scale(0.5);transform-origin:top left"><dc-import name="NP Dashboard Template" hint-size="1720px,840px" style="width:100%;height:100%"></dc-import></div></div>
+<span class="np-caption" style="max-width:860px">الصفحة الوحيدة المسموح لها بتركيب ملخّص لوحي: ترويسة · إشعار سياقي · مؤشرات NPKPI · تنبيهات NPAlertList · اتجاه NPTrendChart · حالة أصول NPTankGauge بأي عدد خزانات · سجلات تحتاج انتباهًا. بلا بطل تسويقي، وبلا شبكة ثابتة العدد، والقيم الممنوعة عن المدير تُحذف من المصدر لا تُموَّه.</span>
+</div>
+
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">T01 · Operational List — 1280</span>
+<div style="width:620px;max-width:100%;height:340px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div style="width:1240px;height:680px;transform:scale(0.5);transform-origin:top left"><dc-import name="NP Operational List Template" hint-size="1240px,680px" style="width:100%;height:100%"></dc-import></div></div>
+<span class="np-caption" style="width:620px">ترويسة · شريط أدوات (بحث · فلاتر · فترة) · شريط تحديد جماعي · جدول يتحوّل إلى بطاقات في العرض المضغوط · ترقيم · حالات النظام.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">T02 · Detail — 1280</span>
+<div style="width:620px;max-width:100%;height:340px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div style="width:1240px;height:680px;transform:scale(0.5);transform-origin:top left"><dc-import name="NP Detail Template" hint-size="1240px,680px" style="width:100%;height:100%"></dc-import></div></div>
+<span class="np-caption" style="width:620px">سياق وحالة · مجموعات قيم · سجلات مرتبطة · تدقيق قبل/بعد · قيمة حسّاسة مقنّعة · إجراءات سياقية. لا مخطط جهة أو مناوبة أو جهاز مثبّت.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">T03 · Operational Form — 1280</span>
+<div style="width:620px;max-width:100%;height:340px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div style="width:1240px;height:680px;transform:scale(0.5);transform-origin:top left"><dc-import name="NP Operational Form Template" hint-size="1240px,680px" style="width:100%;height:100%"></dc-import></div></div>
+<span class="np-caption" style="width:620px">أقسام حقول · تجميع · تذييل إجراءات · حالات نظيف/حفظ/نجاح/خطأ. عمودان فقط حين يسمح عرض الحاوية، وعمود واحد في المضغوط.</span>
+</div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:var(--np-space-5)">
+<sc-if value="{{g2}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<div class="np-row"><span class="np-chip np-chip--success">STATION / MOBILE</span><h2 class="np-h1">قوالب المحطة — تطبيق جوال على NPTaskShell · station</h2></div>
+<span class="np-caption" style="max-width:980px">قالبا المحطة مرجعان لتطبيق جوال (Flutter لاحقًا)، لا صفحتا ويب. المعاينة القانونية 390×844 و 360×800 داخل إطار هاتف يتمرّر مثل الجهاز، والإجراء الأساسي يبقى ملتصقًا أسفل الإطار. لا يوجد عرض ويب كامل لهذين القالبين.</span>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">T05 · Station Task Flow — 390</span>
+<div style="width:390px;max-width:100%;height:844px;overflow:auto;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div style="min-height:100%;display:flex"><dc-import name="NP Station Task Flow Template" hint-size="390px,720px"></dc-import></div></div>
+<span class="np-caption" style="width:390px">تنفيذ مهمة على الجوال أولًا: مزامنة دائمة · حقول قراءة/مبلغ/ملاحظة حسب البيانات · التقاط صورة · إجراء لاصق ٥٦. ليست آلة حالات المحطة: لا انتقالات ولا قواعد سحب ولا صيغ عدّادات.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">T05 · مع خطوات + انتظار دون اتصال — 360</span>
+<div style="width:360px;max-width:100%;height:800px;overflow:auto;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div style="min-height:100%;display:flex"><dc-import name="NP Station Task Flow Template" steps="البيانات,القراءات,المراجعة" step-current="{{ 1 }}" guard-mode="queue" sync-state="offline" sync-pending="{{ 3 }}" show-capture="{{ false }}" show-review="{{ true }}" action-label="حفظ (يُحفظ للمزامنة)" hint-size="360px,720px"></dc-import></div></div>
+<span class="np-caption" style="width:360px">نفس القالب ببيانات مختلفة: NPStepFlow لمهمة خطّية محدودة · NPOfflineGuard في وضع الانتظار متركّبًا مع حالة المزامنة · ملخص قبل الحفظ.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">T06 · Station Gate / Status — 390</span>
+<div style="width:390px;max-width:100%;height:844px;overflow:auto;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div style="min-height:100%;display:flex"><dc-import name="NP Station Gate Template" tone="blocking" state-title="الاتصال مطلوب" explanation="لا يمكن بدء هذه الخطوة دون اتصال. ستعود العمليات فور استعادة الشبكة." action-label="إعادة المحاولة" help-label="مساعدة" hint-size="390px,720px" style="height:100%;min-height:0"></dc-import></div></div>
+<span class="np-caption" style="width:390px">حالة/بوابة تهيمن على الشاشة بلا نموذج: أيقونة · عنوان · شرح · تفاصيل اختيارية · إجراء. خمس نبرات بنيوية، وأسماء الحالات كلها بيانات مستهلك.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">T06 · نبرة نجاح + تفاصيل — 360</span>
+<div style="width:360px;max-width:100%;height:800px;overflow:auto;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div style="min-height:100%;display:flex"><dc-import name="NP Station Gate Template" tone="success" sync-state="synced" state-title="اكتملت المهمة" explanation="تم حفظ المهمة ومزامنتها." details="قيمة أ:2450.5, قيمة ب:148250" action-label="إنهاء" show-sync="{{ true }}" hint-size="360px,720px" style="height:100%;min-height:0"></dc-import></div></div>
+<span class="np-caption" style="width:360px">نفس القالب لحالة الإتمام: النبرة والتفاصيل والإجراء بيانات — لا اسم حالة منتج داخل القالب.</span>
+</div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:var(--np-space-5)">
+<sc-if value="{{g3}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<div class="np-row"><span class="np-chip np-chip--warning">AUTH / MOBILE</span><h2 class="np-h1">T07 · قالب دخول الجوال — NPTaskShell · auth</h2></div>
+<span class="np-caption" style="max-width:980px">دخول داخل عائلة تطبيق الجوال: دخول · تغيير كلمة مرور إجباري · فتح ببصمة أو مفتاح. بوابات جهاز المحطة (تسجيل · انتظار · سحب) تخصّ T06 لا هذا القالب. شاشة دخول العامل المعتمدة تبقى المرجع البصري لمنتجها، وهذا القالب متوافق معها بنيويًا ولا يعيد تصميمها.</span>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">390×844 · نموذج</span>
+<div style="width:390px;max-width:100%;height:844px;overflow:auto;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div style="min-height:100%;display:flex"><dc-import name="NP Mobile Auth Template" variant="form" auth-title="عنوان المهمة" auth-subtitle="وصف قصير محايد" action-label="متابعة" secondary-label="إجراء ثانوي" hint-size="390px,844px" style="height:100%;min-height:0"></dc-import></div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">360×800 · رمز (S7 مفتوح)</span>
+<div style="width:360px;max-width:100%;height:800px;overflow:auto;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div style="min-height:100%;display:flex"><dc-import name="NP Mobile Auth Template" variant="code" auth-title="تحقّق من الهوية" auth-subtitle="أدخل رمز الدخول للمتابعة" hint-size="360px,800px" style="height:100%;min-height:0"></dc-import></div></div>
+<div class="np-notice np-notice--warning" role="status" style="width:360px"><np-icon name="alert"></np-icon><div class="np-notice__body"><span class="np-notice__title">زرّا متابعة — S7 مفتوح</span><span class="np-notice__msg">NPAccessCodeInput يوفّر متابعة صريحة بعقده، وصدفة auth تعرض إجراءً أساسيًا دائمًا. الإصلاح الأدنى سطر إضافي واحد في الصدفة المجمّدة، ولم يُنفَّذ.</span></div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">390×844 · حالة</span>
+<div style="width:390px;max-width:100%;height:844px;overflow:auto;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div style="min-height:100%;display:flex"><dc-import name="NP Mobile Auth Template" variant="status" auth-title="حالة الدخول" auth-subtitle="" status-title="بانتظار الاعتماد" status-text="نص محايد يشرح الحالة وما سيحدث بعدها." action-label="تحديث الحالة" hint-size="390px,844px" style="height:100%;min-height:0"></dc-import></div></div>
+</div>
+</div>
+</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:var(--np-space-5)">
+<sc-if value="{{g4}}" hint-placeholder-val="{{ false }}"><div style="display:contents">
+<div class="np-row"><span class="np-chip np-chip--neutral">AUTH / WEB</span><h2 class="np-h1">T08 · قالب دخول الكونسول — NPTaskShell · auth</h2></div>
+<span class="np-caption" style="max-width:980px">مصادقة شخص في الكونسول على الويب: سطح محدود متمركز على لوحة كاملة، كثافة سطح مكتب، ويستجيب حتى المضغوط دون أن يصبح سطح محطة. بلا شريط جانبي وبلا بطاقة مستخدم (لا جلسة بعد)، وبلا مزامنة أو إجراء محطة لاصق.</span>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">1440×900 · دخول</span>
+<div style="width:860px;max-width:100%;height:340px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div style="width:1720px;height:680px;transform:scale(0.5);transform-origin:top left;display:flex"><dc-import name="NP Console Auth Template" auth-title="تسجيل الدخول" auth-subtitle="ادخل بيانات حسابك للمتابعة" action-label="دخول" secondary-label="نسيت كلمة المرور" legal="سياسة الاستخدام وسياسة الخصوصية" hint-size="1720px,680px" style="width:100%;height:100%;min-height:0"></dc-import></div></div>
+</div>
+<div style="display:flex;gap:var(--np-space-5);flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">1280×800 · حالة موقوفة</span>
+<div style="width:640px;max-width:100%;height:320px;overflow:hidden;border:1px solid var(--np-border);border-radius:var(--np-card-radius)" dir="ltr"><div style="width:1280px;height:640px;transform:scale(0.5);transform-origin:top left;display:flex"><dc-import name="NP Console Auth Template" variant="status" auth-title="تعذّر الدخول" auth-subtitle="" notice-message="تم تجاوز عدد المحاولات المسموح." notice-severity="danger" notice-blocking="{{ true }}" action-label="إعادة المحاولة لاحقاً" hint-size="1280px,640px" style="width:100%;height:100%;min-height:0"></dc-import></div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:var(--np-space-2)"><span class="np-badge">390×844 · إثبات مضغوط</span>
+<div style="width:390px;max-width:100%;height:844px;overflow:auto;border:1px solid var(--np-border);border-radius:var(--np-card-radius)"><div style="min-height:100%;display:flex"><dc-import name="NP Console Auth Template" auth-title="تسجيل الدخول" auth-subtitle="ادخل بيانات حسابك للمتابعة" action-label="دخول" hint-size="390px,844px" style="height:100%;min-height:0"></dc-import></div></div>
+</div>
+</div>
+</div></sc-if>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+/* Template Set review surface — 0.2.0-rc.1.
+   Seven canonical templates in three groups: Console (T01–T04), Station
+   (T05–T06), Auth (T07). Neutral specimen data only; no product page, no
+   product navigation array, no legacy copy.
+
+   Sections mount progressively (the accepted Foundation catalogue
+   approach): each group hands the thread back before the next mounts, so
+   the review surface is scrollable immediately and every specimen still
+   mounts. */
+class Component extends DCLogic {
+  static get GROUPS() { return 4; }
+  state = { stage: 0 };
+  componentDidMount() { this._stage = 0; this.pump(); }
+  componentWillUnmount() { this._stopped = true; }
+  pump() {
+    if (this._stopped || this._stage >= Component.GROUPS) return;
+    setTimeout(() => {
+      if (this._stopped) return;
+      this._stage += 1;
+      this.setState({ stage: this._stage });
+      this.pump();
+    }, 0);
+  }
+  renderVals() {
+    const s = this.state.stage;
+    return { g1: s >= 1, g2: s >= 2, g3: s >= 3, g4: s >= 4 };
+  }
+}
+</script>
+</body>
+</html>

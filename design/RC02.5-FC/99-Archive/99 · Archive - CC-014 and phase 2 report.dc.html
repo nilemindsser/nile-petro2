@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="../doc-page.js"></script>
+<style>
+doc-page:not(:defined){visibility:hidden}
+h1,h2,h3,p{margin:0}
+table{border-collapse:collapse;width:100%}
+a{color:#2962FF;text-decoration:none}a:hover{color:#1A237E}
+.mono{font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate}
+.val{font-family:'IBM Plex Mono',Tajawal,sans-serif;direction:ltr;unicode-bidi:plaintext;font-variant-numeric:tabular-nums}
+</style>
+</helmet>
+<doc-page margin="0.7in">
+
+<header slot="header" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:9px;border-bottom:2px solid #1A237E;font-family:Tajawal,system-ui,sans-serif" dir="rtl">
+  <span style="display:flex;align-items:center;gap:9px">
+    <img src="assets/np-logo-symbol.png" alt="" style="height:24px;width:auto">
+    <b style="font-size:12px;color:#1A237E">نايل بترو — CC-014 والمرحلة الثانية</b>
+  </span>
+  <span class="mono" style="font-size:10.5px;color:#607D8B">17/09/2026 · NP-WO-CD-07 · 1.6.0</span>
+</header>
+
+<footer slot="footer" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:8px;border-top:1px solid #CFD8DC;font-family:Tajawal,system-ui,sans-serif;font-size:10px;color:#607D8B" dir="rtl">
+  <span>وثيقة حكومة تصميم — لمراجعة المالك</span>
+  <span class="mono">Nile Petro © 2025</span>
+</footer>
+
+<div dir="rtl" style="font-family:Tajawal,system-ui,sans-serif;color:#37474F;line-height:1.7">
+
+  <div style="display:flex;flex-direction:column;gap:9px;padding-bottom:16px;border-bottom:1px solid #E0E6ED">
+    <span class="mono" style="display:inline-flex;align-self:flex-start;align-items:center;height:24px;padding:0 10px;border-radius:6px;background:#E8EEFF;color:#1A237E;font-size:10.5px;font-weight:600">CC-014 · CLOSED &nbsp;·&nbsp; PHASE 2 · OWNER REVIEW</span>
+    <h1 style="font-size:24px;font-weight:800;color:#1A237E">ترقية أساس الجوال + رحلة الوردية وقراءات العدادات</h1>
+    <p style="font-size:13px;color:#546E7A;text-wrap:pretty">أُغلقت فجوات المرحلة الأولى الثلاث، وارتفع الأساس إلى <span class="mono">1.6.0 · FROZEN</span>، ثم نُفِّذت رحلة الوردية كاملة من البدء إلى الإغلاق الناجح. أمر العمل <span class="mono">NP-WO-CD-07</span> لم يُفتح له بديل.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;padding-top:5px">
+      <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+        <span style="display:flex;flex-direction:column;gap:2px;padding:10px 11px;border:1px solid #E0E6ED;border-radius:9px;background:#F7F9FC">
+          <b class="mono" style="font-size:17px;color:#1A237E">{{k.value}}</b>
+          <span style="font-size:10.5px;color:#607D8B">{{k.label}}</span>
+        </span>
+      </sc-for>
+    </div>
+  </div>
+
+  <h2 style="font-size:16px;font-weight:800;color:#1A237E;padding:18px 0 8px">١ · CC-014 — المكوّنات المُرقّاة إلى الأساس</h2>
+  <table style="font-size:11px">
+    <thead><tr style="background:#1A237E;color:#fff">
+      <th style="text-align:start;padding:8px 9px;font-size:10.5px">المكوّن</th>
+      <th style="text-align:start;padding:8px 9px;font-size:10.5px">الهندسة</th>
+      <th style="text-align:start;padding:8px 9px;font-size:10.5px">العقد</th>
+    </tr></thead>
+    <tbody>
+      <sc-for list="{{promoted}}" as="p" hint-placeholder-count="5">
+        <tr style="break-inside:avoid">
+          <td class="mono" style="padding:8px 9px;border-bottom:1px solid #E8EDF3;font-size:10px;font-weight:600;color:#1A237E">{{p.name}}</td>
+          <td class="val" style="padding:8px 9px;border-bottom:1px solid #E8EDF3;font-size:10px;color:#546E7A;white-space:nowrap">{{p.geom}}</td>
+          <td style="padding:8px 9px;border-bottom:1px solid #E8EDF3;color:#546E7A">{{p.note}}</td>
+        </tr>
+      </sc-for>
+    </tbody>
+  </table>
+  <p style="font-size:11px;color:#546E7A;padding-top:8px;text-wrap:pretty"><b style="color:#263238">لم تُنشأ نسخ مكرّرة:</b> NPPrimaryButton / NPSecondaryButton ← أنماط <span class="mono">NPButton</span> · NPTextField / NPPasswordField ← هيكل الحقول المعتمد <span class="mono">.np-field/.np-input</span> · NPStatusBadge ← <span class="mono">NPStatusChip</span> · NPMobileHeader ← ترويسة <span class="mono">NPTaskShell</span> · NPEmptyState و NPLoadingState و NPErrorState معتمدة أصلاً. صفر نسخة خاصة بالعامل أو بالمدير.</p>
+
+  <h2 style="font-size:16px;font-weight:800;color:#1A237E;padding:18px 0 8px">٢ · سجل الأيقونات ومجموعة Tokens الداكنة</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px">
+    <sc-for list="{{foundation}}" as="f" hint-placeholder-count="4">
+      <div style="padding:11px 12px;border:1px solid #E0E6ED;border-radius:10px;background:#FBFCFE;break-inside:avoid">
+        <b style="display:block;font-size:11.5px;color:#1A237E;padding-bottom:3px">{{f.title}}</b>
+        <span style="font-size:10.5px;line-height:1.65;color:#546E7A">{{f.body}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:16px;font-weight:800;color:#1A237E;padding:18px 0 8px">٣ · المرحلة الثانية — الإطارات المُسلَّمة</h2>
+  <table style="font-size:11px">
+    <thead><tr style="background:#F1F5FB;color:#1A237E">
+      <th style="text-align:start;padding:8px 9px;font-size:10.5px">#</th>
+      <th style="text-align:start;padding:8px 9px;font-size:10.5px">الإطار</th>
+      <th style="text-align:start;padding:8px 9px;font-size:10.5px">القرار التصميمي</th>
+    </tr></thead>
+    <tbody>
+      <sc-for list="{{frames}}" as="s" hint-placeholder-count="13">
+        <tr style="break-inside:avoid">
+          <td class="mono" style="padding:7px 9px;border-bottom:1px solid #E8EDF3;font-size:10px;font-weight:600;color:#1A237E">{{s.n}}</td>
+          <td class="mono" style="padding:7px 9px;border-bottom:1px solid #E8EDF3;font-size:9.5px;color:#455A64">{{s.key}}</td>
+          <td style="padding:7px 9px;border-bottom:1px solid #E8EDF3;color:#546E7A">{{s.note}}</td>
+        </tr>
+      </sc-for>
+    </tbody>
+  </table>
+
+  <h2 style="font-size:16px;font-weight:800;color:#1A237E;padding:18px 0 8px">٤ · قواعد العمل المطبَّقة</h2>
+  <ol style="margin:0;padding-inline-start:19px;font-size:11.5px;color:#546E7A;display:flex;flex-direction:column;gap:5px">
+    <sc-for list="{{rules}}" as="r" hint-placeholder-count="7">
+      <li style="break-inside:avoid">{{r}}</li>
+    </sc-for>
+  </ol>
+
+  <h2 style="font-size:16px;font-weight:800;color:#1A237E;padding:18px 0 8px">٥ · تغطية عدم الاتصال والمزامنة والأخطاء</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 18px;font-size:11px">
+    <sc-for list="{{coverage}}" as="c" hint-placeholder-count="10">
+      <span style="display:flex;align-items:center;gap:9px;padding:6px 0;border-bottom:1px solid #EDF1F6;break-inside:avoid">
+        <span style="flex:1;min-width:0;color:#546E7A">{{c.label}}</span>
+        <b class="val" style="flex:none;font-size:10.5px;color:#1A237E">{{c.value}}</b>
+      </span>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:16px;font-weight:800;color:#1A237E;padding:18px 0 8px">٦ · معايير القبول</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 18px;font-size:11px">
+    <sc-for list="{{checks}}" as="c" hint-placeholder-count="16">
+      <span style="display:flex;align-items:center;gap:9px;padding:6px 0;border-bottom:1px solid #EDF1F6">
+        <span style="flex:1;min-width:0;color:#546E7A">{{c.label}}</span>
+        <b class="val" style="flex:none;font-size:10.5px;color:{{c.ink}}">{{c.value}}</b>
+      </span>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:16px;font-weight:800;color:#1A237E;padding:18px 0 8px">٧ · فجوات مفتوحة — مُبلَّغ عنها ولم تُنفَّذ</h2>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <sc-for list="{{gaps}}" as="g" hint-placeholder-count="3">
+      <div style="padding:11px 12px;border:1px solid #FFE0B2;border-radius:10px;background:#FFF8EE;break-inside:avoid">
+        <b style="font-size:11.5px;color:#8D4E00">{{g.title}}</b>
+        <span style="display:block;font-size:10.5px;line-height:1.6;color:#6D5228">{{g.body}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <h2 style="font-size:16px;font-weight:800;color:#1A237E;padding:18px 0 8px">٨ · مطلوب قرار المالك</h2>
+  <ol style="margin:0;padding-inline-start:19px;font-size:11.5px;color:#546E7A;display:flex;flex-direction:column;gap:6px">
+    <sc-for list="{{decisions}}" as="d" hint-placeholder-count="4">
+      <li style="break-inside:avoid"><b style="color:#263238">{{d.title}}</b> — {{d.body}}</li>
+    </sc-for>
+  </ol>
+
+  <div style="margin-top:18px;padding:13px 15px;border-radius:11px;background:#1A237E;color:#fff;display:flex;flex-direction:column;gap:3px;break-inside:avoid">
+    <b style="font-size:12.5px">نقطة التوقف</b>
+    <span style="font-size:11px;color:#C5CFF5;text-wrap:pretty">CC-014 مغلق والأساس مُجمَّد عند <span class="mono">1.6.0</span>؛ المرحلة الثانية (الوردية والقراءات) جاهزة للمراجعة بـ ١٣ إطاراً و١٦ مكوّناً جديداً وصفر مسار مسدود. لم تبدأ المصروفات ولا التوريد ولا مسار التنبيهات التفصيلي ولا تطبيق المدير — بانتظار مراجعتك.</span>
+  </div>
+</div>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() {
+    const OK = "#0B6B3A", B = "#1A237E";
+    return {
+      kpis: [
+        { value: "1.6.0", label: "الأساس — مُجمَّد" },
+        { value: "16", label: "مكوّناً جديداً" },
+        { value: "13", label: "إطار المرحلة الثانية" },
+        { value: "49", label: "أيقونة في السجل" }
+      ],
+      promoted: [
+        { name: "NPActionCard", geom: "min-h 112 · r16 · pad 16", note: "بطاقة إجراء عامة واحدة: أربع حالات، البطاقة كلها هدف اللمس، وسبب التعطيل بالكلمات. تعمل في شبكة عمودين وقائمة عمود واحد." },
+        { name: "NPBottomNavigation", geom: "78 + safe area · 4 tabs", note: "الرئيسية · الوردية · التنبيهات · حسابي فقط. الإعدادات والأمان داخل «حسابي» ولا يصيران تبويبين. الشارة تغيب عند الصفر." },
+        { name: "NPOTPInput", geom: "46×56 · r12 · gap 8", note: "ست خانات، خمس حالات، صف الأرقام معزول LTR داخل شاشة RTL دون قاعدة منفصلة، والخطأ نصي لا لوني." },
+        { name: "NPConnectivityBanner", geom: "min-h 40 · r12", note: "شريط بعرض الشاشة بخمس حالات. لا يكرّر NPSyncStatus (شريحة) ولا NPOfflineGuard (بوابة منع)." },
+        { name: "NPSuccessState", geom: "disc 64 · pad 24", note: "الشقيق الناقص لـ NPEmptyState و NPErrorState: إجراء أساسي واحد فقط حتى لا تصبح شاشة النجاح مساراً مسدوداً." }
+      ],
+      foundation: [
+        { title: "سجل الأيقونات: 46 ← 49", body: "أُضيفت lock و mail و fingerprint بلغة السجل نفسها (شبكة 20، خطوط فقط، أطراف ووصلات دائرية، غير قابلة للانعكاس). البدائل المؤقتة (certificate / parties / worker-id) خارج واجهة الجوال. الفجوة المُبلَّغة في CC-011 مغلقة." },
+        { title: "أيقونات وظيفية لا مجسّمة", body: "المسدس المجسّم np-nozzle-3d.png زخرفة محصورة في الترويسات، ولا يُستخدم أبداً كأيقونة وظيفية في بطاقة أو قائمة." },
+        { title: "مجموعة Tokens داكنة رسمية", body: "‎[data-scheme=\"dark\"]‎ في الطبقة الرابعة يعيد تعريف نفس أسماء الـ Tokens الدلالية التي يعرّفها الفاتح، فيتبعها كل مكوّن دون نظام داكن ثانٍ ودون تغيير أي هندسة. canvas #071426 · surface #0B1D35 · raised #102640 · نص #FFFFFF و #B8C5D6 · حدود silver 28%. لا أسود صافٍ." },
+        { title: "الأنماط الثلاثة", body: "light · dark · system — و«system» يُحَل إلى أحد المخططين ولا يملك مجموعة قيَم ثالثة. ألوان الهوية ثابتة: Primary #2962FF و Deep #1A237E. حلقة التركيز على الأسطح الداكنة تعيد استخدام حلقة CC-007 المعتمدة." }
+      ],
+      frames: [
+        { n: "07", key: "screen_shift_empty", note: "حالة فراغ بإجراء واحد: بدء وردية. المحطة والوقت فقط — لا رمز عامل ولا بيانات إدارية." },
+        { n: "08", key: "screen_shift_start_confirmation", note: "ملخص المحطة والتاريخ والوقت + تنبيه صريح بأن قراءات البداية تسبق التفعيل." },
+        { n: "09", key: "screen_opening_readings", note: "قائمة تقدم ٣ من ٦ بأربع حالات لكل مسدس — لا ستة نماذج في شاشة واحدة." },
+        { n: "10", key: "screen_meter_reading", note: "بطاقة معلومات المضخة والمسدس والوقود + حقل بثلاث خانات عشرية + صورة مطلوبة." },
+        { n: "11", key: "screen_meter_reading__captured", note: "صورة مُلتقطة بمصغّرة حقيقية، «إعادة التصوير»، وشارة بانتظار المزامنة." },
+        { n: "12", key: "reading_saved", note: "تم حفظ القراءة ← المسدس التالي، مع مخرج ثانوي إلى القائمة." },
+        { n: "13", key: "screen_opening_complete", note: "٦ من ٦ ثم «تفعيل الوردية» — التفعيل بعد إكمال القراءات لا قبله." },
+        { n: "14", key: "screen_shift_active", note: "وردية نشطة: وقت البداية والمدة، ثلاث بطاقات ملخص، ثلاث عمليات، وإنهاء الوردية كإجراء محكوم لا أزرق أساسي." },
+        { n: "15", key: "screen_shift_close_confirmation", note: "قراءات النهاية مطلوبة قبل الإنهاء + العودة للوردية." },
+        { n: "16", key: "screen_meter_reading__closing", note: "نفس المكوّنات بوضع closing: البداية والنهاية والفرق المحسوب تلقائياً + تحذير «القراءة تحتاج مراجعة» بتأكيد أو تعديل." },
+        { n: "17", key: "screen_shift_review", note: "خمسة أقسام مراجعة + تحذير عناصر بانتظار المزامنة قبل الإغلاق النهائي." },
+        { n: "18", key: "close_confirmation_sheet", note: "ورقة تأكيد تمتد من NPBottomSheet المُجمَّد: إلغاء أولاً، وإنهاء الوردية يحمل العاقبة بالكلمات." },
+        { n: "19", key: "screen_shift_closed_success", note: "تم إنهاء الوردية بنجاح ← العودة للرئيسية بحالة «لا توجد وردية»." }
+      ],
+      rules: [
+        "الوردية لا تصبح نشطة قبل إكمال قراءات البداية — قاعدة عمل معروضة في ثلاث شاشات.",
+        "الفرق بين قراءتي البداية والنهاية محسوب تلقائياً ولا يملك العامل أي حقل لتعديله.",
+        "وجوب صورة العداد خاصية photoRequired وليست قاعدة مخترعة؛ الحالة الاختيارية تُعلن بالكلمات.",
+        "القراءة غير المتوقعة تحذير قابل للتأكيد أو التعديل — لا رفض نهائي من الواجهة؛ القاعدة النهائية من الخادم.",
+        "لا تُحذف أي قراءة محلية قبل نجاح المزامنة، والقيمة تبقى ظاهرة في حالتي الانتظار والفشل.",
+        "أنواع الوقود بنزين و جاز بيانات قابلة للتهيئة؛ «ديزل» المثبّتة في الكود: صفر.",
+        "وضع closing يغيّر العنوان والكلمات فقط — الهندسة والمكوّنات نفسها، دون نظام ثانٍ."
+      ],
+      coverage: [
+        { label: "حالات الاتصال في الشريط", value: "5" },
+        { label: "حالات مزامنة السجل", value: "4" },
+        { label: "حالات حقل القراءة", value: "6" },
+        { label: "حالات صورة العداد", value: "5" },
+        { label: "حالات صف المسدس", value: "4" },
+        { label: "حالات الخطأ الموثّقة", value: "8" },
+        { label: "حفظ محلي دون اتصال", value: "مدعوم" },
+        { label: "إعادة المحاولة عند الفشل", value: "موجودة" },
+        { label: "عروض مختبرة", value: "360 · 390 · 393 · 430" },
+        { label: "خانات عشرية للقراءة", value: "3" }
+      ],
+      checks: [
+        { label: "مسار بدء الوردية مكتمل", value: "PASS", ink: OK },
+        { label: "قراءات البداية مكتملة", value: "PASS", ink: OK },
+        { label: "إدخال القراءة مكتمل", value: "PASS", ink: OK },
+        { label: "حالة صورة العداد", value: "PASS", ink: OK },
+        { label: "تعدد المسدسات", value: "6", ink: B },
+        { label: "بنزين · جاز", value: "مدعومان", ink: OK },
+        { label: "«ديزل» مثبّتة في الكود", value: "0", ink: OK },
+        { label: "قراءات النهاية بنفس النظام", value: "PASS", ink: OK },
+        { label: "الفرق محسوب تلقائياً", value: "PASS", ink: OK },
+        { label: "المراجعة والتأكيد والنجاح", value: "3/3", ink: OK },
+        { label: "التنقل السفلي محفوظ", value: "4 tabs", ink: B },
+        { label: "مكوّنات من الأساس", value: "PASS", ink: OK },
+        { label: "توافق فاتح / داكن", value: "PASS", ink: OK },
+        { label: "RTL · LTR-ready", value: "PASS", ink: OK },
+        { label: "مسارات مسدودة", value: "0", ink: OK },
+        { label: "تعريفات مكرّرة · استيرادات مكسورة", value: "0 · 0", ink: OK },
+        { label: "أخطاء كونسول", value: "0", ink: OK },
+        { label: "قياسات التسليم معروضة", value: "18 سطراً", ink: B }
+      ],
+      gaps: [
+        { title: "التوقيع والتسليم غير منفَّذين — فتحة اختيارية فقط", body: "handoverRequired مسجّلة كخاصية: إذا false لا يظهر شيء، وإذا true يظهر موضع مكوّن لاحق. لم يُخترع أي مكوّن توقيع، ولم يُدرج في شاشة المراجعة الحالية لأن سياسة التسليم غير معتمدة بعد." },
+        { title: "المصروفات والتوريدات عناوين فقط", body: "بطاقتا «تسجيل مصروف» و«تسجيل توريد» ظاهرتان في الوردية النشطة بسبب واضح («يُنفَّذ في مرحلة لاحقة») ولم تُنفَّذ تفاصيلهما وفق نقطة التوقف B28." },
+        { title: "المرحلة الأولى ما زالت بأسلوب صفحة المنتج", body: "شاشات المصادقة والرئيسية في NP Worker App مبنية بأنماط داخلية ورموز SVG محلية لا عبر المكوّنات المعتمدة الجديدة. ترحيلها إلى NPActionCard و NPBottomNavigation و NPOTPInput تغيير هيكلي يحتاج إذنك — لم يُنفَّذ حتى لا تتغير شاشات مُعتمدة دون قرار." }
+      ],
+      decisions: [
+        { title: "ترحيل شاشات المرحلة الأولى", body: "هل نستبدل الأنماط الداخلية في شاشات المرحلة الأولى بالمكوّنات المعتمدة الثلاثة الآن، أم نتركها كما اعتُمدت؟" },
+        { title: "سياسة التوقيع والتسليم", body: "هل تتطلب الوردية توقيعاً أو تسليماً لعامل الوردية التالية؟ القرار يحدّد تفعيل handoverRequired." },
+        { title: "وجوب صورة العداد", body: "photoRequired = true لكل القراءات، أم لقراءات النهاية فقط، أم حسب إعداد المحطة؟" },
+        { title: "نطاق المرحلة الثالثة", body: "المصروفات والتوريد أولاً، أم التنبيهات التفصيلية، أم البدء بتطبيق المدير؟" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
