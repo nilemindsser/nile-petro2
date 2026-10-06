@@ -1,0 +1,18 @@
+# NP-DELIVERY-CHECKSUMS-RC02.5-FC
+# Nile Petro · frozen delivery set · owner freeze APPROVED · 2026-09-20
+# Format: sha256sum-compatible (SHA-256  <two spaces>  filename)
+# This file is EXTERNAL to the sealed package and is NOT inside the ZIP.
+# Verify:  sha256sum -c NP-DELIVERY-CHECKSUMS-RC02.5-FC.sha256
+#
+# Content identity digest of the package contents (70 files, manifest excluded):
+#   c079d1a25ff5518dd8db701f8e99cf6661d9a8de9ea175dc5eecc771539d4395
+#
+# Nile-Petro-Developer-Handoff-RC02.5-FC.zip — 13719772 bytes
+# NP-RC02.5-FC-BASELINE.md — 4201 bytes
+# NP-FREEZE-01-RC02.5-FC.md — 4610 bytes
+# NP-CR-001-TEMPLATE.md — 3305 bytes
+#
+25ef2cfb637f405082052f0bd8d28ba0fd73bc81b29c5f1530f64a33a1e3b911  Nile-Petro-Developer-Handoff-RC02.5-FC.zip
+3d5948db14640a3235f71b8270c7ffc64d6a7e1bc6f1f1461def902591f42b65  NP-RC02.5-FC-BASELINE.md
+1a691f349c2bc887bb5a3babaa6783b4e4b0de4de1e3fd665fa411c6d223e5b5  NP-FREEZE-01-RC02.5-FC.md
+f25fce2713b06f474c67589d7437ad867ce9bf642eeed085c83b35b70f5683d6  NP-CR-001-TEMPLATE.md

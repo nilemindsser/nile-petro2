@@ -1,0 +1,28 @@
+{
+  "name": "nile-petro",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@9.12.3",
+  "engines": {
+    "node": ">=20.11.0"
+  },
+  "scripts": {
+    "import:design": "node tools/import-design.mjs",
+    "verify:freeze": "node tools/verify-freeze.mjs",
+    "verify:design": "node tools/verify-design.mjs",
+    "gen:tokens": "node packages/tokens/src/generate.mjs",
+    "gen:icons": "node packages/icons/src/generate.mjs",
+    "gen:all": "pnpm gen:tokens && pnpm gen:icons",
+    "scan:literals": "node packages/lint-literals/bin/scan.mjs",
+    "test": "node --test packages/*/test/*.test.mjs",
+    "lint": "eslint .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "eslint": "^9.13.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3"
+  }
+}

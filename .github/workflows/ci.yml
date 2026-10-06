@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  m0:
+    name: M0 — frozen identity, generators, detectors
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.3
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - name: install (frozen lockfile — pnpm-lock.yaml is committed)
+        run: pnpm install --frozen-lockfile
+
+      - name: 1 · freeze + design identity (before)
+        run: |
+          node tools/verify-freeze.mjs
+          node tools/verify-design.mjs
+      - name: 2 · token generation
+        run: pnpm gen:tokens
+      - name: 3 · icon generation
+        run: pnpm gen:icons
+      - name: 4 · generator determinism (tokens + icons)
+        run: node --test packages/tokens/test/parity.test.mjs packages/icons/test/icons.test.mjs
+      - name: 5 · generation drift on committed outputs
+        run: git diff --exit-code -- packages/*/dist
+      - name: 6 · token parity incl. Brand Dark A/B/C
+        run: node --test packages/tokens/test/tokens.test.mjs packages/tokens/test/brand-dark.test.mjs packages/tokens/test/parity.test.mjs
+      - name: 7 · literal clean scan
+        run: pnpm scan:literals
+      - name: 8 · literal negative control (2/2 must be detected)
+        run: node --test packages/lint-literals/test/negative-control.test.mjs
+      - name: 9 · SVG / icon contracts
+        run: node --test packages/icons/test/icons.test.mjs
+      - name: 10 · alias resolution
+        run: node -e "const m=require('./packages/icons/dist/icons.json');const bad=Object.entries(m.aliases).filter(([,c])=>!m.icons[c]);if(bad.length){console.error(bad);process.exit(1)}console.log('aliases resolved',Object.keys(m.aliases).length)"
+      - name: 11 · lint
+        run: pnpm lint
+      - name: 12 · format check
+        run: pnpm format:check
+      - name: 13 · typecheck
+        run: pnpm typecheck
+      - name: 14 · unit tests + design read-only proof (after)
+        run: |
+          pnpm test
+          node tools/verify-design.mjs
+          git diff --exit-code -- design contracts governance
+
+# No skipped test is reported as PASS: the token/icon suites fail hard when the design tree
+# is missing, because gate 1 stops the job before they run.
+# Branch protection is configured on the remote; when no remote is reachable the status is
+# REMOTE BRANCH PROTECTION UNVERIFIED — that is not a failure of M0.

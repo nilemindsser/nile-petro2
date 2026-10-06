@@ -1,0 +1,572 @@
+/* ==========================================================================
+   NILE PETRO APP — CANONICAL TOKEN SOURCE
+   Brand authority : Nile Petro Brand Identity & Product Design System v1.0
+   Parent company  : Nile Minds For Digital Technologies
+   Product         : Nile Petro App — Fuel Station Management System
+
+   THIS IS THE ONLY FILE PERMITTED TO CONTAIN LITERAL VALUES.
+   Layers: 1 Primitive · 2 Semantic · 3 Component · 4 Modes
+   ========================================================================== */
+
+/* ==========================================================================
+   LAYER 1 — PRIMITIVE TOKENS
+   ========================================================================== */
+:root {
+  /* --- 1.1 Brand primitives (approved identity — never altered) --- */
+  --np-color-blue-primary: #2962FF;   /* Primary Blue    */
+  --np-color-blue-deep:    #1A237E;   /* Deep Tech Blue  */
+  --np-color-slate:        #455A64;   /* Slate Gray      */
+  --np-color-silver:       #90A4AE;   /* Smart Silver    */
+  --np-color-sky:          #E4F2FD;   /* Light Sky Blue  */
+
+  /* --- 1.2 Neutral primitives (non-brand) --- */
+  --np-color-white: #FFFFFF;
+  --np-color-ink:   #0E1116;
+
+  /* --- 1.2b Dark-scheme structural surfaces — CC-015 · BRAND-TINTED DARK.
+         Dark is NOT a black mode. Every structural rung is the TENANT's own
+         deep brand colour mixed into a neutral dark base, so a blue tenant
+         reads deep navy and a teal tenant reads deep green from the SAME
+         rule — no per-tenant dark literal and no pure black anywhere.
+         Only the four neutral bases and the three text values are literal;
+         a tenant theme overrides --np-dark-brand alone. --- */
+  /* NP-DESIGN-CLOSURE-01 · P2 — surfaces are derived in OKLCH from the client
+     hue/chroma only. No neutral base, no brand↔black blend. A tenant theme
+     overrides --np-dark-hue / --np-dark-chroma (derived from brand.deep). */
+  --np-dark-hue:    270.3;
+  --np-dark-chroma: 0.055;
+  --np-dark-canvas:   oklch(0.205 var(--np-dark-chroma) var(--np-dark-hue));
+  --np-dark-surface:  oklch(0.245 var(--np-dark-chroma) var(--np-dark-hue));
+  --np-dark-raised:   oklch(0.285 var(--np-dark-chroma) var(--np-dark-hue));
+  --np-dark-elevated: oklch(0.325 var(--np-dark-chroma) var(--np-dark-hue));
+  --np-dark-border:   oklch(0.590 calc(var(--np-dark-chroma) * 0.85) var(--np-dark-hue));
+  --np-dark-focus:    oklch(0.860 0.140 var(--np-dark-hue));
+  /* NP-MR-001 P3 · F-P2-05 — the dark ACTION colour is now derived from the
+     tenant hue like every other dark rung, instead of being supplied by each
+     surface as a literal fallback that measured 3.41:1 on the dark surface. */
+  --np-dark-action:   oklch(0.800 0.120 var(--np-dark-hue));
+  /* NP-MR-001 P3 · F-P2-02 — dark text rungs promoted to primitives so a
+     surface rendered OUTSIDE [data-scheme="dark"] (the Authentication
+     specimens) can read them. Values are unchanged; the scheme block below
+     now references these names. */
+  --np-dark-text:     oklch(0.965 calc(var(--np-dark-chroma) * 0.30) var(--np-dark-hue));
+  --np-dark-text-2:   oklch(0.845 calc(var(--np-dark-chroma) * 0.30) var(--np-dark-hue));
+  --np-dark-text-3:   oklch(0.700 calc(var(--np-dark-chroma) * 0.30) var(--np-dark-hue));
+
+  /* NP-RC01-REMEDIATION-01 · F-05 — the legacy --np-color-dark-* set and its
+     brand↔neutral color-mix derivation are REMOVED. Its inputs
+     (--np-dark-base-1..4, --np-dark-brand) were deleted when P2 closed, so the
+     declarations no longer resolved. The OKLCH ladder above is the ONE dark
+     algorithm; the old model is recorded in change history, not in source. */
+
+  /* --- 1.3 Feedback primitives — INDEPENDENT of brand.
+         No feedback role may ever alias a brand primitive. --- */
+  --np-color-success: #1B7F4D;
+  --np-color-warning: #B26A00;
+  --np-color-danger:  #C62828;
+  --np-color-info:    #0277BD;
+  /* CC-007 · owner ruling R1 §3 — ACCESSIBILITY CORRECTION.
+     #B26A00 with white text measured 4.24:1 against a 4.5:1 minimum.
+     The old graph overloaded ONE primitive across four semantic roles, so
+     the failing role is SPLIT OUT instead of repainting the whole family:
+     this value serves the SOLID role only. --np-color-warning stays #B26A00
+     and keeps feeding soft / ink / border, all of which already pass — so
+     no existing warning specimen changes. Measured after: 5.02:1. */
+  --np-color-warning-solid: #B45309;
+
+  /* --- 1.4 (reserved) Regression-test alternates live in
+         tests/np-test-overrides.css and never in this production source. --- */
+
+  /* --- 1.5 Type primitives --- */
+  --np-family-latin:   "Inter", system-ui, sans-serif;
+  --np-family-display: "Inter Display", "Inter", system-ui, sans-serif;
+  --np-family-arabic:  "Noto Sans Arabic", "Inter", system-ui, sans-serif;
+  /* Fallback-only, registered: never a production UI face */
+  --np-family-fallback-arabic: "Noto Sans Arabic", sans-serif;
+
+  --np-weight-regular: 400;
+  --np-weight-medium:  500;
+  --np-weight-semibold: 600;
+  --np-weight-bold:    700;
+
+  /* --- 1.6 Radius primitives — EXACTLY four. No 10px. No 14px. --- */
+  --np-radius-sm:   8px;
+  --np-radius-md:   12px;
+  --np-radius-lg:   16px;
+  --np-radius-full: 999px;
+
+  /* --- 1.7 Spacing primitives — 4px base --- */
+  --np-space-1: 4px;
+  --np-space-2: 8px;
+  --np-space-3: 12px;
+  --np-space-4: 16px;
+  --np-space-5: 20px;
+  --np-space-6: 24px;
+  --np-space-8: 32px;
+  --np-space-10: 40px;
+
+  /* --- 1.8 Size primitives --- */
+  --np-size-control-desktop: 40px;
+  --np-size-control-touch:   48px;
+  --np-size-navrow-desktop:  44px;
+  --np-size-navrow-touch:    48px;
+  --np-size-action-worker:   56px;
+  --np-size-bottomnav:       78px;  /* mobile tab bar — CC-013 */
+  --np-size-otp-cell:        46px;  /* OTP cell width — CC-013 */
+  --np-size-tablerow:        56px;
+  --np-size-tabs:            48px;
+  --np-size-toolbar:         64px;
+  --np-size-topbar:          72px;
+  --np-size-sidebar:         256px;
+  --np-size-sidebar-rail:    76px;
+
+  /* --- 1.9 Icon primitives --- */
+  --np-icon-sm: 16px;
+  --np-icon-md: 20px;   /* canonical */
+  --np-icon-lg: 24px;   /* touch / mobile */
+  --np-icon-xl: 28px;   /* empty & error states */
+  --np-icon-stroke: 1.6;
+
+  /* --- 1.10 Layout mode boundaries (documentation + container queries) --- */
+  --np-layout-compact-max:  767px;
+  --np-layout-medium-min:   768px;
+  --np-layout-medium-max:   1279px;
+  --np-layout-expanded-min: 1280px;
+  --np-layout-narrow-max:   360px;  /* very-narrow surface guard */
+  --np-cq-narrow-max:       420px;  /* component-owned container threshold */
+  --np-viewport-reference:  1440px; /* DESIGN REFERENCE ONLY — not a breakpoint */
+  /* CC-003: @container / @media conditions cannot read var(); the literals in
+     np-system.css are the SAME five thresholds registered here and are
+     classified as RESPONSIVE THRESHOLDS, verified against these tokens by the
+     Capability Gate. No other breakpoint value may appear anywhere. */
+
+  /* --- 1.11 Motion --- */
+  --np-motion-fast: .12s;
+  --np-motion-base: .2s;
+  --np-ease: cubic-bezier(.2,.6,.3,1);
+  --np-z-sticky: 10;
+  --np-z-drawer: 40;
+  --np-z-modal: 50;
+  --np-z-toast: 60;
+}
+
+/* ==========================================================================
+   LAYER 2 — SEMANTIC TOKENS
+   Components consume ONLY this layer and layer 3.
+   ========================================================================== */
+:root {
+  /* --- 2.1 Action --- */
+  --np-action-primary:        var(--np-color-blue-primary);
+  --np-action-primary-hover:  color-mix(in srgb, var(--np-action-primary) 86%, var(--np-color-ink));
+  --np-action-primary-active: color-mix(in srgb, var(--np-action-primary) 76%, var(--np-color-ink));
+  --np-action-primary-ink:    var(--np-color-white);
+  --np-action-secondary-bg:   var(--np-color-white);
+  --np-action-secondary-ink:  var(--np-color-blue-deep);
+  --np-action-ghost-ink:      var(--np-color-blue-deep);
+  --np-action-destructive:      var(--np-color-danger);
+  --np-action-destructive-ink:  var(--np-color-white);
+  --np-action-disabled-ink:   var(--np-color-silver);
+
+  /* --- 2.2 Surface --- */
+  --np-surface:         var(--np-color-white);
+  --np-surface-subtle:  color-mix(in srgb, var(--np-color-sky) 40%, var(--np-color-white));
+  --np-surface-raised:  var(--np-color-white);
+  --np-canvas:          color-mix(in srgb, var(--np-color-sky) 55%, var(--np-color-white));
+  --np-scrim:           color-mix(in srgb, var(--np-color-ink) 45%, transparent);
+
+  /* --- 2.3 Border --- */
+  --np-border:        color-mix(in srgb, var(--np-color-silver) 48%, var(--np-color-white));
+  --np-border-strong: color-mix(in srgb, var(--np-color-silver) 80%, var(--np-color-white));
+  /* NP-MR-001 P3 R2 — the mobile bridges reference --np-border-soft; it only ever resolved
+     through their literal fallback. Registered here so the hairline rule has one source. */
+  --np-border-soft:   color-mix(in srgb, var(--np-color-silver) 22%, var(--np-color-white));
+
+  /* --- 2.4 Text --- */
+  --np-text-primary:   color-mix(in srgb, var(--np-color-slate) 88%, var(--np-color-ink));
+  /* NP-MR-001 P3 · F-P2-01 — ACCESSIBILITY CORRECTION. The 80% tint measured
+     4.40:1 on white, below the 4.5 minimum, and it is the token every secondary
+     label and caption reads. Secondary now resolves to the registered Slate
+     primitive itself (7.24:1). No new colour, same hue, no geometry change. */
+  --np-text-secondary: var(--np-color-slate);
+  --np-text-disabled:  var(--np-color-silver);
+  --np-text-onbrand:   var(--np-color-white);
+  --np-text-link:      var(--np-action-primary);
+
+  /* --- 2.5 Navigation --- */
+  --np-nav-bg:          var(--np-color-blue-deep);
+  --np-nav-ink:         color-mix(in srgb, var(--np-color-sky) 82%, var(--np-color-blue-deep));
+  --np-nav-ink-active:  var(--np-color-white);
+  --np-nav-active-bg:   color-mix(in srgb, var(--np-color-white) 14%, transparent);
+  --np-nav-hover-bg:    color-mix(in srgb, var(--np-color-white) 7%, transparent);
+  --np-nav-rule:        color-mix(in srgb, var(--np-color-white) 12%, transparent);
+  --np-nav-marker:      var(--np-action-primary);
+
+  /* --- 2.6 Feedback (solid / soft / ink / border) --- */
+  --np-success:        var(--np-color-success);
+  --np-success-soft:   color-mix(in srgb, var(--np-color-success) 10%, var(--np-color-white));
+  --np-success-ink:    color-mix(in srgb, var(--np-color-success) 82%, var(--np-color-ink));
+  --np-success-border: color-mix(in srgb, var(--np-color-success) 32%, var(--np-color-white));
+  --np-warning:        var(--np-color-warning-solid);  /* CC-007 — solid role only */
+  --np-warning-soft:   color-mix(in srgb, var(--np-color-warning) 10%, var(--np-color-white));
+  --np-warning-ink:    color-mix(in srgb, var(--np-color-warning) 84%, var(--np-color-ink));
+  --np-warning-border: color-mix(in srgb, var(--np-color-warning) 32%, var(--np-color-white));
+  --np-danger:         var(--np-color-danger);
+  --np-danger-soft:    color-mix(in srgb, var(--np-color-danger) 9%, var(--np-color-white));
+  --np-danger-ink:     color-mix(in srgb, var(--np-color-danger) 86%, var(--np-color-ink));
+  --np-danger-border:  color-mix(in srgb, var(--np-color-danger) 30%, var(--np-color-white));
+  --np-info:           var(--np-color-info);
+  --np-info-soft:      color-mix(in srgb, var(--np-color-info) 9%, var(--np-color-white));
+  --np-info-ink:       color-mix(in srgb, var(--np-color-info) 86%, var(--np-color-ink));
+  --np-info-border:    color-mix(in srgb, var(--np-color-info) 30%, var(--np-color-white));
+  --np-neutral-soft:   var(--np-surface-subtle);
+  --np-neutral-ink:    var(--np-text-secondary);
+  --np-neutral-border: var(--np-border);
+
+  /* --- 2.7 Focus --- */
+  --np-focus-ring:   var(--np-action-primary);
+  --np-focus-width:  2px;
+  --np-focus-offset: 2px;
+  /* CC-007 · owner ruling R1 §4 — ACCESSIBILITY CORRECTION.
+     Primary Blue on Deep Tech Blue measured 2.70:1 against a 3:1 minimum,
+     and .np-nav-item:focus-visible is the live instance on the navy
+     sidebar. Dark STRUCTURAL surfaces remap the ring colour only — same
+     width, same offset, same geometry. Light Sky Blue measures 11.62:1 on
+     Deep Tech Blue. Reusable on any dark structural surface, not just
+     NPSidebar (see .np-on-dark in np-system.css). */
+  --np-focus-ring-ondark: var(--np-color-sky);
+
+  /* --- 2.8 Elevation --- */
+  --np-elevation-0: none;
+  --np-elevation-1: 0 4px 12px color-mix(in srgb, var(--np-color-ink) 8%, transparent);
+  --np-elevation-2: 0 8px 20px color-mix(in srgb, var(--np-color-ink) 12%, transparent);
+  --np-elevation-3: 0 16px 40px color-mix(in srgb, var(--np-color-ink) 18%, transparent);
+
+  /* --- 2.9 Typography roles --- */
+  --np-font-ui:      var(--np-family-arabic);
+  --np-font-display: var(--np-family-display);
+  --np-font-num:     var(--np-family-latin);
+
+  --np-type-display-size: 32px; --np-type-display-line: 40px; --np-type-display-weight: var(--np-weight-bold);
+  --np-type-h1-size: 24px;      --np-type-h1-line: 32px;      --np-type-h1-weight: var(--np-weight-bold);
+  --np-type-h2-size: 20px;      --np-type-h2-line: 28px;      --np-type-h2-weight: var(--np-weight-bold);
+  --np-type-h3-size: 16px;      --np-type-h3-line: 24px;      --np-type-h3-weight: var(--np-weight-semibold);
+  --np-type-body-size: 14px;    --np-type-body-line: 22px;    --np-type-body-weight: var(--np-weight-regular);
+  --np-type-label-size: 13px;   --np-type-label-line: 20px;   --np-type-label-weight: var(--np-weight-medium);
+  --np-type-caption-size: 12px; --np-type-caption-line: 18px; --np-type-caption-weight: var(--np-weight-regular);
+  --np-type-kpi-size: 28px;     --np-type-kpi-line: 36px;     --np-type-kpi-weight: var(--np-weight-bold);
+
+  /* --- 2.10 Numeric treatment (financial, meter, id, date, time, technical) --- */
+  --np-numeric-family:   var(--np-font-num);
+  --np-numeric-variant:  tabular-nums lining-nums;
+  --np-numeric-feature:  "tnum" 1, "lnum" 1;
+  --np-numeric-tracking: 0;
+  --np-numeric-direction: ltr;
+
+  /* --- 2.11 Data series (CTO-R-024) — chart series NEVER use the action
+         colour or a feedback colour. Two reusable aliases, both resolving
+         to existing brand primitives: no new colour enters the system. --- */
+  --np-data-series-1: var(--np-color-blue-deep);  /* 13.24:1 on white */
+  --np-data-series-2: var(--np-color-slate);      /*  7.24:1 on white */
+}
+
+/* ==========================================================================
+   LAYER 3 — COMPONENT TOKENS
+   ========================================================================== */
+:root {
+  /* mode-resolved control sizes (see layer 4) */
+  --np-control-h: var(--np-size-control-desktop);
+  --np-navrow-h:  var(--np-size-navrow-desktop);
+  --np-icon-size: var(--np-icon-md);
+
+  /* Button */
+  --np-button-h: var(--np-control-h);
+  --np-button-radius: var(--np-radius-md);
+  --np-button-px: var(--np-space-4);
+  --np-button-gap: var(--np-space-2);
+  --np-button-font-size: var(--np-type-body-size);
+  --np-button-font-weight: var(--np-weight-semibold);
+
+  /* IconButton */
+  --np-iconbutton-size: var(--np-control-h);
+  --np-iconbutton-radius: var(--np-radius-md);
+
+  /* Input / Select / DatePicker */
+  --np-input-h: var(--np-control-h);
+  --np-input-radius: var(--np-radius-md);
+  --np-input-px: var(--np-space-3);
+  --np-input-border: var(--np-border-strong);
+  --np-search-w-min: var(--np-menu-w-min);   /* 240 — same compact popover width step */
+
+  /* Choice controls — CC-004 (Checkbox / Radio). Interaction target is 48 in
+     BOTH densities: it is a touch-safety floor, not a density value. */
+  --np-choice-box: var(--np-icon-md);              /* 20 visual box */
+  --np-choice-target: var(--np-size-control-touch);/* 48 hit area */
+  --np-choice-radius: var(--np-radius-sm);
+  --np-choice-dot: var(--np-space-2);              /* 8 radio dot */
+  --np-choice-border: var(--np-border-strong);
+  /* Select / DatePicker — CC-004. Height reads --np-control-h DIRECTLY in
+     np-system.css (no :root alias) so nested density contexts resolve. */
+  --np-select-radius: var(--np-input-radius);
+  --np-select-px: var(--np-input-px);
+
+  /* Sidebar */
+  --np-nav-marker-w: 3px;
+  --np-nav-marker-h: 22px;
+  --np-nav-marker-offset: calc((var(--np-navrow-h) - var(--np-nav-marker-h)) / 2);
+  --np-avatar-size: 36px;
+  --np-sidebar-mark-size: var(--np-size-control-desktop);
+  --np-sidebar-w: var(--np-size-sidebar);
+  --np-sidebar-rail-w: var(--np-size-sidebar-rail);
+  --np-sidebar-item-h: var(--np-navrow-h);
+  --np-sidebar-item-radius: var(--np-radius-sm);
+
+  /* Topbar */
+  --np-topbar-h: var(--np-size-topbar);
+  --np-topbar-bg: var(--np-surface);
+  --np-topbar-border: var(--np-border);
+
+  /* Toolbar */
+  --np-toolbar-h: var(--np-size-toolbar);
+  --np-toolbar-gap: var(--np-space-3);
+  --np-toolbar-px: var(--np-space-4);
+
+  /* Tabs — CC-001 */
+  --np-tabs-h: var(--np-size-tabs);
+  --np-tabs-indicator: 2px;
+  --np-tabs-gap: var(--np-space-5);
+  --np-tabs-px: var(--np-space-2);
+  --np-tabs-count-size: var(--np-space-5);
+  --np-segmented-h: var(--np-control-h);
+  --np-segmented-radius: var(--np-radius-sm);
+  --np-segmented-bg: var(--np-surface-subtle);
+
+  /* Table */
+  --np-table-row-h: var(--np-size-tablerow);
+  --np-table-head-bg: var(--np-surface-subtle);
+
+  /* Card */
+  --np-card-radius: var(--np-radius-lg);
+  --np-card-pad: var(--np-space-5);
+
+  /* Modal / Drawer / Sheet */
+  --np-modal-w: 560px;
+  --np-modal-radius: var(--np-radius-lg);
+  --np-drawer-w: 640px;
+  --np-drawer-radius: var(--np-radius-lg);
+  --np-sheet-radius: var(--np-radius-lg);
+  /* Bottom sheet — CC-001 */
+  --np-sheet-pad: var(--np-space-4);
+  --np-sheet-handle-w: var(--np-space-8);   /* 32 */
+  --np-sheet-handle-h: var(--np-space-1);   /*  4 */
+  --np-sheet-h-tall: 62%;
+  /* fit is capped by LIST LENGTH, not by a viewport percentage: five action
+     rows scroll internally beyond that, and a short list never scrolls. */
+  --np-sheet-fit-body-max: calc(var(--np-sheet-row-h) * 5);  /* 5 × 56 = 280 */
+  --np-sheet-row-h: var(--np-size-tablerow);      /* 56 — min 48 enforced */
+  /* NPBottomSheet is a COMPACT/TOUCH overlay: the component itself is bounded
+     to the mobile reference width. Desktop short actions route to NPMenu,
+     structured detail to NPModal / NPDrawer. */
+  --np-sheet-w-max: 390px;
+  --np-sheet-stage-min: 480px;                    /* standalone mobile context */
+  --np-sheet-inset-inline: var(--np-space-4);     /* 16 */
+  --np-sheet-inset-block: var(--np-space-3);      /* 12 */
+  --np-sheet-h-full: 100%;
+  --np-sheet-safe: env(safe-area-inset-bottom, 0px);
+
+  /* Chip / Toast / Menu */
+  --np-chip-h: 28px;
+  --np-chip-radius: var(--np-radius-sm);
+  --np-toast-radius: var(--np-radius-md);
+  --np-toast-w-min: 320px;
+  --np-toast-w-max: 420px;
+  --np-badge-h: 26px;
+  --np-dot-size: 7px;          /* status / notification dot */
+  --np-dot-ring: 1.5px;        /* dot ring against its surface */
+  --np-modal-icon-size: 36px;  /* modal head status disc */
+  --np-skel-line-h: 14px;      /* loading skeleton line */
+  --np-skel-block-h: 28px;     /* loading skeleton block */
+  --np-cq-thumb-w: 96px;
+  --np-cq-thumb-h: 72px;
+  --np-toast-duration: 4s;
+  --np-menu-radius: var(--np-radius-md);
+  /* Menu — CC-001 */
+  --np-menu-w-min: 240px;
+  --np-menu-w-max: 280px;
+  --np-menu-row-h: var(--np-control-h);
+  --np-menu-pad: var(--np-space-1);
+  --np-menu-elevation: var(--np-elevation-1);
+  /* Logo — CC-001 (official clear space = 0.5 x artwork height) */
+  --np-logo-h-sm: var(--np-space-6);
+  --np-logo-h-md: var(--np-space-8);
+  --np-logo-h-lg: var(--np-space-10);
+  --np-logo-plate-radius: var(--np-radius-md);
+  --np-logo-clearspace: .5em;
+  --np-logo-pending-tracking: .04em;
+  /* Wordmark set beside the official symbol (owner instruction, CC-006).
+     No new family: the registered Latin face at the registered display step. */
+  --np-logo-word-size: var(--np-type-h3-size);
+  --np-logo-word-weight: var(--np-weight-bold);
+  --np-logo-word-tracking: -.01em;
+  --np-logo-word-sub-size: var(--np-type-caption-size);
+
+  /* CC-007 — operational domain components. Every value derives from a
+     registered primitive: no new colour, radius, spacing step, control
+     height or breakpoint enters the system. */
+  --np-textarea-min-h: calc(var(--np-control-h) * 2);
+  --np-textarea-max-h: calc(var(--np-control-h) * 5);
+  --np-textarea-py: var(--np-space-2);
+  --np-code-tracking: .24em;           /* single-field code legibility */
+  --np-progress-h: var(--np-space-2);
+  --np-photo-h: calc(var(--np-space-10) * 4);   /* 160 preview box */
+  --np-gauge-track-h: var(--np-space-2);
+  --np-chart-h: calc(var(--np-space-10) * 4);   /* 160 plot area */
+  --np-chart-bar-w: var(--np-space-3);
+  --np-tree-indent: var(--np-space-5);
+  --np-notice-pad: var(--np-space-3);
+  --np-notice-radius: var(--np-radius-md);
+  --np-step-dot: var(--np-space-6);
+  --np-attach-row-h: var(--np-size-tablerow);
+  --np-disclosure-h: var(--np-size-tablerow);
+  --np-kpi-gap: var(--np-space-1);
+
+  /* CC-013 — mobile components (NPMobileActionCard · NPBottomNavigation ·
+     NPOTPInput). Every value derives from a registered primitive: no new
+     colour, radius or spacing step enters the system. */
+  --np-mcard-min-h: calc(var(--np-space-8) * 3.5);  /* 112 */
+  --np-mcard-radius: var(--np-radius-lg);
+  --np-mcard-pad: var(--np-space-4);
+  --np-mcard-gap: var(--np-space-3);
+  --np-mcard-icon-box: var(--np-size-control-desktop);  /* 40 icon plate */
+  --np-bottomnav-h: var(--np-size-bottomnav);
+  --np-bottomnav-item-min: var(--np-size-control-touch);
+  --np-bottomnav-icon: var(--np-icon-lg);
+  --np-bottomnav-safe: env(safe-area-inset-bottom, 0px);
+  --np-otp-cell-w: var(--np-size-otp-cell);
+  --np-otp-cell-h: var(--np-size-action-worker);
+  --np-otp-radius: var(--np-radius-md);
+  --np-otp-gap: var(--np-space-2);
+
+  /* Worker primary action */
+  --np-action-worker-h: var(--np-size-action-worker);
+}
+
+/* ==========================================================================
+   LAYER 4 — MODES
+   theme · scheme · direction · density · layout
+   ========================================================================== */
+
+/* 4.1 theme — nile-petro is the only registered product theme */
+[data-theme="nile-petro"] { color-scheme: light; }
+
+/* 4.2 scheme — light is the only registered scheme in v1 */
+[data-scheme="light"] { --np-canvas: color-mix(in srgb, var(--np-color-sky) 55%, var(--np-color-white)); }
+
+/* 4.2b scheme — dark · CC-013.
+   ONE shared theme variable set: dark overrides the SAME semantic token names
+   the light scheme defines, so every component follows without a fork and no
+   screen geometry changes. Feedback softs re-mix against the dark surface
+   instead of white so they stay legible; brand primitives are untouched. */
+[data-scheme="dark"] {
+  color-scheme: dark;
+  --np-canvas:          var(--np-dark-canvas);
+  --np-surface:         var(--np-dark-surface);
+  --np-surface-raised:  var(--np-dark-raised);
+  --np-surface-subtle:  color-mix(in srgb, var(--np-dark-raised) 70%, var(--np-dark-canvas));
+  --np-scrim:           color-mix(in srgb, var(--np-dark-canvas) 72%, transparent);
+
+  --np-surface-elevated: var(--np-dark-elevated);
+  --np-surface-selected: color-mix(in srgb, var(--np-action-primary) 18%, var(--np-dark-elevated));
+  --np-surface-hover:    color-mix(in srgb, var(--np-action-primary) 10%, var(--np-dark-raised));
+
+  --np-border:          var(--np-dark-border);
+  --np-border-strong:   oklch(0.660 calc(var(--np-dark-chroma) * 0.85) var(--np-dark-hue));
+
+  --np-text-primary:    var(--np-dark-text);
+  --np-text-secondary:  var(--np-dark-text-2);
+  --np-text-muted:      var(--np-dark-text-3);
+  --np-text-disabled:   color-mix(in srgb, oklch(0.700 calc(var(--np-dark-chroma) * 0.30) var(--np-dark-hue)) 62%, var(--np-dark-surface));
+  --np-text-onbrand:    var(--np-color-white);
+
+  --np-action-secondary-bg:  transparent;
+  --np-action-secondary-ink: var(--np-color-sky);
+  --np-action-ghost-ink:     var(--np-color-sky);
+  --np-action-disabled-ink:  color-mix(in srgb, var(--np-color-silver) 74%, var(--np-dark-surface));
+
+  /* Bottom / side navigation sits one rung ABOVE the canvas — never its own
+     black bar. */
+  --np-nav-bg:          var(--np-dark-elevated);
+  --np-nav-ink:         var(--np-dark-text-2);
+  --np-nav-ink-active:  var(--np-color-white);
+
+  --np-success-soft:    color-mix(in srgb, var(--np-color-success) 22%, var(--np-dark-surface));
+  --np-success-ink:     color-mix(in srgb, var(--np-color-success) 34%, var(--np-color-white));
+  --np-success-border:  color-mix(in srgb, var(--np-color-success) 46%, var(--np-dark-surface));
+  --np-warning-soft:    color-mix(in srgb, var(--np-color-warning) 22%, var(--np-dark-surface));
+  --np-warning-ink:     color-mix(in srgb, var(--np-color-warning) 40%, var(--np-color-white));
+  --np-warning-border:  color-mix(in srgb, var(--np-color-warning) 46%, var(--np-dark-surface));
+  --np-danger-soft:     color-mix(in srgb, var(--np-color-danger) 22%, var(--np-dark-surface));
+  --np-danger-ink:      color-mix(in srgb, var(--np-color-danger) 40%, var(--np-color-white));
+  --np-danger-border:   color-mix(in srgb, var(--np-color-danger) 46%, var(--np-dark-surface));
+  --np-info-soft:       color-mix(in srgb, var(--np-color-info) 22%, var(--np-dark-surface));
+  --np-info-ink:        color-mix(in srgb, var(--np-color-info) 40%, var(--np-color-white));
+  --np-info-border:     color-mix(in srgb, var(--np-color-info) 46%, var(--np-dark-surface));
+
+  /* Primary Blue on the dark canvas measures below 3:1 as a focus ring, so
+     dark reuses the registered dark-surface ring from CC-007 — same width,
+     same offset, same geometry. */
+  --np-focus-ring:      var(--np-focus-ring-ondark);
+  --np-input-border:    color-mix(in srgb, var(--np-color-silver) 46%, transparent);
+  --np-table-head-bg:   var(--np-dark-raised);
+  --np-table-row-hover: color-mix(in srgb, var(--np-action-primary) 9%, var(--np-dark-surface));
+  --np-topbar-bg:       var(--np-dark-elevated);
+  --np-input-bg:        var(--np-dark-raised);
+  --np-data-series-1:   var(--np-color-sky);
+  --np-data-series-2:   var(--np-color-silver);
+}
+
+/* 4.3 direction — no forked components; logical properties do the work.
+       Arabic UI keeps numerals LTR-isolated (see .np-num in np-system.css). */
+[dir="rtl"] { --np-font-ui: var(--np-family-arabic); }
+[dir="ltr"] { --np-font-ui: var(--np-family-latin); }
+
+/* 4.4 density */
+/* CC-002 — DENSITY RESOLUTION.
+   A layer-3 alias written on :root as `var(--np-control-h)` is substituted at
+   :root, so the already-resolved value inherits downward and a nested
+   data-density context cannot change it. Every density-DEPENDENT component
+   alias is therefore re-declared inside BOTH density blocks below, from the
+   same registered size primitives — no literal is duplicated and no component
+   hard-codes a size. Density-INDEPENDENT geometry (table row 56, tabs 48,
+   toolbar 64, topbar 72, worker action 56, sidebar widths) is deliberately
+   absent: it must not move with density. */
+[data-density="desktop"] {
+  --np-control-h:        var(--np-size-control-desktop);
+  --np-navrow-h:         var(--np-size-navrow-desktop);
+  --np-icon-size:        var(--np-icon-md);
+  --np-button-h:         var(--np-size-control-desktop);
+  --np-iconbutton-size:  var(--np-size-control-desktop);
+  --np-input-h:          var(--np-size-control-desktop);
+  --np-menu-row-h:       var(--np-size-control-desktop);
+  --np-segmented-h:      var(--np-size-control-desktop);
+  --np-sidebar-item-h:   var(--np-size-navrow-desktop);
+}
+[data-density="touch"] {
+  --np-control-h:        var(--np-size-control-touch);
+  --np-navrow-h:         var(--np-size-navrow-touch);
+  --np-icon-size:        var(--np-icon-lg);
+  --np-button-h:         var(--np-size-control-touch);
+  --np-iconbutton-size:  var(--np-size-control-touch);
+  --np-input-h:          var(--np-size-control-touch);
+  --np-menu-row-h:       var(--np-size-control-touch);
+  --np-segmented-h:      var(--np-size-control-touch);
+  --np-sidebar-item-h:   var(--np-size-navrow-touch);
+}
+
+/* 4.5 layout — resolved by container queries in np-system.css.
+       1440 is a reference viewport only and defines no rule. */
+
+/* ==========================================================================
+   Regression-test swap classes are NOT defined here.
+   They live in tests/np-test-overrides.css, loaded only by the
+   Capability Gate. This file contains production values only.
+   ========================================================================== */

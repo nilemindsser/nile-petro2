@@ -1,0 +1,13 @@
+{
+  "name": "@nile-petro/lint-literals",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "np-scan-literals": "bin/scan.mjs"
+  },
+  "scripts": {
+    "scan": "node bin/scan.mjs",
+    "test": "node --test test/*.test.mjs"
+  }
+}
